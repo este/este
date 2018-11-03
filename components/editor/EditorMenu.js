@@ -6,19 +6,17 @@ import { View } from 'react-native';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
-import type { MarkType } from './Editor';
-
-type EditorMenuButtonProps = {|
-  children: string,
-  isActive: boolean,
-  onPress: () => void,
-|};
+import { useEditorDispatch, type MarkType, type SlateValue } from './Editor';
 
 function EditorMenuButton({
   children,
   isActive,
   onPress,
-}: EditorMenuButtonProps) {
+}: {|
+  children: string,
+  isActive: boolean,
+  onPress: () => void,
+|}) {
   const theme = useTheme();
   function handlePressIn(event) {
     event.preventDefault();
@@ -36,32 +34,32 @@ function EditorMenuButton({
   );
 }
 
-type MarkButtonProps = {|
+function MarkButton({
+  type,
+  text,
+  activeMarks,
+  onPress,
+}: {|
   type: MarkType,
   text: string,
   activeMarks: Object,
-|};
-
-function MarkButton({ type, text, activeMarks }: MarkButtonProps) {
+  onPress: () => void,
+|}) {
   function isMarkType(markType) {
     return activeMarks.some(mark => mark.type === markType);
   }
   return (
-    <EditorMenuButton isActive={isMarkType(type)} onPress={() => {}}>
+    <EditorMenuButton isActive={isMarkType(type)} onPress={onPress}>
       {text}
     </EditorMenuButton>
   );
 }
 
-type EditorMenuProps = {|
-  value: Object,
-|};
-
-export default function EditorMenu({ value }: EditorMenuProps) {
+export default function EditorMenu({ value }: {| value: SlateValue |}) {
   const theme = useTheme();
   const portal = usePortal();
-
   const [position, setPosition] = useState(null);
+  const dispatch = useEditorDispatch();
 
   useEffect(
     () => {
@@ -83,12 +81,30 @@ export default function EditorMenu({ value }: EditorMenuProps) {
     [value],
   );
 
+  function handleBoldPress() {
+    dispatch({ type: 'toggleMark', mark: 'bold' });
+  }
+
+  function handleItalicPress() {
+    dispatch({ type: 'toggleMark', mark: 'italic' });
+  }
+
   if (portal == null || position == null) return null;
 
   return portal(
     <View style={[theme.styles.editorMenu, position]}>
-      <MarkButton type="bold" text="b" activeMarks={value.activeMarks} />
-      <MarkButton type="italic" text="i" activeMarks={value.activeMarks} />
+      <MarkButton
+        type="bold"
+        text="b"
+        activeMarks={value.activeMarks}
+        onPress={handleBoldPress}
+      />
+      <MarkButton
+        type="italic"
+        text="i"
+        activeMarks={value.activeMarks}
+        onPress={handleItalicPress}
+      />
     </View>,
   );
 }

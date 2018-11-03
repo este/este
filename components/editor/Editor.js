@@ -7,7 +7,7 @@ import React, {
   // $FlowFixMe
   useMemo,
   // $FlowFixMe
-  useCallback,
+  useContext,
   type Node,
 } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -18,8 +18,22 @@ import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
 
+export type SlateValue = Object;
 export type MarkType = 'bold' | 'italic';
-// type NodeType = 'style';
+
+export type EditorAction =
+  | {| type: 'focus' |}
+  | {| type: 'update', value: SlateValue |}
+  | {| type: 'toggleMark', mark: MarkType |};
+
+type EditorDispatch = (action: EditorAction) => void;
+
+const EditorDispatchContext = React.createContext<?EditorDispatch>(null);
+
+export function useEditorDispatch(): EditorDispatch {
+  const dispatch = useContext(EditorDispatchContext);
+  return dispatch;
+}
 
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
@@ -321,7 +335,7 @@ function EditorWithData({
   colorValues,
   dimensionValues,
 }) {
-  const editor = useRef(null);
+  const editorRef = useRef(null);
 
   const [editorValue, setEditorValue] = useState(() => {
     const model = elementsToSlateValue(page.element.id, elements);
@@ -336,30 +350,50 @@ function EditorWithData({
     [styles, borderValues, colorValues, dimensionValues],
   );
 
-  const handleEditorChange = useCallback(({ value }) => {
-    setEditorValue(value);
-  }, []);
+  function dispatch(action: EditorAction) {
+    const { current: editor } = editorRef;
+    if (!editor) return;
 
-  // https://github.com/ianstormtaylor/slate/issues/2352
-  const handleEditorFocus = useCallback((event, change) => {
-    change.focus();
-  }, []);
-
-  function toggleMark(event: Event, mark: MarkType) {
-    event.preventDefault();
-    if (!editor.current) return;
-    editor.current.toggleMark(mark);
+    switch (action.type) {
+      case 'focus': {
+        editor.focus();
+        break;
+      }
+      case 'update': {
+        setEditorValue(action.value);
+        break;
+      }
+      case 'toggleMark': {
+        editor.toggleMark(action.mark);
+        break;
+      }
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (action.type: empty);
+    }
   }
 
-  const handleEditorKeyDown = useCallback((event, _, next) => {
+  // Note we don't need useCallback. Editor renders only changed nodes anyway.
+  function handleEditorChange({ value }) {
+    dispatch({ type: 'update', value });
+  }
+
+  // https://github.com/ianstormtaylor/slate/issues/2352
+  function handleEditorFocus() {
+    dispatch({ type: 'focus' });
+  }
+
+  function handleEditorKeyDown(event, _, next) {
     if (isBoldHotkey(event)) {
-      toggleMark(event, 'bold');
+      event.preventDefault();
+      dispatch({ type: 'toggleMark', mark: 'bold' });
     } else if (isItalicHotkey(event)) {
-      toggleMark(event, 'italic');
+      event.preventDefault();
+      dispatch({ type: 'toggleMark', mark: 'italic' });
     } else {
       return next();
     }
-  });
+  }
 
   function renderNode(props) {
     const { node, attributes, children } = props;
@@ -404,7 +438,7 @@ function EditorWithData({
         autoCorrect={false}
         spellCheck={false}
         autoFocus
-        ref={editor}
+        ref={editorRef}
         value={editorValue}
         style={slateEditorStyles}
         onChange={handleEditorChange}
@@ -413,18 +447,15 @@ function EditorWithData({
         renderNode={renderNode}
         renderMark={renderMark}
       />
-      <EditorMenu value={editorValue} />
+      <EditorDispatchContext.Provider value={dispatch}>
+        <EditorMenu value={editorValue} />
+      </EditorDispatchContext.Provider>
     </>
   );
 }
 
-type EditorProps = {|
-  data: Data,
-|};
-
-// Because of Flow 0.85, funcional component must type return, otherwise
-// EditorWithData type inference does not work.
-function Editor({ data: { page } }: EditorProps): Node {
+// Note ": Node". From Flow 0.85, it's must to EditorWithData props be inferred.
+function Editor({ data: { page } }: {| data: Data |}): Node {
   if (
     page == null ||
     page.web.borderValues == null ||
