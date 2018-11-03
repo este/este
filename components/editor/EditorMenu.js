@@ -2,11 +2,56 @@
 /* eslint-env browser */
 // $FlowFixMe
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
+import Button from '../core/Button';
+import type { MarkType } from './Editor';
 
-import { Text } from 'react-native';
+type EditorMenuButtonProps = {|
+  children: string,
+  isActive: boolean,
+  onPress: () => void,
+|};
+
+function EditorMenuButton({
+  children,
+  isActive,
+  onPress,
+}: EditorMenuButtonProps) {
+  const theme = useTheme();
+  function handlePressIn(event) {
+    event.preventDefault();
+    onPress();
+  }
+  return (
+    <Button
+      onPressIn={handlePressIn}
+      color={isActive ? 'success' : 'gray'}
+      bold
+      style={theme.styles.editorMenuButton}
+    >
+      {children}
+    </Button>
+  );
+}
+
+type MarkButtonProps = {|
+  type: MarkType,
+  text: string,
+  activeMarks: Object,
+|};
+
+function MarkButton({ type, text, activeMarks }: MarkButtonProps) {
+  function isMarkType(markType) {
+    return activeMarks.some(mark => mark.type === markType);
+  }
+  return (
+    <EditorMenuButton isActive={isMarkType(type)} onPress={() => {}}>
+      {text}
+    </EditorMenuButton>
+  );
+}
 
 type EditorMenuProps = {|
   value: Object,
@@ -42,7 +87,8 @@ export default function EditorMenu({ value }: EditorMenuProps) {
 
   return portal(
     <View style={[theme.styles.editorMenu, position]}>
-      <Text>foo</Text>
+      <MarkButton type="bold" text="b" activeMarks={value.activeMarks} />
+      <MarkButton type="italic" text="i" activeMarks={value.activeMarks} />
     </View>,
   );
 }
