@@ -24,6 +24,7 @@ class DeleteWeb extends React.PureComponent<DeleteWebProps> {
     const href: Href = {
       pathname: '/',
     };
+    // $FlowFixMe Wrong libdef.
     Router.replace(href);
   };
 

@@ -7,7 +7,7 @@ module.exports = {
     'prettier/react',
   ],
   parser: 'babel-eslint',
-  plugins: ['flowtype', 'relay'],
+  plugins: ['flowtype', 'relay', 'react-hooks'],
   // Some rules can be too strict. Feel free to relax them. Explain.
   rules: {
     'import/first': 0, // Too strict.
@@ -39,5 +39,6 @@ module.exports = {
     'react/no-did-update-set-state': 0, // Perfectly valid. https://github.com/yannickcr/eslint-plugin-react/issues/1754
     'no-nested-ternary': 0, // That's fine.
     'react/no-multi-comp': 0, // That's fine.
+    'react-hooks/rules-of-hooks': 'error',
   },
 };

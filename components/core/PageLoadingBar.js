@@ -7,19 +7,19 @@ import Router from 'next/router';
 const startDelay = 1000;
 let timeoutID = null;
 
-Router.onRouteChangeStart = () => {
+Router.events.on('routeChangeStart', () => {
   timeoutID = setTimeout(() => NProgress.start(), startDelay);
-};
+});
 
-Router.onRouteChangeComplete = () => {
+Router.events.on('routeChangeComplete', () => {
   if (timeoutID) clearTimeout(timeoutID);
   NProgress.done();
-};
+});
 
-Router.onRouteChangeError = () => {
+Router.events.on('routeChangeError', () => {
   if (timeoutID) clearTimeout(timeoutID);
   NProgress.done();
-};
+});
 
 type Props = {
   color: string,

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Sat Oct 13 2018 23:24:15 GMT+0200 (Central European Summer Time)
+# timestamp: Thu Nov 01 2018 22:32:14 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -18,9 +18,27 @@ type AuthPayload {
   user: User
 }
 
-type BorderValue {
+type BorderValue implements Node {
+  id: ID!
+  web: Web!
+  name: String
   unit: BorderValueUnit!
   value: Int!
+}
+
+enum BorderValueOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  unit_ASC
+  unit_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 enum BorderValueUnit {
@@ -36,6 +54,86 @@ input BorderValueWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [BorderValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
   unit: BorderValueUnit
 
   """All values that are not equal to given value."""
@@ -68,6 +166,7 @@ input BorderValueWhereInput {
 
   """All values greater than or equal the given value."""
   value_gte: Int
+  web: WebWhereInput
 }
 
 type ColorValue implements Node {
@@ -279,6 +378,119 @@ input ColorValueWhereInput {
   web: WebWhereInput
 }
 
+type Component implements Node {
+  id: ID!
+  web: Web!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  name: String!
+}
+
+enum ComponentOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ComponentWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
+}
+
 type CreateWebErrors {
   name: Max140CharsError
   pageTitle: Max140CharsError
@@ -338,6 +550,7 @@ enum DimensionValueOrderByInput {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
+  KEYWORD
 }
 
 input DimensionValueWhereInput {
@@ -464,19 +677,48 @@ input DimensionValueWhereInput {
   web: WebWhereInput
 }
 
-type Document implements Node {
+type Element implements Node {
   id: ID!
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  parent: Element
+  web: Web!
+  style: Style
+  component: Component
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
 }
 
-input DocumentWhereInput {
+enum ElementOrderByInput {
+  id_ASC
+  id_DESC
+  index_ASC
+  index_DESC
+  type_ASC
+  type_DESC
+  textLeaves_ASC
+  textLeaves_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+enum ElementType {
+  BLOCK
+  INLINE
+  TEXT
+}
+
+input ElementWhereInput {
   """Logical AND on all given filters."""
-  AND: [DocumentWhereInput!]
+  AND: [ElementWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [DocumentWhereInput!]
+  OR: [ElementWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [DocumentWhereInput!]
+  NOT: [ElementWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -517,6 +759,45 @@ input DocumentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
+  children_every: ElementWhereInput
+  children_some: ElementWhereInput
+  children_none: ElementWhereInput
+  parent: ElementWhereInput
+  web: WebWhereInput
+  style: StyleWhereInput
+  component: ComponentWhereInput
 }
 
 enum EmailError {
@@ -555,11 +836,10 @@ type Page implements Node {
   id: ID!
   creator: User!
   web: Web!
+  element: Element!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  content: Json
-  document: Document
 }
 
 enum PageOrderByInput {
@@ -571,8 +851,6 @@ enum PageOrderByInput {
   updatedAt_DESC
   title_ASC
   title_DESC
-  content_ASC
-  content_DESC
 }
 
 input PageWhereInput {
@@ -710,7 +988,7 @@ input PageWhereInput {
   title_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  document: DocumentWhereInput
+  element: ElementWhereInput
 }
 
 enum PasswordError {
@@ -773,9 +1051,12 @@ type SetWebNamePayload {
 
 type Style implements Node {
   id: ID!
+  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
+  nextStyle: Style
   web: Web!
-  type: StyleType!
-  name: String
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  name: String!
+  isText: Boolean
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -821,10 +1102,6 @@ type Style implements Node {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowColor: ColorValue
-  shadowOffset: StyleShadowOffset
-  shadowOpacity: Int
-  shadowRadius: Int
   backgroundColor: ColorValue
   borderColor: ColorValue
   borderBottomColor: ColorValue
@@ -956,10 +1233,10 @@ enum StyleJustifyContent {
 enum StyleOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   name_ASC
   name_DESC
+  isText_ASC
+  isText_DESC
   display_ASC
   display_DESC
   position_ASC
@@ -990,10 +1267,6 @@ enum StyleOrderByInput {
   zIndex_DESC
   direction_ASC
   direction_DESC
-  shadowOpacity_ASC
-  shadowOpacity_DESC
-  shadowRadius_ASC
-  shadowRadius_DESC
   borderStyle_ASC
   borderStyle_DESC
   opacity_ASC
@@ -1037,64 +1310,97 @@ enum StylePosition {
   RELATIVE
 }
 
-type StyleShadowOffset {
-  width: Int!
-  height: Int!
+type StyleSpread implements Node {
+  id: ID!
+  spreadStyle: Style!
+  index: Int!
+  style: Style!
 }
 
-input StyleShadowOffsetWhereInput {
+enum StyleSpreadOrderByInput {
+  id_ASC
+  id_DESC
+  index_ASC
+  index_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input StyleSpreadWhereInput {
   """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetWhereInput!]
+  AND: [StyleSpreadWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetWhereInput!]
+  OR: [StyleSpreadWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetWhereInput!]
-  width: Int
+  NOT: [StyleSpreadWhereInput!]
+  id: ID
 
   """All values that are not equal to given value."""
-  width_not: Int
+  id_not: ID
 
   """All values that are contained in given list."""
-  width_in: [Int!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  width_not_in: [Int!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  width_lt: Int
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  width_lte: Int
+  id_lte: ID
 
   """All values greater than the given value."""
-  width_gt: Int
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  width_gte: Int
-  height: Int
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
 
   """All values that are not equal to given value."""
-  height_not: Int
+  index_not: Int
 
   """All values that are contained in given list."""
-  height_in: [Int!]
+  index_in: [Int!]
 
   """All values that are not contained in given list."""
-  height_not_in: [Int!]
+  index_not_in: [Int!]
 
   """All values less than the given value."""
-  height_lt: Int
+  index_lt: Int
 
   """All values less than or equal the given value."""
-  height_lte: Int
+  index_lte: Int
 
   """All values greater than the given value."""
-  height_gt: Int
+  index_gt: Int
 
   """All values greater than or equal the given value."""
-  height_gte: Int
+  index_gte: Int
+  spreadStyle: StyleWhereInput
+  style: StyleWhereInput
 }
 
 enum StyleTextAlign {
@@ -1124,11 +1430,6 @@ enum StyleTextTransform {
   CAPITALIZE
   UPPERCASE
   LOWERCASE
-}
-
-enum StyleType {
-  VIEW
-  TEXT
 }
 
 input StyleWhereInput {
@@ -1180,16 +1481,6 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: StyleType
-
-  """All values that are not equal to given value."""
-  type_not: StyleType
-
-  """All values that are contained in given list."""
-  type_in: [StyleType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [StyleType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -1230,6 +1521,10 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  isText: Boolean
+
+  """All values that are not equal to given value."""
+  isText_not: Boolean
   display: StyleDisplay
 
   """All values that are not equal to given value."""
@@ -1440,50 +1735,6 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   direction_not_in: [StyleDirection!]
-  shadowOpacity: Int
-
-  """All values that are not equal to given value."""
-  shadowOpacity_not: Int
-
-  """All values that are contained in given list."""
-  shadowOpacity_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowOpacity_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowOpacity_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowOpacity_lte: Int
-
-  """All values greater than the given value."""
-  shadowOpacity_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowOpacity_gte: Int
-  shadowRadius: Int
-
-  """All values that are not equal to given value."""
-  shadowRadius_not: Int
-
-  """All values that are contained in given list."""
-  shadowRadius_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowRadius_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowRadius_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowRadius_lte: Int
-
-  """All values greater than the given value."""
-  shadowRadius_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowRadius_gte: Int
   borderStyle: StyleBorderStyle
 
   """All values that are not equal to given value."""
@@ -1692,7 +1943,14 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
+  spreadStyles_every: StyleSpreadWhereInput
+  spreadStyles_some: StyleSpreadWhereInput
+  spreadStyles_none: StyleSpreadWhereInput
+  nextStyle: StyleWhereInput
   web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput
@@ -1723,8 +1981,6 @@ input StyleWhereInput {
   paddingStart: DimensionValueWhereInput
   paddingTop: DimensionValueWhereInput
   paddingVertical: DimensionValueWhereInput
-  shadowColor: ColorValueWhereInput
-  shadowOffset: StyleShadowOffsetWhereInput
   backgroundColor: ColorValueWhereInput
   borderColor: ColorValueWhereInput
   borderBottomColor: ColorValueWhereInput
@@ -1755,7 +2011,6 @@ input StyleWhereInput {
 type User implements Node {
   id: ID!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
@@ -1979,21 +2234,21 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
 }
 
 type Web implements Node {
   id: ID!
   creator: User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue!]
   colorValues(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ColorValue!]
+  borderValues(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BorderValue!]
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 enum WebOrderByInput {
@@ -2144,6 +2399,9 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
   styles_every: StyleWhereInput
   styles_some: StyleWhereInput
   styles_none: StyleWhereInput
@@ -2153,4 +2411,10 @@ input WebWhereInput {
   colorValues_every: ColorValueWhereInput
   colorValues_some: ColorValueWhereInput
   colorValues_none: ColorValueWhereInput
+  borderValues_every: BorderValueWhereInput
+  borderValues_some: BorderValueWhereInput
+  borderValues_none: BorderValueWhereInput
+  components_every: ComponentWhereInput
+  components_some: ComponentWhereInput
+  components_none: ComponentWhereInput
 }

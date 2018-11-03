@@ -58,14 +58,208 @@ const Mutation: MutationType = {
     const errors = validations.validateCreateWeb(args.input);
     if (errors) return { errors };
 
+    // Note we have to create Web to get its ID for further mutations.
+    // TODO: All mutations in one transaction.
+    // https://github.com/prisma/prisma/issues/74
+
+    const web = await db.mutation.createWeb({
+      data: {
+        name: args.input.name,
+        creator: { connect: { id: userId } },
+      },
+    });
+
+    const colorBackground = await db.mutation.createColorValue({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'background',
+        r: 250,
+        g: 250,
+        b: 250,
+      },
+    });
+
+    const colorForeground = await db.mutation.createColorValue({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'foreground',
+        r: 51,
+        g: 51,
+        b: 51,
+      },
+    });
+
+    const spaceSmall = await db.mutation.createDimensionValue({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'space-small',
+        unit: 'POINT',
+        value: 12,
+      },
+    });
+
+    const spaceMedium = await db.mutation.createDimensionValue({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'space-medium',
+        unit: 'POINT',
+        // The same as lineHeight for rhythm.
+        value: 24,
+      },
+    });
+
+    const pageStyle = await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'page',
+        flex: 1,
+        backgroundColor: { connect: { id: colorBackground.id } },
+      },
+    });
+
+    const containerStyle = await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'container',
+        maxWidth: {
+          create: {
+            web: { connect: { id: web.id } },
+            unit: 'POINT',
+            value: 768,
+          },
+        },
+        width: {
+          create: {
+            web: { connect: { id: web.id } },
+            unit: 'PERCENTAGE',
+            value: 100,
+          },
+        },
+        marginHorizontal: {
+          create: {
+            web: { connect: { id: web.id } },
+            unit: 'KEYWORD',
+            value: 1,
+          },
+        },
+        paddingHorizontal: {
+          connect: { id: spaceSmall.id },
+        },
+      },
+    });
+
+    const textStyle = await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'text',
+        isText: true,
+        // $font-family-sans-serif
+        // https://github.com/twbs/bootstrap/blob/v4-dev/scss/_variables.scss
+        fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"`,
+        fontSize: 16,
+        lineHeight: 24,
+        color: { connect: { id: colorForeground.id } },
+      },
+    });
+
+    const paragraphStyle = await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        spreadStyles: {
+          create: { index: 0, style: { connect: { id: textStyle.id } } },
+        },
+        name: 'paragraph',
+        marginBottom: { connect: { id: spaceMedium.id } },
+      },
+    });
+
+    // const h1Style =
+    await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        spreadStyles: {
+          create: { index: 0, style: { connect: { id: paragraphStyle.id } } },
+        },
+        name: 'h1',
+        fontSize: 32,
+        lineHeight: 48,
+      },
+    });
+
+    // const h2Style =
+    await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        spreadStyles: {
+          create: { index: 0, style: { connect: { id: paragraphStyle.id } } },
+        },
+        name: 'h2',
+        fontSize: 24,
+        lineHeight: 36,
+      },
+    });
+
+    // TODO: blockquote and list / list-item. Maybe it's just one style.
+
     const page = await db.mutation.createPage({
       data: {
-        title: args.input.pageTitle,
+        web: { connect: { id: web.id } },
         creator: { connect: { id: userId } },
-        web: {
+        title: args.input.pageTitle,
+        element: {
           create: {
-            name: args.input.name,
-            creator: { connect: { id: userId } },
+            web: { connect: { id: web.id } },
+            style: { connect: { id: pageStyle.id } },
+            index: 0,
+            type: 'BLOCK',
+            children: {
+              create: [
+                {
+                  web: { connect: { id: web.id } },
+                  style: { connect: { id: containerStyle.id } },
+                  index: 0,
+                  type: 'BLOCK',
+                  children: {
+                    create: [
+                      {
+                        web: { connect: { id: web.id } },
+                        style: { connect: { id: paragraphStyle.id } },
+                        index: 0,
+                        type: 'BLOCK',
+                        children: {
+                          create: [
+                            {
+                              web: { connect: { id: web.id } },
+                              index: 0,
+                              type: 'TEXT',
+                              // $FlowFixMe Weird. It should allow JSON instead of string.
+                              textLeaves: [{ text: 'Ahoj' }],
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        web: { connect: { id: web.id } },
+                        style: { connect: { id: paragraphStyle.id } },
+                        index: 1,
+                        type: 'BLOCK',
+                        children: {
+                          create: [
+                            {
+                              web: { connect: { id: web.id } },
+                              index: 0,
+                              type: 'TEXT',
+                              // $FlowFixMe Weird. It should allow JSON instead of string.
+                              textLeaves: [{ text: 'Svete' }],
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
           },
         },
       },
@@ -116,15 +310,16 @@ const Mutation: MutationType = {
     return { web };
   },
 
-  setPageContent: async (args, info, { db }) => {
+  setPageContent: async (/* args, info, { db } */) => {
+    throw Error('TODO');
     // TODO: Add validateSetPageContent. Prisma allows 256kB and we should
     // return error for that.
-    const page = await db.mutation.updatePage({
-      where: { id: args.input.id },
-      data: { content: args.input.content },
-    });
-    if (page == null) return null;
-    return { page };
+    // const page = await db.mutation.updatePage({
+    //   where: { id: args.input.id },
+    //   data: { content: args.input.content },
+    // });
+    // if (page == null) return null;
+    // return { page };
   },
 
   deletePage: async (args, info, { db }) => {

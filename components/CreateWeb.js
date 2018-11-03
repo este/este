@@ -53,6 +53,7 @@ class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
       pathname: '/editor',
       query: { id },
     };
+    // $FlowFixMe Wrong libdef.
     Router.push(href);
   };
 

@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Sat Oct 13 2018 23:24:07 GMT+0200 (Central European Summer Time)
+# timestamp: Thu Nov 01 2018 22:33:18 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -17,10 +17,6 @@ type AggregateDimensionValue {
   count: Int!
 }
 
-type AggregateDocument {
-  count: Int!
-}
-
 type AggregateElement {
   count: Int!
 }
@@ -33,7 +29,7 @@ type AggregateStyle {
   count: Int!
 }
 
-type AggregateStyleShadowOffset {
+type AggregateStyleSpread {
   count: Int!
 }
 
@@ -50,7 +46,10 @@ type BatchPayload {
   count: Long!
 }
 
-type BorderValue {
+type BorderValue implements Node {
+  id: ID!
+  web: Web!
+  name: String
   unit: BorderValueUnit!
   value: Int!
 }
@@ -66,12 +65,26 @@ type BorderValueConnection {
 }
 
 input BorderValueCreateInput {
+  name: String
   unit: BorderValueUnit!
   value: Int!
+  web: WebCreateOneWithoutBorderValuesInput!
+}
+
+input BorderValueCreateManyWithoutWebInput {
+  create: [BorderValueCreateWithoutWebInput!]
+  connect: [BorderValueWhereUniqueInput!]
 }
 
 input BorderValueCreateOneInput {
   create: BorderValueCreateInput
+  connect: BorderValueWhereUniqueInput
+}
+
+input BorderValueCreateWithoutWebInput {
+  name: String
+  unit: BorderValueUnit!
+  value: Int!
 }
 
 """An edge in a connection."""
@@ -84,12 +97,14 @@ type BorderValueEdge {
 }
 
 enum BorderValueOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
   unit_ASC
   unit_DESC
   value_ASC
   value_DESC
-  id_ASC
-  id_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -97,6 +112,8 @@ enum BorderValueOrderByInput {
 }
 
 type BorderValuePreviousValues {
+  id: ID!
+  name: String
   unit: BorderValueUnit!
   value: Int!
 }
@@ -145,26 +162,57 @@ enum BorderValueUnit {
 }
 
 input BorderValueUpdateDataInput {
+  name: String
   unit: BorderValueUnit
   value: Int
+  web: WebUpdateOneRequiredWithoutBorderValuesInput
 }
 
 input BorderValueUpdateInput {
+  name: String
   unit: BorderValueUnit
   value: Int
+  web: WebUpdateOneRequiredWithoutBorderValuesInput
+}
+
+input BorderValueUpdateManyWithoutWebInput {
+  create: [BorderValueCreateWithoutWebInput!]
+  connect: [BorderValueWhereUniqueInput!]
+  disconnect: [BorderValueWhereUniqueInput!]
+  delete: [BorderValueWhereUniqueInput!]
+  update: [BorderValueUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [BorderValueUpsertWithWhereUniqueWithoutWebInput!]
 }
 
 input BorderValueUpdateOneInput {
   create: BorderValueCreateInput
+  connect: BorderValueWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
   update: BorderValueUpdateDataInput
   upsert: BorderValueUpsertNestedInput
 }
 
+input BorderValueUpdateWithoutWebDataInput {
+  name: String
+  unit: BorderValueUnit
+  value: Int
+}
+
+input BorderValueUpdateWithWhereUniqueWithoutWebInput {
+  where: BorderValueWhereUniqueInput!
+  data: BorderValueUpdateWithoutWebDataInput!
+}
+
 input BorderValueUpsertNestedInput {
   update: BorderValueUpdateDataInput!
   create: BorderValueCreateInput!
+}
+
+input BorderValueUpsertWithWhereUniqueWithoutWebInput {
+  where: BorderValueWhereUniqueInput!
+  update: BorderValueUpdateWithoutWebDataInput!
+  create: BorderValueCreateWithoutWebInput!
 }
 
 input BorderValueWhereInput {
@@ -176,6 +224,86 @@ input BorderValueWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [BorderValueWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
   unit: BorderValueUnit
 
   """All values that are not equal to given value."""
@@ -208,6 +336,11 @@ input BorderValueWhereInput {
 
   """All values greater than or equal the given value."""
   value_gte: Int
+  web: WebWhereInput
+}
+
+input BorderValueWhereUniqueInput {
+  id: ID
 }
 
 type ColorValue implements Node {
@@ -580,8 +713,8 @@ input ColorValueWhereUniqueInput {
 type Component implements Node {
   id: ID!
   web: Web!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
-  document: Document
 }
 
 """A connection to a list of items."""
@@ -597,7 +730,7 @@ type ComponentConnection {
 input ComponentCreateInput {
   name: String!
   web: WebCreateOneWithoutComponentsInput!
-  document: DocumentCreateOneInput
+  elements: ElementCreateManyWithoutComponentInput
 }
 
 input ComponentCreateManyWithoutWebInput {
@@ -605,14 +738,19 @@ input ComponentCreateManyWithoutWebInput {
   connect: [ComponentWhereUniqueInput!]
 }
 
-input ComponentCreateOneInput {
-  create: ComponentCreateInput
+input ComponentCreateOneWithoutElementsInput {
+  create: ComponentCreateWithoutElementsInput
   connect: ComponentWhereUniqueInput
+}
+
+input ComponentCreateWithoutElementsInput {
+  name: String!
+  web: WebCreateOneWithoutComponentsInput!
 }
 
 input ComponentCreateWithoutWebInput {
   name: String!
-  document: DocumentCreateOneInput
+  elements: ElementCreateManyWithoutComponentInput
 }
 
 """An edge in a connection."""
@@ -679,16 +817,10 @@ input ComponentSubscriptionWhereInput {
   node: ComponentWhereInput
 }
 
-input ComponentUpdateDataInput {
-  name: String
-  web: WebUpdateOneRequiredWithoutComponentsInput
-  document: DocumentUpdateOneInput
-}
-
 input ComponentUpdateInput {
   name: String
   web: WebUpdateOneRequiredWithoutComponentsInput
-  document: DocumentUpdateOneInput
+  elements: ElementUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateManyWithoutWebInput {
@@ -700,18 +832,23 @@ input ComponentUpdateManyWithoutWebInput {
   upsert: [ComponentUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input ComponentUpdateOneInput {
-  create: ComponentCreateInput
+input ComponentUpdateOneWithoutElementsInput {
+  create: ComponentCreateWithoutElementsInput
   connect: ComponentWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: ComponentUpdateDataInput
-  upsert: ComponentUpsertNestedInput
+  update: ComponentUpdateWithoutElementsDataInput
+  upsert: ComponentUpsertWithoutElementsInput
+}
+
+input ComponentUpdateWithoutElementsDataInput {
+  name: String
+  web: WebUpdateOneRequiredWithoutComponentsInput
 }
 
 input ComponentUpdateWithoutWebDataInput {
   name: String
-  document: DocumentUpdateOneInput
+  elements: ElementUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateWithWhereUniqueWithoutWebInput {
@@ -719,9 +856,9 @@ input ComponentUpdateWithWhereUniqueWithoutWebInput {
   data: ComponentUpdateWithoutWebDataInput!
 }
 
-input ComponentUpsertNestedInput {
-  update: ComponentUpdateDataInput!
-  create: ComponentCreateInput!
+input ComponentUpsertWithoutElementsInput {
+  update: ComponentUpdateWithoutElementsDataInput!
+  create: ComponentCreateWithoutElementsInput!
 }
 
 input ComponentUpsertWithWhereUniqueWithoutWebInput {
@@ -820,7 +957,9 @@ input ComponentWhereInput {
   """All values not ending with the given string."""
   name_not_ends_with: String
   web: WebWhereInput
-  document: DocumentWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
 }
 
 input ComponentWhereUniqueInput {
@@ -943,6 +1082,7 @@ input DimensionValueSubscriptionWhereInput {
 enum DimensionValueUnit {
   POINT
   PERCENTAGE
+  KEYWORD
 }
 
 input DimensionValueUpdateDataInput {
@@ -1127,289 +1267,16 @@ input DimensionValueWhereUniqueInput {
   id: ID
 }
 
-type Document implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  web: Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
-}
-
-"""A connection to a list of items."""
-type DocumentConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [DocumentEdge]!
-  aggregate: AggregateDocument!
-}
-
-input DocumentCreateInput {
-  web: WebCreateOneWithoutDocumentsInput!
-  elements: ElementCreateManyWithoutDocumentInput
-}
-
-input DocumentCreateManyWithoutWebInput {
-  create: [DocumentCreateWithoutWebInput!]
-  connect: [DocumentWhereUniqueInput!]
-}
-
-input DocumentCreateOneInput {
-  create: DocumentCreateInput
-  connect: DocumentWhereUniqueInput
-}
-
-input DocumentCreateOneWithoutElementsInput {
-  create: DocumentCreateWithoutElementsInput
-  connect: DocumentWhereUniqueInput
-}
-
-input DocumentCreateWithoutElementsInput {
-  web: WebCreateOneWithoutDocumentsInput!
-}
-
-input DocumentCreateWithoutWebInput {
-  elements: ElementCreateManyWithoutDocumentInput
-}
-
-"""An edge in a connection."""
-type DocumentEdge {
-  """The item at the end of the edge."""
-  node: Document!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum DocumentOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-}
-
-type DocumentPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
-type DocumentSubscriptionPayload {
-  mutation: MutationType!
-  node: Document
-  updatedFields: [String!]
-  previousValues: DocumentPreviousValues
-}
-
-input DocumentSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [DocumentSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [DocumentSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [DocumentSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: DocumentWhereInput
-}
-
-input DocumentUpdateDataInput {
-  web: WebUpdateOneRequiredWithoutDocumentsInput
-  elements: ElementUpdateManyWithoutDocumentInput
-}
-
-input DocumentUpdateInput {
-  web: WebUpdateOneRequiredWithoutDocumentsInput
-  elements: ElementUpdateManyWithoutDocumentInput
-}
-
-input DocumentUpdateManyWithoutWebInput {
-  create: [DocumentCreateWithoutWebInput!]
-  connect: [DocumentWhereUniqueInput!]
-  disconnect: [DocumentWhereUniqueInput!]
-  delete: [DocumentWhereUniqueInput!]
-  update: [DocumentUpdateWithWhereUniqueWithoutWebInput!]
-  upsert: [DocumentUpsertWithWhereUniqueWithoutWebInput!]
-}
-
-input DocumentUpdateOneInput {
-  create: DocumentCreateInput
-  connect: DocumentWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: DocumentUpdateDataInput
-  upsert: DocumentUpsertNestedInput
-}
-
-input DocumentUpdateOneRequiredWithoutElementsInput {
-  create: DocumentCreateWithoutElementsInput
-  connect: DocumentWhereUniqueInput
-  update: DocumentUpdateWithoutElementsDataInput
-  upsert: DocumentUpsertWithoutElementsInput
-}
-
-input DocumentUpdateWithoutElementsDataInput {
-  web: WebUpdateOneRequiredWithoutDocumentsInput
-}
-
-input DocumentUpdateWithoutWebDataInput {
-  elements: ElementUpdateManyWithoutDocumentInput
-}
-
-input DocumentUpdateWithWhereUniqueWithoutWebInput {
-  where: DocumentWhereUniqueInput!
-  data: DocumentUpdateWithoutWebDataInput!
-}
-
-input DocumentUpsertNestedInput {
-  update: DocumentUpdateDataInput!
-  create: DocumentCreateInput!
-}
-
-input DocumentUpsertWithoutElementsInput {
-  update: DocumentUpdateWithoutElementsDataInput!
-  create: DocumentCreateWithoutElementsInput!
-}
-
-input DocumentUpsertWithWhereUniqueWithoutWebInput {
-  where: DocumentWhereUniqueInput!
-  update: DocumentUpdateWithoutWebDataInput!
-  create: DocumentCreateWithoutWebInput!
-}
-
-input DocumentWhereInput {
-  """Logical AND on all given filters."""
-  AND: [DocumentWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [DocumentWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [DocumentWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
-}
-
-input DocumentWhereUniqueInput {
-  id: ID
-}
-
 type Element implements Node {
   id: ID!
-  type: ElementType!
-  document: Document!
-  path: [Int!]!
-  component: Component
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  parent: Element
+  web: Web!
   style: Style
+  component: Component
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
 }
 
 """A connection to a list of items."""
@@ -1423,27 +1290,94 @@ type ElementConnection {
 }
 
 input ElementCreateInput {
+  index: Int!
   type: ElementType!
-  path: ElementCreatepathInput
-  document: DocumentCreateOneWithoutElementsInput!
-  component: ComponentCreateOneInput
-  style: StyleCreateOneInput
+  textLeaves: Json
+  children: ElementCreateManyWithoutParentInput
+  parent: ElementCreateOneWithoutChildrenInput
+  web: WebCreateOneWithoutElementsInput!
+  style: StyleCreateOneWithoutElementsInput
+  component: ComponentCreateOneWithoutElementsInput
 }
 
-input ElementCreateManyWithoutDocumentInput {
-  create: [ElementCreateWithoutDocumentInput!]
+input ElementCreateManyWithoutComponentInput {
+  create: [ElementCreateWithoutComponentInput!]
   connect: [ElementWhereUniqueInput!]
 }
 
-input ElementCreatepathInput {
-  set: [Int!]
+input ElementCreateManyWithoutParentInput {
+  create: [ElementCreateWithoutParentInput!]
+  connect: [ElementWhereUniqueInput!]
 }
 
-input ElementCreateWithoutDocumentInput {
+input ElementCreateManyWithoutStyleInput {
+  create: [ElementCreateWithoutStyleInput!]
+  connect: [ElementWhereUniqueInput!]
+}
+
+input ElementCreateManyWithoutWebInput {
+  create: [ElementCreateWithoutWebInput!]
+  connect: [ElementWhereUniqueInput!]
+}
+
+input ElementCreateOneInput {
+  create: ElementCreateInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateOneWithoutChildrenInput {
+  create: ElementCreateWithoutChildrenInput
+  connect: ElementWhereUniqueInput
+}
+
+input ElementCreateWithoutChildrenInput {
+  index: Int!
   type: ElementType!
-  path: ElementCreatepathInput
-  component: ComponentCreateOneInput
-  style: StyleCreateOneInput
+  textLeaves: Json
+  parent: ElementCreateOneWithoutChildrenInput
+  web: WebCreateOneWithoutElementsInput!
+  style: StyleCreateOneWithoutElementsInput
+  component: ComponentCreateOneWithoutElementsInput
+}
+
+input ElementCreateWithoutComponentInput {
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
+  children: ElementCreateManyWithoutParentInput
+  parent: ElementCreateOneWithoutChildrenInput
+  web: WebCreateOneWithoutElementsInput!
+  style: StyleCreateOneWithoutElementsInput
+}
+
+input ElementCreateWithoutParentInput {
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
+  children: ElementCreateManyWithoutParentInput
+  web: WebCreateOneWithoutElementsInput!
+  style: StyleCreateOneWithoutElementsInput
+  component: ComponentCreateOneWithoutElementsInput
+}
+
+input ElementCreateWithoutStyleInput {
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
+  children: ElementCreateManyWithoutParentInput
+  parent: ElementCreateOneWithoutChildrenInput
+  web: WebCreateOneWithoutElementsInput!
+  component: ComponentCreateOneWithoutElementsInput
+}
+
+input ElementCreateWithoutWebInput {
+  index: Int!
+  type: ElementType!
+  textLeaves: Json
+  children: ElementCreateManyWithoutParentInput
+  parent: ElementCreateOneWithoutChildrenInput
+  style: StyleCreateOneWithoutElementsInput
+  component: ComponentCreateOneWithoutElementsInput
 }
 
 """An edge in a connection."""
@@ -1458,8 +1392,12 @@ type ElementEdge {
 enum ElementOrderByInput {
   id_ASC
   id_DESC
+  index_ASC
+  index_DESC
   type_ASC
   type_DESC
+  textLeaves_ASC
+  textLeaves_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1468,8 +1406,9 @@ enum ElementOrderByInput {
 
 type ElementPreviousValues {
   id: ID!
+  index: Int!
   type: ElementType!
-  path: [Int!]!
+  textLeaves: Json
 }
 
 type ElementSubscriptionPayload {
@@ -1512,48 +1451,187 @@ input ElementSubscriptionWhereInput {
 }
 
 enum ElementType {
-  DOCUMENT
   BLOCK
+  INLINE
   TEXT
 }
 
-input ElementUpdateInput {
+input ElementUpdateDataInput {
+  index: Int
   type: ElementType
-  path: ElementUpdatepathInput
-  document: DocumentUpdateOneRequiredWithoutElementsInput
-  component: ComponentUpdateOneInput
-  style: StyleUpdateOneInput
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  parent: ElementUpdateOneWithoutChildrenInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  style: StyleUpdateOneWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
 }
 
-input ElementUpdateManyWithoutDocumentInput {
-  create: [ElementCreateWithoutDocumentInput!]
+input ElementUpdateInput {
+  index: Int
+  type: ElementType
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  parent: ElementUpdateOneWithoutChildrenInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  style: StyleUpdateOneWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
+}
+
+input ElementUpdateManyWithoutComponentInput {
+  create: [ElementCreateWithoutComponentInput!]
   connect: [ElementWhereUniqueInput!]
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
-  update: [ElementUpdateWithWhereUniqueWithoutDocumentInput!]
-  upsert: [ElementUpsertWithWhereUniqueWithoutDocumentInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutComponentInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutComponentInput!]
 }
 
-input ElementUpdatepathInput {
-  set: [Int!]
+input ElementUpdateManyWithoutParentInput {
+  create: [ElementCreateWithoutParentInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutParentInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutParentInput!]
 }
 
-input ElementUpdateWithoutDocumentDataInput {
+input ElementUpdateManyWithoutStyleInput {
+  create: [ElementCreateWithoutStyleInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutStyleInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutStyleInput!]
+}
+
+input ElementUpdateManyWithoutWebInput {
+  create: [ElementCreateWithoutWebInput!]
+  connect: [ElementWhereUniqueInput!]
+  disconnect: [ElementWhereUniqueInput!]
+  delete: [ElementWhereUniqueInput!]
+  update: [ElementUpdateWithWhereUniqueWithoutWebInput!]
+  upsert: [ElementUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ElementUpdateOneRequiredInput {
+  create: ElementCreateInput
+  connect: ElementWhereUniqueInput
+  update: ElementUpdateDataInput
+  upsert: ElementUpsertNestedInput
+}
+
+input ElementUpdateOneWithoutChildrenInput {
+  create: ElementCreateWithoutChildrenInput
+  connect: ElementWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ElementUpdateWithoutChildrenDataInput
+  upsert: ElementUpsertWithoutChildrenInput
+}
+
+input ElementUpdateWithoutChildrenDataInput {
+  index: Int
   type: ElementType
-  path: ElementUpdatepathInput
-  component: ComponentUpdateOneInput
-  style: StyleUpdateOneInput
+  textLeaves: Json
+  parent: ElementUpdateOneWithoutChildrenInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  style: StyleUpdateOneWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
 }
 
-input ElementUpdateWithWhereUniqueWithoutDocumentInput {
-  where: ElementWhereUniqueInput!
-  data: ElementUpdateWithoutDocumentDataInput!
+input ElementUpdateWithoutComponentDataInput {
+  index: Int
+  type: ElementType
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  parent: ElementUpdateOneWithoutChildrenInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  style: StyleUpdateOneWithoutElementsInput
 }
 
-input ElementUpsertWithWhereUniqueWithoutDocumentInput {
+input ElementUpdateWithoutParentDataInput {
+  index: Int
+  type: ElementType
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  style: StyleUpdateOneWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
+}
+
+input ElementUpdateWithoutStyleDataInput {
+  index: Int
+  type: ElementType
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  parent: ElementUpdateOneWithoutChildrenInput
+  web: WebUpdateOneRequiredWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
+}
+
+input ElementUpdateWithoutWebDataInput {
+  index: Int
+  type: ElementType
+  textLeaves: Json
+  children: ElementUpdateManyWithoutParentInput
+  parent: ElementUpdateOneWithoutChildrenInput
+  style: StyleUpdateOneWithoutElementsInput
+  component: ComponentUpdateOneWithoutElementsInput
+}
+
+input ElementUpdateWithWhereUniqueWithoutComponentInput {
   where: ElementWhereUniqueInput!
-  update: ElementUpdateWithoutDocumentDataInput!
-  create: ElementCreateWithoutDocumentInput!
+  data: ElementUpdateWithoutComponentDataInput!
+}
+
+input ElementUpdateWithWhereUniqueWithoutParentInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutParentDataInput!
+}
+
+input ElementUpdateWithWhereUniqueWithoutStyleInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutStyleDataInput!
+}
+
+input ElementUpdateWithWhereUniqueWithoutWebInput {
+  where: ElementWhereUniqueInput!
+  data: ElementUpdateWithoutWebDataInput!
+}
+
+input ElementUpsertNestedInput {
+  update: ElementUpdateDataInput!
+  create: ElementCreateInput!
+}
+
+input ElementUpsertWithoutChildrenInput {
+  update: ElementUpdateWithoutChildrenDataInput!
+  create: ElementCreateWithoutChildrenInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutComponentInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutComponentDataInput!
+  create: ElementCreateWithoutComponentInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutParentInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutParentDataInput!
+  create: ElementCreateWithoutParentInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutStyleInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutStyleDataInput!
+  create: ElementCreateWithoutStyleInput!
+}
+
+input ElementUpsertWithWhereUniqueWithoutWebInput {
+  where: ElementWhereUniqueInput!
+  update: ElementUpdateWithoutWebDataInput!
+  create: ElementCreateWithoutWebInput!
 }
 
 input ElementWhereInput {
@@ -1605,6 +1683,28 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
   type: ElementType
 
   """All values that are not equal to given value."""
@@ -1615,9 +1715,13 @@ input ElementWhereInput {
 
   """All values that are not contained in given list."""
   type_not_in: [ElementType!]
-  document: DocumentWhereInput
-  component: ComponentWhereInput
+  children_every: ElementWhereInput
+  children_some: ElementWhereInput
+  children_none: ElementWhereInput
+  parent: ElementWhereInput
+  web: WebWhereInput
   style: StyleWhereInput
+  component: ComponentWhereInput
 }
 
 input ElementWhereUniqueInput {
@@ -1634,66 +1738,66 @@ Long can represent values between -(2^63) and 2^63 - 1.
 scalar Long
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
   createWeb(data: WebCreateInput!): Web!
   createPage(data: PageCreateInput!): Page!
-  createElement(data: ElementCreateInput!): Element!
+  createStyleSpread(data: StyleSpreadCreateInput!): StyleSpread!
   createComponent(data: ComponentCreateInput!): Component!
-  createStyle(data: StyleCreateInput!): Style!
-  createStyleShadowOffset(data: StyleShadowOffsetCreateInput!): StyleShadowOffset!
-  createDocument(data: DocumentCreateInput!): Document!
+  createUser(data: UserCreateInput!): User!
+  createElement(data: ElementCreateInput!): Element!
   createBorderValue(data: BorderValueCreateInput!): BorderValue!
   createDimensionValue(data: DimensionValueCreateInput!): DimensionValue!
   createColorValue(data: ColorValueCreateInput!): ColorValue!
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createStyle(data: StyleCreateInput!): Style!
   updateWeb(data: WebUpdateInput!, where: WebWhereUniqueInput!): Web
   updatePage(data: PageUpdateInput!, where: PageWhereUniqueInput!): Page
-  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
+  updateStyleSpread(data: StyleSpreadUpdateInput!, where: StyleSpreadWhereUniqueInput!): StyleSpread
   updateComponent(data: ComponentUpdateInput!, where: ComponentWhereUniqueInput!): Component
-  updateStyle(data: StyleUpdateInput!, where: StyleWhereUniqueInput!): Style
-  updateDocument(data: DocumentUpdateInput!, where: DocumentWhereUniqueInput!): Document
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateElement(data: ElementUpdateInput!, where: ElementWhereUniqueInput!): Element
+  updateBorderValue(data: BorderValueUpdateInput!, where: BorderValueWhereUniqueInput!): BorderValue
   updateDimensionValue(data: DimensionValueUpdateInput!, where: DimensionValueWhereUniqueInput!): DimensionValue
   updateColorValue(data: ColorValueUpdateInput!, where: ColorValueWhereUniqueInput!): ColorValue
-  deleteUser(where: UserWhereUniqueInput!): User
+  updateStyle(data: StyleUpdateInput!, where: StyleWhereUniqueInput!): Style
   deleteWeb(where: WebWhereUniqueInput!): Web
   deletePage(where: PageWhereUniqueInput!): Page
-  deleteElement(where: ElementWhereUniqueInput!): Element
+  deleteStyleSpread(where: StyleSpreadWhereUniqueInput!): StyleSpread
   deleteComponent(where: ComponentWhereUniqueInput!): Component
-  deleteStyle(where: StyleWhereUniqueInput!): Style
-  deleteDocument(where: DocumentWhereUniqueInput!): Document
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteElement(where: ElementWhereUniqueInput!): Element
+  deleteBorderValue(where: BorderValueWhereUniqueInput!): BorderValue
   deleteDimensionValue(where: DimensionValueWhereUniqueInput!): DimensionValue
   deleteColorValue(where: ColorValueWhereUniqueInput!): ColorValue
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteStyle(where: StyleWhereUniqueInput!): Style
   upsertWeb(where: WebWhereUniqueInput!, create: WebCreateInput!, update: WebUpdateInput!): Web!
   upsertPage(where: PageWhereUniqueInput!, create: PageCreateInput!, update: PageUpdateInput!): Page!
-  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
+  upsertStyleSpread(where: StyleSpreadWhereUniqueInput!, create: StyleSpreadCreateInput!, update: StyleSpreadUpdateInput!): StyleSpread!
   upsertComponent(where: ComponentWhereUniqueInput!, create: ComponentCreateInput!, update: ComponentUpdateInput!): Component!
-  upsertStyle(where: StyleWhereUniqueInput!, create: StyleCreateInput!, update: StyleUpdateInput!): Style!
-  upsertDocument(where: DocumentWhereUniqueInput!, create: DocumentCreateInput!, update: DocumentUpdateInput!): Document!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertElement(where: ElementWhereUniqueInput!, create: ElementCreateInput!, update: ElementUpdateInput!): Element!
+  upsertBorderValue(where: BorderValueWhereUniqueInput!, create: BorderValueCreateInput!, update: BorderValueUpdateInput!): BorderValue!
   upsertDimensionValue(where: DimensionValueWhereUniqueInput!, create: DimensionValueCreateInput!, update: DimensionValueUpdateInput!): DimensionValue!
   upsertColorValue(where: ColorValueWhereUniqueInput!, create: ColorValueCreateInput!, update: ColorValueUpdateInput!): ColorValue!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  upsertStyle(where: StyleWhereUniqueInput!, create: StyleCreateInput!, update: StyleUpdateInput!): Style!
   updateManyWebs(data: WebUpdateInput!, where: WebWhereInput): BatchPayload!
   updateManyPages(data: PageUpdateInput!, where: PageWhereInput): BatchPayload!
-  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
+  updateManyStyleSpreads(data: StyleSpreadUpdateInput!, where: StyleSpreadWhereInput): BatchPayload!
   updateManyComponents(data: ComponentUpdateInput!, where: ComponentWhereInput): BatchPayload!
-  updateManyStyles(data: StyleUpdateInput!, where: StyleWhereInput): BatchPayload!
-  updateManyStyleShadowOffsets(data: StyleShadowOffsetUpdateInput!, where: StyleShadowOffsetWhereInput): BatchPayload!
-  updateManyDocuments(data: DocumentUpdateInput!, where: DocumentWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyElements(data: ElementUpdateInput!, where: ElementWhereInput): BatchPayload!
   updateManyBorderValues(data: BorderValueUpdateInput!, where: BorderValueWhereInput): BatchPayload!
   updateManyDimensionValues(data: DimensionValueUpdateInput!, where: DimensionValueWhereInput): BatchPayload!
   updateManyColorValues(data: ColorValueUpdateInput!, where: ColorValueWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  updateManyStyles(data: StyleUpdateInput!, where: StyleWhereInput): BatchPayload!
   deleteManyWebs(where: WebWhereInput): BatchPayload!
   deleteManyPages(where: PageWhereInput): BatchPayload!
-  deleteManyElements(where: ElementWhereInput): BatchPayload!
+  deleteManyStyleSpreads(where: StyleSpreadWhereInput): BatchPayload!
   deleteManyComponents(where: ComponentWhereInput): BatchPayload!
-  deleteManyStyles(where: StyleWhereInput): BatchPayload!
-  deleteManyStyleShadowOffsets(where: StyleShadowOffsetWhereInput): BatchPayload!
-  deleteManyDocuments(where: DocumentWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyElements(where: ElementWhereInput): BatchPayload!
   deleteManyBorderValues(where: BorderValueWhereInput): BatchPayload!
   deleteManyDimensionValues(where: DimensionValueWhereInput): BatchPayload!
   deleteManyColorValues(where: ColorValueWhereInput): BatchPayload!
+  deleteManyStyles(where: StyleWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -1713,11 +1817,10 @@ type Page implements Node {
   id: ID!
   creator: User!
   web: Web!
+  element: Element!
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  content: Json
-  document: Document
 }
 
 """A connection to a list of items."""
@@ -1732,15 +1835,9 @@ type PageConnection {
 
 input PageCreateInput {
   title: String!
-  content: Json
-  creator: UserCreateOneWithoutPagesInput!
+  creator: UserCreateOneInput!
   web: WebCreateOneWithoutPagesInput!
-  document: DocumentCreateOneInput
-}
-
-input PageCreateManyWithoutCreatorInput {
-  create: [PageCreateWithoutCreatorInput!]
-  connect: [PageWhereUniqueInput!]
+  element: ElementCreateOneInput!
 }
 
 input PageCreateManyWithoutWebInput {
@@ -1748,18 +1845,10 @@ input PageCreateManyWithoutWebInput {
   connect: [PageWhereUniqueInput!]
 }
 
-input PageCreateWithoutCreatorInput {
-  title: String!
-  content: Json
-  web: WebCreateOneWithoutPagesInput!
-  document: DocumentCreateOneInput
-}
-
 input PageCreateWithoutWebInput {
   title: String!
-  content: Json
-  creator: UserCreateOneWithoutPagesInput!
-  document: DocumentCreateOneInput
+  creator: UserCreateOneInput!
+  element: ElementCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -1795,8 +1884,6 @@ enum PageOrderByInput {
   updatedAt_DESC
   title_ASC
   title_DESC
-  content_ASC
-  content_DESC
 }
 
 type PagePreviousValues {
@@ -1804,7 +1891,6 @@ type PagePreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   title: String!
-  content: Json
 }
 
 type PageSubscriptionPayload {
@@ -1848,19 +1934,9 @@ input PageSubscriptionWhereInput {
 
 input PageUpdateInput {
   title: String
-  content: Json
-  creator: UserUpdateOneRequiredWithoutPagesInput
+  creator: UserUpdateOneRequiredInput
   web: WebUpdateOneRequiredWithoutPagesInput
-  document: DocumentUpdateOneInput
-}
-
-input PageUpdateManyWithoutCreatorInput {
-  create: [PageCreateWithoutCreatorInput!]
-  connect: [PageWhereUniqueInput!]
-  disconnect: [PageWhereUniqueInput!]
-  delete: [PageWhereUniqueInput!]
-  update: [PageUpdateWithWhereUniqueWithoutCreatorInput!]
-  upsert: [PageUpsertWithWhereUniqueWithoutCreatorInput!]
+  element: ElementUpdateOneRequiredInput
 }
 
 input PageUpdateManyWithoutWebInput {
@@ -1872,34 +1948,15 @@ input PageUpdateManyWithoutWebInput {
   upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input PageUpdateWithoutCreatorDataInput {
-  title: String
-  content: Json
-  web: WebUpdateOneRequiredWithoutPagesInput
-  document: DocumentUpdateOneInput
-}
-
 input PageUpdateWithoutWebDataInput {
   title: String
-  content: Json
-  creator: UserUpdateOneRequiredWithoutPagesInput
-  document: DocumentUpdateOneInput
-}
-
-input PageUpdateWithWhereUniqueWithoutCreatorInput {
-  where: PageWhereUniqueInput!
-  data: PageUpdateWithoutCreatorDataInput!
+  creator: UserUpdateOneRequiredInput
+  element: ElementUpdateOneRequiredInput
 }
 
 input PageUpdateWithWhereUniqueWithoutWebInput {
   where: PageWhereUniqueInput!
   data: PageUpdateWithoutWebDataInput!
-}
-
-input PageUpsertWithWhereUniqueWithoutCreatorInput {
-  where: PageWhereUniqueInput!
-  update: PageUpdateWithoutCreatorDataInput!
-  create: PageCreateWithoutCreatorInput!
 }
 
 input PageUpsertWithWhereUniqueWithoutWebInput {
@@ -2043,7 +2100,7 @@ input PageWhereInput {
   title_not_ends_with: String
   creator: UserWhereInput
   web: WebWhereInput
-  document: DocumentWhereInput
+  element: ElementWhereInput
 }
 
 input PageWhereUniqueInput {
@@ -2055,37 +2112,36 @@ enum PrismaDatabase {
 }
 
 type Query {
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web]!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page]!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
+  styleSpreads(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread]!
   components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component]!
-  styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style]!
-  styleShadowOffsets(where: StyleShadowOffsetWhereInput, orderBy: StyleShadowOffsetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleShadowOffset]!
-  documents(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Document]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element]!
   borderValues(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BorderValue]!
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue]!
   colorValues(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ColorValue]!
-  user(where: UserWhereUniqueInput!): User
+  styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style]!
   web(where: WebWhereUniqueInput!): Web
   page(where: PageWhereUniqueInput!): Page
-  element(where: ElementWhereUniqueInput!): Element
+  styleSpread(where: StyleSpreadWhereUniqueInput!): StyleSpread
   component(where: ComponentWhereUniqueInput!): Component
-  style(where: StyleWhereUniqueInput!): Style
-  document(where: DocumentWhereUniqueInput!): Document
+  user(where: UserWhereUniqueInput!): User
+  element(where: ElementWhereUniqueInput!): Element
+  borderValue(where: BorderValueWhereUniqueInput!): BorderValue
   dimensionValue(where: DimensionValueWhereUniqueInput!): DimensionValue
   colorValue(where: ColorValueWhereUniqueInput!): ColorValue
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  style(where: StyleWhereUniqueInput!): Style
   websConnection(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): WebConnection!
   pagesConnection(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PageConnection!
-  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
+  styleSpreadsConnection(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleSpreadConnection!
   componentsConnection(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ComponentConnection!
-  stylesConnection(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleConnection!
-  styleShadowOffsetsConnection(where: StyleShadowOffsetWhereInput, orderBy: StyleShadowOffsetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleShadowOffsetConnection!
-  documentsConnection(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DocumentConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  elementsConnection(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ElementConnection!
   borderValuesConnection(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BorderValueConnection!
   dimensionValuesConnection(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DimensionValueConnection!
   colorValuesConnection(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ColorValueConnection!
+  stylesConnection(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StyleConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -2096,9 +2152,12 @@ type Query {
 
 type Style implements Node {
   id: ID!
+  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
+  nextStyle: Style
   web: Web!
-  type: StyleType!
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
+  isText: Boolean
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -2144,10 +2203,6 @@ type Style implements Node {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowColor: ColorValue
-  shadowOffset: StyleShadowOffset
-  shadowOpacity: Int
-  shadowRadius: Int
   backgroundColor: ColorValue
   borderColor: ColorValue
   borderBottomColor: ColorValue
@@ -2231,8 +2286,8 @@ type StyleConnection {
 }
 
 input StyleCreateInput {
-  type: StyleType!
   name: String!
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -2248,8 +2303,6 @@ input StyleCreateInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2263,7 +2316,10 @@ input StyleCreateInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
+  nextStyle: StyleCreateOneInput
   web: WebCreateOneWithoutStylesInput!
+  elements: ElementCreateManyWithoutStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2294,8 +2350,6 @@ input StyleCreateInput {
   paddingStart: DimensionValueCreateOneInput
   paddingTop: DimensionValueCreateOneInput
   paddingVertical: DimensionValueCreateOneInput
-  shadowColor: ColorValueCreateOneInput
-  shadowOffset: StyleShadowOffsetCreateOneInput
   backgroundColor: ColorValueCreateOneInput
   borderColor: ColorValueCreateOneInput
   borderBottomColor: ColorValueCreateOneInput
@@ -2333,9 +2387,19 @@ input StyleCreateOneInput {
   connect: StyleWhereUniqueInput
 }
 
-input StyleCreateWithoutWebInput {
-  type: StyleType!
+input StyleCreateOneWithoutElementsInput {
+  create: StyleCreateWithoutElementsInput
+  connect: StyleWhereUniqueInput
+}
+
+input StyleCreateOneWithoutSpreadStylesInput {
+  create: StyleCreateWithoutSpreadStylesInput
+  connect: StyleWhereUniqueInput
+}
+
+input StyleCreateWithoutElementsInput {
   name: String!
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -2351,8 +2415,6 @@ input StyleCreateWithoutWebInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2366,6 +2428,9 @@ input StyleCreateWithoutWebInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
+  nextStyle: StyleCreateOneInput
+  web: WebCreateOneWithoutStylesInput!
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2396,8 +2461,188 @@ input StyleCreateWithoutWebInput {
   paddingStart: DimensionValueCreateOneInput
   paddingTop: DimensionValueCreateOneInput
   paddingVertical: DimensionValueCreateOneInput
-  shadowColor: ColorValueCreateOneInput
-  shadowOffset: StyleShadowOffsetCreateOneInput
+  backgroundColor: ColorValueCreateOneInput
+  borderColor: ColorValueCreateOneInput
+  borderBottomColor: ColorValueCreateOneInput
+  borderEndColor: ColorValueCreateOneInput
+  borderLeftColor: ColorValueCreateOneInput
+  borderRightColor: ColorValueCreateOneInput
+  borderStartColor: ColorValueCreateOneInput
+  borderTopColor: ColorValueCreateOneInput
+  borderRadius: BorderValueCreateOneInput
+  borderBottomEndRadius: BorderValueCreateOneInput
+  borderBottomLeftRadius: BorderValueCreateOneInput
+  borderBottomRightRadius: BorderValueCreateOneInput
+  borderBottomStartRadius: BorderValueCreateOneInput
+  borderTopEndRadius: BorderValueCreateOneInput
+  borderTopLeftRadius: BorderValueCreateOneInput
+  borderTopRightRadius: BorderValueCreateOneInput
+  borderTopStartRadius: BorderValueCreateOneInput
+  borderWidth: BorderValueCreateOneInput
+  borderBottomWidth: BorderValueCreateOneInput
+  borderEndWidth: BorderValueCreateOneInput
+  borderLeftWidth: BorderValueCreateOneInput
+  borderRightWidth: BorderValueCreateOneInput
+  borderStartWidth: BorderValueCreateOneInput
+  borderTopWidth: BorderValueCreateOneInput
+  color: ColorValueCreateOneInput
+}
+
+input StyleCreateWithoutSpreadStylesInput {
+  name: String!
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  nextStyle: StyleCreateOneInput
+  web: WebCreateOneWithoutStylesInput!
+  elements: ElementCreateManyWithoutStyleInput
+  width: DimensionValueCreateOneInput
+  height: DimensionValueCreateOneInput
+  bottom: DimensionValueCreateOneInput
+  end: DimensionValueCreateOneInput
+  left: DimensionValueCreateOneInput
+  right: DimensionValueCreateOneInput
+  start: DimensionValueCreateOneInput
+  top: DimensionValueCreateOneInput
+  minWidth: DimensionValueCreateOneInput
+  maxWidth: DimensionValueCreateOneInput
+  minHeight: DimensionValueCreateOneInput
+  maxHeight: DimensionValueCreateOneInput
+  margin: DimensionValueCreateOneInput
+  marginBottom: DimensionValueCreateOneInput
+  marginEnd: DimensionValueCreateOneInput
+  marginHorizontal: DimensionValueCreateOneInput
+  marginLeft: DimensionValueCreateOneInput
+  marginRight: DimensionValueCreateOneInput
+  marginStart: DimensionValueCreateOneInput
+  marginTop: DimensionValueCreateOneInput
+  marginVertical: DimensionValueCreateOneInput
+  padding: DimensionValueCreateOneInput
+  paddingBottom: DimensionValueCreateOneInput
+  paddingEnd: DimensionValueCreateOneInput
+  paddingHorizontal: DimensionValueCreateOneInput
+  paddingLeft: DimensionValueCreateOneInput
+  paddingRight: DimensionValueCreateOneInput
+  paddingStart: DimensionValueCreateOneInput
+  paddingTop: DimensionValueCreateOneInput
+  paddingVertical: DimensionValueCreateOneInput
+  backgroundColor: ColorValueCreateOneInput
+  borderColor: ColorValueCreateOneInput
+  borderBottomColor: ColorValueCreateOneInput
+  borderEndColor: ColorValueCreateOneInput
+  borderLeftColor: ColorValueCreateOneInput
+  borderRightColor: ColorValueCreateOneInput
+  borderStartColor: ColorValueCreateOneInput
+  borderTopColor: ColorValueCreateOneInput
+  borderRadius: BorderValueCreateOneInput
+  borderBottomEndRadius: BorderValueCreateOneInput
+  borderBottomLeftRadius: BorderValueCreateOneInput
+  borderBottomRightRadius: BorderValueCreateOneInput
+  borderBottomStartRadius: BorderValueCreateOneInput
+  borderTopEndRadius: BorderValueCreateOneInput
+  borderTopLeftRadius: BorderValueCreateOneInput
+  borderTopRightRadius: BorderValueCreateOneInput
+  borderTopStartRadius: BorderValueCreateOneInput
+  borderWidth: BorderValueCreateOneInput
+  borderBottomWidth: BorderValueCreateOneInput
+  borderEndWidth: BorderValueCreateOneInput
+  borderLeftWidth: BorderValueCreateOneInput
+  borderRightWidth: BorderValueCreateOneInput
+  borderStartWidth: BorderValueCreateOneInput
+  borderTopWidth: BorderValueCreateOneInput
+  color: ColorValueCreateOneInput
+}
+
+input StyleCreateWithoutWebInput {
+  name: String!
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
+  nextStyle: StyleCreateOneInput
+  elements: ElementCreateManyWithoutStyleInput
+  width: DimensionValueCreateOneInput
+  height: DimensionValueCreateOneInput
+  bottom: DimensionValueCreateOneInput
+  end: DimensionValueCreateOneInput
+  left: DimensionValueCreateOneInput
+  right: DimensionValueCreateOneInput
+  start: DimensionValueCreateOneInput
+  top: DimensionValueCreateOneInput
+  minWidth: DimensionValueCreateOneInput
+  maxWidth: DimensionValueCreateOneInput
+  minHeight: DimensionValueCreateOneInput
+  maxHeight: DimensionValueCreateOneInput
+  margin: DimensionValueCreateOneInput
+  marginBottom: DimensionValueCreateOneInput
+  marginEnd: DimensionValueCreateOneInput
+  marginHorizontal: DimensionValueCreateOneInput
+  marginLeft: DimensionValueCreateOneInput
+  marginRight: DimensionValueCreateOneInput
+  marginStart: DimensionValueCreateOneInput
+  marginTop: DimensionValueCreateOneInput
+  marginVertical: DimensionValueCreateOneInput
+  padding: DimensionValueCreateOneInput
+  paddingBottom: DimensionValueCreateOneInput
+  paddingEnd: DimensionValueCreateOneInput
+  paddingHorizontal: DimensionValueCreateOneInput
+  paddingLeft: DimensionValueCreateOneInput
+  paddingRight: DimensionValueCreateOneInput
+  paddingStart: DimensionValueCreateOneInput
+  paddingTop: DimensionValueCreateOneInput
+  paddingVertical: DimensionValueCreateOneInput
   backgroundColor: ColorValueCreateOneInput
   borderColor: ColorValueCreateOneInput
   borderBottomColor: ColorValueCreateOneInput
@@ -2493,10 +2738,10 @@ enum StyleJustifyContent {
 enum StyleOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   name_ASC
   name_DESC
+  isText_ASC
+  isText_DESC
   display_ASC
   display_DESC
   position_ASC
@@ -2527,10 +2772,6 @@ enum StyleOrderByInput {
   zIndex_DESC
   direction_ASC
   direction_DESC
-  shadowOpacity_ASC
-  shadowOpacity_DESC
-  shadowRadius_ASC
-  shadowRadius_DESC
   borderStyle_ASC
   borderStyle_DESC
   opacity_ASC
@@ -2576,8 +2817,8 @@ enum StylePosition {
 
 type StylePreviousValues {
   id: ID!
-  type: StyleType!
   name: String!
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -2593,8 +2834,6 @@ type StylePreviousValues {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2610,73 +2849,80 @@ type StylePreviousValues {
   textTransform: StyleTextTransform
 }
 
-type StyleShadowOffset {
-  width: Int!
-  height: Int!
+type StyleSpread implements Node {
+  id: ID!
+  spreadStyle: Style!
+  index: Int!
+  style: Style!
 }
 
 """A connection to a list of items."""
-type StyleShadowOffsetConnection {
+type StyleSpreadConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [StyleShadowOffsetEdge]!
-  aggregate: AggregateStyleShadowOffset!
+  edges: [StyleSpreadEdge]!
+  aggregate: AggregateStyleSpread!
 }
 
-input StyleShadowOffsetCreateInput {
-  width: Int!
-  height: Int!
+input StyleSpreadCreateInput {
+  index: Int!
+  spreadStyle: StyleCreateOneWithoutSpreadStylesInput!
+  style: StyleCreateOneInput!
 }
 
-input StyleShadowOffsetCreateOneInput {
-  create: StyleShadowOffsetCreateInput
+input StyleSpreadCreateManyWithoutSpreadStyleInput {
+  create: [StyleSpreadCreateWithoutSpreadStyleInput!]
+  connect: [StyleSpreadWhereUniqueInput!]
+}
+
+input StyleSpreadCreateWithoutSpreadStyleInput {
+  index: Int!
+  style: StyleCreateOneInput!
 }
 
 """An edge in a connection."""
-type StyleShadowOffsetEdge {
+type StyleSpreadEdge {
   """The item at the end of the edge."""
-  node: StyleShadowOffset!
+  node: StyleSpread!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum StyleShadowOffsetOrderByInput {
-  width_ASC
-  width_DESC
-  height_ASC
-  height_DESC
+enum StyleSpreadOrderByInput {
   id_ASC
   id_DESC
+  index_ASC
+  index_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type StyleShadowOffsetPreviousValues {
-  width: Int!
-  height: Int!
+type StyleSpreadPreviousValues {
+  id: ID!
+  index: Int!
 }
 
-type StyleShadowOffsetSubscriptionPayload {
+type StyleSpreadSubscriptionPayload {
   mutation: MutationType!
-  node: StyleShadowOffset
+  node: StyleSpread
   updatedFields: [String!]
-  previousValues: StyleShadowOffsetPreviousValues
+  previousValues: StyleSpreadPreviousValues
 }
 
-input StyleShadowOffsetSubscriptionWhereInput {
+input StyleSpreadSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetSubscriptionWhereInput!]
+  AND: [StyleSpreadSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetSubscriptionWhereInput!]
+  OR: [StyleSpreadSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetSubscriptionWhereInput!]
+  NOT: [StyleSpreadSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -2697,85 +2943,117 @@ input StyleShadowOffsetSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: StyleShadowOffsetWhereInput
+  node: StyleSpreadWhereInput
 }
 
-input StyleShadowOffsetUpdateDataInput {
-  width: Int
-  height: Int
+input StyleSpreadUpdateInput {
+  index: Int
+  spreadStyle: StyleUpdateOneRequiredWithoutSpreadStylesInput
+  style: StyleUpdateOneRequiredInput
 }
 
-input StyleShadowOffsetUpdateInput {
-  width: Int
-  height: Int
+input StyleSpreadUpdateManyWithoutSpreadStyleInput {
+  create: [StyleSpreadCreateWithoutSpreadStyleInput!]
+  connect: [StyleSpreadWhereUniqueInput!]
+  disconnect: [StyleSpreadWhereUniqueInput!]
+  delete: [StyleSpreadWhereUniqueInput!]
+  update: [StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput!]
+  upsert: [StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput!]
 }
 
-input StyleShadowOffsetUpdateOneInput {
-  create: StyleShadowOffsetCreateInput
-  disconnect: Boolean
-  delete: Boolean
-  update: StyleShadowOffsetUpdateDataInput
-  upsert: StyleShadowOffsetUpsertNestedInput
+input StyleSpreadUpdateWithoutSpreadStyleDataInput {
+  index: Int
+  style: StyleUpdateOneRequiredInput
 }
 
-input StyleShadowOffsetUpsertNestedInput {
-  update: StyleShadowOffsetUpdateDataInput!
-  create: StyleShadowOffsetCreateInput!
+input StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput {
+  where: StyleSpreadWhereUniqueInput!
+  data: StyleSpreadUpdateWithoutSpreadStyleDataInput!
 }
 
-input StyleShadowOffsetWhereInput {
+input StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput {
+  where: StyleSpreadWhereUniqueInput!
+  update: StyleSpreadUpdateWithoutSpreadStyleDataInput!
+  create: StyleSpreadCreateWithoutSpreadStyleInput!
+}
+
+input StyleSpreadWhereInput {
   """Logical AND on all given filters."""
-  AND: [StyleShadowOffsetWhereInput!]
+  AND: [StyleSpreadWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [StyleShadowOffsetWhereInput!]
+  OR: [StyleSpreadWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [StyleShadowOffsetWhereInput!]
-  width: Int
+  NOT: [StyleSpreadWhereInput!]
+  id: ID
 
   """All values that are not equal to given value."""
-  width_not: Int
+  id_not: ID
 
   """All values that are contained in given list."""
-  width_in: [Int!]
+  id_in: [ID!]
 
   """All values that are not contained in given list."""
-  width_not_in: [Int!]
+  id_not_in: [ID!]
 
   """All values less than the given value."""
-  width_lt: Int
+  id_lt: ID
 
   """All values less than or equal the given value."""
-  width_lte: Int
+  id_lte: ID
 
   """All values greater than the given value."""
-  width_gt: Int
+  id_gt: ID
 
   """All values greater than or equal the given value."""
-  width_gte: Int
-  height: Int
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
 
   """All values that are not equal to given value."""
-  height_not: Int
+  index_not: Int
 
   """All values that are contained in given list."""
-  height_in: [Int!]
+  index_in: [Int!]
 
   """All values that are not contained in given list."""
-  height_not_in: [Int!]
+  index_not_in: [Int!]
 
   """All values less than the given value."""
-  height_lt: Int
+  index_lt: Int
 
   """All values less than or equal the given value."""
-  height_lte: Int
+  index_lte: Int
 
   """All values greater than the given value."""
-  height_gt: Int
+  index_gt: Int
 
   """All values greater than or equal the given value."""
-  height_gte: Int
+  index_gte: Int
+  spreadStyle: StyleWhereInput
+  style: StyleWhereInput
+}
+
+input StyleSpreadWhereUniqueInput {
+  id: ID
 }
 
 type StyleSubscriptionPayload {
@@ -2846,14 +3124,9 @@ enum StyleTextTransform {
   LOWERCASE
 }
 
-enum StyleType {
-  VIEW
-  TEXT
-}
-
 input StyleUpdateDataInput {
-  type: StyleType
   name: String
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -2869,8 +3142,6 @@ input StyleUpdateDataInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2884,7 +3155,10 @@ input StyleUpdateDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
+  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
+  elements: ElementUpdateManyWithoutStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -2915,8 +3189,6 @@ input StyleUpdateDataInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -2945,8 +3217,8 @@ input StyleUpdateDataInput {
 }
 
 input StyleUpdateInput {
-  type: StyleType
   name: String
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -2962,8 +3234,6 @@ input StyleUpdateInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -2977,7 +3247,10 @@ input StyleUpdateInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
+  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
+  elements: ElementUpdateManyWithoutStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3008,8 +3281,6 @@ input StyleUpdateInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -3055,9 +3326,32 @@ input StyleUpdateOneInput {
   upsert: StyleUpsertNestedInput
 }
 
-input StyleUpdateWithoutWebDataInput {
-  type: StyleType
+input StyleUpdateOneRequiredInput {
+  create: StyleCreateInput
+  connect: StyleWhereUniqueInput
+  update: StyleUpdateDataInput
+  upsert: StyleUpsertNestedInput
+}
+
+input StyleUpdateOneRequiredWithoutSpreadStylesInput {
+  create: StyleCreateWithoutSpreadStylesInput
+  connect: StyleWhereUniqueInput
+  update: StyleUpdateWithoutSpreadStylesDataInput
+  upsert: StyleUpsertWithoutSpreadStylesInput
+}
+
+input StyleUpdateOneWithoutElementsInput {
+  create: StyleCreateWithoutElementsInput
+  connect: StyleWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: StyleUpdateWithoutElementsDataInput
+  upsert: StyleUpsertWithoutElementsInput
+}
+
+input StyleUpdateWithoutElementsDataInput {
   name: String
+  isText: Boolean
   display: StyleDisplay
   position: StylePosition
   flexDirection: StyleFlexDirection
@@ -3073,8 +3367,6 @@ input StyleUpdateWithoutWebDataInput {
   flexBasis: Int
   zIndex: Int
   direction: StyleDirection
-  shadowOpacity: Int
-  shadowRadius: Int
   borderStyle: StyleBorderStyle
   opacity: Int
   fontFamily: String
@@ -3088,6 +3380,9 @@ input StyleUpdateWithoutWebDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
+  nextStyle: StyleUpdateOneInput
+  web: WebUpdateOneRequiredWithoutStylesInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3118,8 +3413,188 @@ input StyleUpdateWithoutWebDataInput {
   paddingStart: DimensionValueUpdateOneInput
   paddingTop: DimensionValueUpdateOneInput
   paddingVertical: DimensionValueUpdateOneInput
-  shadowColor: ColorValueUpdateOneInput
-  shadowOffset: StyleShadowOffsetUpdateOneInput
+  backgroundColor: ColorValueUpdateOneInput
+  borderColor: ColorValueUpdateOneInput
+  borderBottomColor: ColorValueUpdateOneInput
+  borderEndColor: ColorValueUpdateOneInput
+  borderLeftColor: ColorValueUpdateOneInput
+  borderRightColor: ColorValueUpdateOneInput
+  borderStartColor: ColorValueUpdateOneInput
+  borderTopColor: ColorValueUpdateOneInput
+  borderRadius: BorderValueUpdateOneInput
+  borderBottomEndRadius: BorderValueUpdateOneInput
+  borderBottomLeftRadius: BorderValueUpdateOneInput
+  borderBottomRightRadius: BorderValueUpdateOneInput
+  borderBottomStartRadius: BorderValueUpdateOneInput
+  borderTopEndRadius: BorderValueUpdateOneInput
+  borderTopLeftRadius: BorderValueUpdateOneInput
+  borderTopRightRadius: BorderValueUpdateOneInput
+  borderTopStartRadius: BorderValueUpdateOneInput
+  borderWidth: BorderValueUpdateOneInput
+  borderBottomWidth: BorderValueUpdateOneInput
+  borderEndWidth: BorderValueUpdateOneInput
+  borderLeftWidth: BorderValueUpdateOneInput
+  borderRightWidth: BorderValueUpdateOneInput
+  borderStartWidth: BorderValueUpdateOneInput
+  borderTopWidth: BorderValueUpdateOneInput
+  color: ColorValueUpdateOneInput
+}
+
+input StyleUpdateWithoutSpreadStylesDataInput {
+  name: String
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  nextStyle: StyleUpdateOneInput
+  web: WebUpdateOneRequiredWithoutStylesInput
+  elements: ElementUpdateManyWithoutStyleInput
+  width: DimensionValueUpdateOneInput
+  height: DimensionValueUpdateOneInput
+  bottom: DimensionValueUpdateOneInput
+  end: DimensionValueUpdateOneInput
+  left: DimensionValueUpdateOneInput
+  right: DimensionValueUpdateOneInput
+  start: DimensionValueUpdateOneInput
+  top: DimensionValueUpdateOneInput
+  minWidth: DimensionValueUpdateOneInput
+  maxWidth: DimensionValueUpdateOneInput
+  minHeight: DimensionValueUpdateOneInput
+  maxHeight: DimensionValueUpdateOneInput
+  margin: DimensionValueUpdateOneInput
+  marginBottom: DimensionValueUpdateOneInput
+  marginEnd: DimensionValueUpdateOneInput
+  marginHorizontal: DimensionValueUpdateOneInput
+  marginLeft: DimensionValueUpdateOneInput
+  marginRight: DimensionValueUpdateOneInput
+  marginStart: DimensionValueUpdateOneInput
+  marginTop: DimensionValueUpdateOneInput
+  marginVertical: DimensionValueUpdateOneInput
+  padding: DimensionValueUpdateOneInput
+  paddingBottom: DimensionValueUpdateOneInput
+  paddingEnd: DimensionValueUpdateOneInput
+  paddingHorizontal: DimensionValueUpdateOneInput
+  paddingLeft: DimensionValueUpdateOneInput
+  paddingRight: DimensionValueUpdateOneInput
+  paddingStart: DimensionValueUpdateOneInput
+  paddingTop: DimensionValueUpdateOneInput
+  paddingVertical: DimensionValueUpdateOneInput
+  backgroundColor: ColorValueUpdateOneInput
+  borderColor: ColorValueUpdateOneInput
+  borderBottomColor: ColorValueUpdateOneInput
+  borderEndColor: ColorValueUpdateOneInput
+  borderLeftColor: ColorValueUpdateOneInput
+  borderRightColor: ColorValueUpdateOneInput
+  borderStartColor: ColorValueUpdateOneInput
+  borderTopColor: ColorValueUpdateOneInput
+  borderRadius: BorderValueUpdateOneInput
+  borderBottomEndRadius: BorderValueUpdateOneInput
+  borderBottomLeftRadius: BorderValueUpdateOneInput
+  borderBottomRightRadius: BorderValueUpdateOneInput
+  borderBottomStartRadius: BorderValueUpdateOneInput
+  borderTopEndRadius: BorderValueUpdateOneInput
+  borderTopLeftRadius: BorderValueUpdateOneInput
+  borderTopRightRadius: BorderValueUpdateOneInput
+  borderTopStartRadius: BorderValueUpdateOneInput
+  borderWidth: BorderValueUpdateOneInput
+  borderBottomWidth: BorderValueUpdateOneInput
+  borderEndWidth: BorderValueUpdateOneInput
+  borderLeftWidth: BorderValueUpdateOneInput
+  borderRightWidth: BorderValueUpdateOneInput
+  borderStartWidth: BorderValueUpdateOneInput
+  borderTopWidth: BorderValueUpdateOneInput
+  color: ColorValueUpdateOneInput
+}
+
+input StyleUpdateWithoutWebDataInput {
+  name: String
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
+  nextStyle: StyleUpdateOneInput
+  elements: ElementUpdateManyWithoutStyleInput
+  width: DimensionValueUpdateOneInput
+  height: DimensionValueUpdateOneInput
+  bottom: DimensionValueUpdateOneInput
+  end: DimensionValueUpdateOneInput
+  left: DimensionValueUpdateOneInput
+  right: DimensionValueUpdateOneInput
+  start: DimensionValueUpdateOneInput
+  top: DimensionValueUpdateOneInput
+  minWidth: DimensionValueUpdateOneInput
+  maxWidth: DimensionValueUpdateOneInput
+  minHeight: DimensionValueUpdateOneInput
+  maxHeight: DimensionValueUpdateOneInput
+  margin: DimensionValueUpdateOneInput
+  marginBottom: DimensionValueUpdateOneInput
+  marginEnd: DimensionValueUpdateOneInput
+  marginHorizontal: DimensionValueUpdateOneInput
+  marginLeft: DimensionValueUpdateOneInput
+  marginRight: DimensionValueUpdateOneInput
+  marginStart: DimensionValueUpdateOneInput
+  marginTop: DimensionValueUpdateOneInput
+  marginVertical: DimensionValueUpdateOneInput
+  padding: DimensionValueUpdateOneInput
+  paddingBottom: DimensionValueUpdateOneInput
+  paddingEnd: DimensionValueUpdateOneInput
+  paddingHorizontal: DimensionValueUpdateOneInput
+  paddingLeft: DimensionValueUpdateOneInput
+  paddingRight: DimensionValueUpdateOneInput
+  paddingStart: DimensionValueUpdateOneInput
+  paddingTop: DimensionValueUpdateOneInput
+  paddingVertical: DimensionValueUpdateOneInput
   backgroundColor: ColorValueUpdateOneInput
   borderColor: ColorValueUpdateOneInput
   borderBottomColor: ColorValueUpdateOneInput
@@ -3155,6 +3630,16 @@ input StyleUpdateWithWhereUniqueWithoutWebInput {
 input StyleUpsertNestedInput {
   update: StyleUpdateDataInput!
   create: StyleCreateInput!
+}
+
+input StyleUpsertWithoutElementsInput {
+  update: StyleUpdateWithoutElementsDataInput!
+  create: StyleCreateWithoutElementsInput!
+}
+
+input StyleUpsertWithoutSpreadStylesInput {
+  update: StyleUpdateWithoutSpreadStylesDataInput!
+  create: StyleCreateWithoutSpreadStylesInput!
 }
 
 input StyleUpsertWithWhereUniqueWithoutWebInput {
@@ -3212,16 +3697,6 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: StyleType
-
-  """All values that are not equal to given value."""
-  type_not: StyleType
-
-  """All values that are contained in given list."""
-  type_in: [StyleType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [StyleType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -3262,6 +3737,10 @@ input StyleWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
+  isText: Boolean
+
+  """All values that are not equal to given value."""
+  isText_not: Boolean
   display: StyleDisplay
 
   """All values that are not equal to given value."""
@@ -3472,50 +3951,6 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   direction_not_in: [StyleDirection!]
-  shadowOpacity: Int
-
-  """All values that are not equal to given value."""
-  shadowOpacity_not: Int
-
-  """All values that are contained in given list."""
-  shadowOpacity_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowOpacity_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowOpacity_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowOpacity_lte: Int
-
-  """All values greater than the given value."""
-  shadowOpacity_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowOpacity_gte: Int
-  shadowRadius: Int
-
-  """All values that are not equal to given value."""
-  shadowRadius_not: Int
-
-  """All values that are contained in given list."""
-  shadowRadius_in: [Int!]
-
-  """All values that are not contained in given list."""
-  shadowRadius_not_in: [Int!]
-
-  """All values less than the given value."""
-  shadowRadius_lt: Int
-
-  """All values less than or equal the given value."""
-  shadowRadius_lte: Int
-
-  """All values greater than the given value."""
-  shadowRadius_gt: Int
-
-  """All values greater than or equal the given value."""
-  shadowRadius_gte: Int
   borderStyle: StyleBorderStyle
 
   """All values that are not equal to given value."""
@@ -3724,7 +4159,14 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
+  spreadStyles_every: StyleSpreadWhereInput
+  spreadStyles_some: StyleSpreadWhereInput
+  spreadStyles_none: StyleSpreadWhereInput
+  nextStyle: StyleWhereInput
   web: WebWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput
@@ -3755,8 +4197,6 @@ input StyleWhereInput {
   paddingStart: DimensionValueWhereInput
   paddingTop: DimensionValueWhereInput
   paddingVertical: DimensionValueWhereInput
-  shadowColor: ColorValueWhereInput
-  shadowOffset: StyleShadowOffsetWhereInput
   backgroundColor: ColorValueWhereInput
   borderColor: ColorValueWhereInput
   borderBottomColor: ColorValueWhereInput
@@ -3789,23 +4229,21 @@ input StyleWhereUniqueInput {
 }
 
 type Subscription {
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   web(where: WebSubscriptionWhereInput): WebSubscriptionPayload
   page(where: PageSubscriptionWhereInput): PageSubscriptionPayload
-  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
+  styleSpread(where: StyleSpreadSubscriptionWhereInput): StyleSpreadSubscriptionPayload
   component(where: ComponentSubscriptionWhereInput): ComponentSubscriptionPayload
-  style(where: StyleSubscriptionWhereInput): StyleSubscriptionPayload
-  styleShadowOffset(where: StyleShadowOffsetSubscriptionWhereInput): StyleShadowOffsetSubscriptionPayload
-  document(where: DocumentSubscriptionWhereInput): DocumentSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  element(where: ElementSubscriptionWhereInput): ElementSubscriptionPayload
   borderValue(where: BorderValueSubscriptionWhereInput): BorderValueSubscriptionPayload
   dimensionValue(where: DimensionValueSubscriptionWhereInput): DimensionValueSubscriptionPayload
   colorValue(where: ColorValueSubscriptionWhereInput): ColorValueSubscriptionPayload
+  style(where: StyleSubscriptionWhereInput): StyleSubscriptionPayload
 }
 
 type User implements Node {
   id: ID!
   webs(where: WebWhereInput, orderBy: WebOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Web!]
-  pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
@@ -3828,11 +4266,10 @@ input UserCreateInput {
   password: String!
   themeName: String
   webs: WebCreateManyWithoutCreatorInput
-  pages: PageCreateManyWithoutCreatorInput
 }
 
-input UserCreateOneWithoutPagesInput {
-  create: UserCreateWithoutPagesInput
+input UserCreateOneInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
 }
 
@@ -3841,18 +4278,10 @@ input UserCreateOneWithoutWebsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutPagesInput {
-  email: String!
-  password: String!
-  themeName: String
-  webs: WebCreateManyWithoutCreatorInput
-}
-
 input UserCreateWithoutWebsInput {
   email: String!
   password: String!
   themeName: String
-  pages: PageCreateManyWithoutCreatorInput
 }
 
 """An edge in a connection."""
@@ -3927,19 +4356,25 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  email: String
+  password: String
+  themeName: String
+  webs: WebUpdateManyWithoutCreatorInput
+}
+
 input UserUpdateInput {
   email: String
   password: String
   themeName: String
   webs: WebUpdateManyWithoutCreatorInput
-  pages: PageUpdateManyWithoutCreatorInput
 }
 
-input UserUpdateOneRequiredWithoutPagesInput {
-  create: UserCreateWithoutPagesInput
+input UserUpdateOneRequiredInput {
+  create: UserCreateInput
   connect: UserWhereUniqueInput
-  update: UserUpdateWithoutPagesDataInput
-  upsert: UserUpsertWithoutPagesInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
 input UserUpdateOneRequiredWithoutWebsInput {
@@ -3949,23 +4384,15 @@ input UserUpdateOneRequiredWithoutWebsInput {
   upsert: UserUpsertWithoutWebsInput
 }
 
-input UserUpdateWithoutPagesDataInput {
-  email: String
-  password: String
-  themeName: String
-  webs: WebUpdateManyWithoutCreatorInput
-}
-
 input UserUpdateWithoutWebsDataInput {
   email: String
   password: String
   themeName: String
-  pages: PageUpdateManyWithoutCreatorInput
 }
 
-input UserUpsertWithoutPagesInput {
-  update: UserUpdateWithoutPagesDataInput!
-  create: UserCreateWithoutPagesInput!
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
 input UserUpsertWithoutWebsInput {
@@ -4189,9 +4616,6 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
-  pages_every: PageWhereInput
-  pages_some: PageWhereInput
-  pages_none: PageWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -4203,14 +4627,15 @@ type Web implements Node {
   id: ID!
   creator: User!
   pages(where: PageWhereInput, orderBy: PageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Page!]
-  documents(where: DocumentWhereInput, orderBy: DocumentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Document!]
-  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
+  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   styles(where: StyleWhereInput, orderBy: StyleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Style!]
   dimensionValues(where: DimensionValueWhereInput, orderBy: DimensionValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DimensionValue!]
   colorValues(where: ColorValueWhereInput, orderBy: ColorValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ColorValue!]
+  borderValues(where: BorderValueWhereInput, orderBy: BorderValueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BorderValue!]
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 """A connection to a list of items."""
@@ -4227,16 +4652,22 @@ input WebCreateInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 input WebCreateManyWithoutCreatorInput {
   create: [WebCreateWithoutCreatorInput!]
   connect: [WebWhereUniqueInput!]
+}
+
+input WebCreateOneWithoutBorderValuesInput {
+  create: WebCreateWithoutBorderValuesInput
+  connect: WebWhereUniqueInput
 }
 
 input WebCreateOneWithoutColorValuesInput {
@@ -4254,8 +4685,8 @@ input WebCreateOneWithoutDimensionValuesInput {
   connect: WebWhereUniqueInput
 }
 
-input WebCreateOneWithoutDocumentsInput {
-  create: WebCreateWithoutDocumentsInput
+input WebCreateOneWithoutElementsInput {
+  create: WebCreateWithoutElementsInput
   connect: WebWhereUniqueInput
 }
 
@@ -4269,74 +4700,92 @@ input WebCreateOneWithoutStylesInput {
   connect: WebWhereUniqueInput
 }
 
+input WebCreateWithoutBorderValuesInput {
+  name: String!
+  creator: UserCreateOneWithoutWebsInput!
+  pages: PageCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
+  styles: StyleCreateManyWithoutWebInput
+  dimensionValues: DimensionValueCreateManyWithoutWebInput
+  colorValues: ColorValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
+}
+
 input WebCreateWithoutColorValuesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutComponentsInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutCreatorInput {
   name: String!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutDimensionValuesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
-input WebCreateWithoutDocumentsInput {
+input WebCreateWithoutElementsInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutPagesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   styles: StyleCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 input WebCreateWithoutStylesInput {
   name: String!
   creator: UserCreateOneWithoutWebsInput!
   pages: PageCreateManyWithoutWebInput
-  documents: DocumentCreateManyWithoutWebInput
-  components: ComponentCreateManyWithoutWebInput
+  elements: ElementCreateManyWithoutWebInput
   dimensionValues: DimensionValueCreateManyWithoutWebInput
   colorValues: ColorValueCreateManyWithoutWebInput
+  borderValues: BorderValueCreateManyWithoutWebInput
+  components: ComponentCreateManyWithoutWebInput
 }
 
 """An edge in a connection."""
@@ -4409,11 +4858,12 @@ input WebUpdateInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateManyWithoutCreatorInput {
@@ -4423,6 +4873,13 @@ input WebUpdateManyWithoutCreatorInput {
   delete: [WebWhereUniqueInput!]
   update: [WebUpdateWithWhereUniqueWithoutCreatorInput!]
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input WebUpdateOneRequiredWithoutBorderValuesInput {
+  create: WebCreateWithoutBorderValuesInput
+  connect: WebWhereUniqueInput
+  update: WebUpdateWithoutBorderValuesDataInput
+  upsert: WebUpsertWithoutBorderValuesInput
 }
 
 input WebUpdateOneRequiredWithoutColorValuesInput {
@@ -4446,11 +4903,11 @@ input WebUpdateOneRequiredWithoutDimensionValuesInput {
   upsert: WebUpsertWithoutDimensionValuesInput
 }
 
-input WebUpdateOneRequiredWithoutDocumentsInput {
-  create: WebCreateWithoutDocumentsInput
+input WebUpdateOneRequiredWithoutElementsInput {
+  create: WebCreateWithoutElementsInput
   connect: WebWhereUniqueInput
-  update: WebUpdateWithoutDocumentsDataInput
-  upsert: WebUpsertWithoutDocumentsInput
+  update: WebUpdateWithoutElementsDataInput
+  upsert: WebUpsertWithoutElementsInput
 }
 
 input WebUpdateOneRequiredWithoutPagesInput {
@@ -4467,79 +4924,102 @@ input WebUpdateOneRequiredWithoutStylesInput {
   upsert: WebUpsertWithoutStylesInput
 }
 
+input WebUpdateWithoutBorderValuesDataInput {
+  name: String
+  creator: UserUpdateOneRequiredWithoutWebsInput
+  pages: PageUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
+  styles: StyleUpdateManyWithoutWebInput
+  dimensionValues: DimensionValueUpdateManyWithoutWebInput
+  colorValues: ColorValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
+}
+
 input WebUpdateWithoutColorValuesDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutComponentsDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutCreatorDataInput {
   name: String
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutDimensionValuesDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
-input WebUpdateWithoutDocumentsDataInput {
+input WebUpdateWithoutElementsDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutPagesDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   styles: StyleUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithoutStylesDataInput {
   name: String
   creator: UserUpdateOneRequiredWithoutWebsInput
   pages: PageUpdateManyWithoutWebInput
-  documents: DocumentUpdateManyWithoutWebInput
-  components: ComponentUpdateManyWithoutWebInput
+  elements: ElementUpdateManyWithoutWebInput
   dimensionValues: DimensionValueUpdateManyWithoutWebInput
   colorValues: ColorValueUpdateManyWithoutWebInput
+  borderValues: BorderValueUpdateManyWithoutWebInput
+  components: ComponentUpdateManyWithoutWebInput
 }
 
 input WebUpdateWithWhereUniqueWithoutCreatorInput {
   where: WebWhereUniqueInput!
   data: WebUpdateWithoutCreatorDataInput!
+}
+
+input WebUpsertWithoutBorderValuesInput {
+  update: WebUpdateWithoutBorderValuesDataInput!
+  create: WebCreateWithoutBorderValuesInput!
 }
 
 input WebUpsertWithoutColorValuesInput {
@@ -4557,9 +5037,9 @@ input WebUpsertWithoutDimensionValuesInput {
   create: WebCreateWithoutDimensionValuesInput!
 }
 
-input WebUpsertWithoutDocumentsInput {
-  update: WebUpdateWithoutDocumentsDataInput!
-  create: WebCreateWithoutDocumentsInput!
+input WebUpsertWithoutElementsInput {
+  update: WebUpdateWithoutElementsDataInput!
+  create: WebCreateWithoutElementsInput!
 }
 
 input WebUpsertWithoutPagesInput {
@@ -4715,12 +5195,9 @@ input WebWhereInput {
   pages_every: PageWhereInput
   pages_some: PageWhereInput
   pages_none: PageWhereInput
-  documents_every: DocumentWhereInput
-  documents_some: DocumentWhereInput
-  documents_none: DocumentWhereInput
-  components_every: ComponentWhereInput
-  components_some: ComponentWhereInput
-  components_none: ComponentWhereInput
+  elements_every: ElementWhereInput
+  elements_some: ElementWhereInput
+  elements_none: ElementWhereInput
   styles_every: StyleWhereInput
   styles_some: StyleWhereInput
   styles_none: StyleWhereInput
@@ -4730,6 +5207,12 @@ input WebWhereInput {
   colorValues_every: ColorValueWhereInput
   colorValues_some: ColorValueWhereInput
   colorValues_none: ColorValueWhereInput
+  borderValues_every: BorderValueWhereInput
+  borderValues_some: BorderValueWhereInput
+  borderValues_none: BorderValueWhereInput
+  components_every: ComponentWhereInput
+  components_some: ComponentWhereInput
+  components_none: ComponentWhereInput
 }
 
 input WebWhereUniqueInput {

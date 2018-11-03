@@ -1,20 +1,15 @@
 // @flow
-import * as React from 'react';
-import withTheme, { type Theme } from './withTheme';
+import React, { type Node } from 'react';
+import useTheme from './useTheme';
 import { View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type BlockProps = {|
   style?: ViewStyleProp,
-  children?: React.Node,
-  theme: Theme,
+  children?: Node,
 |};
 
-class Block extends React.PureComponent<BlockProps> {
-  render() {
-    const { style, theme, ...props } = this.props;
-    return <View style={[theme.styles.block, style]} {...props} />;
-  }
+export default function Block({ style, ...props }: BlockProps) {
+  const theme = useTheme();
+  return <View style={[theme.styles.block, style]} {...props} />;
 }
-
-export default withTheme(Block);

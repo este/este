@@ -14,6 +14,7 @@ import ErrorContext, {
   type ContextError,
 } from '../components/core/ErrorContext';
 import RelayProvider from '../components/core/RelayProvider';
+// $FlowFixMe Wrong libdef.
 import Error from 'next/error';
 
 type RelayRecords = Object;

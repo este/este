@@ -29,7 +29,19 @@
 
 [untyped]
 ; TODO: Should be revisited after next React Native release.
-.*/node_modules/react-native/Libraries/.*
+.*/node_modules/react-native/Libraries/StyleSheet/StyleSheetValidation.js
+.*/node_modules/react-native/Libraries/StyleSheet/processTransform.js
+.*/node_modules/react-native/Libraries/StyleSheet/EdgeInsetsPropType.js
+.*/node_modules/react-native/Libraries/ReactNative/YellowBox.js
+.*/node_modules/react-native/Libraries/Lists/.*
+.*/node_modules/react-native/Libraries/Components/.*
+.*/node_modules/react-native/Libraries/Image/.*
+.*/node_modules/react-native/Libraries/Animated/.*
+.*/node_modules/react-native/Libraries/Text/.*
+.*/node_modules/react-native/Libraries/LayoutAnimation/.*
+.*/node_modules/react-native/Libraries/Experimental/SwipeableRow/.*
+.*/node_modules/react-native/Libraries/ReactNative/requireNativeComponent.js
+.*/node_modules/react-native/Libraries/ReactNative/renderApplication.js
 
 [include]
 
