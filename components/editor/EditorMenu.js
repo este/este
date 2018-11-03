@@ -1,28 +1,50 @@
 // @flow
 /* eslint-env browser */
 // $FlowFixMe
-import React, { useContext } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import useTheme from '../core/useTheme';
+import usePortal from '../core/usePortal';
+
+import { Text } from 'react-native';
 
 type EditorMenuProps = {|
   value: Object,
 |};
 
-export default function EditorMenu(props: EditorMenuProps) {
+export default function EditorMenu({ value }: EditorMenuProps) {
   const theme = useTheme();
-  // theme.styles.appPageBody;
+  const portal = usePortal();
 
-  // console.log(theme);
-  //     return ReactDOM.createPortal(
-  //       <View style={[this.props.theme.styles.editorMenu, { left, top }]}>
-  //         {view}
-  //       </View>,
-  //       el,
-  //     );
+  const [position, setPosition] = useState(null);
 
-  return null;
+  useEffect(
+    () => {
+      const { selection, fragment } = value;
+      const hideMenu =
+        selection.isBlurred || selection.isCollapsed || fragment.text === '';
+      if (hideMenu) {
+        setPosition(null);
+        return;
+      }
+      const rect = window
+        .getSelection()
+        .getRangeAt(0)
+        .getBoundingClientRect();
+      const left = rect.left;
+      const top = window.pageYOffset + rect.bottom;
+      setPosition({ left, top });
+    },
+    [value],
+  );
+
+  if (portal == null || position == null) return null;
+
+  return portal(
+    <View style={[theme.styles.editorMenu, position]}>
+      <Text>foo</Text>
+    </View>,
+  );
 }
 
 // import * as React from 'react';
