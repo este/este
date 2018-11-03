@@ -18,8 +18,8 @@ import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
 
-type MarkType = 'bold' | 'italic';
-type NodeType = 'style';
+export type MarkType = 'bold' | 'italic';
+// type NodeType = 'style';
 
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
@@ -45,23 +45,17 @@ function elementsToSlateValue(pageElementId, elementsArray) {
   function walk(id) {
     const element = elements[id];
     const { type } = element;
-    const slateNode = {
-      object: type.toLowerCase(),
-      type: 'style',
-      data: {
-        style: {
-          id: element.style?.id,
-        },
-      },
-    };
     if (type === 'TEXT')
       return {
-        ...slateNode,
+        object: 'text',
         leaves: element.textLeaves,
       };
-
+    const styleId = element.style?.id;
+    if (styleId == null)
+      throw Error('The element has to have style or component ID.');
     return {
-      ...slateNode,
+      object: type.toLowerCase(),
+      type: styleId,
       nodes: element.children
         .map(child => elements[child.id])
         .sort((a, b) => a.index - b.index)
@@ -367,35 +361,19 @@ function EditorWithData({
     }
   });
 
-  // We can't use useCallback.
-  // https://github.com/facebook/react/issues/14080
-  function renderNode(props, editor, next) {
+  function renderNode(props) {
     const { node, attributes, children } = props;
-    const type: NodeType = node.type;
-    const data = node.data.get(type);
-    switch (type) {
-      case 'style': {
-        const { style, isText } = styleSheet[data.id];
-        const Component = isText ? Text : View;
-        // console.log(name, StyleSheet.flatten(style));
-        return (
-          <Component {...attributes} style={style}>
-            {children}
-          </Component>
-        );
-      }
-      // case 'component':
-      //   return <blockquote {...attributes}>{children}</blockquote>;
-      default: {
-        // eslint-disable-next-line no-unused-expressions
-        (type: empty);
-        return next();
-      }
-    }
+    const styleId = node.type;
+    const { style, isText } = styleSheet[styleId];
+    const Component = isText ? Text : View;
+    // console.log(name, StyleSheet.flatten(style));
+    return (
+      <Component {...attributes} style={style}>
+        {children}
+      </Component>
+    );
   }
 
-  // We can't use useCallback.
-  // https://github.com/facebook/react/issues/14080
   function renderMark(props, editor, next) {
     const { children, mark, attributes } = props;
     const type: MarkType = mark.type;
