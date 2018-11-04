@@ -14,7 +14,26 @@
  */
 
 declare module 'slate-react' {
-  declare module.exports: any;
+  // TL;DR: Currently copy-pasting is indeed the best practice.
+  // https://github.com/flow-typed/flow-typed/issues/2842#issuecomment-429974407
+  declare export type SlateValue = Object;
+  declare export var Editor: React$ComponentType<{|
+    autoCorrect?: boolean,
+    spellCheck?: boolean,
+    autoFocus?: boolean,
+    ref?: $FlowFixMe,
+    value?: SlateValue,
+    style?: Object,
+    onChange?: ({ value: SlateValue }) => void,
+    onFocus?: () => void,
+    onKeyDown?: (
+      event: SyntheticKeyboardEvent<HTMLDivElement>,
+      editor: $FlowFixMe,
+      next: () => $FlowFixMe,
+    ) => void,
+    renderNode?: $FlowFixMe,
+    renderMark?: $FlowFixMe,
+  |}>;
 }
 
 /**

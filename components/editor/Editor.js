@@ -12,13 +12,12 @@ import React, {
 } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
-import { Value, KeyUtils } from 'slate';
+import { Value, KeyUtils, type SlateValue } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
 import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
 
-export type SlateValue = Object;
 export type MarkType = 'bold' | 'italic';
 
 export type EditorAction =

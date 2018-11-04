@@ -6,7 +6,8 @@ import { View } from 'react-native';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
-import { useEditorDispatch, type MarkType, type SlateValue } from './Editor';
+import { useEditorDispatch, type MarkType } from './Editor';
+import { type SlateValue } from 'slate';
 
 function EditorMenuButton({
   children,
