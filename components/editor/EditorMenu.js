@@ -11,13 +11,12 @@ import { type SlateValue } from 'slate';
 
 function EditorMenuButton({ children, isActive, onPress }) {
   const theme = useTheme();
-  function handlePressIn(event) {
-    event.preventDefault();
-    onPress();
-  }
   return (
     <Button
-      onPressIn={handlePressIn}
+      onPressIn={event => {
+        event.preventDefault();
+        onPress();
+      }}
       color={isActive ? 'success' : 'gray'}
       bold
       style={theme.styles.editorMenuButton}
@@ -76,27 +75,19 @@ export default function EditorMenu({ value }: {| value: SlateValue |}) {
 
   if (portal == null || position == null) return null;
 
-  function handleBoldPress() {
-    dispatch({ type: 'toggleMark', mark: 'bold' });
-  }
-
-  function handleItalicPress() {
-    dispatch({ type: 'toggleMark', mark: 'italic' });
-  }
-
   return portal(
     <View style={[theme.styles.editorMenu, position]}>
       <EditorMenuMarkButton
         type="bold"
         text="b"
         activeMarks={value.activeMarks}
-        onPress={handleBoldPress}
+        onPress={() => dispatch({ type: 'toggleMark', mark: 'bold' })}
       />
       <EditorMenuMarkButton
         type="italic"
         text="i"
         activeMarks={value.activeMarks}
-        onPress={handleItalicPress}
+        onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
       />
     </View>,
   );
