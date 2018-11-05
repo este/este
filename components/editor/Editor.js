@@ -444,11 +444,7 @@ function EditorWithData({
       />
       <EditorDispatchContext.Provider value={dispatch}>
         <EditorMenu value={editorValue} />
-        <EditorBreadcrumb
-          document={editorValue.document}
-          focusPath={editorValue.selection.focus.path}
-          stylesById={stylesById}
-        />
+        <EditorBreadcrumb value={editorValue} stylesById={stylesById} />
       </EditorDispatchContext.Provider>
     </>
   );

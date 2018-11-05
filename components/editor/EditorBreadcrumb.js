@@ -1,11 +1,12 @@
 // @flow
 // $FlowFixMe
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useTheme from '../core/useTheme';
 import Button from '../core/Button';
 import Row from '../core/Row';
 import withRovingTabIndex from '../core/withRovingTabIndex';
+import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
 
 function EditorBreadcrumbButton({
   onPress,
@@ -16,15 +17,8 @@ function EditorBreadcrumbButton({
   label: string,
   isActive?: boolean,
 |}) {
-  function handlePressIn(event) {
-    event.preventDefault();
-    onPress();
-  }
   return (
-    <Button
-      onPressIn={handlePressIn}
-      color={isActive === true ? 'primary' : 'gray'}
-    >
+    <Button onPress={onPress} color={isActive === true ? 'primary' : 'gray'}>
       {label}
     </Button>
   );
@@ -42,33 +36,23 @@ const styles = StyleSheet.create({
 });
 
 function EditorBreadcrumb({
-  document,
-  focusPath,
+  value,
   stylesById,
 }: {|
-  document: Object,
-  focusPath: Object,
+  value: Object,
   stylesById: Object,
 |}) {
   const theme = useTheme();
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
-  const [activeNode, setActiveNode] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  // Remove first item (Slate document). We don't use it for styling etc.
-  const ancestors = document.getAncestors(focusPath).shift();
-
-  function handleKebabButtonPress() {
-    setKebabMenuVisible(!kebabMenuVisible);
-  }
-
-  function handlePositionButtonPress() {
-    setBreadcrumbPosition(breadcrumbPosition === 'bottom' ? 'top' : 'bottom');
-  }
-
-  function handleBreadcrumbItemPress(node) {
-    return () => setActiveNode(activeNode === node ? null : node);
-  }
+  // No need for useMemo, ancestors are updated whenever document is changed.
+  const ancestors = value.document
+    .getAncestors(value.selection.focus.path)
+    // Remove first item (Slate document). We don't use it.
+    .shift();
+  const activeAncestor = ancestors.get(activeIndex);
 
   return (
     <View
@@ -82,147 +66,39 @@ function EditorBreadcrumb({
         <EditorBreadcrumbButton
           label="⋮"
           isActive={kebabMenuVisible}
-          onPress={handleKebabButtonPress}
+          onPress={() => setKebabMenuVisible(!kebabMenuVisible)}
         />
         {kebabMenuVisible ? (
           <EditorBreadcrumbButton
             label={breadcrumbPosition === 'bottom' ? '↑' : '↓'}
-            onPress={handlePositionButtonPress}
+            onPress={() =>
+              setBreadcrumbPosition(
+                breadcrumbPosition === 'bottom' ? 'top' : 'bottom',
+              )
+            }
           />
         ) : (
-          ancestors.map(node => {
+          ancestors.map((node, index) => {
             return (
               <EditorBreadcrumbButton
                 key={node.key}
                 label={stylesById[node.type].name}
-                isActive={activeNode === node}
-                onPress={handleBreadcrumbItemPress(node)}
+                isActive={activeIndex === index}
+                onPress={() => {
+                  setActiveIndex(activeIndex === index ? null : index);
+                }}
               />
             );
           })
         )}
       </Row>
+      {activeAncestor && (
+        <>
+          <EditorBreadcrumbOutline node={activeAncestor} />
+        </>
+      )}
     </View>
   );
 }
 
-export default memo(withRovingTabIndex(EditorBreadcrumb));
-
-// import * as React from 'react';
-// import { View } from 'react-native';
-// import withTheme, { type Theme } from '../core/withTheme';
-// import Row from '../core/Row';
-// import EditorBreadcrumbButton from './EditorBreadcrumbButton';
-// import EditorBreadcrumbItem from './EditorBreadcrumbItem';
-// import EditorBreadcrumbOutline from './EditorBreadcrumbOutline';
-// import EditorBreadcrumbDetail from './EditorBreadcrumbDetail';
-// import { pipe } from 'ramda';
-// import withRovingTabIndex from '../core/withRovingTabIndex';
-// // import type { OnEditorAction } from './Editor';
-// type OnEditorAction = any;
-//
-// type EditorBreadcrumbProps = {|
-//   document: Object,
-//   // String, to leverage pure shouldComponentUpdate.
-//   focusPathString: string,
-//   theme: Theme,
-//   onEditorAction: OnEditorAction,
-// |};
-//
-// export type VerticalPosition = 'bottom' | 'top';
-//
-// type EditorBreadcrumbState = {|
-//   activeIndex: ?number,
-//   verticalPosition: VerticalPosition,
-//   kebabMenuShown: boolean,
-// |};
-//
-// class EditorBreadcrumb extends React.PureComponent<
-//   EditorBreadcrumbProps,
-//   EditorBreadcrumbState,
-// > {
-//   static fixedPositionStyle = { position: 'fixed' };
-//
-//   state = {
-//     activeIndex: null,
-//     verticalPosition: 'bottom',
-//     kebabMenuShown: false,
-//   };
-//
-//   handleButtonPress = activeIndex => {
-//     this.setState(state => {
-//       return {
-//         activeIndex: state.activeIndex === activeIndex ? null : activeIndex,
-//       };
-//     });
-//   };
-//
-//   handleToggleVerticalPosition = (event: Event) => {
-//     event.preventDefault();
-//     this.setState(state => {
-//       return {
-//         verticalPosition: state.verticalPosition === 'top' ? 'bottom' : 'top',
-//       };
-//     });
-//   };
-//
-//   handleKebabPress = () => {
-//     this.setState(state => {
-//       return { kebabMenuShown: !state.kebabMenuShown };
-//     });
-//   };
-//
-//   render() {
-//     const { document, focusPathString, theme } = this.props;
-//     const { activeIndex, verticalPosition, kebabMenuShown } = this.state;
-//     const ancestors = document.getAncestors(focusPathString.split(','));
-//     const activeNode = ancestors.get(activeIndex);
-//     return (
-//       <View
-//         style={[
-//           theme.styles.editorBreadcrumb,
-//           EditorBreadcrumb.fixedPositionStyle,
-//           { [verticalPosition]: 0 },
-//         ]}
-//       >
-//         <Row rhythm={0.5} wrap>
-//           <EditorBreadcrumbButton
-//             color={kebabMenuShown ? 'primary' : 'gray'}
-//             onPress={this.handleKebabPress}
-//           >
-//             ⋮
-//           </EditorBreadcrumbButton>
-// {this.state.kebabMenuShown ? (
-//   <EditorBreadcrumbButton onPress={this.handleToggleVerticalPosition}>
-//     {verticalPosition === 'bottom' ? '↑' : '↓'}
-//   </EditorBreadcrumbButton>
-// ) : (
-//   ancestors.map((node, index) => (
-//     <EditorBreadcrumbItem
-//       node={node}
-//       index={index}
-//       key={node.key}
-//       onPress={this.handleButtonPress}
-//       isActive={activeIndex === index}
-//     />
-//   ))
-// )}
-//         </Row>
-//         {activeNode != null && (
-//           <>
-//             <EditorBreadcrumbDetail
-//               node={activeNode}
-//               onEditorAction={this.props.onEditorAction}
-//             />
-//             <EditorBreadcrumbOutline node={activeNode} />
-//           </>
-//         )}
-//       </View>
-//     );
-//   }
-// }
-//
-// export default pipe(
-//   withRovingTabIndex,
-//   withTheme,
-// )(EditorBreadcrumb);
+export default withRovingTabIndex(EditorBreadcrumb);
