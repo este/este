@@ -6,11 +6,14 @@ import getFocusableNodes from '../../client/getFocusableNodes';
 // Note it's implemented out of React with plain DOM because it's easier.
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 
+// TODO: Make pure React version with context etc. Handling refs should be much
+// easier with hooks.
+
 // https://flow.org/en/docs/react/hoc/#toc-supporting-defaultprops-with-react-elementconfig
 const withRovingTabIndex = <Props, Component: React.ComponentType<Props>>(
   WrappedComponent: Component,
 ): React.ComponentType<React.ElementConfig<Component>> => {
-  class RovingTabIndex extends React.PureComponent<Props> {
+  class RovingTabIndex extends React.Component<Props> {
     static maybeIgnoreElementWithCaret(focused, left) {
       if (!focused.classList.contains('caret-position')) return;
       const ignore =
