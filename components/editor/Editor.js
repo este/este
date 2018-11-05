@@ -1,6 +1,7 @@
 // @flow
 // $FlowFixMe
 import React, { useRef, useState, useMemo, useContext, type Node } from 'react';
+import Head from 'next/head';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
 import { Value, KeyUtils } from 'slate';
@@ -427,8 +428,15 @@ function EditorWithData({
     }
   }
 
+  // https://github.com/relayjs/eslint-plugin-relay/issues/35
+  // eslint-disable-next-line no-unused-expressions
+  page.title;
+
   return (
     <>
+      <Head>
+        <title>{page.draftTitle}</title>
+      </Head>
       <SlateEditor
         autoCorrect={false}
         spellCheck={false}
@@ -482,6 +490,9 @@ export default createFragmentContainer(
     fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
       page(id: $id) {
         id
+        title @__clientField(handle: "draft")
+        # This preloads
+        draftTitle
         element {
           id
         }

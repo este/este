@@ -34,6 +34,8 @@ declare export opaque type Editor$ref: FragmentReference;
 export type Editor = {|
   +page: ?{|
     +id: string,
+    +title: string,
+    +draftTitle: string,
     +element: {|
       +id: string
     |},
@@ -368,6 +370,20 @@ return {
       "plural": false,
       "selections": [
         v0,
+        {
+          "kind": "ScalarField",
+          "alias": "title",
+          "name": "__title_draft",
+          "args": null,
+          "storageKey": null
+        },
+        {
+          "kind": "ScalarField",
+          "alias": null,
+          "name": "draftTitle",
+          "args": null,
+          "storageKey": null
+        },
         {
           "kind": "LinkedField",
           "alias": null,
@@ -1283,5 +1299,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '95aa6cfd62a773afbe34e4daba4c3f2d';
+(node/*: any*/).hash = '5ae9d54df5d5e08e3d9fdd713565be15';
 module.exports = node;

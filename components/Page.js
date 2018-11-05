@@ -20,7 +20,6 @@ class Page extends React.PureComponent<PageProps> {
     // https://github.com/relayjs/eslint-plugin-relay/issues/35
     // eslint-disable-next-line no-unused-expressions
     page.title;
-    // page.id
     return (
       <>
         <Head>
