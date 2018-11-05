@@ -14,13 +14,7 @@
  */
 
 declare module 'slate' {
-  // TL;DR: Currently copy-pasting is indeed the best practice.
-  // https://github.com/flow-typed/flow-typed/issues/2842#issuecomment-429974407
-  declare export type SlateValue = Object;
-  declare export var Value: SlateValue;
-  declare export var KeyUtils: {
-    resetGenerator: () => void,
-  };
+  declare module.exports: any;
 }
 
 /**

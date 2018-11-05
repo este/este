@@ -3,7 +3,7 @@
 import React, { useRef, useState, useMemo, useContext, type Node } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
-import { Value, KeyUtils, type SlateValue } from 'slate';
+import { Value, KeyUtils } from 'slate';
 import { Editor as SlateEditor } from 'slate-react';
 import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
@@ -14,7 +14,7 @@ export type MarkType = 'bold' | 'italic';
 
 export type EditorAction =
   | {| type: 'focus' |}
-  | {| type: 'update', value: SlateValue |}
+  | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |};
 
 type EditorDispatch = (action: EditorAction) => void;

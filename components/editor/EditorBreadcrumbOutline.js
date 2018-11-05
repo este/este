@@ -4,7 +4,6 @@
 import React, { useState, useEffect } from 'react';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
-// $FlowFixMe
 import { findDOMNode } from 'slate-react';
 import { View } from 'react-native';
 

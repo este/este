@@ -7,7 +7,6 @@ import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
 import { useEditorDispatch, type MarkType } from './Editor';
-import { type SlateValue } from 'slate';
 
 function EditorMenuButton({ children, isActive, onPress }) {
   const theme = useTheme();
@@ -47,7 +46,7 @@ function EditorMenuMarkButton({
   );
 }
 
-export default function EditorMenu({ value }: {| value: SlateValue |}) {
+export default function EditorMenu({ value }: {| value: Object |}) {
   const theme = useTheme();
   const portal = usePortal();
   const [position, setPosition] = useState(null);
