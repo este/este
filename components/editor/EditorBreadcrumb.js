@@ -1,4 +1,113 @@
-// // @flow
+// @flow
+// $FlowFixMe
+import React, { memo, useState } from 'react';
+import { View, StyleSheet } from 'react-native';
+import useTheme from '../core/useTheme';
+import Button from '../core/Button';
+import Row from '../core/Row';
+import withRovingTabIndex from '../core/withRovingTabIndex';
+
+function EditorBreadcrumbButton({
+  onPress,
+  label,
+  isActive,
+}: {|
+  onPress: () => void,
+  label: string,
+  isActive?: boolean,
+|}) {
+  function handlePressIn(event) {
+    event.preventDefault();
+    onPress();
+  }
+  return (
+    <Button
+      onPressIn={handlePressIn}
+      color={isActive === true ? 'primary' : 'gray'}
+    >
+      {label}
+    </Button>
+  );
+}
+
+const styles = StyleSheet.create({
+  breadcrumb: {
+    // RNW does not support position fixed style, because it's a workaround.
+    // https://github.com/este/este/issues/1584
+    // $FlowFixMe
+    position: 'fixed',
+  },
+  bottom: { bottom: 0 },
+  top: { top: 0 },
+});
+
+function EditorBreadcrumb({
+  document,
+  focusPath,
+  stylesById,
+}: {|
+  document: Object,
+  focusPath: Object,
+  stylesById: Object,
+|}) {
+  const theme = useTheme();
+  const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
+  const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
+  const [activeNode, setActiveNode] = useState(null);
+
+  // Remove first item (Slate document). We don't use it for styling etc.
+  const ancestors = document.getAncestors(focusPath).shift();
+
+  function handleKebabButtonPress() {
+    setKebabMenuVisible(!kebabMenuVisible);
+  }
+
+  function handlePositionButtonPress() {
+    setBreadcrumbPosition(breadcrumbPosition === 'bottom' ? 'top' : 'bottom');
+  }
+
+  function handleBreadcrumbItemPress(node) {
+    return () => setActiveNode(activeNode === node ? null : node);
+  }
+
+  return (
+    <View
+      style={[
+        theme.styles.editorBreadcrumb,
+        styles.breadcrumb,
+        styles[breadcrumbPosition],
+      ]}
+    >
+      <Row rhythm={0.5} wrap>
+        <EditorBreadcrumbButton
+          label="⋮"
+          isActive={kebabMenuVisible}
+          onPress={handleKebabButtonPress}
+        />
+        {kebabMenuVisible ? (
+          <EditorBreadcrumbButton
+            label={breadcrumbPosition === 'bottom' ? '↑' : '↓'}
+            onPress={handlePositionButtonPress}
+          />
+        ) : (
+          ancestors.map(node => {
+            return (
+              <EditorBreadcrumbButton
+                key={node.key}
+                label={stylesById[node.type].name}
+                isActive={activeNode === node}
+                onPress={handleBreadcrumbItemPress(node)}
+              />
+            );
+          })
+        )}
+      </Row>
+    </View>
+  );
+}
+
+export default memo(withRovingTabIndex(EditorBreadcrumb));
+
 // import * as React from 'react';
 // import { View } from 'react-native';
 // import withTheme, { type Theme } from '../core/withTheme';
@@ -83,21 +192,21 @@
 //           >
 //             ⋮
 //           </EditorBreadcrumbButton>
-//           {this.state.kebabMenuShown ? (
-//             <EditorBreadcrumbButton onPress={this.handleToggleVerticalPosition}>
-//               {verticalPosition === 'bottom' ? '↑' : '↓'}
-//             </EditorBreadcrumbButton>
-//           ) : (
-//             ancestors.map((node, index) => (
-//               <EditorBreadcrumbItem
-//                 node={node}
-//                 index={index}
-//                 key={node.key}
-//                 onPress={this.handleButtonPress}
-//                 isActive={activeIndex === index}
-//               />
-//             ))
-//           )}
+// {this.state.kebabMenuShown ? (
+//   <EditorBreadcrumbButton onPress={this.handleToggleVerticalPosition}>
+//     {verticalPosition === 'bottom' ? '↑' : '↓'}
+//   </EditorBreadcrumbButton>
+// ) : (
+//   ancestors.map((node, index) => (
+//     <EditorBreadcrumbItem
+//       node={node}
+//       index={index}
+//       key={node.key}
+//       onPress={this.handleButtonPress}
+//       isActive={activeIndex === index}
+//     />
+//   ))
+// )}
 //         </Row>
 //         {activeNode != null && (
 //           <>

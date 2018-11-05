@@ -216,9 +216,6 @@ const stylesJson = {
   },
 
   editorBreadcrumb: {
-    // As inline style, because it's a workaround.
-    // https://github.com/este/este/issues/1584
-    // position: 'fixed',
     left: 0,
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
     paddingVertical: typography.rhythm(0.2),

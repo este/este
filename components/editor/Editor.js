@@ -1,15 +1,6 @@
 // @flow
-import React, {
 // $FlowFixMe
-  useRef,
-  // $FlowFixMe
-  useState,
-  // $FlowFixMe
-  useMemo,
-  // $FlowFixMe
-  useContext,
-  type Node,
-} from 'react';
+import React, { useRef, useState, useMemo, useContext, type Node } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { Editor as Data } from './__generated__/Editor.graphql';
 import { Value, KeyUtils, type SlateValue } from 'slate';
@@ -17,6 +8,7 @@ import { Editor as SlateEditor } from 'slate-react';
 import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
+import EditorBreadcrumb from './EditorBreadcrumb';
 
 export type MarkType = 'bold' | 'italic';
 
@@ -46,7 +38,7 @@ const markStyles = StyleSheet.create({
   },
 });
 
-function arrayOfItemsWithIdToObject(array) {
+function arrayOfItemsWithIdToObject(array: $ReadOnlyArray<{ +id: string }>) {
   return array.reduce((obj, item) => {
     return { ...obj, [item.id]: item };
   }, {});
@@ -91,6 +83,7 @@ function stylesToStyleSheet(
   borderValues,
   colorValues,
   dimensionValues,
+  stylesById,
 ) {
   const borders = borderValues.reduce((borders, borderValue) => {
     const { unit, id, value } = borderValue;
@@ -290,10 +283,6 @@ function stylesToStyleSheet(
     return { ...sheets, [value.id]: sheet };
   }, {});
 
-  const stylesById = styles.reduce((stylesById, style) => {
-    return { ...stylesById, [style.id]: style };
-  }, {});
-
   // No circular check. It's the server and UI responsibility.
   function resolveStyle(styleId) {
     const style = stylesById[styleId];
@@ -335,18 +324,25 @@ function EditorWithData({
   dimensionValues,
 }) {
   const editorRef = useRef(null);
-
   const [editorValue, setEditorValue] = useState(() => {
     const model = elementsToSlateValue(page.element.id, elements);
     // For SSR.
     KeyUtils.resetGenerator();
     return Value.fromJSON(model);
   });
-
+  const stylesById = useMemo(() => arrayOfItemsWithIdToObject(styles), [
+    styles,
+  ]);
   const styleSheet = useMemo(
     () =>
-      stylesToStyleSheet(styles, borderValues, colorValues, dimensionValues),
-    [styles, borderValues, colorValues, dimensionValues],
+      stylesToStyleSheet(
+        styles,
+        borderValues,
+        colorValues,
+        dimensionValues,
+        stylesById,
+      ),
+    [styles, borderValues, colorValues, dimensionValues, stylesById],
   );
 
   function dispatch(action: EditorAction) {
@@ -448,6 +444,11 @@ function EditorWithData({
       />
       <EditorDispatchContext.Provider value={dispatch}>
         <EditorMenu value={editorValue} />
+        <EditorBreadcrumb
+          document={editorValue.document}
+          focusPath={editorValue.selection.focus.path}
+          stylesById={stylesById}
+        />
       </EditorDispatchContext.Provider>
     </>
   );

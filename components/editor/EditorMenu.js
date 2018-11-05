@@ -9,15 +9,7 @@ import Button from '../core/Button';
 import { useEditorDispatch, type MarkType } from './Editor';
 import { type SlateValue } from 'slate';
 
-function EditorMenuButton({
-  children,
-  isActive,
-  onPress,
-}: {|
-  children: string,
-  isActive: boolean,
-  onPress: () => void,
-|}) {
+function EditorMenuButton({ children, isActive, onPress }) {
   const theme = useTheme();
   function handlePressIn(event) {
     event.preventDefault();
@@ -35,7 +27,7 @@ function EditorMenuButton({
   );
 }
 
-function MarkButton({
+function EditorMenuMarkButton({
   type,
   text,
   activeMarks,
@@ -82,6 +74,8 @@ export default function EditorMenu({ value }: {| value: SlateValue |}) {
     [value],
   );
 
+  if (portal == null || position == null) return null;
+
   function handleBoldPress() {
     dispatch({ type: 'toggleMark', mark: 'bold' });
   }
@@ -90,17 +84,15 @@ export default function EditorMenu({ value }: {| value: SlateValue |}) {
     dispatch({ type: 'toggleMark', mark: 'italic' });
   }
 
-  if (portal == null || position == null) return null;
-
   return portal(
     <View style={[theme.styles.editorMenu, position]}>
-      <MarkButton
+      <EditorMenuMarkButton
         type="bold"
         text="b"
         activeMarks={value.activeMarks}
         onPress={handleBoldPress}
       />
-      <MarkButton
+      <EditorMenuMarkButton
         type="italic"
         text="i"
         activeMarks={value.activeMarks}
