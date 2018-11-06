@@ -9,8 +9,7 @@ const Mutation: MutationType = {
     // Email and password must be trimmed before the validation.
     // This is the pattern. Trim what must be stored trimmed.
     const input = {
-      // Note we can't use object spread because of Webpack 3
-      isSignUp: args.input.isSignUp,
+      ...args.input,
       email: args.input.email.trim(),
       password: args.input.password.trim(),
     };
