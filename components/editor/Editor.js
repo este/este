@@ -17,6 +17,7 @@ export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |};
+// set style
 
 type EditorDispatch = (action: EditorAction) => void;
 
@@ -369,16 +370,6 @@ function EditorWithData({
     }
   }
 
-  // Note we don't need useCallback. Editor renders only changed nodes anyway.
-  function handleEditorChange({ value }) {
-    dispatch({ type: 'update', value });
-  }
-
-  // https://github.com/ianstormtaylor/slate/issues/2352
-  function handleEditorFocus() {
-    dispatch({ type: 'focus' });
-  }
-
   function handleEditorKeyDown(event, _, next) {
     if (isBoldHotkey(event)) {
       event.preventDefault();
@@ -444,8 +435,9 @@ function EditorWithData({
         ref={editorRef}
         value={editorValue}
         style={slateEditorStyles}
-        onChange={handleEditorChange}
-        onFocus={handleEditorFocus}
+        onChange={({ value }) => dispatch({ type: 'update', value })}
+        // https://github.com/ianstormtaylor/slate/issues/2352
+        onFocus={() => dispatch({ type: 'focus' })}
         onKeyDown={handleEditorKeyDown}
         renderNode={renderNode}
         renderMark={renderMark}
