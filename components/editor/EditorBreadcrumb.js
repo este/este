@@ -91,7 +91,6 @@ function EditorBreadcrumb({
       kebabMenuVisible,
       breadcrumbPosition,
       activeIndex,
-      // ancestors,
       ancestors.map(({ key, type }) => `${key}-${type}`).join(),
     ],
   );
