@@ -1103,12 +1103,11 @@ type SetWebNamePayload {
 
 type Style implements Node {
   id: ID!
-  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
-  nextStyle: Style
   web: Web!
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
   isText: Boolean
+  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -1995,14 +1994,13 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
-  spreadStyles_every: StyleSpreadWhereInput
-  spreadStyles_some: StyleSpreadWhereInput
-  spreadStyles_none: StyleSpreadWhereInput
-  nextStyle: StyleWhereInput
   web: WebWhereInput
   elements_every: ElementWhereInput
   elements_some: ElementWhereInput
   elements_none: ElementWhereInput
+  spreadStyles_every: StyleSpreadWhereInput
+  spreadStyles_some: StyleSpreadWhereInput
+  spreadStyles_none: StyleSpreadWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput
@@ -3163,14 +3161,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textTransform_not?: StyleTextTransform,
   textTransform_in?: Array< StyleTextTransform > | StyleTextTransform,
   textTransform_not_in?: Array< StyleTextTransform > | StyleTextTransform,
-  spreadStyles_every?: StyleSpreadWhereInput,
-  spreadStyles_some?: StyleSpreadWhereInput,
-  spreadStyles_none?: StyleSpreadWhereInput,
-  nextStyle?: StyleWhereInput,
   web?: WebWhereInput,
   elements_every?: ElementWhereInput,
   elements_some?: ElementWhereInput,
   elements_none?: ElementWhereInput,
+  spreadStyles_every?: StyleSpreadWhereInput,
+  spreadStyles_some?: StyleSpreadWhereInput,
+  spreadStyles_none?: StyleSpreadWhereInput,
   width?: DimensionValueWhereInput,
   height?: DimensionValueWhereInput,
   bottom?: DimensionValueWhereInput,
@@ -3728,12 +3725,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type Style = {| ...Node,
  
    id: ID_Output,
-   spreadStyles?: StyleSpread[],
-   nextStyle?: Style,
    web: Web,
    elements?: Element[],
    name: String,
    isText?: Boolean,
+   spreadStyles?: StyleSpread[],
    display?: StyleDisplay,
    width?: DimensionValue,
    height?: DimensionValue,

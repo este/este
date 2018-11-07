@@ -15,6 +15,7 @@
   "confirm.areYouSure": "Are you sure?",
   "createWeb.name.label": "Web Name",
   "createWeb.pageTitle": "Home",
+  "editorMenu.styles": "styles",
   "error.alreadyExists": "Already exists.",
   "error.email": "Email address is not valid.",
   "error.maxLength": "{maxLength} characters maximum.",

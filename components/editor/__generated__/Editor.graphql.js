@@ -68,9 +68,6 @@ export type Editor = {|
             +id: string
           |},
         |}>,
-        +nextStyle: ?{|
-          +id: string
-        |},
         +isText: ?boolean,
         +name: string,
         +display: ?StyleDisplay,
@@ -481,16 +478,6 @@ return {
                   "storageKey": null
                 },
                 v0,
-                {
-                  "kind": "LinkedField",
-                  "alias": null,
-                  "name": "nextStyle",
-                  "storageKey": null,
-                  "args": null,
-                  "concreteType": "Style",
-                  "plural": false,
-                  "selections": v1
-                },
                 {
                   "kind": "ScalarField",
                   "alias": null,
@@ -1299,5 +1286,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5ae9d54df5d5e08e3d9fdd713565be15';
+(node/*: any*/).hash = '15faf06ca924a86cdf3b23bd42b0a8a4';
 module.exports = node;

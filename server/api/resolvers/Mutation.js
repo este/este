@@ -158,26 +158,15 @@ const Mutation: MutationType = {
         fontSize: 16,
         lineHeight: 24,
         color: { connect: { id: colorForeground.id } },
-      },
-    });
-
-    const paragraphStyle = await db.mutation.createStyle({
-      data: {
-        web: { connect: { id: web.id } },
-        spreadStyles: {
-          create: { index: 0, style: { connect: { id: textStyle.id } } },
-        },
-        name: 'paragraph',
         marginBottom: { connect: { id: spaceMedium.id } },
       },
     });
 
-    // const h1Style =
-    await db.mutation.createStyle({
+    const h1Style = await db.mutation.createStyle({
       data: {
         web: { connect: { id: web.id } },
         spreadStyles: {
-          create: { index: 0, style: { connect: { id: paragraphStyle.id } } },
+          create: { index: 0, style: { connect: { id: textStyle.id } } },
         },
         name: 'h1',
         fontSize: 32,
@@ -190,15 +179,13 @@ const Mutation: MutationType = {
       data: {
         web: { connect: { id: web.id } },
         spreadStyles: {
-          create: { index: 0, style: { connect: { id: paragraphStyle.id } } },
+          create: { index: 0, style: { connect: { id: textStyle.id } } },
         },
         name: 'h2',
         fontSize: 24,
         lineHeight: 36,
       },
     });
-
-    // TODO: blockquote and list / list-item. Maybe it's just one style.
 
     const page = await db.mutation.createPage({
       data: {
@@ -222,7 +209,7 @@ const Mutation: MutationType = {
                     create: [
                       {
                         web: { connect: { id: web.id } },
-                        style: { connect: { id: paragraphStyle.id } },
+                        style: { connect: { id: h1Style.id } },
                         index: 0,
                         type: 'BLOCK',
                         children: {
@@ -232,14 +219,14 @@ const Mutation: MutationType = {
                               index: 0,
                               type: 'TEXT',
                               // $FlowFixMe Weird. It should allow JSON instead of string.
-                              textLeaves: [{ text: 'Ahoj' }],
+                              textLeaves: [{ text: 'Title' }],
                             },
                           ],
                         },
                       },
                       {
                         web: { connect: { id: web.id } },
-                        style: { connect: { id: paragraphStyle.id } },
+                        style: { connect: { id: textStyle.id } },
                         index: 1,
                         type: 'BLOCK',
                         children: {
@@ -249,7 +236,7 @@ const Mutation: MutationType = {
                               index: 0,
                               type: 'TEXT',
                               // $FlowFixMe Weird. It should allow JSON instead of string.
-                              textLeaves: [{ text: 'Svete' }],
+                              textLeaves: [{ text: 'Paragraph.' }],
                             },
                           ],
                         },

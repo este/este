@@ -15,6 +15,7 @@
   "confirm.areYouSure": "Jste si jistý?",
   "createWeb.name.label": "Jméno webu",
   "createWeb.pageTitle": "Úvod",
+  "editorMenu.styles": "styly",
   "error.alreadyExists": "Již existuje.",
   "error.email": "Emailová adresa není validní.",
   "error.maxLength": "Maximálně {maxLength} znaků.",

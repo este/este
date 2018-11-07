@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Thu Nov 01 2018 22:32:14 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Nov 07 2018 16:49:55 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -1051,12 +1051,11 @@ type SetWebNamePayload {
 
 type Style implements Node {
   id: ID!
-  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
-  nextStyle: Style
   web: Web!
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
   isText: Boolean
+  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -1943,14 +1942,13 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
-  spreadStyles_every: StyleSpreadWhereInput
-  spreadStyles_some: StyleSpreadWhereInput
-  spreadStyles_none: StyleSpreadWhereInput
-  nextStyle: StyleWhereInput
   web: WebWhereInput
   elements_every: ElementWhereInput
   elements_some: ElementWhereInput
   elements_none: ElementWhereInput
+  spreadStyles_every: StyleSpreadWhereInput
+  spreadStyles_some: StyleSpreadWhereInput
+  spreadStyles_none: StyleSpreadWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput

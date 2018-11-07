@@ -89,15 +89,13 @@ enum ElementType {
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
 type Style {
   id: ID! @unique
-  spreadStyles: [StyleSpread!]! @relation(name: "StyleSpreadStyles")
-
-  # When the user presses the enter key on the end of a text.
-  # Example: heading 1 -> paragraph
-  nextStyle: Style @relation(name: "StyleNextStyle")
   web: Web! @relation(name: "WebStyles")
   elements: [Element!]! @relation(name: "ElementStyle")
   name: String!
+  # There are two kinds of style. Layout style and text style. Layout is for
+  # View, text is for Text. Text has everything View has plus own props.
   isText: Boolean @default(value: "false")
+  spreadStyles: [StyleSpread!]! @relation(name: "StyleSpreadStyles")
 
   # View
   display: StyleDisplay

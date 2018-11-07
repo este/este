@@ -16,7 +16,8 @@ export type MarkType = 'bold' | 'italic';
 export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
-  | {| type: 'toggleMark', mark: MarkType |};
+  | {| type: 'toggleMark', mark: MarkType |}
+  | {| type: 'setBlocks', id: string |};
 // set style
 
 type EditorDispatch = (action: EditorAction) => void;
@@ -302,9 +303,9 @@ function stylesToStyleSheet(
     return { isText, style: [...spreadStyles, sheets[styleId]] };
   }
 
-  const styleSheet = styles.reduce((styleSheet, { id, name, nextStyle }) => {
+  const styleSheet = styles.reduce((styleSheet, { id, name }) => {
     const { isText, style } = resolveStyle(id);
-    return { ...styleSheet, [id]: { name, isText, style, nextStyle } };
+    return { ...styleSheet, [id]: { name, isText, style } };
   }, {});
 
   return styleSheet;
@@ -362,6 +363,11 @@ function EditorWithData({
       }
       case 'toggleMark': {
         editor.toggleMark(action.mark);
+        break;
+      }
+      case 'setBlocks': {
+        const type = action.id;
+        editor.setBlocks(type);
         break;
       }
       default:
@@ -443,7 +449,7 @@ function EditorWithData({
         renderMark={renderMark}
       />
       <EditorDispatchContext.Provider value={dispatch}>
-        <EditorMenu value={editorValue} />
+        <EditorMenu value={editorValue} styleSheet={styleSheet} />
         <EditorBreadcrumb value={editorValue} stylesById={stylesById} />
       </EditorDispatchContext.Provider>
     </>
@@ -516,9 +522,6 @@ export default createFragmentContainer(
               style {
                 id
               }
-            }
-            nextStyle {
-              id
             }
             isText
             name

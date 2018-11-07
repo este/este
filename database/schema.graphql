@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Nov 01 2018 22:33:18 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Nov 07 2018 14:56:03 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -2152,12 +2152,11 @@ type Query {
 
 type Style implements Node {
   id: ID!
-  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
-  nextStyle: Style
   web: Web!
   elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
   isText: Boolean
+  spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
   display: StyleDisplay
   width: DimensionValue
   height: DimensionValue
@@ -2316,10 +2315,9 @@ input StyleCreateInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
-  nextStyle: StyleCreateOneInput
   web: WebCreateOneWithoutStylesInput!
   elements: ElementCreateManyWithoutStyleInput
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2428,9 +2426,8 @@ input StyleCreateWithoutElementsInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
-  nextStyle: StyleCreateOneInput
   web: WebCreateOneWithoutStylesInput!
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -2519,7 +2516,6 @@ input StyleCreateWithoutSpreadStylesInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  nextStyle: StyleCreateOneInput
   web: WebCreateOneWithoutStylesInput!
   elements: ElementCreateManyWithoutStyleInput
   width: DimensionValueCreateOneInput
@@ -2610,9 +2606,8 @@ input StyleCreateWithoutWebInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
-  nextStyle: StyleCreateOneInput
   elements: ElementCreateManyWithoutStyleInput
+  spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -3155,10 +3150,9 @@ input StyleUpdateDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
-  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
   elements: ElementUpdateManyWithoutStyleInput
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3247,10 +3241,9 @@ input StyleUpdateInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
-  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
   elements: ElementUpdateManyWithoutStyleInput
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3317,15 +3310,6 @@ input StyleUpdateManyWithoutWebInput {
   upsert: [StyleUpsertWithWhereUniqueWithoutWebInput!]
 }
 
-input StyleUpdateOneInput {
-  create: StyleCreateInput
-  connect: StyleWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: StyleUpdateDataInput
-  upsert: StyleUpsertNestedInput
-}
-
 input StyleUpdateOneRequiredInput {
   create: StyleCreateInput
   connect: StyleWhereUniqueInput
@@ -3380,9 +3364,8 @@ input StyleUpdateWithoutElementsDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
-  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -3471,7 +3454,6 @@ input StyleUpdateWithoutSpreadStylesDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  nextStyle: StyleUpdateOneInput
   web: WebUpdateOneRequiredWithoutStylesInput
   elements: ElementUpdateManyWithoutStyleInput
   width: DimensionValueUpdateOneInput
@@ -3562,9 +3544,8 @@ input StyleUpdateWithoutWebDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
-  nextStyle: StyleUpdateOneInput
   elements: ElementUpdateManyWithoutStyleInput
+  spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -4159,14 +4140,13 @@ input StyleWhereInput {
 
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
-  spreadStyles_every: StyleSpreadWhereInput
-  spreadStyles_some: StyleSpreadWhereInput
-  spreadStyles_none: StyleSpreadWhereInput
-  nextStyle: StyleWhereInput
   web: WebWhereInput
   elements_every: ElementWhereInput
   elements_some: ElementWhereInput
   elements_none: ElementWhereInput
+  spreadStyles_every: StyleSpreadWhereInput
+  spreadStyles_some: StyleSpreadWhereInput
+  spreadStyles_none: StyleSpreadWhereInput
   width: DimensionValueWhereInput
   height: DimensionValueWhereInput
   bottom: DimensionValueWhereInput

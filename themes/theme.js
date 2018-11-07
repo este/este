@@ -190,7 +190,7 @@ const stylesJson = {
 
   editorMenuButton: {
     paddingVertical: typography.rhythm(0.2),
-    paddingHorizontal: typography.rhythm(0.5),
+    paddingHorizontal: typography.rhythm(0.25),
     // It's web only style.
     ...(fontSmoothing: any),
   },

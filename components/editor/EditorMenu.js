@@ -7,6 +7,7 @@ import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
 import { useEditorDispatch, type MarkType } from './Editor';
+import { FormattedMessage } from 'react-intl';
 
 function EditorMenuButton({ children, isActive, onPress }) {
   const theme = useTheme();
@@ -27,12 +28,12 @@ function EditorMenuButton({ children, isActive, onPress }) {
 
 function EditorMenuMarkButton({
   type,
-  text,
+  label,
   activeMarks,
   onPress,
 }: {|
   type: MarkType,
-  text: string,
+  label: string,
   activeMarks: Object,
   onPress: () => void,
 |}) {
@@ -41,16 +42,74 @@ function EditorMenuMarkButton({
   }
   return (
     <EditorMenuButton isActive={isMarkType(type)} onPress={onPress}>
-      {text}
+      {label}
     </EditorMenuButton>
   );
 }
 
-export default function EditorMenu({ value }: {| value: Object |}) {
+function DefaultView({ activeMarks, setMenuView }) {
+  const dispatch = useEditorDispatch();
+  return (
+    <>
+      <EditorMenuMarkButton
+        type="bold"
+        label="b"
+        activeMarks={activeMarks}
+        onPress={() => dispatch({ type: 'toggleMark', mark: 'bold' })}
+      />
+      <EditorMenuMarkButton
+        type="italic"
+        label="i"
+        activeMarks={activeMarks}
+        onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
+      />
+      <EditorMenuButton isActive={false} onPress={() => setMenuView('styles')}>
+        <FormattedMessage defaultMessage="styles" id="editorMenu.styles" />
+      </EditorMenuButton>
+    </>
+  );
+}
+
+// TODO: Consider show the first two semantic btns in default view.
+// E.g. b i h1 h2 ... for more.
+function StylesView({ styleSheet, blocks }) {
+  const dispatch = useEditorDispatch();
+  const styles = Object.keys(styleSheet)
+    .filter(id => styleSheet[id].isText)
+    .map(id => {
+      const { name } = styleSheet[id];
+      return { id, name };
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+  return styles.map(style => {
+    return (
+      <EditorMenuButton
+        isActive={blocks.some(node => node.type === style.id)}
+        onPress={() => dispatch({ type: 'setBlocks', id: style.id })}
+        key={style.id}
+      >
+        {style.name}
+      </EditorMenuButton>
+    );
+  });
+}
+
+type MenuView = 'initial' | 'styles';
+
+export default function EditorMenu({
+  value,
+  styleSheet,
+}: {|
+  value: Object,
+  styleSheet: Object,
+|}) {
   const theme = useTheme();
   const portal = usePortal();
   const [position, setPosition] = useState(null);
-  const dispatch = useEditorDispatch();
+  const [menuView, setMenuView]: [
+    MenuView,
+    (menuView: MenuView) => void,
+  ] = useState('initial');
 
   useEffect(
     () => {
@@ -58,6 +117,7 @@ export default function EditorMenu({ value }: {| value: Object |}) {
       const hideMenu =
         selection.isBlurred || selection.isCollapsed || fragment.text === '';
       if (hideMenu) {
+        setMenuView('initial');
         setPosition(null);
         return;
       }
@@ -74,21 +134,26 @@ export default function EditorMenu({ value }: {| value: Object |}) {
 
   if (portal == null || position == null) return null;
 
+  function renderMenuView() {
+    switch (menuView) {
+      case 'initial':
+        return (
+          <DefaultView
+            activeMarks={value.activeMarks}
+            setMenuView={setMenuView}
+          />
+        );
+      case 'styles':
+        return <StylesView styleSheet={styleSheet} blocks={value.blocks} />;
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (menuView: empty);
+        return null;
+    }
+  }
+
   return portal(
-    <View style={[theme.styles.editorMenu, position]}>
-      <EditorMenuMarkButton
-        type="bold"
-        text="b"
-        activeMarks={value.activeMarks}
-        onPress={() => dispatch({ type: 'toggleMark', mark: 'bold' })}
-      />
-      <EditorMenuMarkButton
-        type="italic"
-        text="i"
-        activeMarks={value.activeMarks}
-        onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
-      />
-    </View>,
+    <View style={[theme.styles.editorMenu, position]}>{renderMenuView()}</View>,
   );
 }
 
