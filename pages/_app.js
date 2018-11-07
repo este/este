@@ -124,8 +124,7 @@ class MyApp extends App {
         try {
           data = await fetchQuery(environment, graphQLQuery, graphQLVariables);
         } catch (errors) {
-          // We don't care about errors yet, just render Next.js Error 404 and
-          // set response status code. It's good enough for now.
+          // TODO: https://github.com/este/este/issues/1606
           statusCode = 404;
           if (ctx.res) {
             // eslint-disable-next-line no-param-reassign
