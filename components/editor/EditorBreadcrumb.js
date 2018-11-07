@@ -1,6 +1,6 @@
 // @flow
 // $FlowFixMe
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useTheme from '../core/useTheme';
 import Button from '../core/Button';
@@ -46,22 +46,16 @@ function EditorBreadcrumb({
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
   const [activeIndex, setActiveIndex] = useState(null);
-
-  // No need for useMemo, ancestors are updated whenever document is changed.
-  const ancestors = value.document
-    .getAncestors(value.selection.focus.path)
-    // Remove first item (Slate document). We don't use it.
-    .shift();
-  const activeAncestor = ancestors.get(activeIndex);
-
-  return (
-    <View
-      style={[
-        theme.styles.editorBreadcrumb,
-        styles.breadcrumb,
-        styles[breadcrumbPosition],
-      ]}
-    >
+  const ancestors = useMemo(
+    () =>
+      value.document
+        .getAncestors(value.selection.focus.path)
+        // Remove first item (Slate document). We don't use it.
+        .shift(),
+    [value.document, value.selection.focus.path],
+  );
+  const row = useMemo(
+    () => (
       <Row rhythm={0.5} wrap>
         <EditorBreadcrumbButton
           label="⋮"
@@ -92,11 +86,27 @@ function EditorBreadcrumb({
           })
         )}
       </Row>
-      {activeAncestor && (
-        <>
-          <EditorBreadcrumbOutline node={activeAncestor} />
-        </>
-      )}
+    ),
+    [
+      kebabMenuVisible,
+      breadcrumbPosition,
+      activeIndex,
+      // ancestors,
+      ancestors.map(({ key, type }) => `${key}-${type}`).join(),
+    ],
+  );
+  const activeAncestor = ancestors.get(activeIndex);
+
+  return (
+    <View
+      style={[
+        theme.styles.editorBreadcrumb,
+        styles.breadcrumb,
+        styles[breadcrumbPosition],
+      ]}
+    >
+      {row}
+      {activeAncestor && <EditorBreadcrumbOutline node={activeAncestor} />}
     </View>
   );
 }
