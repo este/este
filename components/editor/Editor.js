@@ -17,12 +17,15 @@ export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |}
-  | {| type: 'setBlocks', id: string |};
-// set style
+  | {| type: 'setStyle', id: string |};
 
 type EditorDispatch = (action: EditorAction) => void;
 
 const EditorDispatchContext = React.createContext<?EditorDispatch>(null);
+
+export function stylesSorter<S: { +name: string }>(a: S, b: S) {
+  return a.name.localeCompare(b.name);
+}
 
 export function useEditorDispatch(): EditorDispatch {
   const dispatch = useContext(EditorDispatchContext);
@@ -80,7 +83,9 @@ function elementsToSlateValue(pageElementId, elementsArray) {
   };
 }
 
-// Eager approach is simple. TODO: Consider lazy resolving with a cache.
+// Eager approach is simple.
+// TODO: Consider lazy resolving with a cache.
+// TODO: Do not pass styles, stylesById are enough.
 function stylesToStyleSheet(
   styles,
   borderValues,
@@ -365,7 +370,7 @@ function EditorWithData({
         editor.toggleMark(action.mark);
         break;
       }
-      case 'setBlocks': {
+      case 'setStyle': {
         const type = action.id;
         editor.setBlocks(type);
         break;
@@ -376,16 +381,45 @@ function EditorWithData({
     }
   }
 
-  function handleEditorKeyDown(event, _, next) {
+  function handleEditorKeyDown(event: KeyboardEvent, _, next) {
+    // Yep. We can declare functions inside functions. This is a great pattern.
+    function tryGeyStyleHotkey(event) {
+      if (!isKeyHotkey('cmd+opt', event)) return;
+      const styleIndex = event.which - 49;
+      const isStyleHotkey = styleIndex >= 0 && styleIndex <= 9;
+      if (!isStyleHotkey) return;
+      const styles = Object.keys(styleSheet)
+        .map(id => {
+          const { name, isText } = styleSheet[id];
+          return { id, name, isText };
+        })
+        .filter(style => style.isText)
+        .sort(stylesSorter);
+      const style = styles[styleIndex];
+      if (style == null) return;
+      return style.id;
+    }
+
     if (isBoldHotkey(event)) {
       event.preventDefault();
       dispatch({ type: 'toggleMark', mark: 'bold' });
-    } else if (isItalicHotkey(event)) {
+      return;
+    }
+
+    if (isItalicHotkey(event)) {
       event.preventDefault();
       dispatch({ type: 'toggleMark', mark: 'italic' });
-    } else {
-      return next();
+      return;
     }
+
+    const styleId = tryGeyStyleHotkey(event);
+    if (styleId != null) {
+      event.preventDefault();
+      dispatch({ type: 'setStyle', id: styleId });
+      return;
+    }
+
+    return next();
   }
 
   function renderNode(props) {

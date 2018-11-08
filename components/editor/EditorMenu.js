@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import Button from '../core/Button';
-import { useEditorDispatch, type MarkType } from './Editor';
+import { useEditorDispatch, stylesSorter, type MarkType } from './Editor';
 import { FormattedMessage } from 'react-intl';
 
 function EditorMenuButton({ children, isActive, onPress }) {
@@ -80,12 +80,12 @@ function StylesView({ styleSheet, blocks }) {
       const { name } = styleSheet[id];
       return { id, name };
     })
-    .sort((a, b) => a.name.localeCompare(b.name));
+    .sort(stylesSorter);
   return styles.map(style => {
     return (
       <EditorMenuButton
         isActive={blocks.some(node => node.type === style.id)}
-        onPress={() => dispatch({ type: 'setBlocks', id: style.id })}
+        onPress={() => dispatch({ type: 'setStyle', id: style.id })}
         key={style.id}
       >
         {style.name}
