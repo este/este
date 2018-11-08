@@ -1,6 +1,6 @@
 // @flow
 // $FlowFixMe
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useTheme from '../core/useTheme';
 import Button from '../core/Button';
@@ -36,24 +36,16 @@ const styles = StyleSheet.create({
 });
 
 function EditorBreadcrumb({
-  value,
+  ancestors,
   stylesById,
 }: {|
-  value: Object,
+  ancestors: Object,
   stylesById: Object,
 |}) {
   const theme = useTheme();
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
   const [activeIndex, setActiveIndex] = useState(null);
-  const ancestors = useMemo(
-    () =>
-      value.document
-        .getAncestors(value.selection.focus.path)
-        // Remove first item (Slate document). We don't use it.
-        .shift(),
-    [value.document, value.selection.focus.path],
-  );
   const row = useMemo(
     () => (
       <Row rhythm={0.5} wrap>
@@ -110,4 +102,4 @@ function EditorBreadcrumb({
   );
 }
 
-export default withRovingTabIndex(EditorBreadcrumb);
+export default withRovingTabIndex(memo(EditorBreadcrumb));

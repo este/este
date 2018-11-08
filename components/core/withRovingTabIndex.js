@@ -13,7 +13,7 @@ import getFocusableNodes from '../../client/getFocusableNodes';
 const withRovingTabIndex = <Props, Component: React.ComponentType<Props>>(
   WrappedComponent: Component,
 ): React.ComponentType<React.ElementConfig<Component>> => {
-  class RovingTabIndex extends React.Component<Props> {
+  class RovingTabIndex extends React.PureComponent<Props> {
     static maybeIgnoreElementWithCaret(focused, left) {
       if (!focused.classList.contains('caret-position')) return;
       const ignore =
