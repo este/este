@@ -32,9 +32,6 @@ export function useEditorDispatch(): EditorDispatch {
   return dispatch;
 }
 
-const isBoldHotkey = isKeyHotkey('mod+b');
-const isItalicHotkey = isKeyHotkey('mod+i');
-
 const markStyles = StyleSheet.create({
   bold: {
     fontWeight: 'bold',
@@ -316,13 +313,6 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
-// Emulate React Native View. We need it for the full available height.
-const slateEditorStyles = {
-  display: 'flex',
-  flex: 1,
-  flexDirection: 'column',
-};
-
 function EditorWithData({
   page,
   elements,
@@ -332,7 +322,7 @@ function EditorWithData({
   dimensionValues,
 }) {
   const editorRef = useRef(null);
-  const [editorValue, setEditorValue] = useState(() => {
+  const [value, setValue] = useState(() => {
     const model = elementsToSlateValue(page.element.id, elements);
     // For SSR.
     KeyUtils.resetGenerator();
@@ -352,6 +342,10 @@ function EditorWithData({
       ),
     [styles, borderValues, colorValues, dimensionValues, stylesById],
   );
+  const ancestors = useMemo(
+    () => value.document.getAncestors(value.selection.focus.path).shift(),
+    [value.document, value.selection.focus.path],
+  );
 
   function dispatch(action: EditorAction) {
     const { current: editor } = editorRef;
@@ -363,7 +357,7 @@ function EditorWithData({
         break;
       }
       case 'update': {
-        setEditorValue(action.value);
+        setValue(action.value);
         break;
       }
       case 'toggleMark': {
@@ -381,35 +375,38 @@ function EditorWithData({
     }
   }
 
-  function handleEditorKeyDown(event: KeyboardEvent, _, next) {
-    // Yep. We can declare functions inside functions. This is a great pattern.
-    function tryGeyStyleHotkey(event) {
-      if (!isKeyHotkey('cmd+opt', event)) return;
-      const styleIndex = event.which - 49;
-      const isStyleHotkey = styleIndex >= 0 && styleIndex <= 9;
-      if (!isStyleHotkey) return;
-      const styles = Object.keys(styleSheet)
-        .map(id => {
-          const { name, isText } = styleSheet[id];
-          return { id, name, isText };
-        })
-        .filter(style => style.isText)
-        .sort(stylesSorter);
-      const style = styles[styleIndex];
-      if (style == null) return;
-      return style.id;
-    }
-
-    if (isBoldHotkey(event)) {
+  function handleKeyDown(event: KeyboardEvent, editor, next) {
+    if (isKeyHotkey('mod+b')(event)) {
       event.preventDefault();
       dispatch({ type: 'toggleMark', mark: 'bold' });
       return;
     }
 
-    if (isItalicHotkey(event)) {
+    if (isKeyHotkey('mod+i')(event)) {
       event.preventDefault();
       dispatch({ type: 'toggleMark', mark: 'italic' });
       return;
+    }
+
+    function getTextStyles() {
+      return Object.keys(styleSheet)
+        .map(id => {
+          const { name, isText, style } = styleSheet[id];
+          return { id, name, isText, style };
+        })
+        .filter(style => style.isText);
+    }
+
+    // Yep. Functions inside functions. It's handy and ok pattern.
+    function tryGeyStyleHotkey(event) {
+      if (!isKeyHotkey('cmd+opt', event)) return;
+      const styleIndex = event.which - 49;
+      const isStyleHotkey = styleIndex >= 0 && styleIndex <= 9;
+      if (!isStyleHotkey) return;
+      const styles = getTextStyles().sort(stylesSorter);
+      const style = styles[styleIndex];
+      if (style == null) return;
+      return style.id;
     }
 
     const styleId = tryGeyStyleHotkey(event);
@@ -417,6 +414,63 @@ function EditorWithData({
       event.preventDefault();
       dispatch({ type: 'setStyle', id: styleId });
       return;
+    }
+
+    // By default, Slate splits blocks to the same type. That's fine for lists.
+    // But for anything else, we want default text style instead (P after H1).
+    // Convention over configuration by text styles names is the best IMHO.
+    // 1) Try to find closest parent node related text.
+    //    e.g. header-text, container-text, etc.
+    // 2) Try to find node named 'text'.
+    // 3) First isText without spread, for rare case the user renamed it.
+    // 4) Throw an error. App must not allow to delete text style.
+    function getDefaultTextStyleId() {
+      const styles = getTextStyles();
+      const ancestorWithTextStyle = ancestors.find(ancestor => {
+        const { name } = stylesById[ancestor.type];
+        const textName = `${name}-text`;
+        return styles.find(style => style.name === textName);
+      });
+      if (ancestorWithTextStyle != null)
+        return stylesById[ancestorWithTextStyle.get('type')].id;
+      const named = styles.find(style => style.name === 'text');
+      if (named != null) return named.id;
+      const firstWithoutSpread = styles.find(s => s.style.length === 1);
+      if (firstWithoutSpread != null) return firstWithoutSpread.id;
+      throw Error('missing text style');
+    }
+
+    function handleKeyEnter() {
+      const { value } = editor;
+      const { selection } = value;
+      const { start, end, isExpanded } = selection;
+      if (isExpanded) return next();
+
+      const { startBlock } = value;
+      // if (start.offset == 0 && startBlock.text.length == 0)
+      //   return this.onBackspace(event, editor, next);
+      if (end.offset !== startBlock.text.length) return next();
+
+      // TODO: Heuristic detection.
+      const isItem = false;
+
+      if (isItem) {
+        // Default action is to split an element.
+        return next();
+      }
+
+      // For headings, quotes, etc., we want to continue with a text.
+      event.preventDefault();
+      editor.splitBlock().setBlocks(getDefaultTextStyleId());
+    }
+
+    switch (event.key) {
+      // case ' ':
+      //   return handleKeySpace(event, change, next);
+      // case 'Backspace':
+      //   return handleKeyBackspace(event, change, next);
+      case 'Enter':
+        return handleKeyEnter();
     }
 
     return next();
@@ -473,18 +527,19 @@ function EditorWithData({
         spellCheck={false}
         autoFocus
         ref={editorRef}
-        value={editorValue}
-        style={slateEditorStyles}
+        value={value}
+        // Emulate React Native View. We need it for the full available height.
+        style={{ display: 'flex', flex: 1, flexDirection: 'column' }}
         onChange={({ value }) => dispatch({ type: 'update', value })}
         // https://github.com/ianstormtaylor/slate/issues/2352
         onFocus={() => dispatch({ type: 'focus' })}
-        onKeyDown={handleEditorKeyDown}
+        onKeyDown={handleKeyDown}
         renderNode={renderNode}
         renderMark={renderMark}
       />
       <EditorDispatchContext.Provider value={dispatch}>
-        <EditorMenu value={editorValue} styleSheet={styleSheet} />
-        <EditorBreadcrumb value={editorValue} stylesById={stylesById} />
+        <EditorMenu value={value} styleSheet={styleSheet} />
+        <EditorBreadcrumb ancestors={ancestors} stylesById={stylesById} />
       </EditorDispatchContext.Provider>
     </>
   );
