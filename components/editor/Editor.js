@@ -440,6 +440,25 @@ function EditorWithData({
       throw Error('missing text style');
     }
 
+    function handleKeyBackspace() {
+      const { value } = editor;
+      const { selection } = value;
+      const { isExpanded, start } = selection;
+      if (isExpanded) return next();
+      if (start.offset !== 0) return next();
+
+      const { startBlock } = value;
+      const type = getDefaultTextStyleId();
+      if (startBlock.type === type) return next();
+
+      event.preventDefault();
+      editor.setBlocks(type);
+
+      // if (startBlock.type == 'list-item') {
+      //   editor.unwrapBlock('bulleted-list');
+      // }
+    }
+
     function handleKeyEnter() {
       const { value } = editor;
       const { selection } = value;
@@ -447,9 +466,11 @@ function EditorWithData({
       if (isExpanded) return next();
 
       const { startBlock } = value;
-      // if (start.offset == 0 && startBlock.text.length == 0)
-      //   return this.onBackspace(event, editor, next);
-      if (end.offset !== startBlock.text.length) return next();
+      const caretOnEmptyText =
+        start.offset === 0 && startBlock.text.length === 0;
+      if (caretOnEmptyText) return handleKeyBackspace();
+      const caretOnTextEnd = end.offset === startBlock.text.length;
+      if (!caretOnTextEnd) return next();
 
       // TODO: Heuristic detection.
       const isItem = false;
@@ -461,14 +482,15 @@ function EditorWithData({
 
       // For headings, quotes, etc., we want to continue with a text.
       event.preventDefault();
-      editor.splitBlock().setBlocks(getDefaultTextStyleId());
+      const type = getDefaultTextStyleId();
+      editor.splitBlock().setBlocks(type);
     }
 
     switch (event.key) {
       // case ' ':
       //   return handleKeySpace(event, change, next);
-      // case 'Backspace':
-      //   return handleKeyBackspace(event, change, next);
+      case 'Backspace':
+        return handleKeyBackspace();
       case 'Enter':
         return handleKeyEnter();
     }

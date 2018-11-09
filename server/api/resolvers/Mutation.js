@@ -88,6 +88,16 @@ const Mutation: MutationType = {
       },
     });
 
+    const colorGray = await db.mutation.createColorValue({
+      data: {
+        web: { connect: { id: web.id } },
+        name: 'gray',
+        r: 170,
+        g: 170,
+        b: 170,
+      },
+    });
+
     const spaceSmall = await db.mutation.createDimensionValue({
       data: {
         web: { connect: { id: web.id } },
@@ -184,6 +194,18 @@ const Mutation: MutationType = {
         name: 'h2',
         fontSize: 24,
         lineHeight: 36,
+      },
+    });
+
+    await db.mutation.createStyle({
+      data: {
+        web: { connect: { id: web.id } },
+        spreadStyles: {
+          create: { index: 0, style: { connect: { id: textStyle.id } } },
+        },
+        name: 'quote',
+        color: { connect: { id: colorGray.id } },
+        fontStyle: 'ITALIC',
       },
     });
 

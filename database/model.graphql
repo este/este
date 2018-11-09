@@ -48,8 +48,8 @@ type Page {
   title: String!
 }
 
-# Should be called Node, but that's reserved word in Relay.
-# Element is good enough abstraction for View Text Component.
+# Prisma does not support interfaces nor union types yet, so we emulate it.
+# Element is the basic building block.
 # https://docs.slatejs.org/guides/data-model#documents-and-nodes
 type Element {
   id: ID! @unique
