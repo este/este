@@ -124,8 +124,9 @@ class MyApp extends App {
         try {
           data = await fetchQuery(environment, graphQLQuery, graphQLVariables);
         } catch (errors) {
-          // TODO: https://github.com/este/este/issues/1606
-          statusCode = 404;
+          // TODO: https://github.com/este/este/issues/1607
+          console.log(errors);
+          statusCode = 500;
           if (ctx.res) {
             // eslint-disable-next-line no-param-reassign
             ctx.res.statusCode = statusCode;
