@@ -1,4 +1,4 @@
-// flow-typed signature: 45338f7982a1a44b1ffbd7cfe2925735
+// flow-typed signature: 8b7097e20fc03eca681219e79165b100
 // flow-typed version: <<STUB>>/eslint-config-prettier_v^3.0.0/flow_v0.86.0
 
 /**
@@ -46,6 +46,10 @@ declare module 'eslint-config-prettier/unicorn' {
   declare module.exports: any;
 }
 
+declare module 'eslint-config-prettier/vue' {
+  declare module.exports: any;
+}
+
 // Filename aliases
 declare module 'eslint-config-prettier/bin/cli.js' {
   declare module.exports: $Exports<'eslint-config-prettier/bin/cli'>;
@@ -70,4 +74,7 @@ declare module 'eslint-config-prettier/standard.js' {
 }
 declare module 'eslint-config-prettier/unicorn.js' {
   declare module.exports: $Exports<'eslint-config-prettier/unicorn'>;
+}
+declare module 'eslint-config-prettier/vue.js' {
+  declare module.exports: $Exports<'eslint-config-prettier/vue'>;
 }
