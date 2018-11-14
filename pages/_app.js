@@ -125,6 +125,7 @@ class MyApp extends App {
           data = await fetchQuery(environment, graphQLQuery, graphQLVariables);
         } catch (errors) {
           // TODO: https://github.com/este/este/issues/1607
+          // eslint-disable-next-line no-console
           console.log(errors);
           statusCode = 500;
           if (ctx.res) {

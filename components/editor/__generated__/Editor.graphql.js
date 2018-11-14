@@ -269,9 +269,6 @@ export type Editor = {|
         +children: ?$ReadOnlyArray<{|
           +id: string
         |}>,
-        +style: ?{|
-          +id: string
-        |},
         +index: number,
         +type: ElementType,
         +textLeaves: ?any,
@@ -325,16 +322,6 @@ v4 = {
   "name": "index",
   "args": null,
   "storageKey": null
-},
-v5 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "style",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "Style",
-  "plural": false,
-  "selections": v1
 };
 return {
   "kind": "Fragment",
@@ -859,7 +846,16 @@ return {
                   "plural": true,
                   "selections": [
                     v4,
-                    v5
+                    {
+                      "kind": "LinkedField",
+                      "alias": null,
+                      "name": "style",
+                      "storageKey": null,
+                      "args": null,
+                      "concreteType": "Style",
+                      "plural": false,
+                      "selections": v1
+                    }
                   ]
                 },
                 {
@@ -1260,7 +1256,6 @@ return {
                   "plural": true,
                   "selections": v1
                 },
-                v5,
                 v4,
                 {
                   "kind": "ScalarField",
@@ -1286,5 +1281,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '15faf06ca924a86cdf3b23bd42b0a8a4';
+(node/*: any*/).hash = 'ee428bade803fcc492697e525793078e';
 module.exports = node;

@@ -314,6 +314,7 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
+// eslint-disable-next-line no-unused-vars
 function EditorWithData({
   page,
   elements,
@@ -581,16 +582,17 @@ function Editor({ data: { page } }: {| data: Data |}): Node {
     // No data? Just render nothing. Maybe a schema was updated.
     return null;
   }
-  return (
-    <EditorWithData
-      page={page}
-      borderValues={page.web.borderValues}
-      colorValues={page.web.colorValues}
-      dimensionValues={page.web.dimensionValues}
-      elements={page.web.elements}
-      styles={page.web.styles}
-    />
-  );
+  return null;
+  // return (
+  //   <EditorWithData
+  //     page={page}
+  //     borderValues={page.web.borderValues}
+  //     colorValues={page.web.colorValues}
+  //     dimensionValues={page.web.dimensionValues}
+  //     elements={page.web.elements}
+  //     styles={page.web.styles}
+  //   />
+  // );
 }
 
 // TODO: Replace with useRelayFragmentContainer when available.
@@ -846,9 +848,9 @@ export default createFragmentContainer(
             children {
               id
             }
-            style {
-              id
-            }
+            # style {
+            #  id
+            # }
             index
             type
             textLeaves

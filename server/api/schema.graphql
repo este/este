@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Nov 07 2018 16:49:55 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Nov 14 2018 03:50:52 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -380,9 +380,9 @@ input ColorValueWhereInput {
 
 type Component implements Node {
   id: ID!
-  web: Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
+  creator: User!
+  props(where: ComponentPropWhereInput, orderBy: ComponentPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ComponentProp!]
 }
 
 enum ComponentOrderByInput {
@@ -394,6 +394,128 @@ enum ComponentOrderByInput {
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+}
+
+type ComponentProp implements Node {
+  id: ID!
+  component: Component!
+  name: String!
+  type: PropType!
+}
+
+enum ComponentPropOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ComponentPropWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentPropWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentPropWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentPropWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  component: ComponentWhereInput
 }
 
 input ComponentWhereInput {
@@ -485,10 +607,10 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  creator: UserWhereInput
+  props_every: ComponentPropWhereInput
+  props_some: ComponentPropWhereInput
+  props_none: ComponentPropWhereInput
 }
 
 type CreateWebErrors {
@@ -679,29 +801,197 @@ input DimensionValueWhereInput {
 
 type Element implements Node {
   id: ID!
-  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
-  parent: Element
-  web: Web!
-  style: Style
-  component: Component
-  index: Int!
   type: ElementType!
+  index: Int!
+  web: Web!
+  parent: Element
   textLeaves: Json
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  shared: SharedElement
+  component: Component!
+  props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
 }
 
 enum ElementOrderByInput {
   id_ASC
   id_DESC
-  index_ASC
-  index_DESC
   type_ASC
   type_DESC
+  index_ASC
+  index_DESC
   textLeaves_ASC
   textLeaves_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+}
+
+type ElementProp implements Node {
+  id: ID!
+  element: Element!
+  name: String!
+  type: PropType!
+  style: Style
+  value: String
+}
+
+enum ElementPropOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ElementPropWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementPropWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementPropWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementPropWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  element: ElementWhereInput
+  style: StyleWhereInput
 }
 
 enum ElementType {
@@ -759,6 +1049,16 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
   index: Int
 
   """All values that are not equal to given value."""
@@ -781,23 +1081,16 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
+  web: WebWhereInput
+  parent: ElementWhereInput
   children_every: ElementWhereInput
   children_some: ElementWhereInput
   children_none: ElementWhereInput
-  parent: ElementWhereInput
-  web: WebWhereInput
-  style: StyleWhereInput
+  shared: SharedElementWhereInput
   component: ComponentWhereInput
+  props_every: ElementPropWhereInput
+  props_some: ElementPropWhereInput
+  props_none: ElementPropWhereInput
 }
 
 enum EmailError {
@@ -998,6 +1291,14 @@ enum PasswordError {
   WRONG_PASSWORD
 }
 
+enum PropType {
+  BOOLEAN
+  NUMBER
+  STRING
+  VIEW_STYLE
+  TEXT_STYLE
+}
+
 type Query {
   me: User
   page(id: ID!): Page
@@ -1049,10 +1350,112 @@ type SetWebNamePayload {
   web: Web
 }
 
+type SharedElement implements Node {
+  id: ID!
+  sharedBy(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  name: String!
+  element: Element!
+}
+
+input SharedElementWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SharedElementWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SharedElementWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SharedElementWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  sharedBy_every: ElementWhereInput
+  sharedBy_some: ElementWhereInput
+  sharedBy_none: ElementWhereInput
+  element: ElementWhereInput
+}
+
 type Style implements Node {
   id: ID!
   web: Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
   name: String!
   isText: Boolean
   spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
@@ -1943,9 +2346,9 @@ input StyleWhereInput {
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
   web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  props_every: ElementPropWhereInput
+  props_some: ElementPropWhereInput
+  props_none: ElementPropWhereInput
   spreadStyles_every: StyleSpreadWhereInput
   spreadStyles_some: StyleSpreadWhereInput
   spreadStyles_none: StyleSpreadWhereInput
@@ -2014,6 +2417,7 @@ type User implements Node {
   email: String!
   password: String!
   themeName: String
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 input UserWhereInput {
@@ -2232,6 +2636,9 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
+  components_every: ComponentWhereInput
+  components_some: ComponentWhereInput
+  components_none: ComponentWhereInput
 }
 
 type Web implements Node {
@@ -2246,7 +2653,6 @@ type Web implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
-  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 enum WebOrderByInput {
@@ -2412,7 +2818,4 @@ input WebWhereInput {
   borderValues_every: BorderValueWhereInput
   borderValues_some: BorderValueWhereInput
   borderValues_none: BorderValueWhereInput
-  components_every: ComponentWhereInput
-  components_some: ComponentWhereInput
-  components_none: ComponentWhereInput
 }
