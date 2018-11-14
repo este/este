@@ -1,14 +1,16 @@
 // @flow
 /* eslint-env browser */
-// $FlowFixMe
 import React, { useState, useEffect } from 'react';
 import useTheme from '../core/useTheme';
 import usePortal from '../core/usePortal';
 import { findDOMNode } from 'slate-react';
 import { View } from 'react-native';
 
+type Rec = {| width: number, height: number, left: number, top: number |};
+type Styles = {| left: Rec, right: Rec, top: Rec, bottom: Rec |};
+
 export default function EditorBreadcrumbOutline({ node }: {| node: Object |}) {
-  const [styles, setStyles] = useState(null);
+  const [styles, setStyles] = useState<?Styles>(null);
   const portal = usePortal();
   const theme = useTheme();
 

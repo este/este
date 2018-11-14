@@ -1,11 +1,10 @@
 // @flow
 /* eslint-env browser */
-// $FlowFixMe
 import { useState, useEffect, type Node } from 'react';
 import ReactDOM from 'react-dom';
 
 export default function usePortal() {
-  const [container, setContainer] = useState(null);
+  const [container, setContainer] = useState<?HTMLDivElement>(null);
 
   useEffect(() => {
     const next = window.document.getElementById('__next');

@@ -1,6 +1,5 @@
 // @flow
 /* eslint-env browser */
-// $FlowFixMe
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import useTheme from '../core/useTheme';
@@ -95,6 +94,7 @@ function StylesView({ styleSheet, blocks }) {
 }
 
 type MenuView = 'initial' | 'styles';
+type Position = {| left: number, top: number |};
 
 export default function EditorMenu({
   value,
@@ -105,11 +105,8 @@ export default function EditorMenu({
 |}) {
   const theme = useTheme();
   const portal = usePortal();
-  const [position, setPosition] = useState(null);
-  const [menuView, setMenuView]: [
-    MenuView,
-    (menuView: MenuView) => void,
-  ] = useState('initial');
+  const [position, setPosition] = useState<?Position>(null);
+  const [menuView, setMenuView] = useState<MenuView>('initial');
 
   useEffect(
     () => {

@@ -11,6 +11,7 @@ import type { ConcreteFragment } from 'relay-runtime';
 export type BorderValueUnit = "POINT";
 export type DimensionValueUnit = "KEYWORD" | "PERCENTAGE" | "POINT";
 export type ElementType = "BLOCK" | "INLINE" | "TEXT";
+export type PropType = "BOOLEAN" | "NUMBER" | "STRING" | "TEXT_STYLE" | "VIEW_STYLE";
 export type StyleAlignContent = "CENTER" | "FLEX_END" | "FLEX_START" | "SPACE_AROUND" | "SPACE_BETWEEN" | "STRETCH";
 export type StyleAlignItems = "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";
 export type StyleAlignSelf = "AUTO" | "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";
@@ -266,12 +267,24 @@ export type Editor = {|
       |}>,
       +elements: ?$ReadOnlyArray<{|
         +id: string,
-        +children: ?$ReadOnlyArray<{|
-          +id: string
-        |}>,
         +index: number,
         +type: ElementType,
         +textLeaves: ?any,
+        +children: ?$ReadOnlyArray<{|
+          +id: string
+        |}>,
+        +component: {|
+          +id: string
+        |},
+        +props: ?$ReadOnlyArray<{|
+          +id: string,
+          +name: string,
+          +type: PropType,
+          +style: ?{|
+            +id: string
+          |},
+          +value: ?string,
+        |}>,
       |}>,
     |},
   |},
@@ -298,7 +311,14 @@ v2 = {
   "args": null,
   "storageKey": null
 },
-v3 = [
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "value",
+  "args": null,
+  "storageKey": null
+},
+v4 = [
   v0,
   v2,
   {
@@ -308,18 +328,29 @@ v3 = [
     "args": null,
     "storageKey": null
   },
-  {
-    "kind": "ScalarField",
-    "alias": null,
-    "name": "value",
-    "args": null,
-    "storageKey": null
-  }
+  v3
 ],
-v4 = {
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "index",
+  "args": null,
+  "storageKey": null
+},
+v6 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "style",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Style",
+  "plural": false,
+  "selections": v1
+},
+v7 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "type",
   "args": null,
   "storageKey": null
 };
@@ -395,7 +426,7 @@ return {
               "args": null,
               "concreteType": "BorderValue",
               "plural": true,
-              "selections": v3
+              "selections": v4
             },
             {
               "kind": "LinkedField",
@@ -446,7 +477,7 @@ return {
               "args": null,
               "concreteType": "DimensionValue",
               "plural": true,
-              "selections": v3
+              "selections": v4
             },
             {
               "kind": "LinkedField",
@@ -845,17 +876,8 @@ return {
                   "concreteType": "StyleSpread",
                   "plural": true,
                   "selections": [
-                    v4,
-                    {
-                      "kind": "LinkedField",
-                      "alias": null,
-                      "name": "style",
-                      "storageKey": null,
-                      "args": null,
-                      "concreteType": "Style",
-                      "plural": false,
-                      "selections": v1
-                    }
+                    v5,
+                    v6
                   ]
                 },
                 {
@@ -1246,6 +1268,15 @@ return {
               "plural": true,
               "selections": [
                 v0,
+                v5,
+                v7,
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "textLeaves",
+                  "args": null,
+                  "storageKey": null
+                },
                 {
                   "kind": "LinkedField",
                   "alias": null,
@@ -1256,20 +1287,31 @@ return {
                   "plural": true,
                   "selections": v1
                 },
-                v4,
                 {
-                  "kind": "ScalarField",
+                  "kind": "LinkedField",
                   "alias": null,
-                  "name": "type",
+                  "name": "component",
+                  "storageKey": null,
                   "args": null,
-                  "storageKey": null
+                  "concreteType": "Component",
+                  "plural": false,
+                  "selections": v1
                 },
                 {
-                  "kind": "ScalarField",
+                  "kind": "LinkedField",
                   "alias": null,
-                  "name": "textLeaves",
+                  "name": "props",
+                  "storageKey": null,
                   "args": null,
-                  "storageKey": null
+                  "concreteType": "ElementProp",
+                  "plural": true,
+                  "selections": [
+                    v0,
+                    v2,
+                    v7,
+                    v6,
+                    v3
+                  ]
                 }
               ]
             }
@@ -1281,5 +1323,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ee428bade803fcc492697e525793078e';
+(node/*: any*/).hash = '12efa39a2fe245e9acca31dfb8559ff9';
 module.exports = node;

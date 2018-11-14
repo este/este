@@ -1,5 +1,4 @@
 // @flow
-// $FlowFixMe
 import { useContext } from 'react';
 import ThemeContext from './ThemeContext';
 import type { Theme } from '../../themes/types';
