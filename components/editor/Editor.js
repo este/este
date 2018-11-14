@@ -1,5 +1,4 @@
 // @flow
-// $FlowFixMe
 import React, { useRef, useState, useMemo, useContext, type Node } from 'react';
 import Head from 'next/head';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -21,15 +20,14 @@ export type EditorAction =
 
 type EditorDispatch = (action: EditorAction) => void;
 
-const EditorDispatchContext = React.createContext<?EditorDispatch>(null);
+const EditorDispatchContext = React.createContext<EditorDispatch>(() => {});
 
 export function stylesSorter<S: { +name: string }>(a: S, b: S) {
   return a.name.localeCompare(b.name);
 }
 
 export function useEditorDispatch(): EditorDispatch {
-  const dispatch = useContext(EditorDispatchContext);
-  return dispatch;
+  return useContext(EditorDispatchContext);
 }
 
 const markStyles = StyleSheet.create({
@@ -41,7 +39,9 @@ const markStyles = StyleSheet.create({
   },
 });
 
-function arrayOfItemsWithIdToObject(array: $ReadOnlyArray<{ +id: string }>) {
+function arrayOfItemsWithIdToObject<T: { +id: string }>(
+  array: $ReadOnlyArray<T>,
+): { [key: string]: T } {
   return array.reduce((obj, item) => {
     return { ...obj, [item.id]: item };
   }, {});
@@ -52,23 +52,23 @@ function elementsToSlateValue(pageElementId, elementsArray) {
 
   function walk(id) {
     const element = elements[id];
-    const { type } = element;
-    if (type === 'TEXT')
+    if (element.type === 'TEXT')
       return {
         object: 'text',
         leaves: element.textLeaves,
       };
-    // const component
-    const styleId = element.style?.id;
-    if (styleId == null)
-      throw Error('The element has to have style or component ID.');
+    // Flow type refinement.
+    const { children, props } = element;
+    if (children == null || props == null) throw Error('Should not be null.');
+    const nodes = children
+      .map(child => elements[child.id])
+      .sort((a, b) => a.index - b.index)
+      .map(child => walk(child.id));
     return {
-      object: type.toLowerCase(),
-      type: styleId,
-      nodes: element.children
-        .map(child => elements[child.id])
-        .sort((a, b) => a.index - b.index)
-        .map(child => walk(child.id)),
+      object: element.type.toLowerCase(),
+      type: element.component.id,
+      nodes,
+      data: { props },
     };
   }
 
@@ -294,13 +294,14 @@ function stylesToStyleSheet(
     const style = stylesById[styleId];
     let { isText } = style;
     let spreadStyles = [];
+    if (style.spreadStyles == null) throw Error('Should not be null.');
     style.spreadStyles
       // Clone first, because sort mutates array.
       .slice()
       .sort((a, b) => a.index - b.index)
       .forEach(item => {
         const resolved = resolveStyle(item.style.id);
-        if (resolved.isText) isText = true;
+        if (resolved.isText === true) isText = true;
         spreadStyles = [...resolved.style, ...spreadStyles];
       });
     return { isText, style: [...spreadStyles, sheets[styleId]] };
@@ -582,17 +583,16 @@ function Editor({ data: { page } }: {| data: Data |}): Node {
     // No data? Just render nothing. Maybe a schema was updated.
     return null;
   }
-  return null;
-  // return (
-  //   <EditorWithData
-  //     page={page}
-  //     borderValues={page.web.borderValues}
-  //     colorValues={page.web.colorValues}
-  //     dimensionValues={page.web.dimensionValues}
-  //     elements={page.web.elements}
-  //     styles={page.web.styles}
-  //   />
-  // );
+  return (
+    <EditorWithData
+      page={page}
+      borderValues={page.web.borderValues}
+      colorValues={page.web.colorValues}
+      dimensionValues={page.web.dimensionValues}
+      elements={page.web.elements}
+      styles={page.web.styles}
+    />
+  );
 }
 
 // TODO: Replace with useRelayFragmentContainer when available.
@@ -603,7 +603,7 @@ export default createFragmentContainer(
       page(id: $id) {
         id
         title @__clientField(handle: "draft")
-        # This preloads
+        # Preloads title.
         draftTitle
         element {
           id
@@ -834,26 +834,31 @@ export default createFragmentContainer(
             textTransform
           }
           elements {
-            # TODO: shared and component, to je ten trik
-            #shared {
-            #id
-            # sharedBy { id }
-            #name: String!
-            #element { id }
-            #}
-            #component {
-            #
-            #}
             id
-            children {
-              id
-            }
-            # style {
-            #  id
-            # }
             index
             type
             textLeaves
+            children {
+              id
+            }
+            # shared {
+            #   name
+            #   element {
+            #     id
+            #   }
+            # }
+            component {
+              id
+            }
+            props {
+              id
+              name
+              type
+              style {
+                id
+              }
+              value
+            }
           }
         }
       }
