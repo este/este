@@ -35,7 +35,7 @@ Universal React. React + React Native.
 - `yarn env production` - copy `.env.production` to `.env`
 - `yarn production` - test production build locally
 - `yarn test`
-- `yarn codegen` - when `yarn dev` is running
+- `yarn codegen` - after deploy, run `yarn dev`, then `yarn codegen` in another tab
 - `yarn deploy:db`
 - `yarn deploy:api`
 - `yarn deploy:web`
