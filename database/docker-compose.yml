@@ -1,7 +1,7 @@
 version: '3'
 services:
   prisma:
-    image: prismagraphql/prisma:1.18
+    image: prismagraphql/prisma:1.20.1
     restart: always
     ports:
       - '4466:4466'
@@ -28,4 +28,4 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
 volumes:
-  ? postgres
+  postgres:
