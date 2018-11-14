@@ -57,6 +57,18 @@ const Mutation: MutationType = {
     const errors = validations.validateCreateWeb(args.input);
     if (errors) return { errors };
 
+    // Fetch seed data first.
+
+    const view = await db.query.component({
+      where: { name: 'View' },
+    });
+
+    const text = await db.query.component({
+      where: { name: 'Text' },
+    });
+
+    if (view == null || text == null) throw Error('Missing seed data.');
+
     // Note we have to create Web to get its ID for further mutations.
     // TODO: All mutations in one transaction.
     // https://github.com/prisma/prisma/issues/74
@@ -87,6 +99,16 @@ const Mutation: MutationType = {
         b: 51,
       },
     });
+
+    // const colorLink = await db.mutation.createColorValue({
+    //   data: {
+    //     web: { connect: { id: web.id } },
+    //     name: 'link',
+    //     r: 34,
+    //     g: 139,
+    //     b: 230,
+    //   },
+    // });
 
     const colorGray = await db.mutation.createColorValue({
       data: {
@@ -217,30 +239,58 @@ const Mutation: MutationType = {
         element: {
           create: {
             web: { connect: { id: web.id } },
-            style: { connect: { id: pageStyle.id } },
+            component: { connect: { id: view.id } },
+            props: {
+              create: [
+                {
+                  name: 'style',
+                  type: 'VIEW_STYLE',
+                  style: { connect: { id: pageStyle.id } },
+                },
+              ],
+            },
             index: 0,
             type: 'BLOCK',
             children: {
               create: [
                 {
                   web: { connect: { id: web.id } },
-                  style: { connect: { id: containerStyle.id } },
+                  component: { connect: { id: view.id } },
+                  props: {
+                    create: [
+                      {
+                        name: 'style',
+                        type: 'VIEW_STYLE',
+                        style: { connect: { id: containerStyle.id } },
+                      },
+                    ],
+                  },
                   index: 0,
                   type: 'BLOCK',
                   children: {
                     create: [
                       {
                         web: { connect: { id: web.id } },
-                        style: { connect: { id: h1Style.id } },
+                        component: { connect: { id: text.id } },
+                        props: {
+                          create: [
+                            {
+                              name: 'style',
+                              type: 'TEXT_STYLE',
+                              style: { connect: { id: h1Style.id } },
+                            },
+                          ],
+                        },
                         index: 0,
                         type: 'BLOCK',
                         children: {
                           create: [
                             {
                               web: { connect: { id: web.id } },
+                              component: { connect: { id: text.id } },
                               index: 0,
                               type: 'TEXT',
-                              // $FlowFixMe Weird. It should allow JSON instead of string.
+                              // $FlowFixMe JSON expects string for some reason.
                               textLeaves: [{ text: 'Title' }],
                             },
                           ],
@@ -248,16 +298,26 @@ const Mutation: MutationType = {
                       },
                       {
                         web: { connect: { id: web.id } },
-                        style: { connect: { id: textStyle.id } },
+                        component: { connect: { id: text.id } },
+                        props: {
+                          create: [
+                            {
+                              name: 'style',
+                              type: 'TEXT_STYLE',
+                              style: { connect: { id: textStyle.id } },
+                            },
+                          ],
+                        },
                         index: 1,
                         type: 'BLOCK',
                         children: {
                           create: [
                             {
                               web: { connect: { id: web.id } },
+                              component: { connect: { id: text.id } },
                               index: 0,
                               type: 'TEXT',
-                              // $FlowFixMe Weird. It should allow JSON instead of string.
+                              // $FlowFixMe JSON expects string for some reason.
                               textLeaves: [{ text: 'Paragraph.' }],
                             },
                           ],

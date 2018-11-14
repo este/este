@@ -1,7 +1,7 @@
 # Prisma does not support interfaces nor union types yet, so we emulate it.
+# Soon: https://github.com/prisma/prisma/issues/3408
 # https://www.prisma.io/docs/data-model-and-migrations/data-model-knul/#more-sdl-features
 # TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
-
 # As for tree structure, we use parent/children because it's the most
 # straightforward approach for now. We don't need recursive queries because we
 # can fetch all related objects from App and resolve them in the client.
@@ -21,6 +21,7 @@ type User {
   email: String! @unique
   password: String!
   themeName: String
+  components: [Component!]! @relation(name: "UserComponents")
 }
 
 type Web {
@@ -35,7 +36,6 @@ type Web {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
-  components: [Component!]! @relation(name: "WebComponents")
 }
 
 type Page {
@@ -48,49 +48,75 @@ type Page {
   title: String!
 }
 
-# Prisma does not support interfaces nor union types yet, so we emulate it.
-# Element is the basic building block.
-# https://docs.slatejs.org/guides/data-model#documents-and-nodes
 type Element {
   id: ID! @unique
-  # https://github.com/prisma/prisma/issues/2034#issuecomment-421850503
-  children: [Element!]! @relation(name: "ElementTree")
-  parent: Element @relation(name: "ElementTree")
-  web: Web! @relation(name: "WebElements")
-  style: Style @relation(name: "ElementStyle")
-  component: Component @relation(name: "ElementComponent")
-  index: Int!
   type: ElementType!
-  # Block or inline element can have children, style, or component, so we need
-  # referential integrity, but text element is value object only with marks.
-  # To simplify things, we consider marks as constants, only bold and italic
-  # are allowed for now.
-  # {
-  #   object: 'text',
-  #   leaves: [
-  #     { object: 'leaf', text: ' and ', marks: [] },
-  #     {
-  #       object: 'leaf',
-  #       text: 'bold',
-  #       marks: [{ object: 'mark', type: 'bold', data: {} }],
-  #     },
-  #     { object: 'leaf', text: '.', marks: [] },
-  #   ],
-  # },
+  index: Int!
+  web: Web! @relation(name: "WebElements")
+  parent: Element @relation(name: "ElementTree")
+  # if type == 'TEXT'
+  # Slate text model with bold and italic marks only. Example:
+  # [{ text: 'Hello ' }, { text: 'World', marks: [{ type: 'bold' }] }];
   textLeaves: Json
+  # else
+  children: [Element!]! @relation(name: "ElementTree")
+  # children or shared, not both.
+  shared: SharedElement @relation(name: "ElementShared")
+  # Will get shared || children as children prop.
+  component: Component! @relation(name: "ElementComponents")
+  props: [ElementProp!]! @relation(name: "ElementProps")
 }
 
+# Slate model
 enum ElementType {
   BLOCK
   INLINE
   TEXT
 }
 
+type SharedElement {
+  id: ID! @unique
+  sharedBy: [Element!]! @relation(name: "ElementShared")
+  name: String!
+  element: Element! @relation(name: "SharedElement")
+}
+
+type Component {
+  id: ID! @unique
+  name: String! @unique
+  creator: User! @relation(name: "UserComponents")
+  props: [ComponentProp!]! @relation(name: "ComponentProps")
+}
+
+type ComponentProp {
+  id: ID! @unique
+  component: Component! @relation(name: "ComponentProps")
+  name: String!
+  type: PropType!
+}
+
+enum PropType {
+  BOOLEAN
+  NUMBER
+  STRING
+  VIEW_STYLE
+  TEXT_STYLE
+}
+
+type ElementProp {
+  id: ID! @unique
+  element: Element! @relation(name: "ElementProps")
+  name: String!
+  type: PropType!
+  style: Style @relation(name: "StyleProp")
+  value: String
+}
+
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
 type Style {
   id: ID! @unique
   web: Web! @relation(name: "WebStyles")
-  elements: [Element!]! @relation(name: "ElementStyle")
+  props: [ElementProp!]! @relation(name: "StyleProp")
   name: String!
   # There are two kinds of style. Layout style and text style. Layout is for
   # View, text is for Text. Text has everything View has plus own props.
@@ -375,11 +401,4 @@ enum StyleTextTransform {
   CAPITALIZE
   UPPERCASE
   LOWERCASE
-}
-
-type Component {
-  id: ID! @unique
-  web: Web! @relation(name: "WebComponents")
-  elements: [Element!]! @relation(name: "ElementComponent")
-  name: String!
 }

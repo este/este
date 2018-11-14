@@ -8,3 +8,6 @@ hooks:
   post-deploy:
     - graphql get-schema --project database
     - yarn codegen
+
+seed:
+  import: seed.graphql

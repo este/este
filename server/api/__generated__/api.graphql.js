@@ -432,9 +432,9 @@ input ColorValueWhereInput {
 
 type Component implements Node {
   id: ID!
-  web: Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   name: String!
+  creator: User!
+  props(where: ComponentPropWhereInput, orderBy: ComponentPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ComponentProp!]
 }
 
 enum ComponentOrderByInput {
@@ -446,6 +446,128 @@ enum ComponentOrderByInput {
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+}
+
+type ComponentProp implements Node {
+  id: ID!
+  component: Component!
+  name: String!
+  type: PropType!
+}
+
+enum ComponentPropOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ComponentPropWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentPropWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentPropWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentPropWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  component: ComponentWhereInput
 }
 
 input ComponentWhereInput {
@@ -537,10 +659,10 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  creator: UserWhereInput
+  props_every: ComponentPropWhereInput
+  props_some: ComponentPropWhereInput
+  props_none: ComponentPropWhereInput
 }
 
 type CreateWebErrors {
@@ -731,29 +853,197 @@ input DimensionValueWhereInput {
 
 type Element implements Node {
   id: ID!
-  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
-  parent: Element
-  web: Web!
-  style: Style
-  component: Component
-  index: Int!
   type: ElementType!
+  index: Int!
+  web: Web!
+  parent: Element
   textLeaves: Json
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  shared: SharedElement
+  component: Component!
+  props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
 }
 
 enum ElementOrderByInput {
   id_ASC
   id_DESC
-  index_ASC
-  index_DESC
   type_ASC
   type_DESC
+  index_ASC
+  index_DESC
   textLeaves_ASC
   textLeaves_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
+}
+
+type ElementProp implements Node {
+  id: ID!
+  element: Element!
+  name: String!
+  type: PropType!
+  style: Style
+  value: String
+}
+
+enum ElementPropOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+  value_ASC
+  value_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+input ElementPropWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementPropWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementPropWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementPropWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
+  element: ElementWhereInput
+  style: StyleWhereInput
 }
 
 enum ElementType {
@@ -811,6 +1101,16 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
   index: Int
 
   """All values that are not equal to given value."""
@@ -833,23 +1133,16 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
+  web: WebWhereInput
+  parent: ElementWhereInput
   children_every: ElementWhereInput
   children_some: ElementWhereInput
   children_none: ElementWhereInput
-  parent: ElementWhereInput
-  web: WebWhereInput
-  style: StyleWhereInput
+  shared: SharedElementWhereInput
   component: ComponentWhereInput
+  props_every: ElementPropWhereInput
+  props_some: ElementPropWhereInput
+  props_none: ElementPropWhereInput
 }
 
 enum EmailError {
@@ -1050,6 +1343,14 @@ enum PasswordError {
   WRONG_PASSWORD
 }
 
+enum PropType {
+  BOOLEAN
+  NUMBER
+  STRING
+  VIEW_STYLE
+  TEXT_STYLE
+}
+
 type Query {
   me: User
   page(id: ID!): Page
@@ -1101,10 +1402,112 @@ type SetWebNamePayload {
   web: Web
 }
 
+type SharedElement implements Node {
+  id: ID!
+  sharedBy(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  name: String!
+  element: Element!
+}
+
+input SharedElementWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SharedElementWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SharedElementWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SharedElementWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  sharedBy_every: ElementWhereInput
+  sharedBy_some: ElementWhereInput
+  sharedBy_none: ElementWhereInput
+  element: ElementWhereInput
+}
+
 type Style implements Node {
   id: ID!
   web: Web!
-  elements(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
   name: String!
   isText: Boolean
   spreadStyles(where: StyleSpreadWhereInput, orderBy: StyleSpreadOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StyleSpread!]
@@ -1995,9 +2398,9 @@ input StyleWhereInput {
   """All values that are not contained in given list."""
   textTransform_not_in: [StyleTextTransform!]
   web: WebWhereInput
-  elements_every: ElementWhereInput
-  elements_some: ElementWhereInput
-  elements_none: ElementWhereInput
+  props_every: ElementPropWhereInput
+  props_some: ElementPropWhereInput
+  props_none: ElementPropWhereInput
   spreadStyles_every: StyleSpreadWhereInput
   spreadStyles_some: StyleSpreadWhereInput
   spreadStyles_none: StyleSpreadWhereInput
@@ -2066,6 +2469,7 @@ type User implements Node {
   email: String!
   password: String!
   themeName: String
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 input UserWhereInput {
@@ -2284,6 +2688,9 @@ input UserWhereInput {
   webs_every: WebWhereInput
   webs_some: WebWhereInput
   webs_none: WebWhereInput
+  components_every: ComponentWhereInput
+  components_some: ComponentWhereInput
+  components_none: ComponentWhereInput
 }
 
 type Web implements Node {
@@ -2298,7 +2705,6 @@ type Web implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
-  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]
 }
 
 enum WebOrderByInput {
@@ -2464,9 +2870,6 @@ input WebWhereInput {
   borderValues_every: BorderValueWhereInput
   borderValues_some: BorderValueWhereInput
   borderValues_none: BorderValueWhereInput
-  components_every: ComponentWhereInput
-  components_some: ComponentWhereInput
-  components_none: ComponentWhereInput
 }
 `
 
@@ -2478,12 +2881,18 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  * Types
 */
 
- export type StyleTextAlign =
-    | 'AUTO'
-    | 'LEFT'
-    | 'RIGHT'
-    | 'CENTER'
-    | 'JUSTIFY'
+ export type StyleFontWeight =
+    | 'NORMAL'
+    | 'BOLD'
+    | 'INT_100'
+    | 'INT_200'
+    | 'INT_300'
+    | 'INT_400'
+    | 'INT_500'
+    | 'INT_600'
+    | 'INT_700'
+    | 'INT_800'
+    | 'INT_900'
   
 
  export type StyleOrderByInput =
@@ -2555,6 +2964,52 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'createdAt_DESC'
   
 
+ export type StyleFontVariant =
+    | 'SMALL_CAPS'
+  
+
+ export type PageOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'title_ASC'
+    | 'title_DESC'
+  
+
+ export type StyleJustifyContent =
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'SPACE_BETWEEN'
+    | 'SPACE_AROUND'
+    | 'SPACE_EVENLY'
+  
+
+ export type DimensionValueUnit =
+    | 'POINT'
+    | 'PERCENTAGE'
+    | 'KEYWORD'
+  
+
+ export type StyleAlignItems =
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'STRETCH'
+    | 'BASELINE'
+  
+
+ export type StyleTextAlign =
+    | 'AUTO'
+    | 'LEFT'
+    | 'RIGHT'
+    | 'CENTER'
+    | 'JUSTIFY'
+  
+
  export type StyleAlignSelf =
     | 'AUTO'
     | 'FLEX_START'
@@ -2564,8 +3019,19 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'BASELINE'
   
 
- export type BorderValueUnit =
-    | 'POINT'
+ export type DimensionValueOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'unit_ASC'
+    | 'unit_DESC'
+    | 'value_ASC'
+    | 'value_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
   
 
  export type StyleAlignContent =
@@ -2575,19 +3041,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRETCH'
     | 'SPACE_BETWEEN'
     | 'SPACE_AROUND'
-  
-
- export type StyleTextAlignVertical =
-    | 'AUTO'
-    | 'TOP'
-    | 'BOTTOM'
-    | 'CENTER'
-  
-
- export type StyleOverflow =
-    | 'VISIBLE'
-    | 'HIDDEN'
-    | 'SCROLL'
   
 
  export type ColorValueOrderByInput =
@@ -2609,10 +3062,122 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'createdAt_DESC'
   
 
+ export type StyleOverflow =
+    | 'VISIBLE'
+    | 'HIDDEN'
+    | 'SCROLL'
+  
+
+ export type ElementType =
+    | 'BLOCK'
+    | 'INLINE'
+    | 'TEXT'
+  
+
  export type StyleDirection =
     | 'INHERIT'
     | 'LTR'
     | 'RTL'
+  
+
+ export type ComponentPropOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
+
+ export type StyleBorderStyle =
+    | 'SOLID'
+    | 'DOTTED'
+    | 'DASHED'
+  
+
+ export type ElementOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'index_ASC'
+    | 'index_DESC'
+    | 'textLeaves_ASC'
+    | 'textLeaves_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
+
+ export type StyleFontStyle =
+    | 'NORMAL'
+    | 'ITALIC'
+  
+
+ export type StyleDisplay =
+    | 'NONE'
+    | 'FLEX'
+  
+
+ export type PasswordError =
+    | 'REQUIRED'
+    | 'MIN_5_CHARS'
+    | 'MAX_1024_CHARS'
+    | 'WRONG_PASSWORD'
+  
+
+ export type StyleFlexDirection =
+    | 'ROW'
+    | 'ROW_REVERSE'
+    | 'COLUMN'
+    | 'COLUMN_REVERSE'
+  
+
+ export type Max140CharsError =
+    | 'REQUIRED'
+    | 'MAX_140_CHARS'
+  
+
+ export type StyleSpreadOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'index_ASC'
+    | 'index_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
+
+ export type WebOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+  
+
+ export type ElementPropOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'value_ASC'
+    | 'value_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
   
 
  export type ComponentOrderByInput =
@@ -2626,85 +3191,36 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'createdAt_DESC'
   
 
- export type StyleBorderStyle =
-    | 'SOLID'
-    | 'DOTTED'
-    | 'DASHED'
+ export type BorderValueUnit =
+    | 'POINT'
   
 
- export type ElementType =
-    | 'BLOCK'
-    | 'INLINE'
-    | 'TEXT'
+ export type StyleTextTransform =
+    | 'NONE'
+    | 'CAPITALIZE'
+    | 'UPPERCASE'
+    | 'LOWERCASE'
   
 
- export type StyleFontStyle =
-    | 'NORMAL'
-    | 'ITALIC'
+ export type StyleTextDecorationLine =
+    | 'NONE'
+    | 'UNDERLINE'
+    | 'LINE_THROUGH'
+    | 'UNDERLINE_LINE_THROUGH'
   
 
- export type PasswordError =
-    | 'REQUIRED'
-    | 'MIN_5_CHARS'
-    | 'MAX_1024_CHARS'
-    | 'WRONG_PASSWORD'
-  
-
- export type StyleFontWeight =
-    | 'NORMAL'
-    | 'BOLD'
-    | 'INT_100'
-    | 'INT_200'
-    | 'INT_300'
-    | 'INT_400'
-    | 'INT_500'
-    | 'INT_600'
-    | 'INT_700'
-    | 'INT_800'
-    | 'INT_900'
-  
-
- export type StylePosition =
-    | 'ABSOLUTE'
-    | 'RELATIVE'
-  
-
- export type StyleFontVariant =
-    | 'SMALL_CAPS'
-  
-
- export type StyleFlexWrap =
-    | 'WRAP'
-    | 'NOWRAP'
-    | 'WRAP_REVERSE'
-  
-
- export type ElementOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'index_ASC'
-    | 'index_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'textLeaves_ASC'
-    | 'textLeaves_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-  
-
- export type StyleAlignItems =
-    | 'FLEX_START'
-    | 'FLEX_END'
+ export type StyleTextAlignVertical =
+    | 'AUTO'
+    | 'TOP'
+    | 'BOTTOM'
     | 'CENTER'
-    | 'STRETCH'
-    | 'BASELINE'
   
 
- export type Max140CharsError =
+ export type EmailError =
     | 'REQUIRED'
-    | 'MAX_140_CHARS'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
   
 
  export type BorderValueOrderByInput =
@@ -2722,100 +3238,23 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'createdAt_DESC'
   
 
- export type StyleTextDecorationLine =
-    | 'NONE'
-    | 'UNDERLINE'
-    | 'LINE_THROUGH'
-    | 'UNDERLINE_LINE_THROUGH'
+ export type PropType =
+    | 'BOOLEAN'
+    | 'NUMBER'
+    | 'STRING'
+    | 'VIEW_STYLE'
+    | 'TEXT_STYLE'
   
 
- export type StyleSpreadOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'index_ASC'
-    | 'index_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
+ export type StyleFlexWrap =
+    | 'WRAP'
+    | 'NOWRAP'
+    | 'WRAP_REVERSE'
   
 
- export type StyleFlexDirection =
-    | 'ROW'
-    | 'ROW_REVERSE'
-    | 'COLUMN'
-    | 'COLUMN_REVERSE'
-  
-
- export type DimensionValueUnit =
-    | 'POINT'
-    | 'PERCENTAGE'
-    | 'KEYWORD'
-  
-
- export type WebOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-  
-
- export type PageOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'title_ASC'
-    | 'title_DESC'
-  
-
- export type StyleTextTransform =
-    | 'NONE'
-    | 'CAPITALIZE'
-    | 'UPPERCASE'
-    | 'LOWERCASE'
-  
-
- export type StyleJustifyContent =
-    | 'FLEX_START'
-    | 'FLEX_END'
-    | 'CENTER'
-    | 'SPACE_BETWEEN'
-    | 'SPACE_AROUND'
-    | 'SPACE_EVENLY'
-  
-
- export type StyleDisplay =
-    | 'NONE'
-    | 'FLEX'
-  
-
- export type EmailError =
-    | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
-  
-
- export type DimensionValueOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'unit_ASC'
-    | 'unit_DESC'
-    | 'value_ASC'
-    | 'value_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
+ export type StylePosition =
+    | 'ABSOLUTE'
+    | 'RELATIVE'
   
 
  export type WebWhereInput = {| 
@@ -2884,89 +3323,16 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   colorValues_none?: ColorValueWhereInput,
   borderValues_every?: BorderValueWhereInput,
   borderValues_some?: BorderValueWhereInput,
-  borderValues_none?: BorderValueWhereInput,
-  components_every?: ComponentWhereInput,
-  components_some?: ComponentWhereInput,
-  components_none?: ComponentWhereInput
-|}
-
- export type DeletePageInput = {| 
-  id: ID_Input
-|}
-
- export type DeleteWebInput = {| 
-  id: ID_Input
+  borderValues_none?: BorderValueWhereInput
 |}
 
  export type SetThemeInput = {| 
   themeName: String
 |}
 
- export type ColorValueWhereInput = {| 
-  AND?: Array< ColorValueWhereInput > | ColorValueWhereInput,
-  OR?: Array< ColorValueWhereInput > | ColorValueWhereInput,
-  NOT?: Array< ColorValueWhereInput > | ColorValueWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  r?: Int,
-  r_not?: Int,
-  r_in?: Array< Int > | Int,
-  r_not_in?: Array< Int > | Int,
-  r_lt?: Int,
-  r_lte?: Int,
-  r_gt?: Int,
-  r_gte?: Int,
-  g?: Int,
-  g_not?: Int,
-  g_in?: Array< Int > | Int,
-  g_not_in?: Array< Int > | Int,
-  g_lt?: Int,
-  g_lte?: Int,
-  g_gt?: Int,
-  g_gte?: Int,
-  b?: Int,
-  b_not?: Int,
-  b_in?: Array< Int > | Int,
-  b_not_in?: Array< Int > | Int,
-  b_lt?: Int,
-  b_lte?: Int,
-  b_gt?: Int,
-  b_gte?: Int,
-  a?: Float,
-  a_not?: Float,
-  a_in?: Array< Float > | Float,
-  a_not_in?: Array< Float > | Float,
-  a_lt?: Float,
-  a_lte?: Float,
-  a_gt?: Float,
-  a_gte?: Float,
-  web?: WebWhereInput
+ export type SetWebNameInput = {| 
+  id: ID_Input,
+  name: String
 |}
 
  export type StyleWhereInput = {| 
@@ -3162,9 +3528,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textTransform_in?: Array< StyleTextTransform > | StyleTextTransform,
   textTransform_not_in?: Array< StyleTextTransform > | StyleTextTransform,
   web?: WebWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput,
+  props_every?: ElementPropWhereInput,
+  props_some?: ElementPropWhereInput,
+  props_none?: ElementPropWhereInput,
   spreadStyles_every?: StyleSpreadWhereInput,
   spreadStyles_some?: StyleSpreadWhereInput,
   spreadStyles_none?: StyleSpreadWhereInput,
@@ -3272,9 +3638,68 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type SetPageTitleInput = {| 
-  id: ID_Input,
-  title: String
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
+|}
+
+ export type DeleteWebInput = {| 
+  id: ID_Input
+|}
+
+ export type ElementPropWhereInput = {| 
+  AND?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  OR?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  NOT?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType,
+  value?: String,
+  value_not?: String,
+  value_in?: Array< String > | String,
+  value_not_in?: Array< String > | String,
+  value_lt?: String,
+  value_lte?: String,
+  value_gt?: String,
+  value_gte?: String,
+  value_contains?: String,
+  value_not_contains?: String,
+  value_starts_with?: String,
+  value_not_starts_with?: String,
+  value_ends_with?: String,
+  value_not_ends_with?: String,
+  element?: ElementWhereInput,
+  style?: StyleWhereInput
 |}
 
  export type StyleSpreadWhereInput = {| 
@@ -3307,10 +3732,52 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   style?: StyleWhereInput
 |}
 
- export type AuthInput = {| 
-  email: String,
-  password: String,
-  isSignUp: Boolean
+ export type SharedElementWhereInput = {| 
+  AND?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  OR?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  NOT?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  sharedBy_every?: ElementWhereInput,
+  sharedBy_some?: ElementWhereInput,
+  sharedBy_none?: ElementWhereInput,
+  element?: ElementWhereInput
+|}
+
+ export type SetPageContentInput = {| 
+  id: ID_Input,
+  content: Json
+|}
+
+ export type SetPageTitleInput = {| 
+  id: ID_Input,
+  title: String
 |}
 
  export type CreateWebInput = {| 
@@ -3318,9 +3785,294 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   pageTitle: String
 |}
 
- export type SetWebNameInput = {| 
-  id: ID_Input,
-  name: String
+ export type ColorValueWhereInput = {| 
+  AND?: Array< ColorValueWhereInput > | ColorValueWhereInput,
+  OR?: Array< ColorValueWhereInput > | ColorValueWhereInput,
+  NOT?: Array< ColorValueWhereInput > | ColorValueWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  r?: Int,
+  r_not?: Int,
+  r_in?: Array< Int > | Int,
+  r_not_in?: Array< Int > | Int,
+  r_lt?: Int,
+  r_lte?: Int,
+  r_gt?: Int,
+  r_gte?: Int,
+  g?: Int,
+  g_not?: Int,
+  g_in?: Array< Int > | Int,
+  g_not_in?: Array< Int > | Int,
+  g_lt?: Int,
+  g_lte?: Int,
+  g_gt?: Int,
+  g_gte?: Int,
+  b?: Int,
+  b_not?: Int,
+  b_in?: Array< Int > | Int,
+  b_not_in?: Array< Int > | Int,
+  b_lt?: Int,
+  b_lte?: Int,
+  b_gt?: Int,
+  b_gte?: Int,
+  a?: Float,
+  a_not?: Float,
+  a_in?: Array< Float > | Float,
+  a_not_in?: Array< Float > | Float,
+  a_lt?: Float,
+  a_lte?: Float,
+  a_gt?: Float,
+  a_gte?: Float,
+  web?: WebWhereInput
+|}
+
+ export type ComponentWhereInput = {| 
+  AND?: Array< ComponentWhereInput > | ComponentWhereInput,
+  OR?: Array< ComponentWhereInput > | ComponentWhereInput,
+  NOT?: Array< ComponentWhereInput > | ComponentWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  creator?: UserWhereInput,
+  props_every?: ComponentPropWhereInput,
+  props_some?: ComponentPropWhereInput,
+  props_none?: ComponentPropWhereInput
+|}
+
+ export type ComponentPropWhereInput = {| 
+  AND?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
+  OR?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
+  NOT?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType,
+  component?: ComponentWhereInput
+|}
+
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  element?: ElementWhereInput
+|}
+
+ export type ElementWhereInput = {| 
+  AND?: Array< ElementWhereInput > | ElementWhereInput,
+  OR?: Array< ElementWhereInput > | ElementWhereInput,
+  NOT?: Array< ElementWhereInput > | ElementWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType,
+  index?: Int,
+  index_not?: Int,
+  index_in?: Array< Int > | Int,
+  index_not_in?: Array< Int > | Int,
+  index_lt?: Int,
+  index_lte?: Int,
+  index_gt?: Int,
+  index_gte?: Int,
+  web?: WebWhereInput,
+  parent?: ElementWhereInput,
+  children_every?: ElementWhereInput,
+  children_some?: ElementWhereInput,
+  children_none?: ElementWhereInput,
+  shared?: SharedElementWhereInput,
+  component?: ComponentWhereInput,
+  props_every?: ElementPropWhereInput,
+  props_some?: ElementPropWhereInput,
+  props_none?: ElementPropWhereInput
+|}
+
+ export type BorderValueWhereInput = {| 
+  AND?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  OR?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  NOT?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  unit?: BorderValueUnit,
+  unit_not?: BorderValueUnit,
+  unit_in?: Array< BorderValueUnit > | BorderValueUnit,
+  unit_not_in?: Array< BorderValueUnit > | BorderValueUnit,
+  value?: Int,
+  value_not?: Int,
+  value_in?: Array< Int > | Int,
+  value_not_in?: Array< Int > | Int,
+  value_lt?: Int,
+  value_lte?: Int,
+  value_gt?: Int,
+  value_gte?: Int,
+  web?: WebWhereInput
+|}
+
+ export type DeletePageInput = {| 
+  id: ID_Input
 |}
 
  export type UserWhereInput = {| 
@@ -3401,189 +4153,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   themeName_not_ends_with?: String,
   webs_every?: WebWhereInput,
   webs_some?: WebWhereInput,
-  webs_none?: WebWhereInput
-|}
-
- export type PageWhereInput = {| 
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput,
-  element?: ElementWhereInput
-|}
-
- export type ElementWhereInput = {| 
-  AND?: Array< ElementWhereInput > | ElementWhereInput,
-  OR?: Array< ElementWhereInput > | ElementWhereInput,
-  NOT?: Array< ElementWhereInput > | ElementWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  index?: Int,
-  index_not?: Int,
-  index_in?: Array< Int > | Int,
-  index_not_in?: Array< Int > | Int,
-  index_lt?: Int,
-  index_lte?: Int,
-  index_gt?: Int,
-  index_gte?: Int,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
-  children_every?: ElementWhereInput,
-  children_some?: ElementWhereInput,
-  children_none?: ElementWhereInput,
-  parent?: ElementWhereInput,
-  web?: WebWhereInput,
-  style?: StyleWhereInput,
-  component?: ComponentWhereInput
-|}
-
- export type BorderValueWhereInput = {| 
-  AND?: Array< BorderValueWhereInput > | BorderValueWhereInput,
-  OR?: Array< BorderValueWhereInput > | BorderValueWhereInput,
-  NOT?: Array< BorderValueWhereInput > | BorderValueWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  unit?: BorderValueUnit,
-  unit_not?: BorderValueUnit,
-  unit_in?: Array< BorderValueUnit > | BorderValueUnit,
-  unit_not_in?: Array< BorderValueUnit > | BorderValueUnit,
-  value?: Int,
-  value_not?: Int,
-  value_in?: Array< Int > | Int,
-  value_not_in?: Array< Int > | Int,
-  value_lt?: Int,
-  value_lte?: Int,
-  value_gt?: Int,
-  value_gte?: Int,
-  web?: WebWhereInput
-|}
-
- export type SetPageContentInput = {| 
-  id: ID_Input,
-  content: Json
-|}
-
- export type ComponentWhereInput = {| 
-  AND?: Array< ComponentWhereInput > | ComponentWhereInput,
-  OR?: Array< ComponentWhereInput > | ComponentWhereInput,
-  NOT?: Array< ComponentWhereInput > | ComponentWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  web?: WebWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput
+  webs_none?: WebWhereInput,
+  components_every?: ComponentWhereInput,
+  components_some?: ComponentWhereInput,
+  components_none?: ComponentWhereInput
 |}
 
 /*
@@ -3592,6 +4165,27 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 */
  export type Node = {| 
    id: ID_Output,
+|}
+
+ export type DeletePagePayload = {| 
+   page?: Page,
+|}
+
+ export type CreateWebErrors = {| 
+   name?: Max140CharsError,
+   pageTitle?: Max140CharsError,
+|}
+
+ export type User = {| ...Node,
+ 
+   id: ID_Output,
+   webs?: Web[],
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   email: String,
+   password: String,
+   themeName?: String,
+   components?: Component[],
 |}
 
  export type Web = {| ...Node,
@@ -3607,126 +4201,31 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    createdAt: DateTime,
    updatedAt: DateTime,
    name: String,
-   components?: Component[],
 |}
 
- export type DeletePagePayload = {| 
-   page?: Page,
-|}
-
- export type CreateWebErrors = {| 
-   name?: Max140CharsError,
-   pageTitle?: Max140CharsError,
-|}
-
- export type SetWebNamePayload = {| 
-   errors?: SetWebNameErrors,
-   web?: Web,
-|}
-
- export type Page = {| ...Node,
- 
-   id: ID_Output,
-   creator: User,
-   web: Web,
-   element: Element,
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   title: String,
-|}
-
- export type User = {| ...Node,
- 
-   id: ID_Output,
-   webs?: Web[],
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   email: String,
-   password: String,
-   themeName?: String,
-|}
-
- export type Component = {| ...Node,
- 
-   id: ID_Output,
-   web: Web,
-   elements?: Element[],
-   name: String,
-|}
-
- export type ColorValue = {| ...Node,
+ export type DimensionValue = {| ...Node,
  
    id: ID_Output,
    web: Web,
    name?: String,
-   r: Int,
-   g: Int,
-   b: Int,
-   a?: Float,
+   unit: DimensionValueUnit,
+   value: Int,
 |}
 
- export type DeleteWebPayload = {| 
-   web?: Web,
-|}
-
- export type AuthPayload = {| 
-   errors?: AuthErrors,
-   token?: String,
-   user?: User,
-|}
-
- export type SetPageContentPayload = {| 
-   page?: Page,
-|}
-
- export type StyleSpread = {| ...Node,
+ export type BorderValue = {| ...Node,
  
    id: ID_Output,
-   spreadStyle: Style,
-   index: Int,
-   style: Style,
-|}
-
- export type Element = {| ...Node,
- 
-   id: ID_Output,
-   children?: Element[],
-   parent?: Element,
    web: Web,
-   style?: Style,
-   component?: Component,
-   index: Int,
-   type: ElementType,
-   textLeaves?: Json,
-|}
-
- export type SetPageTitleErrors = {| 
-   title?: Max140CharsError,
-|}
-
- export type SetPageTitlePayload = {| 
-   errors?: SetPageTitleErrors,
-   page?: Page,
-|}
-
- export type SetWebNameErrors = {| 
-   name?: Max140CharsError,
-|}
-
- export type SetThemePayload = {| 
-   user?: User,
-|}
-
- export type CreateWebPayload = {| 
-   errors?: CreateWebErrors,
-   pageId?: ID_Output,
+   name?: String,
+   unit: BorderValueUnit,
+   value: Int,
 |}
 
  export type Style = {| ...Node,
  
    id: ID_Output,
    web: Web,
-   elements?: Element[],
+   props?: ElementProp[],
    name: String,
    isText?: Boolean,
    spreadStyles?: StyleSpread[],
@@ -3815,38 +4314,139 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    textTransform?: StyleTextTransform,
 |}
 
+ export type DeleteWebPayload = {| 
+   web?: Web,
+|}
+
+ export type ComponentProp = {| ...Node,
+ 
+   id: ID_Output,
+   component: Component,
+   name: String,
+   type: PropType,
+|}
+
+ export type ElementProp = {| ...Node,
+ 
+   id: ID_Output,
+   element: Element,
+   name: String,
+   type: PropType,
+   style?: Style,
+   value?: String,
+|}
+
+ export type SetWebNamePayload = {| 
+   errors?: SetWebNameErrors,
+   web?: Web,
+|}
+
+ export type Component = {| ...Node,
+ 
+   id: ID_Output,
+   name: String,
+   creator: User,
+   props?: ComponentProp[],
+|}
+
+ export type SharedElement = {| ...Node,
+ 
+   id: ID_Output,
+   sharedBy?: Element[],
+   name: String,
+   element: Element,
+|}
+
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
+   user?: User,
+|}
+
+ export type SetPageContentPayload = {| 
+   page?: Page,
+|}
+
+ export type Page = {| ...Node,
+ 
+   id: ID_Output,
+   creator: User,
+   web: Web,
+   element: Element,
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   title: String,
+|}
+
+ export type SetPageTitleErrors = {| 
+   title?: Max140CharsError,
+|}
+
+ export type SetPageTitlePayload = {| 
+   errors?: SetPageTitleErrors,
+   page?: Page,
+|}
+
+ export type SetWebNameErrors = {| 
+   name?: Max140CharsError,
+|}
+
+ export type SetThemePayload = {| 
+   user?: User,
+|}
+
+ export type CreateWebPayload = {| 
+   errors?: CreateWebErrors,
+   pageId?: ID_Output,
+|}
+
+ export type Element = {| ...Node,
+ 
+   id: ID_Output,
+   type: ElementType,
+   index: Int,
+   web: Web,
+   parent?: Element,
+   textLeaves?: Json,
+   children?: Element[],
+   shared?: SharedElement,
+   component: Component,
+   props?: ElementProp[],
+|}
+
  export type AuthErrors = {| 
    email?: EmailError,
    password?: PasswordError,
 |}
 
- export type DimensionValue = {| ...Node,
+ export type StyleSpread = {| ...Node,
  
    id: ID_Output,
-   web: Web,
-   name?: String,
-   unit: DimensionValueUnit,
-   value: Int,
+   spreadStyle: Style,
+   index: Int,
+   style: Style,
 |}
 
- export type BorderValue = {| ...Node,
+ export type ColorValue = {| ...Node,
  
    id: ID_Output,
    web: Web,
    name?: String,
-   unit: BorderValueUnit,
-   value: Int,
+   r: Int,
+   g: Int,
+   b: Int,
+   a?: Float,
 |}
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+ export type Boolean = boolean 
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
  export type Float = number 
-
-/*
-Raw JSON value
-*/
- export type Json = string 
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -3855,9 +4455,9 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Output = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+Raw JSON value
 */
- export type Boolean = boolean 
+ export type Json = string 
 
  export type DateTime = Date | string 
 

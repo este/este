@@ -1,0 +1,22 @@
+mutation {
+  createUser(
+    data: {
+      email: "a@a.com"
+      password: "$2a$10$TMyDbQyR4O1Oa.QjKfiVmun7YcZMlsKpkI0BjvOCqXGASwR20N/be"
+      components: {
+        create: [
+          {
+            name: "View"
+            props: { create: { name: "style", type: VIEW_STYLE } }
+          }
+          {
+            name: "Text"
+            props: { create: { name: "style", type: TEXT_STYLE } }
+          }
+        ]
+      }
+    }
+  ) {
+    id
+  }
+}

@@ -58,6 +58,7 @@ function elementsToSlateValue(pageElementId, elementsArray) {
         object: 'text',
         leaves: element.textLeaves,
       };
+    // const component
     const styleId = element.style?.id;
     if (styleId == null)
       throw Error('The element has to have style or component ID.');
@@ -831,6 +832,16 @@ export default createFragmentContainer(
             textTransform
           }
           elements {
+            # TODO: shared and component, to je ten trik
+            #shared {
+            #id
+            # sharedBy { id }
+            #name: String!
+            #element { id }
+            #}
+            #component {
+            #
+            #}
             id
             children {
               id
