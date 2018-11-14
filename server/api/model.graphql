@@ -8,7 +8,7 @@
 # TODO: Ideally, run `yarn codegen` after nodemon.api.json restart invoked by
 # model.graphql change. PR anyone?
 
-# import User, Web, Page from "../../database/schema.graphql"
+# import User, Web, Page, Component from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -120,4 +120,5 @@ type Query {
   me: User
   page(id: ID!): Page
   web(id: ID!): Web
+  components: [Component!]!
 }

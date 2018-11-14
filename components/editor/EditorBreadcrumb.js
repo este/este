@@ -38,9 +38,12 @@ const styles = StyleSheet.create({
 function EditorBreadcrumb({
   ancestors,
   stylesById,
+  componentsById,
 }: {|
   ancestors: Object,
+  // TODO: Type it somehow. Probably import types from Editor.
   stylesById: Object,
+  componentsById: Object,
 |}) {
   const theme = useTheme();
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
@@ -65,10 +68,20 @@ function EditorBreadcrumb({
           />
         ) : (
           ancestors.map((node, index) => {
+            const { name } = componentsById[node.type];
+            function getLabel() {
+              if (name !== 'View' && name !== 'Text') return name;
+              const componentProps = node.data.get('props');
+              const styleProp = componentProps.find(
+                prop => prop.name === 'style',
+              );
+              const style = stylesById[styleProp.style.id];
+              return style.name;
+            }
             return (
               <EditorBreadcrumbButton
                 key={node.key}
-                label={stylesById[node.type].name}
+                label={getLabel()}
                 isActive={activeIndex === index}
                 onPress={() => {
                   setActiveIndex(activeIndex === index ? null : index);
@@ -84,6 +97,8 @@ function EditorBreadcrumb({
       breadcrumbPosition,
       activeIndex,
       ancestors.map(({ key, type }) => `${key}-${type}`).join(),
+      stylesById,
+      componentsById,
     ],
   );
   const activeAncestor = ancestors.get(activeIndex);

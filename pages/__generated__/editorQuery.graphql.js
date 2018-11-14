@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 6d81a9c6447f24a27b5c3b56dff535cb
+ * @relayHash 7f7edd895d353bae3343ce238e8b8322
  */
 
 /* eslint-disable */
@@ -43,6 +43,15 @@ fragment AppPage_16EYnK on Query {
 }
 
 fragment Editor_1Bmzm5 on Query {
+  components {
+    id
+    name
+    props {
+      id
+      name
+      type
+    }
+  }
   page(id: $id) {
     id
     title
@@ -338,7 +347,21 @@ v1 = {
   "args": null,
   "storageKey": null
 },
-v2 = [
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v3 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "type",
+  "args": null,
+  "storageKey": null
+},
+v4 = [
   {
     "kind": "Variable",
     "name": "id",
@@ -346,26 +369,19 @@ v2 = [
     "type": "ID!"
   }
 ],
-v3 = [
+v5 = [
   v1
 ],
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
+v6 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "value",
   "args": null,
   "storageKey": null
 },
-v6 = [
+v7 = [
   v1,
-  v4,
+  v2,
   {
     "kind": "ScalarField",
     "alias": null,
@@ -373,16 +389,16 @@ v6 = [
     "args": null,
     "storageKey": null
   },
-  v5
+  v6
 ],
-v7 = {
+v8 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "index",
   "args": null,
   "storageKey": null
 },
-v8 = {
+v9 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "style",
@@ -390,21 +406,14 @@ v8 = {
   "args": null,
   "concreteType": "Style",
   "plural": false,
-  "selections": v3
-},
-v9 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "type",
-  "args": null,
-  "storageKey": null
+  "selections": v5
 };
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "editorQuery",
   "id": null,
-  "text": "query editorQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  page(id: $id) {\n    id\n    title\n    element {\n      id\n    }\n    web {\n      borderValues {\n        id\n        name\n        unit\n        value\n      }\n      colorValues {\n        id\n        name\n        r\n        g\n        b\n        a\n      }\n      dimensionValues {\n        id\n        name\n        unit\n        value\n      }\n      styles {\n        id\n        spreadStyles {\n          index\n          style {\n            id\n          }\n          id\n        }\n        isText\n        name\n        display\n        width {\n          id\n        }\n        height {\n          id\n        }\n        bottom {\n          id\n        }\n        end {\n          id\n        }\n        left {\n          id\n        }\n        right {\n          id\n        }\n        start {\n          id\n        }\n        top {\n          id\n        }\n        minWidth {\n          id\n        }\n        maxWidth {\n          id\n        }\n        minHeight {\n          id\n        }\n        maxHeight {\n          id\n        }\n        margin {\n          id\n        }\n        marginBottom {\n          id\n        }\n        marginEnd {\n          id\n        }\n        marginHorizontal {\n          id\n        }\n        marginLeft {\n          id\n        }\n        marginRight {\n          id\n        }\n        marginStart {\n          id\n        }\n        marginTop {\n          id\n        }\n        marginVertical {\n          id\n        }\n        padding {\n          id\n        }\n        paddingBottom {\n          id\n        }\n        paddingEnd {\n          id\n        }\n        paddingHorizontal {\n          id\n        }\n        paddingLeft {\n          id\n        }\n        paddingRight {\n          id\n        }\n        paddingStart {\n          id\n        }\n        paddingTop {\n          id\n        }\n        paddingVertical {\n          id\n        }\n        position\n        flexDirection\n        flexWrap\n        justifyContent\n        alignItems\n        alignSelf\n        alignContent\n        overflow\n        flex\n        flexGrow\n        flexShrink\n        flexBasis\n        zIndex\n        direction\n        backgroundColor {\n          id\n        }\n        borderColor {\n          id\n        }\n        borderBottomColor {\n          id\n        }\n        borderEndColor {\n          id\n        }\n        borderLeftColor {\n          id\n        }\n        borderRightColor {\n          id\n        }\n        borderStartColor {\n          id\n        }\n        borderTopColor {\n          id\n        }\n        borderRadius {\n          id\n        }\n        borderBottomEndRadius {\n          id\n        }\n        borderBottomLeftRadius {\n          id\n        }\n        borderBottomRightRadius {\n          id\n        }\n        borderBottomStartRadius {\n          id\n        }\n        borderTopEndRadius {\n          id\n        }\n        borderTopLeftRadius {\n          id\n        }\n        borderTopRightRadius {\n          id\n        }\n        borderTopStartRadius {\n          id\n        }\n        borderStyle\n        borderWidth {\n          id\n        }\n        borderBottomWidth {\n          id\n        }\n        borderEndWidth {\n          id\n        }\n        borderLeftWidth {\n          id\n        }\n        borderRightWidth {\n          id\n        }\n        borderStartWidth {\n          id\n        }\n        borderTopWidth {\n          id\n        }\n        opacity\n        color {\n          id\n        }\n        fontFamily\n        fontSize\n        fontStyle\n        fontWeight\n        fontVariant\n        letterSpacing\n        lineHeight\n        textAlign\n        textAlignVertical\n        textDecorationLine\n        textTransform\n      }\n      elements {\n        id\n        index\n        type\n        textLeaves\n        children {\n          id\n        }\n        component {\n          id\n        }\n        props {\n          id\n          name\n          type\n          style {\n            id\n          }\n          value\n        }\n      }\n      id\n    }\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
+  "text": "query editorQuery(\n  $id: ID!\n  $isPage: Boolean!\n) {\n  ...AppPage_16EYnK\n  ...Editor_1Bmzm5\n}\n\nfragment AppPage_16EYnK on Query {\n  me {\n    themeName\n    id\n  }\n  ...MainNav_1ppZvl\n}\n\nfragment Editor_1Bmzm5 on Query {\n  components {\n    id\n    name\n    props {\n      id\n      name\n      type\n    }\n  }\n  page(id: $id) {\n    id\n    title\n    element {\n      id\n    }\n    web {\n      borderValues {\n        id\n        name\n        unit\n        value\n      }\n      colorValues {\n        id\n        name\n        r\n        g\n        b\n        a\n      }\n      dimensionValues {\n        id\n        name\n        unit\n        value\n      }\n      styles {\n        id\n        spreadStyles {\n          index\n          style {\n            id\n          }\n          id\n        }\n        isText\n        name\n        display\n        width {\n          id\n        }\n        height {\n          id\n        }\n        bottom {\n          id\n        }\n        end {\n          id\n        }\n        left {\n          id\n        }\n        right {\n          id\n        }\n        start {\n          id\n        }\n        top {\n          id\n        }\n        minWidth {\n          id\n        }\n        maxWidth {\n          id\n        }\n        minHeight {\n          id\n        }\n        maxHeight {\n          id\n        }\n        margin {\n          id\n        }\n        marginBottom {\n          id\n        }\n        marginEnd {\n          id\n        }\n        marginHorizontal {\n          id\n        }\n        marginLeft {\n          id\n        }\n        marginRight {\n          id\n        }\n        marginStart {\n          id\n        }\n        marginTop {\n          id\n        }\n        marginVertical {\n          id\n        }\n        padding {\n          id\n        }\n        paddingBottom {\n          id\n        }\n        paddingEnd {\n          id\n        }\n        paddingHorizontal {\n          id\n        }\n        paddingLeft {\n          id\n        }\n        paddingRight {\n          id\n        }\n        paddingStart {\n          id\n        }\n        paddingTop {\n          id\n        }\n        paddingVertical {\n          id\n        }\n        position\n        flexDirection\n        flexWrap\n        justifyContent\n        alignItems\n        alignSelf\n        alignContent\n        overflow\n        flex\n        flexGrow\n        flexShrink\n        flexBasis\n        zIndex\n        direction\n        backgroundColor {\n          id\n        }\n        borderColor {\n          id\n        }\n        borderBottomColor {\n          id\n        }\n        borderEndColor {\n          id\n        }\n        borderLeftColor {\n          id\n        }\n        borderRightColor {\n          id\n        }\n        borderStartColor {\n          id\n        }\n        borderTopColor {\n          id\n        }\n        borderRadius {\n          id\n        }\n        borderBottomEndRadius {\n          id\n        }\n        borderBottomLeftRadius {\n          id\n        }\n        borderBottomRightRadius {\n          id\n        }\n        borderBottomStartRadius {\n          id\n        }\n        borderTopEndRadius {\n          id\n        }\n        borderTopLeftRadius {\n          id\n        }\n        borderTopRightRadius {\n          id\n        }\n        borderTopStartRadius {\n          id\n        }\n        borderStyle\n        borderWidth {\n          id\n        }\n        borderBottomWidth {\n          id\n        }\n        borderEndWidth {\n          id\n        }\n        borderLeftWidth {\n          id\n        }\n        borderRightWidth {\n          id\n        }\n        borderStartWidth {\n          id\n        }\n        borderTopWidth {\n          id\n        }\n        opacity\n        color {\n          id\n        }\n        fontFamily\n        fontSize\n        fontStyle\n        fontWeight\n        fontVariant\n        letterSpacing\n        lineHeight\n        textAlign\n        textAlignVertical\n        textDecorationLine\n        textTransform\n      }\n      elements {\n        id\n        index\n        type\n        textLeaves\n        children {\n          id\n        }\n        component {\n          id\n        }\n        props {\n          id\n          name\n          type\n          style {\n            id\n          }\n          value\n        }\n      }\n      id\n    }\n  }\n}\n\nfragment MainNav_1ppZvl on Query {\n  me {\n    email\n    id\n  }\n  page(id: $id) @include(if: $isPage) {\n    id\n    web {\n      id\n      name\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -473,9 +482,36 @@ return {
       {
         "kind": "LinkedField",
         "alias": null,
+        "name": "components",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Component",
+        "plural": true,
+        "selections": [
+          v1,
+          v2,
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "props",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "ComponentProp",
+            "plural": true,
+            "selections": [
+              v1,
+              v2,
+              v3
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
         "name": "page",
         "storageKey": null,
-        "args": v2,
+        "args": v4,
         "concreteType": "Page",
         "plural": false,
         "selections": [
@@ -504,7 +540,7 @@ return {
             "args": null,
             "concreteType": "Element",
             "plural": false,
-            "selections": v3
+            "selections": v5
           },
           {
             "kind": "LinkedField",
@@ -523,7 +559,7 @@ return {
                 "args": null,
                 "concreteType": "BorderValue",
                 "plural": true,
-                "selections": v6
+                "selections": v7
               },
               {
                 "kind": "LinkedField",
@@ -535,7 +571,7 @@ return {
                 "plural": true,
                 "selections": [
                   v1,
-                  v4,
+                  v2,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -574,7 +610,7 @@ return {
                 "args": null,
                 "concreteType": "DimensionValue",
                 "plural": true,
-                "selections": v6
+                "selections": v7
               },
               {
                 "kind": "LinkedField",
@@ -600,7 +636,7 @@ return {
                     "args": null,
                     "storageKey": null
                   },
-                  v4,
+                  v2,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -616,7 +652,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -626,7 +662,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -636,7 +672,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -646,7 +682,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -656,7 +692,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -666,7 +702,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -676,7 +712,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -686,7 +722,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -696,7 +732,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -706,7 +742,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -716,7 +752,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -726,7 +762,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -736,7 +772,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -746,7 +782,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -756,7 +792,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -766,7 +802,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -776,7 +812,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -786,7 +822,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -796,7 +832,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -806,7 +842,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -816,7 +852,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -826,7 +862,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -836,7 +872,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -846,7 +882,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -856,7 +892,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -866,7 +902,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -876,7 +912,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -886,7 +922,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -896,7 +932,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -906,7 +942,7 @@ return {
                     "args": null,
                     "concreteType": "DimensionValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "ScalarField",
@@ -973,8 +1009,8 @@ return {
                     "concreteType": "StyleSpread",
                     "plural": true,
                     "selections": [
-                      v7,
                       v8,
+                      v9,
                       v1
                     ]
                   },
@@ -1021,7 +1057,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1031,7 +1067,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1041,7 +1077,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1051,7 +1087,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1061,7 +1097,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1071,7 +1107,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1081,7 +1117,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1091,7 +1127,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1101,7 +1137,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1111,7 +1147,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1121,7 +1157,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1131,7 +1167,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1141,7 +1177,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1151,7 +1187,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1161,7 +1197,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1171,7 +1207,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1181,7 +1217,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "ScalarField",
@@ -1198,7 +1234,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1208,7 +1244,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1218,7 +1254,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1228,7 +1264,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1238,7 +1274,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1248,7 +1284,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1258,7 +1294,7 @@ return {
                     "args": null,
                     "concreteType": "BorderValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "ScalarField",
@@ -1275,7 +1311,7 @@ return {
                     "args": null,
                     "concreteType": "ColorValue",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "ScalarField",
@@ -1366,8 +1402,8 @@ return {
                 "plural": true,
                 "selections": [
                   v1,
-                  v7,
-                  v9,
+                  v8,
+                  v3,
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -1383,7 +1419,7 @@ return {
                     "args": null,
                     "concreteType": "Element",
                     "plural": true,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1393,7 +1429,7 @@ return {
                     "args": null,
                     "concreteType": "Component",
                     "plural": false,
-                    "selections": v3
+                    "selections": v5
                   },
                   {
                     "kind": "LinkedField",
@@ -1405,10 +1441,10 @@ return {
                     "plural": true,
                     "selections": [
                       v1,
-                      v4,
+                      v2,
+                      v3,
                       v9,
-                      v8,
-                      v5
+                      v6
                     ]
                   }
                 ]
@@ -1428,7 +1464,7 @@ return {
             "alias": null,
             "name": "page",
             "storageKey": null,
-            "args": v2,
+            "args": v4,
             "concreteType": "Page",
             "plural": false,
             "selections": [
@@ -1441,7 +1477,7 @@ return {
                 "concreteType": "Web",
                 "plural": false,
                 "selections": [
-                  v4
+                  v2
                 ]
               }
             ]

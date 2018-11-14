@@ -17,6 +17,10 @@ const Query: QueryType = {
   web: async (args, info, { db }) => {
     return db.query.web({ where: { id: args.id } }, info);
   },
+
+  components: async (args, info, { db }) => {
+    return db.query.components({ where: {} }, info);
+  },
 };
 
 export default Query;

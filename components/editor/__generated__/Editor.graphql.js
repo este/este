@@ -33,6 +33,15 @@ export type StyleTextTransform = "CAPITALIZE" | "LOWERCASE" | "NONE" | "UPPERCAS
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Editor$ref: FragmentReference;
 export type Editor = {|
+  +components: $ReadOnlyArray<{|
+    +id: string,
+    +name: string,
+    +props: ?$ReadOnlyArray<{|
+      +id: string,
+      +name: string,
+      +type: PropType,
+    |}>,
+  |}>,
   +page: ?{|
     +id: string,
     +title: string,
@@ -301,26 +310,33 @@ var v0 = {
   "args": null,
   "storageKey": null
 },
-v1 = [
-  v0
-],
-v2 = {
+v1 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "name",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v2 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "type",
+  "args": null,
+  "storageKey": null
+},
+v3 = [
+  v0
+],
+v4 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "value",
   "args": null,
   "storageKey": null
 },
-v4 = [
+v5 = [
   v0,
-  v2,
+  v1,
   {
     "kind": "ScalarField",
     "alias": null,
@@ -328,16 +344,16 @@ v4 = [
     "args": null,
     "storageKey": null
   },
-  v3
+  v4
 ],
-v5 = {
+v6 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "index",
   "args": null,
   "storageKey": null
 },
-v6 = {
+v7 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "style",
@@ -345,14 +361,7 @@ v6 = {
   "args": null,
   "concreteType": "Style",
   "plural": false,
-  "selections": v1
-},
-v7 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "type",
-  "args": null,
-  "storageKey": null
+  "selections": v3
 };
 return {
   "kind": "Fragment",
@@ -368,6 +377,33 @@ return {
     }
   ],
   "selections": [
+    {
+      "kind": "LinkedField",
+      "alias": null,
+      "name": "components",
+      "storageKey": null,
+      "args": null,
+      "concreteType": "Component",
+      "plural": true,
+      "selections": [
+        v0,
+        v1,
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "props",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "ComponentProp",
+          "plural": true,
+          "selections": [
+            v0,
+            v1,
+            v2
+          ]
+        }
+      ]
+    },
     {
       "kind": "LinkedField",
       "alias": null,
@@ -407,7 +443,7 @@ return {
           "args": null,
           "concreteType": "Element",
           "plural": false,
-          "selections": v1
+          "selections": v3
         },
         {
           "kind": "LinkedField",
@@ -426,7 +462,7 @@ return {
               "args": null,
               "concreteType": "BorderValue",
               "plural": true,
-              "selections": v4
+              "selections": v5
             },
             {
               "kind": "LinkedField",
@@ -438,7 +474,7 @@ return {
               "plural": true,
               "selections": [
                 v0,
-                v2,
+                v1,
                 {
                   "kind": "ScalarField",
                   "alias": null,
@@ -477,7 +513,7 @@ return {
               "args": null,
               "concreteType": "DimensionValue",
               "plural": true,
-              "selections": v4
+              "selections": v5
             },
             {
               "kind": "LinkedField",
@@ -503,7 +539,7 @@ return {
                   "args": null,
                   "storageKey": null
                 },
-                v2,
+                v1,
                 {
                   "kind": "ScalarField",
                   "alias": null,
@@ -519,7 +555,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -529,7 +565,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -539,7 +575,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -549,7 +585,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -559,7 +595,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -569,7 +605,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -579,7 +615,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -589,7 +625,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -599,7 +635,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -609,7 +645,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -619,7 +655,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -629,7 +665,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -639,7 +675,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -649,7 +685,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -659,7 +695,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -669,7 +705,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -679,7 +715,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -689,7 +725,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -699,7 +735,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -709,7 +745,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -719,7 +755,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -729,7 +765,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -739,7 +775,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -749,7 +785,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -759,7 +795,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -769,7 +805,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -779,7 +815,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -789,7 +825,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -799,7 +835,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -809,7 +845,7 @@ return {
                   "args": null,
                   "concreteType": "DimensionValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "ScalarField",
@@ -876,8 +912,8 @@ return {
                   "concreteType": "StyleSpread",
                   "plural": true,
                   "selections": [
-                    v5,
-                    v6
+                    v6,
+                    v7
                   ]
                 },
                 {
@@ -923,7 +959,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -933,7 +969,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -943,7 +979,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -953,7 +989,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -963,7 +999,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -973,7 +1009,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -983,7 +1019,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -993,7 +1029,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1003,7 +1039,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1013,7 +1049,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1023,7 +1059,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1033,7 +1069,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1043,7 +1079,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1053,7 +1089,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1063,7 +1099,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1073,7 +1109,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1083,7 +1119,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "ScalarField",
@@ -1100,7 +1136,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1110,7 +1146,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1120,7 +1156,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1130,7 +1166,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1140,7 +1176,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1150,7 +1186,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1160,7 +1196,7 @@ return {
                   "args": null,
                   "concreteType": "BorderValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "ScalarField",
@@ -1177,7 +1213,7 @@ return {
                   "args": null,
                   "concreteType": "ColorValue",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "ScalarField",
@@ -1268,8 +1304,8 @@ return {
               "plural": true,
               "selections": [
                 v0,
-                v5,
-                v7,
+                v6,
+                v2,
                 {
                   "kind": "ScalarField",
                   "alias": null,
@@ -1285,7 +1321,7 @@ return {
                   "args": null,
                   "concreteType": "Element",
                   "plural": true,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1295,7 +1331,7 @@ return {
                   "args": null,
                   "concreteType": "Component",
                   "plural": false,
-                  "selections": v1
+                  "selections": v3
                 },
                 {
                   "kind": "LinkedField",
@@ -1307,10 +1343,10 @@ return {
                   "plural": true,
                   "selections": [
                     v0,
+                    v1,
                     v2,
                     v7,
-                    v6,
-                    v3
+                    v4
                   ]
                 }
               ]
@@ -1323,5 +1359,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '12efa39a2fe245e9acca31dfb8559ff9';
+(node/*: any*/).hash = '4a1aa6f61717a7b2741b624e78f4dc35';
 module.exports = node;

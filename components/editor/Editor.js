@@ -83,7 +83,6 @@ function elementsToSlateValue(pageElementId, elementsArray) {
 
 // Eager approach is simple.
 // TODO: Consider lazy resolving with a cache.
-// TODO: Do not pass styles, stylesById are enough.
 function stylesToStyleSheet(
   styles,
   borderValues,
@@ -323,6 +322,7 @@ function EditorWithData({
   borderValues,
   colorValues,
   dimensionValues,
+  components,
 }) {
   const editorRef = useRef(null);
   const [value, setValue] = useState(() => {
@@ -333,6 +333,9 @@ function EditorWithData({
   });
   const stylesById = useMemo(() => arrayOfItemsWithIdToObject(styles), [
     styles,
+  ]);
+  const componentsById = useMemo(() => arrayOfItemsWithIdToObject(components), [
+    components,
   ]);
   const styleSheet = useMemo(
     () =>
@@ -501,17 +504,40 @@ function EditorWithData({
     return next();
   }
 
-  function renderNode(props) {
+  function renderNode(props: {
+    node: {| type: string, props: mixed, data: Object |},
+    attributes: mixed,
+    children: mixed,
+  }) {
     const { node, attributes, children } = props;
-    const styleId = node.type;
-    const { style, isText } = styleSheet[styleId];
-    const Component = isText ? Text : View;
-    // console.log(name, StyleSheet.flatten(style));
-    return (
-      <Component {...attributes} style={style}>
-        {children}
-      </Component>
-    );
+    const component = componentsById[node.type];
+    const componentProps = node.data.get('props');
+    // It's up to component to handle its props.
+    // TODO: Redesign. Probably inject dynamic component.
+    switch (component.name) {
+      case 'View': {
+        const styleProp = componentProps.find(prop => prop.name === 'style');
+        const { style, isText } = styleSheet[styleProp.style.id];
+        if (isText === true) throw Error('View can not have text style.');
+        // console.log(name, StyleSheet.flatten(style));
+        return (
+          <View {...attributes} style={style}>
+            {children}
+          </View>
+        );
+      }
+      case 'Text': {
+        const styleProp = componentProps.find(prop => prop.name === 'style');
+        const { style } = styleSheet[styleProp.style.id];
+        return (
+          <Text {...attributes} style={style}>
+            {children}
+          </Text>
+        );
+      }
+      default:
+        throw Error(`Unknown component${component.name}.`);
+    }
   }
 
   function renderMark(props, editor, next) {
@@ -564,14 +590,18 @@ function EditorWithData({
       />
       <EditorDispatchContext.Provider value={dispatch}>
         <EditorMenu value={value} styleSheet={styleSheet} />
-        <EditorBreadcrumb ancestors={ancestors} stylesById={stylesById} />
+        <EditorBreadcrumb
+          ancestors={ancestors}
+          stylesById={stylesById}
+          componentsById={componentsById}
+        />
       </EditorDispatchContext.Provider>
     </>
   );
 }
 
 // Note ": Node". From Flow 0.85, it's must to EditorWithData props be inferred.
-function Editor({ data: { page } }: {| data: Data |}): Node {
+function Editor({ data: { components, page } }: {| data: Data |}): Node {
   if (
     page == null ||
     page.web.borderValues == null ||
@@ -591,6 +621,7 @@ function Editor({ data: { page } }: {| data: Data |}): Node {
       dimensionValues={page.web.dimensionValues}
       elements={page.web.elements}
       styles={page.web.styles}
+      components={components}
     />
   );
 }
@@ -600,6 +631,15 @@ export default createFragmentContainer(
   Editor,
   graphql`
     fragment Editor on Query @argumentDefinitions(id: { type: "ID!" }) {
+      components {
+        id
+        name
+        props {
+          id
+          name
+          type
+        }
+      }
       page(id: $id) {
         id
         title @__clientField(handle: "draft")

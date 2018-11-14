@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Nov 14 2018 03:50:52 GMT+0100 (Central European Standard Time)
+# timestamp: Wed Nov 14 2018 17:00:54 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -1303,6 +1303,7 @@ type Query {
   me: User
   page(id: ID!): Page
   web(id: ID!): Web
+  components: [Component!]!
 }
 
 input SetPageContentInput {
