@@ -1,4 +1,4 @@
-// flow-typed signature: 602b4080a1f75bdf0e422d07560aa10f
+// flow-typed signature: 2266ba7a8b58cd2459e1d6e9cd11b579
 // flow-typed version: <<STUB>>/babel-plugin-inline-dotenv_v^1.1.2/flow_v0.86.0
 
 /**
@@ -26,6 +26,14 @@ declare module 'babel-plugin-inline-dotenv/src/index' {
   declare module.exports: any;
 }
 
+declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/actual' {
+  declare module.exports: any;
+}
+
+declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/expected' {
+  declare module.exports: any;
+}
+
 declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable/actual' {
   declare module.exports: any;
 }
@@ -41,6 +49,12 @@ declare module 'babel-plugin-inline-dotenv/test/index' {
 // Filename aliases
 declare module 'babel-plugin-inline-dotenv/src/index.js' {
   declare module.exports: $Exports<'babel-plugin-inline-dotenv/src/index'>;
+}
+declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/actual.js' {
+  declare module.exports: $Exports<'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/actual'>;
+}
+declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/expected.js' {
+  declare module.exports: $Exports<'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable-unsafe/expected'>;
 }
 declare module 'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable/actual.js' {
   declare module.exports: $Exports<'babel-plugin-inline-dotenv/test/fixtures/code-simple-env-variable/actual'>;
