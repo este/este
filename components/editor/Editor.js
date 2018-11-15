@@ -9,6 +9,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
 import EditorBreadcrumb from './EditorBreadcrumb';
+import { assocPath } from 'ramda';
 
 export type MarkType = 'bold' | 'italic';
 
@@ -16,7 +17,7 @@ export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |}
-  | {| type: 'setTextStyle', id: string |};
+  | {| type: 'setTextStyle', styleId: string |};
 
 type EditorDispatch = (action: EditorAction) => void;
 
@@ -86,8 +87,8 @@ function elementsToSlateValue(pageElementId, elementsArray) {
   };
 }
 
-// Eager approach is simple.
-// TODO: Consider lazy resolving with a cache.
+// Eager approach is simple, but lazy resolving with a cache would be better.
+// TODO: Rethink it for Relay store and client schema once Relay 2 is completed.
 function stylesToStyleSheet(
   styles,
   borderValues,
@@ -319,7 +320,6 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
-// eslint-disable-next-line no-unused-vars
 function EditorWithData({
   page,
   elements,
@@ -330,6 +330,8 @@ function EditorWithData({
   components,
 }) {
   const editorRef = useRef(null);
+  // We could leverage Relay for lazy resolving via store and client scheme.
+  // TODO: Move state to Relay store once Relay 2 is stable.
   const [value, setValue] = useState(() => {
     const model = elementsToSlateValue(page.element.id, elements);
     // For SSR.
@@ -367,21 +369,58 @@ function EditorWithData({
         editor.focus();
         break;
       }
+
       case 'update': {
+        // Can I find and save only changed node / element?
         setValue(action.value);
         break;
       }
+
       case 'toggleMark': {
         editor.toggleMark(action.mark);
         break;
       }
+
       case 'setTextStyle': {
-        const type = action.id;
-        //
-        console.log(type);
-        // editor.setBlocks(type);
+        const { styleId } = action;
+        // This would be ideal:
+        // editor.setBlocks({
+        //   data: { props: { style: { valueStyle: { id: styleId } } } },
+        // });
+        // But setBlocks properties data are not deeply merged. Therefore,
+        // we have to copy paste Commands.setBlocksAtRange code.
+        // https://github.com/ianstormtaylor/slate/issues/2429
+        const { value } = editor;
+        const { document, selection: range } = value;
+        const blocks = document.getLeafBlocksAtRange(range);
+        const { start, end, isCollapsed } = range;
+        const isStartVoid = document.hasVoidParent(start.key, editor);
+        const startBlock = document.getClosestBlock(start.key);
+        const endBlock = document.getClosestBlock(end.key);
+        const isHanging =
+          isCollapsed === false &&
+          start.offset === 0 &&
+          end.offset === 0 &&
+          isStartVoid === false &&
+          start.key === startBlock.getFirstText().key &&
+          end.key === endBlock.getFirstText().key;
+        const sets = isHanging ? blocks.slice(0, -1) : blocks;
+        editor.withoutNormalizing(() => {
+          sets.forEach(block => {
+            const data = assocPath(
+              ['props', 'style', 'valueStyle', 'id'],
+              styleId,
+              block.data.toJSON(),
+            );
+            editor.setNodeByKey(block.key, {
+              type: block.type,
+              data,
+            });
+          });
+        });
         break;
       }
+
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
@@ -425,7 +464,7 @@ function EditorWithData({
     const styleId = tryGeyStyleHotkey(event);
     if (styleId != null) {
       event.preventDefault();
-      dispatch({ type: 'setTextStyle', id: styleId });
+      dispatch({ type: 'setTextStyle', styleId });
       return;
     }
 
@@ -616,6 +655,7 @@ function EditorWithData({
 
 // Note ": Node". From Flow 0.85, it's must to EditorWithData props be inferred.
 function Editor({ data: { components, page } }: {| data: Data |}): Node {
+  // Hooks can't be conditional so we need separate component. That's fine.
   if (
     page == null ||
     page.web.borderValues == null ||
@@ -657,7 +697,6 @@ export default createFragmentContainer(
       page(id: $id) {
         id
         title @__clientField(handle: "draft")
-        # Preloads title.
         draftTitle
         element {
           id

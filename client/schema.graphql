@@ -1,28 +1,7 @@
 # https://graphql.org/learn/best-practices/#nullability
 # https://github.com/facebook/relay/issues/1656#issuecomment-382461183
 
-# Nullability or not?
-# Nullability is great approach for API evolving without versioning.
-# We can remove (rename) any nullable field and old not yet updated app will
-# still work with the new API. And can request an upgrade, of course.
-# But that's not the use case for the client schema, I suppose.
-# If we remove field, app will not use it, so we don't need nullability.
-# New app reading old client API is not problem.
-# But there is another problem. Developer experience.
-# Nullable fields means we have to cover all null cases, but, if developer
-# forgets to add __clientField directive, app will not break. It will render
-# nonsense. For example, an empty string for Foo name.
-# Non-null can be enforced via Relay hander, but, if developer forgets to add
-# `name @__clientField(handle: "draft")`, app will break during runtime.
-# Types will not help. The problem is, types can not ensure developer will not
-# forget to add __clientField. What should we do?
-# I believe in 1) not writing boilerplate code 2) Fail fast means fail cheap.
-# Therefore, I prefer non-null types. If developer forget to add __clientField
-# directive, app will fail immediately. It's not ideal, but good enough.
-# TODO: Generate Flow type for client schema and use it withStore. Somehow.
-# The beauty of client schema is draftName field etc. are reset on fetch.
-# https://github.com/este/este/issues/1568
-# Feel free to discuss.
+# Do not use client schema until Relay 2 is stable and features documented.
 
 extend type Page {
   draftTitle: String!

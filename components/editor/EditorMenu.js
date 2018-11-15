@@ -90,7 +90,7 @@ function StylesView({ styleSheet, blocks }) {
           const props = node.data.get('props');
           return props.style?.valueStyle?.id === style.id;
         })}
-        onPress={() => dispatch({ type: 'setTextStyle', id: style.id })}
+        onPress={() => dispatch({ type: 'setTextStyle', styleId: style.id })}
         key={style.id}
       >
         {style.name}
