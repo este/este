@@ -86,7 +86,10 @@ function StylesView({ styleSheet, blocks }) {
   return styles.map(style => {
     return (
       <EditorMenuButton
-        isActive={blocks.some(node => node.type === style.id)}
+        isActive={blocks.some(node => {
+          const props = node.data.get('props');
+          return props.style?.valueStyle?.id === style.id;
+        })}
         onPress={() => dispatch({ type: 'setTextStyle', id: style.id })}
         key={style.id}
       >
