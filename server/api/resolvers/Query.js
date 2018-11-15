@@ -19,6 +19,7 @@ const Query: QueryType = {
   },
 
   components: async (args, info, { db }) => {
+    // TODO: Can not pass args, because it freezes Flow 0.86 for some reason.
     return db.query.components({ where: {} }, info);
   },
 };

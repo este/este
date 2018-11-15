@@ -289,7 +289,7 @@ export type Editor = {|
           +id: string,
           +name: string,
           +type: PropType,
-          +style: ?{|
+          +valueStyle: ?{|
             +id: string
           |},
           +value: ?string,
@@ -352,16 +352,6 @@ v6 = {
   "name": "index",
   "args": null,
   "storageKey": null
-},
-v7 = {
-  "kind": "LinkedField",
-  "alias": null,
-  "name": "style",
-  "storageKey": null,
-  "args": null,
-  "concreteType": "Style",
-  "plural": false,
-  "selections": v3
 };
 return {
   "kind": "Fragment",
@@ -913,7 +903,16 @@ return {
                   "plural": true,
                   "selections": [
                     v6,
-                    v7
+                    {
+                      "kind": "LinkedField",
+                      "alias": null,
+                      "name": "style",
+                      "storageKey": null,
+                      "args": null,
+                      "concreteType": "Style",
+                      "plural": false,
+                      "selections": v3
+                    }
                   ]
                 },
                 {
@@ -1345,7 +1344,16 @@ return {
                     v0,
                     v1,
                     v2,
-                    v7,
+                    {
+                      "kind": "LinkedField",
+                      "alias": null,
+                      "name": "valueStyle",
+                      "storageKey": null,
+                      "args": null,
+                      "concreteType": "Style",
+                      "plural": false,
+                      "selections": v3
+                    },
                     v4
                   ]
                 }
@@ -1359,5 +1367,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '4a1aa6f61717a7b2741b624e78f4dc35';
+(node/*: any*/).hash = '97667bed1fbc181f653dcff82409727c';
 module.exports = node;

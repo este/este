@@ -9,6 +9,7 @@
 # model.graphql change. PR anyone?
 
 # import User, Web, Page, Component from "../../database/schema.graphql"
+# import ComponentWhereInput, ComponentOrderByInput from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -120,5 +121,15 @@ type Query {
   me: User
   page(id: ID!): Page
   web(id: ID!): Web
-  components: [Component!]!
+  # Btw, there must be argument.
+  # https://github.com/prisma/prisma-binding/issues/192#issuecomment-401418309
+  components(
+    where: ComponentWhereInput
+    orderBy: ComponentOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Component!]!
 }

@@ -103,12 +103,14 @@ enum PropType {
   TEXT_STYLE
 }
 
+# Soon we will have proper indexes.
+# https://github.com/prisma/prisma/issues/3405
 type ElementProp {
   id: ID! @unique
   element: Element! @relation(name: "ElementProps")
   name: String!
   type: PropType!
-  style: Style @relation(name: "StyleProp")
+  valueStyle: Style @relation(name: "StyleProp")
   value: String
 }
 

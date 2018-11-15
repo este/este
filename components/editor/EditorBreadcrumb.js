@@ -72,10 +72,7 @@ function EditorBreadcrumb({
             function getLabel() {
               if (name !== 'View' && name !== 'Text') return name;
               const componentProps = node.data.get('props');
-              const styleProp = componentProps.find(
-                prop => prop.name === 'style',
-              );
-              const style = stylesById[styleProp.style.id];
+              const style = stylesById[componentProps.style.valueStyle.id];
               return style.name;
             }
             return (

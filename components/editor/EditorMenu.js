@@ -69,6 +69,9 @@ function DefaultView({ activeMarks, setMenuView }) {
   );
 }
 
+// const text = {fontSize: 16, fontFamily}
+// const h1 = {...text, fontSize: 24}
+
 // TODO: Consider show the first two semantic btns in default view.
 // E.g. b i h1 h2 ... for more.
 function StylesView({ styleSheet, blocks }) {
@@ -84,7 +87,7 @@ function StylesView({ styleSheet, blocks }) {
     return (
       <EditorMenuButton
         isActive={blocks.some(node => node.type === style.id)}
-        onPress={() => dispatch({ type: 'setStyle', id: style.id })}
+        onPress={() => dispatch({ type: 'setTextStyle', id: style.id })}
         key={style.id}
       >
         {style.name}

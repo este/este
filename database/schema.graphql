@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Tue Nov 13 2018 17:09:51 GMT+0100 (Central European Standard Time)
+# timestamp: Thu Nov 15 2018 01:34:47 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -1723,7 +1723,7 @@ type ElementProp implements Node {
   element: Element!
   name: String!
   type: PropType!
-  style: Style
+  valueStyle: Style
   value: String
 }
 
@@ -1742,7 +1742,7 @@ input ElementPropCreateInput {
   type: PropType!
   value: String
   element: ElementCreateOneWithoutPropsInput!
-  style: StyleCreateOneWithoutPropsInput
+  valueStyle: StyleCreateOneWithoutPropsInput
 }
 
 input ElementPropCreateManyWithoutElementInput {
@@ -1750,8 +1750,8 @@ input ElementPropCreateManyWithoutElementInput {
   connect: [ElementPropWhereUniqueInput!]
 }
 
-input ElementPropCreateManyWithoutStyleInput {
-  create: [ElementPropCreateWithoutStyleInput!]
+input ElementPropCreateManyWithoutValueStyleInput {
+  create: [ElementPropCreateWithoutValueStyleInput!]
   connect: [ElementPropWhereUniqueInput!]
 }
 
@@ -1759,10 +1759,10 @@ input ElementPropCreateWithoutElementInput {
   name: String!
   type: PropType!
   value: String
-  style: StyleCreateOneWithoutPropsInput
+  valueStyle: StyleCreateOneWithoutPropsInput
 }
 
-input ElementPropCreateWithoutStyleInput {
+input ElementPropCreateWithoutValueStyleInput {
   name: String!
   type: PropType!
   value: String
@@ -1844,7 +1844,7 @@ input ElementPropUpdateInput {
   type: PropType
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
-  style: StyleUpdateOneWithoutPropsInput
+  valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
 input ElementPropUpdateManyMutationInput {
@@ -1862,23 +1862,23 @@ input ElementPropUpdateManyWithoutElementInput {
   upsert: [ElementPropUpsertWithWhereUniqueWithoutElementInput!]
 }
 
-input ElementPropUpdateManyWithoutStyleInput {
-  create: [ElementPropCreateWithoutStyleInput!]
+input ElementPropUpdateManyWithoutValueStyleInput {
+  create: [ElementPropCreateWithoutValueStyleInput!]
   connect: [ElementPropWhereUniqueInput!]
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
-  update: [ElementPropUpdateWithWhereUniqueWithoutStyleInput!]
-  upsert: [ElementPropUpsertWithWhereUniqueWithoutStyleInput!]
+  update: [ElementPropUpdateWithWhereUniqueWithoutValueStyleInput!]
+  upsert: [ElementPropUpsertWithWhereUniqueWithoutValueStyleInput!]
 }
 
 input ElementPropUpdateWithoutElementDataInput {
   name: String
   type: PropType
   value: String
-  style: StyleUpdateOneWithoutPropsInput
+  valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
-input ElementPropUpdateWithoutStyleDataInput {
+input ElementPropUpdateWithoutValueStyleDataInput {
   name: String
   type: PropType
   value: String
@@ -1890,9 +1890,9 @@ input ElementPropUpdateWithWhereUniqueWithoutElementInput {
   data: ElementPropUpdateWithoutElementDataInput!
 }
 
-input ElementPropUpdateWithWhereUniqueWithoutStyleInput {
+input ElementPropUpdateWithWhereUniqueWithoutValueStyleInput {
   where: ElementPropWhereUniqueInput!
-  data: ElementPropUpdateWithoutStyleDataInput!
+  data: ElementPropUpdateWithoutValueStyleDataInput!
 }
 
 input ElementPropUpsertWithWhereUniqueWithoutElementInput {
@@ -1901,10 +1901,10 @@ input ElementPropUpsertWithWhereUniqueWithoutElementInput {
   create: ElementPropCreateWithoutElementInput!
 }
 
-input ElementPropUpsertWithWhereUniqueWithoutStyleInput {
+input ElementPropUpsertWithWhereUniqueWithoutValueStyleInput {
   where: ElementPropWhereUniqueInput!
-  update: ElementPropUpdateWithoutStyleDataInput!
-  create: ElementPropCreateWithoutStyleInput!
+  update: ElementPropUpdateWithoutValueStyleDataInput!
+  create: ElementPropCreateWithoutValueStyleInput!
 }
 
 input ElementPropWhereInput {
@@ -2047,7 +2047,7 @@ input ElementPropWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   element: ElementWhereInput
-  style: StyleWhereInput
+  valueStyle: StyleWhereInput
 }
 
 input ElementPropWhereUniqueInput {
@@ -3231,7 +3231,7 @@ input StyleCreateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebCreateOneWithoutStylesInput!
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
@@ -3432,7 +3432,7 @@ input StyleCreateWithoutSpreadStylesInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebCreateOneWithoutStylesInput!
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -3521,7 +3521,7 @@ input StyleCreateWithoutWebInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
@@ -4070,7 +4070,7 @@ input StyleUpdateDataInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
@@ -4161,7 +4161,7 @@ input StyleUpdateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
@@ -4407,7 +4407,7 @@ input StyleUpdateWithoutSpreadStylesDataInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -4496,7 +4496,7 @@ input StyleUpdateWithoutWebDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput

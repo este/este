@@ -245,7 +245,7 @@ const Mutation: MutationType = {
                 {
                   name: 'style',
                   type: 'VIEW_STYLE',
-                  style: { connect: { id: pageStyle.id } },
+                  valueStyle: { connect: { id: pageStyle.id } },
                 },
               ],
             },
@@ -261,7 +261,7 @@ const Mutation: MutationType = {
                       {
                         name: 'style',
                         type: 'VIEW_STYLE',
-                        style: { connect: { id: containerStyle.id } },
+                        valueStyle: { connect: { id: containerStyle.id } },
                       },
                     ],
                   },
@@ -277,7 +277,7 @@ const Mutation: MutationType = {
                             {
                               name: 'style',
                               type: 'TEXT_STYLE',
-                              style: { connect: { id: h1Style.id } },
+                              valueStyle: { connect: { id: h1Style.id } },
                             },
                           ],
                         },
@@ -304,7 +304,7 @@ const Mutation: MutationType = {
                             {
                               name: 'style',
                               type: 'TEXT_STYLE',
-                              style: { connect: { id: textStyle.id } },
+                              valueStyle: { connect: { id: textStyle.id } },
                             },
                           ],
                         },

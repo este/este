@@ -16,7 +16,7 @@ export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |}
-  | {| type: 'setStyle', id: string |};
+  | {| type: 'setTextStyle', id: string |};
 
 type EditorDispatch = (action: EditorAction) => void;
 
@@ -64,11 +64,16 @@ function elementsToSlateValue(pageElementId, elementsArray) {
       .map(child => elements[child.id])
       .sort((a, b) => a.index - b.index)
       .map(child => walk(child.id));
+    const objectProps = props.reduce((prev, prop) => {
+      return { ...prev, [prop.name]: prop };
+    }, {});
     return {
       object: element.type.toLowerCase(),
       type: element.component.id,
       nodes,
-      data: { props },
+      data: {
+        props: objectProps,
+      },
     };
   }
 
@@ -370,9 +375,11 @@ function EditorWithData({
         editor.toggleMark(action.mark);
         break;
       }
-      case 'setStyle': {
+      case 'setTextStyle': {
         const type = action.id;
-        editor.setBlocks(type);
+        //
+        console.log(type);
+        // editor.setBlocks(type);
         break;
       }
       default:
@@ -418,7 +425,7 @@ function EditorWithData({
     const styleId = tryGeyStyleHotkey(event);
     if (styleId != null) {
       event.preventDefault();
-      dispatch({ type: 'setStyle', id: styleId });
+      dispatch({ type: 'setTextStyle', id: styleId });
       return;
     }
 
@@ -504,6 +511,18 @@ function EditorWithData({
     return next();
   }
 
+  function resolveComponentProps(data) {
+    const props = data.get('props');
+    return Object.keys(props).reduce((prev, key) => {
+      const value = props[key];
+      const newValue =
+        value.type.indexOf('STYLE') !== -1
+          ? styleSheet[value.valueStyle.id].style
+          : value.value;
+      return { ...prev, [key]: newValue };
+    }, {});
+  }
+
   function renderNode(props: {
     node: {| type: string, props: mixed, data: Object |},
     attributes: mixed,
@@ -511,26 +530,21 @@ function EditorWithData({
   }) {
     const { node, attributes, children } = props;
     const component = componentsById[node.type];
-    const componentProps = node.data.get('props');
     // It's up to component to handle its props.
     // TODO: Redesign. Probably inject dynamic component.
     switch (component.name) {
       case 'View': {
-        const styleProp = componentProps.find(prop => prop.name === 'style');
-        const { style, isText } = styleSheet[styleProp.style.id];
-        if (isText === true) throw Error('View can not have text style.');
-        // console.log(name, StyleSheet.flatten(style));
+        const componentProps = resolveComponentProps(node.data);
         return (
-          <View {...attributes} style={style}>
+          <View {...attributes} {...componentProps}>
             {children}
           </View>
         );
       }
       case 'Text': {
-        const styleProp = componentProps.find(prop => prop.name === 'style');
-        const { style } = styleSheet[styleProp.style.id];
+        const componentProps = resolveComponentProps(node.data);
         return (
-          <Text {...attributes} style={style}>
+          <Text {...attributes} {...componentProps}>
             {children}
           </Text>
         );
@@ -894,7 +908,7 @@ export default createFragmentContainer(
               id
               name
               type
-              style {
+              valueStyle {
                 id
               }
               value

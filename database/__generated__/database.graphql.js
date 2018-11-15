@@ -1910,7 +1910,7 @@ type ElementProp implements Node {
   element: Element!
   name: String!
   type: PropType!
-  style: Style
+  valueStyle: Style
   value: String
 }
 
@@ -1929,7 +1929,7 @@ input ElementPropCreateInput {
   type: PropType!
   value: String
   element: ElementCreateOneWithoutPropsInput!
-  style: StyleCreateOneWithoutPropsInput
+  valueStyle: StyleCreateOneWithoutPropsInput
 }
 
 input ElementPropCreateManyWithoutElementInput {
@@ -1937,8 +1937,8 @@ input ElementPropCreateManyWithoutElementInput {
   connect: [ElementPropWhereUniqueInput!]
 }
 
-input ElementPropCreateManyWithoutStyleInput {
-  create: [ElementPropCreateWithoutStyleInput!]
+input ElementPropCreateManyWithoutValueStyleInput {
+  create: [ElementPropCreateWithoutValueStyleInput!]
   connect: [ElementPropWhereUniqueInput!]
 }
 
@@ -1946,10 +1946,10 @@ input ElementPropCreateWithoutElementInput {
   name: String!
   type: PropType!
   value: String
-  style: StyleCreateOneWithoutPropsInput
+  valueStyle: StyleCreateOneWithoutPropsInput
 }
 
-input ElementPropCreateWithoutStyleInput {
+input ElementPropCreateWithoutValueStyleInput {
   name: String!
   type: PropType!
   value: String
@@ -2031,7 +2031,7 @@ input ElementPropUpdateInput {
   type: PropType
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
-  style: StyleUpdateOneWithoutPropsInput
+  valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
 input ElementPropUpdateManyMutationInput {
@@ -2049,23 +2049,23 @@ input ElementPropUpdateManyWithoutElementInput {
   upsert: [ElementPropUpsertWithWhereUniqueWithoutElementInput!]
 }
 
-input ElementPropUpdateManyWithoutStyleInput {
-  create: [ElementPropCreateWithoutStyleInput!]
+input ElementPropUpdateManyWithoutValueStyleInput {
+  create: [ElementPropCreateWithoutValueStyleInput!]
   connect: [ElementPropWhereUniqueInput!]
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
-  update: [ElementPropUpdateWithWhereUniqueWithoutStyleInput!]
-  upsert: [ElementPropUpsertWithWhereUniqueWithoutStyleInput!]
+  update: [ElementPropUpdateWithWhereUniqueWithoutValueStyleInput!]
+  upsert: [ElementPropUpsertWithWhereUniqueWithoutValueStyleInput!]
 }
 
 input ElementPropUpdateWithoutElementDataInput {
   name: String
   type: PropType
   value: String
-  style: StyleUpdateOneWithoutPropsInput
+  valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
-input ElementPropUpdateWithoutStyleDataInput {
+input ElementPropUpdateWithoutValueStyleDataInput {
   name: String
   type: PropType
   value: String
@@ -2077,9 +2077,9 @@ input ElementPropUpdateWithWhereUniqueWithoutElementInput {
   data: ElementPropUpdateWithoutElementDataInput!
 }
 
-input ElementPropUpdateWithWhereUniqueWithoutStyleInput {
+input ElementPropUpdateWithWhereUniqueWithoutValueStyleInput {
   where: ElementPropWhereUniqueInput!
-  data: ElementPropUpdateWithoutStyleDataInput!
+  data: ElementPropUpdateWithoutValueStyleDataInput!
 }
 
 input ElementPropUpsertWithWhereUniqueWithoutElementInput {
@@ -2088,10 +2088,10 @@ input ElementPropUpsertWithWhereUniqueWithoutElementInput {
   create: ElementPropCreateWithoutElementInput!
 }
 
-input ElementPropUpsertWithWhereUniqueWithoutStyleInput {
+input ElementPropUpsertWithWhereUniqueWithoutValueStyleInput {
   where: ElementPropWhereUniqueInput!
-  update: ElementPropUpdateWithoutStyleDataInput!
-  create: ElementPropCreateWithoutStyleInput!
+  update: ElementPropUpdateWithoutValueStyleDataInput!
+  create: ElementPropCreateWithoutValueStyleInput!
 }
 
 input ElementPropWhereInput {
@@ -2234,7 +2234,7 @@ input ElementPropWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   element: ElementWhereInput
-  style: StyleWhereInput
+  valueStyle: StyleWhereInput
 }
 
 input ElementPropWhereUniqueInput {
@@ -3418,7 +3418,7 @@ input StyleCreateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebCreateOneWithoutStylesInput!
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
@@ -3619,7 +3619,7 @@ input StyleCreateWithoutSpreadStylesInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebCreateOneWithoutStylesInput!
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
   bottom: DimensionValueCreateOneInput
@@ -3708,7 +3708,7 @@ input StyleCreateWithoutWebInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  props: ElementPropCreateManyWithoutStyleInput
+  props: ElementPropCreateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadCreateManyWithoutSpreadStyleInput
   width: DimensionValueCreateOneInput
   height: DimensionValueCreateOneInput
@@ -4257,7 +4257,7 @@ input StyleUpdateDataInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
@@ -4348,7 +4348,7 @@ input StyleUpdateInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
@@ -4594,7 +4594,7 @@ input StyleUpdateWithoutSpreadStylesDataInput {
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
   web: WebUpdateOneRequiredWithoutStylesInput
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
   bottom: DimensionValueUpdateOneInput
@@ -4683,7 +4683,7 @@ input StyleUpdateWithoutWebDataInput {
   textAlignVertical: StyleTextAlignVertical
   textDecorationLine: StyleTextDecorationLine
   textTransform: StyleTextTransform
-  props: ElementPropUpdateManyWithoutStyleInput
+  props: ElementPropUpdateManyWithoutValueStyleInput
   spreadStyles: StyleSpreadUpdateManyWithoutSpreadStyleInput
   width: DimensionValueUpdateOneInput
   height: DimensionValueUpdateOneInput
@@ -6940,10 +6940,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   connect?: StyleWhereUniqueInput
 |}
 
- export type ElementPropUpsertWithWhereUniqueWithoutStyleInput = {| 
+ export type ElementPropUpsertWithWhereUniqueWithoutValueStyleInput = {| 
   where: ElementPropWhereUniqueInput,
-  update: ElementPropUpdateWithoutStyleDataInput,
-  create: ElementPropCreateWithoutStyleInput
+  update: ElementPropUpdateWithoutValueStyleDataInput,
+  create: ElementPropCreateWithoutValueStyleInput
 |}
 
  export type StyleCreateInput = {| 
@@ -6978,7 +6978,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
   web: WebCreateOneWithoutStylesInput,
-  props?: ElementPropCreateManyWithoutStyleInput,
+  props?: ElementPropCreateManyWithoutValueStyleInput,
   spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
   width?: DimensionValueCreateOneInput,
   height?: DimensionValueCreateOneInput,
@@ -7530,7 +7530,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   type: PropType,
   value?: String,
   element: ElementCreateOneWithoutPropsInput,
-  style?: StyleCreateOneWithoutPropsInput
+  valueStyle?: StyleCreateOneWithoutPropsInput
 |}
 
  export type StyleSpreadUpdateManyMutationInput = {| 
@@ -7589,7 +7589,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
   web: WebCreateOneWithoutStylesInput,
-  props?: ElementPropCreateManyWithoutStyleInput,
+  props?: ElementPropCreateManyWithoutValueStyleInput,
   width?: DimensionValueCreateOneInput,
   height?: DimensionValueCreateOneInput,
   bottom?: DimensionValueCreateOneInput,
@@ -7679,7 +7679,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
   web?: WebUpdateOneRequiredWithoutStylesInput,
-  props?: ElementPropUpdateManyWithoutStyleInput,
+  props?: ElementPropUpdateManyWithoutValueStyleInput,
   spreadStyles?: StyleSpreadUpdateManyWithoutSpreadStyleInput,
   width?: DimensionValueUpdateOneInput,
   height?: DimensionValueUpdateOneInput,
@@ -7829,7 +7829,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
   web?: WebUpdateOneRequiredWithoutStylesInput,
-  props?: ElementPropUpdateManyWithoutStyleInput,
+  props?: ElementPropUpdateManyWithoutValueStyleInput,
   width?: DimensionValueUpdateOneInput,
   height?: DimensionValueUpdateOneInput,
   bottom?: DimensionValueUpdateOneInput,
@@ -8193,7 +8193,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textAlignVertical?: StyleTextAlignVertical,
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
-  props?: ElementPropCreateManyWithoutStyleInput,
+  props?: ElementPropCreateManyWithoutValueStyleInput,
   spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
   width?: DimensionValueCreateOneInput,
   height?: DimensionValueCreateOneInput,
@@ -8263,7 +8263,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
- export type ElementPropCreateWithoutStyleInput = {| 
+ export type ElementPropCreateWithoutValueStyleInput = {| 
   name: String,
   type: PropType,
   value?: String,
@@ -8371,7 +8371,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textAlignVertical?: StyleTextAlignVertical,
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
-  props?: ElementPropUpdateManyWithoutStyleInput,
+  props?: ElementPropUpdateManyWithoutValueStyleInput,
   spreadStyles?: StyleSpreadUpdateManyWithoutSpreadStyleInput,
   width?: DimensionValueUpdateOneInput,
   height?: DimensionValueUpdateOneInput,
@@ -8436,13 +8436,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ComponentPropCreateManyWithoutComponentInput
 |}
 
- export type ElementPropUpdateManyWithoutStyleInput = {| 
-  create?: Array< ElementPropCreateWithoutStyleInput > | ElementPropCreateWithoutStyleInput,
+ export type ElementPropUpdateManyWithoutValueStyleInput = {| 
+  create?: Array< ElementPropCreateWithoutValueStyleInput > | ElementPropCreateWithoutValueStyleInput,
   connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   disconnect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   delete?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
-  update?: Array< ElementPropUpdateWithWhereUniqueWithoutStyleInput > | ElementPropUpdateWithWhereUniqueWithoutStyleInput,
-  upsert?: Array< ElementPropUpsertWithWhereUniqueWithoutStyleInput > | ElementPropUpsertWithWhereUniqueWithoutStyleInput
+  update?: Array< ElementPropUpdateWithWhereUniqueWithoutValueStyleInput > | ElementPropUpdateWithWhereUniqueWithoutValueStyleInput,
+  upsert?: Array< ElementPropUpsertWithWhereUniqueWithoutValueStyleInput > | ElementPropUpsertWithWhereUniqueWithoutValueStyleInput
 |}
 
  export type UserCreateWithoutComponentsInput = {| 
@@ -8452,19 +8452,19 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   webs?: WebCreateManyWithoutCreatorInput
 |}
 
- export type ElementPropUpdateWithWhereUniqueWithoutStyleInput = {| 
+ export type ElementPropUpdateWithWhereUniqueWithoutValueStyleInput = {| 
   where: ElementPropWhereUniqueInput,
-  data: ElementPropUpdateWithoutStyleDataInput
+  data: ElementPropUpdateWithoutValueStyleDataInput
 |}
 
  export type ElementPropCreateWithoutElementInput = {| 
   name: String,
   type: PropType,
   value?: String,
-  style?: StyleCreateOneWithoutPropsInput
+  valueStyle?: StyleCreateOneWithoutPropsInput
 |}
 
- export type ElementPropUpdateWithoutStyleDataInput = {| 
+ export type ElementPropUpdateWithoutValueStyleDataInput = {| 
   name?: String,
   type?: PropType,
   value?: String,
@@ -8752,7 +8752,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   value_ends_with?: String,
   value_not_ends_with?: String,
   element?: ElementWhereInput,
-  style?: StyleWhereInput
+  valueStyle?: StyleWhereInput
 |}
 
  export type ElementUpdateDataInput = {| 
@@ -8931,7 +8931,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   name?: String,
   type?: PropType,
   value?: String,
-  style?: StyleUpdateOneWithoutPropsInput
+  valueStyle?: StyleUpdateOneWithoutPropsInput
 |}
 
  export type ColorValueUpdateInput = {| 
@@ -9180,8 +9180,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   create: ColorValueCreateWithoutWebInput
 |}
 
- export type ElementPropCreateManyWithoutStyleInput = {| 
-  create?: Array< ElementPropCreateWithoutStyleInput > | ElementPropCreateWithoutStyleInput,
+ export type ElementPropCreateManyWithoutValueStyleInput = {| 
+  create?: Array< ElementPropCreateWithoutValueStyleInput > | ElementPropCreateWithoutValueStyleInput,
   connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
 |}
 
@@ -9618,7 +9618,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   textDecorationLine?: StyleTextDecorationLine,
   textTransform?: StyleTextTransform,
   web?: WebUpdateOneRequiredWithoutStylesInput,
-  props?: ElementPropUpdateManyWithoutStyleInput,
+  props?: ElementPropUpdateManyWithoutValueStyleInput,
   spreadStyles?: StyleSpreadUpdateManyWithoutSpreadStyleInput,
   width?: DimensionValueUpdateOneInput,
   height?: DimensionValueUpdateOneInput,
@@ -10049,7 +10049,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   type?: PropType,
   value?: String,
   element?: ElementUpdateOneRequiredWithoutPropsInput,
-  style?: StyleUpdateOneWithoutPropsInput
+  valueStyle?: StyleUpdateOneWithoutPropsInput
 |}
 
  export type ElementPropWhereUniqueInput = {| 
@@ -10555,7 +10555,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    element: Element,
    name: String,
    type: PropType,
-   style?: Style,
+   valueStyle?: Style,
    value?: String,
 |}
 

@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Wed Nov 14 2018 17:00:54 GMT+0100 (Central European Standard Time)
+# timestamp: Thu Nov 15 2018 01:52:00 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -832,7 +832,7 @@ type ElementProp implements Node {
   element: Element!
   name: String!
   type: PropType!
-  style: Style
+  valueStyle: Style
   value: String
 }
 
@@ -991,7 +991,7 @@ input ElementPropWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   element: ElementWhereInput
-  style: StyleWhereInput
+  valueStyle: StyleWhereInput
 }
 
 enum ElementType {
@@ -1303,7 +1303,7 @@ type Query {
   me: User
   page(id: ID!): Page
   web(id: ID!): Web
-  components: [Component!]!
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]!
 }
 
 input SetPageContentInput {

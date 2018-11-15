@@ -12,6 +12,7 @@ export interface Query {
     me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>; 
     page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>; 
     web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>; 
+    components(args: { where?: ComponentWhereInput, orderBy?: ComponentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<Component[]>; 
   }
 
 export interface Mutation {
@@ -28,7 +29,7 @@ export interface Mutation {
 export interface Subscription {}
 
 export interface Exists {
-
+undefined(where?: ComponentWhereInput): Promise<boolean>;
 }
 
 export interface Prisma {
@@ -884,7 +885,7 @@ type ElementProp implements Node {
   element: Element!
   name: String!
   type: PropType!
-  style: Style
+  valueStyle: Style
   value: String
 }
 
@@ -1043,7 +1044,7 @@ input ElementPropWhereInput {
   """All values not ending with the given string."""
   value_not_ends_with: String
   element: ElementWhereInput
-  style: StyleWhereInput
+  valueStyle: StyleWhereInput
 }
 
 enum ElementType {
@@ -1355,6 +1356,7 @@ type Query {
   me: User
   page(id: ID!): Page
   web(id: ID!): Web
+  components(where: ComponentWhereInput, orderBy: ComponentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Component!]!
 }
 
 input SetPageContentInput {
@@ -3699,7 +3701,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   value_ends_with?: String,
   value_not_ends_with?: String,
   element?: ElementWhereInput,
-  style?: StyleWhereInput
+  valueStyle?: StyleWhereInput
 |}
 
  export type StyleSpreadWhereInput = {| 
@@ -4332,7 +4334,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    element: Element,
    name: String,
    type: PropType,
-   style?: Style,
+   valueStyle?: Style,
    value?: String,
 |}
 
