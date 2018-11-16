@@ -47,7 +47,7 @@ const rules: Rules = {
     setTheme: isAuthenticated,
     setPageTitle: and(isAuthenticated, isPageCreator(args => args.input.id)),
     setWebName: and(isAuthenticated, isWebCreator(args => args.input.id)),
-    setPageContent: and(isAuthenticated, isPageCreator(args => args.input.id)),
+    setPageElement: and(isAuthenticated, isPageCreator(args => args.input.id)),
     deletePage: and(isAuthenticated, isPageCreator(args => args.input.id)),
   },
   Query: {

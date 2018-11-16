@@ -10,6 +10,7 @@
 
 # import User, Web, Page, Component from "../../database/schema.graphql"
 # import ComponentWhereInput, ComponentOrderByInput from "../../database/schema.graphql"
+# import ElementCreateInput from "../../database/schema.graphql"
 # import * from "./errors.graphql"
 
 input AuthInput {
@@ -88,12 +89,12 @@ type SetWebNamePayload {
   web: Web
 }
 
-input SetPageContentInput {
+input SetPageElementInput {
   id: ID!
-  content: Json!
+  element: ElementCreateInput!
 }
 
-type SetPageContentPayload {
+type SetPageElementPayload {
   page: Page
 }
 
@@ -112,7 +113,7 @@ type Mutation {
   setTheme(input: SetThemeInput!): SetThemePayload
   setPageTitle(input: SetPageTitleInput!): SetPageTitlePayload
   setWebName(input: SetWebNameInput!): SetWebNamePayload
-  setPageContent(input: SetPageContentInput!): SetPageContentPayload
+  setPageElement(input: SetPageElementInput!): SetPageElementPayload
   deletePage(input: DeletePageInput!): DeletePagePayload
 }
 

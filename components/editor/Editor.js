@@ -73,6 +73,7 @@ function elementsToSlateValue(pageElementId, elementsArray) {
       type: element.component.id,
       nodes,
       data: {
+        id,
         props: objectProps,
       },
     };
@@ -320,6 +321,54 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
+function setTextStyle(editor, action) {
+  const { styleId } = action;
+  // This would be ideal:
+  // editor.setBlocks({
+  //   data: { props: { style: { valueStyle: { id: styleId } } } },
+  // });
+  // But setBlocks properties data are not deeply merged. Therefore,
+  // we have to copy paste Commands.setBlocksAtRange code.
+  // https://github.com/ianstormtaylor/slate/issues/2429
+  const { value } = editor;
+  const { document, selection: range } = value;
+  const blocks = document.getLeafBlocksAtRange(range);
+  const { start, end, isCollapsed } = range;
+  const isStartVoid = document.hasVoidParent(start.key, editor);
+  const startBlock = document.getClosestBlock(start.key);
+  const endBlock = document.getClosestBlock(end.key);
+  const isHanging =
+    isCollapsed === false &&
+    start.offset === 0 &&
+    end.offset === 0 &&
+    isStartVoid === false &&
+    start.key === startBlock.getFirstText().key &&
+    end.key === endBlock.getFirstText().key;
+  const sets = isHanging ? blocks.slice(0, -1) : blocks;
+  editor.withoutNormalizing(() => {
+    sets.forEach(block => {
+      const data = assocPath(
+        ['props', 'style', 'valueStyle', 'id'],
+        styleId,
+        block.data.toJSON(),
+      );
+      editor.setNodeByKey(block.key, {
+        type: block.type,
+        data,
+      });
+    });
+  });
+}
+
+function maybeSavePage(editor, value, newValue) {
+  const documentChanged = value.document !== newValue.document;
+  if (!documentChanged) return;
+  // Ideally, we should save only changed nodes / elements.
+  const root = newValue.document.nodes.get(0);
+  // eslint-disable-next-line
+  console.log(JSON.stringify(root.toJSON(), null, 2));
+}
+
 function EditorWithData({
   page,
   elements,
@@ -369,58 +418,19 @@ function EditorWithData({
         editor.focus();
         break;
       }
-
       case 'update': {
-        // Can I find and save only changed node / element?
         setValue(action.value);
+        maybeSavePage(editor, value, action.value);
         break;
       }
-
       case 'toggleMark': {
         editor.toggleMark(action.mark);
         break;
       }
-
       case 'setTextStyle': {
-        const { styleId } = action;
-        // This would be ideal:
-        // editor.setBlocks({
-        //   data: { props: { style: { valueStyle: { id: styleId } } } },
-        // });
-        // But setBlocks properties data are not deeply merged. Therefore,
-        // we have to copy paste Commands.setBlocksAtRange code.
-        // https://github.com/ianstormtaylor/slate/issues/2429
-        const { value } = editor;
-        const { document, selection: range } = value;
-        const blocks = document.getLeafBlocksAtRange(range);
-        const { start, end, isCollapsed } = range;
-        const isStartVoid = document.hasVoidParent(start.key, editor);
-        const startBlock = document.getClosestBlock(start.key);
-        const endBlock = document.getClosestBlock(end.key);
-        const isHanging =
-          isCollapsed === false &&
-          start.offset === 0 &&
-          end.offset === 0 &&
-          isStartVoid === false &&
-          start.key === startBlock.getFirstText().key &&
-          end.key === endBlock.getFirstText().key;
-        const sets = isHanging ? blocks.slice(0, -1) : blocks;
-        editor.withoutNormalizing(() => {
-          sets.forEach(block => {
-            const data = assocPath(
-              ['props', 'style', 'valueStyle', 'id'],
-              styleId,
-              block.data.toJSON(),
-            );
-            editor.setNodeByKey(block.key, {
-              type: block.type,
-              data,
-            });
-          });
-        });
+        setTextStyle(editor, action);
         break;
       }
-
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);

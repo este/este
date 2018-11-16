@@ -378,10 +378,8 @@ const Mutation: MutationType = {
     return { web };
   },
 
-  setPageContent: async (/* args, info, { db } */) => {
+  setPageElement: async (/* args, info, { db } */) => {
     throw Error('TODO');
-    // TODO: Add validateSetPageContent. Prisma allows 256kB and we should
-    // return error for that.
     // const page = await db.mutation.updatePage({
     //   where: { id: args.input.id },
     //   data: { content: args.input.content },
