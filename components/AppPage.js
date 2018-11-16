@@ -15,6 +15,7 @@ import type { AppPage as Data } from './__generated__/AppPage.graphql';
 import Auth from './core/Auth';
 import Text from './core/Text';
 import MainNav from './MainNav';
+import IntlContext from './core/IntlContext';
 
 // yarn favicon
 const Favicons = () => [
@@ -132,46 +133,52 @@ class AppPage extends React.PureComponent<Props> {
     const isAuthenticated = data.me != null;
 
     return (
-      <ThemeContext.Provider value={theme}>
-        <Head>
-          {title != null && (
-            <title>{typeof title === 'function' ? title(intl) : title}</title>
-          )}
-          <meta name="theme-color" content={pageBackgroundColor} />
-          <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
-          <Favicons />
-        </Head>
-        {/*
+      // https://github.com/este/este/issues/1609
+      <IntlContext.Provider value={intl}>
+        <ThemeContext.Provider value={theme}>
+          <Head>
+            {title != null && (
+              <title>{typeof title === 'function' ? title(intl) : title}</title>
+            )}
+            <meta name="theme-color" content={pageBackgroundColor} />
+            <style>{` html { background-color: ${pageBackgroundColor} } `}</style>
+            <Favicons />
+          </Head>
+          {/*
           TODO: Use ScrollView https://github.com/este/este/issues/1584
           Meanwhile, we have to use position fixed.
         */}
-        <View
-          style={[theme.styles.appPageFixedHeader, AppPage.fixedPositionStyle]}
-        >
-          <PageLoadingBar color={theme.colors.primary} />
-          <ErrorPopup />
-        </View>
-        <View style={theme.styles.appPageContainer}>
-          <View style={theme.styles.appPageContainerChild}>
-            {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
-            <MainNav data={data} />
-          </View>
           <View
-            ref={this.pageBodyRef}
             style={[
-              !isEditor && theme.styles.appPageContainerChild,
-              theme.styles.appPageBody,
+              theme.styles.appPageFixedHeader,
+              AppPage.fixedPositionStyle,
             ]}
           >
-            {this.renderChildrenOrAuth(isAuthenticated)}
+            <PageLoadingBar color={theme.colors.primary} />
+            <ErrorPopup />
           </View>
-          {isEditor !== true && (
+          <View style={theme.styles.appPageContainer}>
             <View style={theme.styles.appPageContainerChild}>
-              <PageFooter theme={theme} />
+              {/* $FlowFixMe https://github.com/facebook/relay/issues/2316 */}
+              <MainNav data={data} />
             </View>
-          )}
-        </View>
-      </ThemeContext.Provider>
+            <View
+              ref={this.pageBodyRef}
+              style={[
+                !isEditor && theme.styles.appPageContainerChild,
+                theme.styles.appPageBody,
+              ]}
+            >
+              {this.renderChildrenOrAuth(isAuthenticated)}
+            </View>
+            {isEditor !== true && (
+              <View style={theme.styles.appPageContainerChild}>
+                <PageFooter theme={theme} />
+              </View>
+            )}
+          </View>
+        </ThemeContext.Provider>
+      </IntlContext.Provider>
     );
   }
 }
