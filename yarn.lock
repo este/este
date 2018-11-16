@@ -1044,9 +1044,9 @@
   integrity sha512-A2TAGbTFdBw9azHbpVd+/FkdW2T6msN1uct1O9bH3vTerEHKZhTXJUQXy+hNq1B0RagfU8U+KBdqiZpxjhOUQA==
 
 "@types/node@*", "@types/node@^10.12.0":
-  version "10.12.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.8.tgz#d0a3ab5a6e61458c492304e2776ac136b81db927"
-  integrity sha512-INamyRZG4rW3lDCUmwVd5Xho/bXvQm/v1yP8V0UN1RuInU7RoWoaO570b+yLX4Ia/0szsx1wa8VzcsVlsvbWLA==
+  version "10.12.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.9.tgz#a07bfa74331471e1dc22a47eb72026843f7b95c8"
+  integrity sha512-eajkMXG812/w3w4a1OcBlaTwsFPO5F7fJ/amy+tieQxEMWBlbV1JGSjkFM+zkHNf81Cad+dfIRA+IBkvmvdAeA==
 
 "@types/prettier@^1.13.2":
   version "1.13.2"
@@ -1841,9 +1841,9 @@ aws-lambda@^0.1.2:
     dotenv "^0.4.0"
 
 aws-sdk@^*:
-  version "2.356.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.356.0.tgz#491ec8f47a722ffdd2ac553895f012caef8022aa"
-  integrity sha512-s/VjKcmvF1Dh4G3eFI7BEiNaqNs38TqdpxInAK/89AyTpbuEeo1e0ErDUn6+EqdwePhbC6AuLtFTOUv/PlSJ+A==
+  version "2.357.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.357.0.tgz#1c13a2b8162f837aa500ba27094d1146405bc6cd"
+  integrity sha512-XXzIdfPV22cHJmyAFVcQmmz6eWNa5jLaUrOve9VYIr2w0eaSwtkwG3Jv1UAorQ31Kj7glGw28zs5jWddMlBqKQ==
   dependencies:
     buffer "4.9.1"
     events "1.1.1"
@@ -2149,9 +2149,9 @@ babel-plugin-react-intl@^3.0.1:
     mkdirp "^0.5.1"
 
 babel-plugin-react-native-web@^0.9.0:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.7.tgz#4b405240753c44fd1a860d48710939ef0a18b5aa"
-  integrity sha512-AFTt5LYUEm0WvYN4AIEpDTwGu+jOTQf+m1yrlknIPbCC281Vzz7Xoya7btjr5QKqAnxOHL18Q+VN1CpOLONfrA==
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-native-web/-/babel-plugin-react-native-web-0.9.8.tgz#8ca37e984b055c53e8c532270272d9b06dc45a0e"
+  integrity sha512-Zdv/qUOsmWQSTAsm19TzvKiu0BWoIYUOt46zEGLk5fk0uWhjlvovLDaJAHGATDLSW9KnsDL1tQxpTZzunSsriQ==
 
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
@@ -5444,9 +5444,9 @@ flat-cache@^1.2.1:
     write "^0.2.1"
 
 flatmap-stream@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/flatmap-stream/-/flatmap-stream-0.1.1.tgz#d34f39ef3b9aa5a2fc225016bd3adf28ac5ae6ea"
-  integrity sha512-lAq4tLbm3sidmdCN8G3ExaxH7cUCtP5mgDvrYowsx84dcYkJJ4I28N7gkxA6+YlSXzaGLJYIDEi9WGfXzMiXdw==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/flatmap-stream/-/flatmap-stream-0.1.2.tgz#b1da359a93f24f6d96e46f948552d997e3c2863d"
+  integrity sha512-ucyr6WkLXjyMuHPtOUq4l+nSAxgWi7v4QO508eQ9resnGj+lSup26oIsUI5aH8k4Qfpjsxa8dDf9UCKkS2KHzQ==
 
 flow-bin@^0.86.0:
   version "0.86.0"
@@ -10693,9 +10693,9 @@ react-is@^16.6.3:
   integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
 
 react-native-web@^0.9.0:
-  version "0.9.7"
-  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.7.tgz#6cb0e453243509a944ec11ecd9a96e66bc2b2161"
-  integrity sha512-fEJWQsUzggBt5ZkcyEniCALsnE018n7sFv3IywmLX5msRaU/swvFAJePn0PT3uaveLJToGiZxl3RaC7vFallkA==
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.9.8.tgz#a87531277d40df48257f73d0a2bbc54d2a400df3"
+  integrity sha512-Z0B8FvOpVF8pzaFdtW769wEM/v1tzskQ85bDifI6wlZvx6Yyl855sUOsTNKPsA1FkaSCGz+8A2WEy0bnSNC1pA==
   dependencies:
     array-find-index "^1.0.2"
     create-react-class "^15.6.2"
