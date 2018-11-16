@@ -1,7 +1,7 @@
 // @flow
 import React, { type Node } from 'react';
 import { View } from 'react-native';
-import useTheme from './useTheme';
+import useTheme from '../../hooks/useTheme';
 
 // Put some space between those components for God's sake!
 // The most sane approach I guess. Can't believe CSS ignores this use case.

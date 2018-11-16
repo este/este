@@ -1,8 +1,8 @@
 // @flow
 /* eslint-env browser */
 import React, { useState, useEffect } from 'react';
-import useTheme from '../core/useTheme';
-import usePortal from '../core/usePortal';
+import useTheme from '../../hooks/useTheme';
+import usePortal from '../../hooks/usePortal';
 import { findDOMNode } from 'slate-react';
 import { View } from 'react-native';
 

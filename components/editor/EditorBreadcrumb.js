@@ -2,7 +2,7 @@
 // $FlowFixMe
 import React, { useState, useMemo, memo } from 'react';
 import { View, StyleSheet } from 'react-native';
-import useTheme from '../core/useTheme';
+import useTheme from '../../hooks/useTheme';
 import Button from '../core/Button';
 import Row from '../core/Row';
 import withRovingTabIndex from '../core/withRovingTabIndex';

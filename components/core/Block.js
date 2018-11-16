@@ -1,6 +1,6 @@
 // @flow
 import React, { type Node } from 'react';
-import useTheme from './useTheme';
+import useTheme from '../../hooks/useTheme';
 import { View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 

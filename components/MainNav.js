@@ -7,7 +7,7 @@ import type { MainNav as Data } from './__generated__/MainNav.graphql';
 import { titles } from '../browser/sitemap';
 import Spacer from './core/Spacer';
 import { FormattedMessage } from 'react-intl';
-import useTheme from './core/useTheme';
+import useTheme from '../hooks/useTheme';
 import Gravatar from './core/Gravatar';
 
 type MainNavProps = {|
