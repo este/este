@@ -1,22 +1,17 @@
 // @flow
-import * as React from 'react';
-import Heading from './Heading';
-import TextInput from './TextInput';
-import { SignInButton, SignUpButton } from './buttons';
-import Router from 'next/router';
-import withMutation from './withMutation';
-import { setCookie } from '../../browser/cookie';
-import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import type { Href } from '../../browser/sitemap';
-import Row from './Row';
-import Block from './Block';
-import * as validations from '../../validations';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import { pipe } from 'ramda';
-import AuthMutation, {
-  type AuthCommit,
-  type AuthErrors,
-} from '../../mutations/AuthMutation';
+import Heading from './Heading';
+import Block from './Block';
+import TextInput from './TextInput';
+import Row from './Row';
+import { SignInButton, SignUpButton } from './buttons';
+import { defineMessages } from 'react-intl';
+import type { Href } from '../../browser/sitemap';
+import useIntl from '../../hooks/useIntl';
+import { useAuthMutation } from '../../mutations/AuthMutation';
+import Router from 'next/router';
+import { setCookie } from '../../browser/cookie';
 
 const messages = defineMessages({
   emailPlaceholder: {
@@ -31,125 +26,75 @@ const messages = defineMessages({
 
 type AuthProps = {|
   redirectUrl?: Href,
-  intl: IntlShape,
-  commit: AuthCommit,
-  pending: boolean,
 |};
 
-type AuthState = {|
-  errors: AuthErrors,
-  email: string,
-  password: string,
-|};
+export default function Auth(props: AuthProps) {
+  const intl = useIntl();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [commit, errors, pending] = useAuthMutation();
 
-class Auth extends React.PureComponent<AuthProps, AuthState> {
-  static initialState = {
-    errors: null,
-    email: '',
-    password: '',
-  };
-
-  state = Auth.initialState;
-
-  setEmail = email => this.setState({ email });
-  setPassword = password => this.setState({ password });
-
-  handleCompleted = ({ auth }) => {
-    if (!auth) return;
-    if (auth.errors) {
-      this.setState({ errors: auth.errors });
-      return;
-    }
-    const { token } = auth;
-    if (token == null) return;
-    setCookie({ token });
-    if (Router.query.redirectUrl) {
-      Router.replace(Router.query.redirectUrl);
-    } else if (this.props.redirectUrl) {
-      // $FlowFixMe Wrong libdef.
-      Router.replace(this.props.redirectUrl);
-    } else {
-      // $FlowFixMe Wrong libdef.
-      Router.replace({
-        pathname: Router.pathname,
-        query: Router.query,
-      });
-    }
-  };
-
-  handleSignIn = () => {
-    this.auth(false);
-  };
-
-  handleSignUp = () => {
-    this.auth(true);
-  };
-
-  auth(isSignUp: boolean) {
-    const input = {
-      email: this.state.email,
-      password: this.state.password,
-      isSignUp,
-    };
-
-    const errors = validations.validateAuth(input);
-    if (errors) {
-      this.setState({ errors });
-      return;
-    }
-
-    this.props.commit(input, this.handleCompleted);
+  function auth(isSignUp = false) {
+    commit({ email, password, isSignUp }, auth => {
+      const { token } = auth;
+      if (token == null) return;
+      setCookie({ token });
+      // TODO: Typed useRouter.
+      if (Router.query.redirectUrl) {
+        Router.replace(Router.query.redirectUrl);
+      } else if (props.redirectUrl) {
+        // $FlowFixMe Wrong libdef.
+        Router.replace(props.redirectUrl);
+      } else {
+        // $FlowFixMe Wrong libdef.
+        Router.replace({
+          pathname: Router.pathname,
+          query: Router.query,
+        });
+      }
+    });
   }
 
-  render() {
-    const { intl } = this.props;
-    const { errors } = this.state;
-    return (
-      <View>
-        <Heading size={1}>Auth</Heading>
-        <Block>
-          <TextInput
-            autoComplete="email"
-            disabled={this.props.pending}
-            error={errors && errors.email}
-            focusOnError={errors}
-            keyboardType="email-address"
-            name="email"
-            onChangeText={this.setEmail}
-            placeholder={intl.formatMessage(messages.emailPlaceholder)}
-            value={this.state.email}
-            onSubmitEditing={this.handleSignIn}
+  return (
+    <View>
+      <Heading size={1}>Auth</Heading>
+      <Block>
+        <TextInput
+          autoComplete="email"
+          disabled={pending}
+          error={errors && errors.email}
+          focusOnError={errors}
+          keyboardType="email-address"
+          name="email"
+          onChangeText={setEmail}
+          placeholder={intl.formatMessage(messages.emailPlaceholder)}
+          value={email}
+          onSubmitEditing={() => auth()}
+        />
+        <TextInput
+          disabled={pending}
+          error={errors && errors.password}
+          focusOnError={errors}
+          name="password"
+          onChangeText={setPassword}
+          placeholder={intl.formatMessage(messages.passwordPlaceholder)}
+          secureTextEntry
+          value={password}
+          onSubmitEditing={() => auth()}
+        />
+        <Row>
+          <SignInButton
+            disabled={pending}
+            onPress={() => auth()}
+            color="primary"
           />
-          <TextInput
-            disabled={this.props.pending}
-            error={errors && errors.password}
-            focusOnError={errors}
-            name="password"
-            onChangeText={this.setPassword}
-            placeholder={intl.formatMessage(messages.passwordPlaceholder)}
-            secureTextEntry
-            value={this.state.password}
-            onSubmitEditing={this.handleSignIn}
+          <SignUpButton
+            disabled={pending}
+            onPress={() => auth(true)}
+            color="primary"
           />
-          <Row>
-            <SignInButton
-              disabled={this.props.pending}
-              onPress={this.handleSignIn}
-              color="primary"
-            />
-            <SignUpButton
-              disabled={this.props.pending}
-              onPress={this.handleSignUp}
-              color="primary"
-            />
-          </Row>
-        </Block>
-      </View>
-    );
-  }
+        </Row>
+      </Block>
+    </View>
+  );
 }
-
-export default pipe(
-  injectIntl,
-  withMutation(AuthMutation),
-)(Auth);

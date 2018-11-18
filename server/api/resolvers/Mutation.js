@@ -1,19 +1,14 @@
 // @flow
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
+// TODO: Remove
 import * as validations from '../../../validations';
+import validateAuth from '../../../validate/validateAuth';
 import type { Mutation as MutationType } from '../__generated__/api.graphql';
 
 const Mutation: MutationType = {
-  auth: async (args, info, { db }) => {
-    // Email and password must be trimmed before the validation.
-    // This is the pattern. Trim what must be stored trimmed.
-    const input = {
-      ...args.input,
-      email: args.input.email.trim(),
-      password: args.input.password.trim(),
-    };
-    const errors = validations.validateAuth(input);
+  auth: async ({ input }, info, { db }) => {
+    const errors = validateAuth(input);
     if (errors) return { errors };
     const createAuthPayload = user => ({
       token: jsonwebtoken.sign(
@@ -52,9 +47,9 @@ const Mutation: MutationType = {
 
   // Note the resolver is as minimal as possible. No userId? Return null. Easy.
   // Permissions are defined in server/api/permissions by graphql-shield.
-  createWeb: async (args, info, { userId, db }) => {
+  createWeb: async ({ input }, info, { userId, db }) => {
     if (userId == null) return null;
-    const errors = validations.validateCreateWeb(args.input);
+    const errors = validations.validateCreateWeb(input);
     if (errors) return { errors };
 
     // Fetch seed data first.
@@ -75,7 +70,7 @@ const Mutation: MutationType = {
 
     const web = await db.mutation.createWeb({
       data: {
-        name: args.input.name,
+        name: input.name,
         creator: { connect: { id: userId } },
       },
     });
@@ -235,7 +230,7 @@ const Mutation: MutationType = {
       data: {
         web: { connect: { id: web.id } },
         creator: { connect: { id: userId } },
-        title: args.input.pageTitle,
+        title: input.pageTitle,
         element: {
           create: {
             web: { connect: { id: web.id } },
@@ -338,41 +333,41 @@ const Mutation: MutationType = {
     };
   },
 
-  deleteWeb: async (args, info, { db }) => {
+  deleteWeb: async ({ input }, info, { db }) => {
     const web = await db.mutation.deleteWeb({
-      where: { id: args.input.id },
+      where: { id: input.id },
     });
     if (web == null) return null;
     return { web };
   },
 
-  setTheme: async (args, info, { userId, db }) => {
+  setTheme: async ({ input }, info, { userId, db }) => {
     if (userId == null) return null;
     const user = await db.mutation.updateUser({
-      data: { themeName: args.input.themeName },
+      data: { themeName: input.themeName },
       where: { id: userId },
     });
     if (user == null) return null;
     return { user };
   },
 
-  setPageTitle: async (args, info, { db }) => {
-    const errors = validations.validateSetPageTitle(args.input);
+  setPageTitle: async ({ input }, info, { db }) => {
+    const errors = validations.validateSetPageTitle(input);
     if (errors) return { errors };
     const page = await db.mutation.updatePage({
-      where: { id: args.input.id },
-      data: { title: args.input.title },
+      where: { id: input.id },
+      data: { title: input.title },
     });
     if (page == null) return null;
     return { page };
   },
 
-  setWebName: async (args, info, { db }) => {
-    const errors = validations.validateSetWebName(args.input);
+  setWebName: async ({ input }, info, { db }) => {
+    const errors = validations.validateSetWebName(input);
     if (errors) return { errors };
     const web = await db.mutation.updateWeb({
-      where: { id: args.input.id },
-      data: { name: args.input.name },
+      where: { id: input.id },
+      data: { name: input.name },
     });
     if (web == null) return null;
     return { web };
@@ -388,9 +383,9 @@ const Mutation: MutationType = {
     // return { page };
   },
 
-  deletePage: async (args, info, { db }) => {
+  deletePage: async ({ input }, info, { db }) => {
     const page = await db.mutation.deletePage({
-      where: { id: args.input.id },
+      where: { id: input.id },
     });
     if (page == null) return null;
     return { page };

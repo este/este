@@ -1,10 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
-import type { Commit, Errors } from '../components/core/withMutation';
 import type { AuthMutation } from './__generated__/AuthMutation.graphql';
-
-export type AuthCommit = Commit<AuthMutation>;
-export type AuthErrors = Errors<AuthMutation, 'auth'>;
+import validateAuth from '../validate/validateAuth';
+import useMutation from '../hooks/useMutation';
 
 const config = {
   mutation: graphql`
@@ -20,4 +18,6 @@ const config = {
   `,
 };
 
-export default config;
+export function useAuthMutation() {
+  return useMutation<AuthMutation, 'auth'>(config, 'auth', validateAuth);
+}

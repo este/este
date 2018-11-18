@@ -9,21 +9,21 @@ import type { BasePrismaOptions as BPOType } from 'prisma-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>; 
-    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>; 
-    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>; 
-    components(args: { where?: ComponentWhereInput, orderBy?: ComponentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<Component[]>; 
+    me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>;
+    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>;
+    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>;
+    components(args: { where?: ComponentWhereInput, orderBy?: ComponentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<Component[]>;
   }
 
 export interface Mutation {
-    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<AuthPayload | null>; 
-    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>; 
-    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>; 
-    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
-    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>; 
-    setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>; 
-    setPageElement(args: { input: SetPageElementInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageElementPayload | null>; 
-    deletePage(args: { input: DeletePageInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeletePagePayload | null>; 
+    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<AuthPayload | null>;
+    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>;
+    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>;
+    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>;
+    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>;
+    setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>;
+    setPageElement(args: { input: SetPageElementInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageElementPayload | null>;
+    deletePage(args: { input: DeletePageInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeletePagePayload | null>;
   }
 
 export interface Subscription {}
@@ -3583,7 +3583,7 @@ input WebWhereUniqueInput {
 `
 
 const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
- 
+
 
 
 /**
@@ -3595,26 +3595,26 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'ROW_REVERSE'
     | 'COLUMN'
     | 'COLUMN_REVERSE'
-  
+
 
  export type DimensionValueUnit =
     | 'POINT'
     | 'PERCENTAGE'
     | 'KEYWORD'
-  
+
 
  export type StyleFlexWrap =
     | 'WRAP'
     | 'NOWRAP'
     | 'WRAP_REVERSE'
-  
+
 
  export type PasswordError =
     | 'REQUIRED'
     | 'MIN_5_CHARS'
     | 'MAX_1024_CHARS'
     | 'WRONG_PASSWORD'
-  
+
 
  export type StyleJustifyContent =
     | 'FLEX_START'
@@ -3623,7 +3623,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'SPACE_BETWEEN'
     | 'SPACE_AROUND'
     | 'SPACE_EVENLY'
-  
+
 
  export type ComponentOrderByInput =
     | 'id_ASC'
@@ -3634,7 +3634,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleAlignItems =
     | 'FLEX_START'
@@ -3642,7 +3642,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'CENTER'
     | 'STRETCH'
     | 'BASELINE'
-  
+
 
  export type ColorValueOrderByInput =
     | 'id_ASC'
@@ -3661,7 +3661,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleAlignSelf =
     | 'AUTO'
@@ -3670,7 +3670,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'CENTER'
     | 'STRETCH'
     | 'BASELINE'
-  
+
 
  export type DimensionValueOrderByInput =
     | 'id_ASC'
@@ -3685,7 +3685,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleAlignContent =
     | 'FLEX_START'
@@ -3694,19 +3694,19 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRETCH'
     | 'SPACE_BETWEEN'
     | 'SPACE_AROUND'
-  
+
 
  export type ElementType =
     | 'BLOCK'
     | 'INLINE'
     | 'TEXT'
-  
+
 
  export type StyleOverflow =
     | 'VISIBLE'
     | 'HIDDEN'
     | 'SCROLL'
-  
+
 
  export type ElementPropOrderByInput =
     | 'id_ASC'
@@ -3721,13 +3721,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleDirection =
     | 'INHERIT'
     | 'LTR'
     | 'RTL'
-  
+
 
  export type ElementOrderByInput =
     | 'id_ASC'
@@ -3742,28 +3742,28 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleBorderStyle =
     | 'SOLID'
     | 'DOTTED'
     | 'DASHED'
-  
+
 
  export type StyleDisplay =
     | 'NONE'
     | 'FLEX'
-  
+
 
  export type StyleFontStyle =
     | 'NORMAL'
     | 'ITALIC'
-  
+
 
  export type Max140CharsError =
     | 'REQUIRED'
     | 'MAX_140_CHARS'
-  
+
 
  export type StyleFontWeight =
     | 'NORMAL'
@@ -3777,7 +3777,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'INT_700'
     | 'INT_800'
     | 'INT_900'
-  
+
 
  export type BorderValueOrderByInput =
     | 'id_ASC'
@@ -3792,11 +3792,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleFontVariant =
     | 'SMALL_CAPS'
-  
+
 
  export type StyleOrderByInput =
     | 'id_ASC'
@@ -3865,7 +3865,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleTextAlign =
     | 'AUTO'
@@ -3873,7 +3873,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'RIGHT'
     | 'CENTER'
     | 'JUSTIFY'
-  
+
 
  export type ComponentPropOrderByInput =
     | 'id_ASC'
@@ -3886,23 +3886,23 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type StyleTextAlignVertical =
     | 'AUTO'
     | 'TOP'
     | 'BOTTOM'
     | 'CENTER'
-  
+
 
  export type StylePosition =
     | 'ABSOLUTE'
     | 'RELATIVE'
-  
+
 
  export type BorderValueUnit =
     | 'POINT'
-  
+
 
  export type WebOrderByInput =
     | 'id_ASC'
@@ -3913,28 +3913,28 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'name_ASC'
     | 'name_DESC'
-  
+
 
  export type StyleTextTransform =
     | 'NONE'
     | 'CAPITALIZE'
     | 'UPPERCASE'
     | 'LOWERCASE'
-  
+
 
  export type StyleTextDecorationLine =
     | 'NONE'
     | 'UNDERLINE'
     | 'LINE_THROUGH'
     | 'UNDERLINE_LINE_THROUGH'
-  
+
 
  export type EmailError =
     | 'REQUIRED'
     | 'EMAIL'
     | 'ALREADY_EXISTS'
     | 'NOT_EXISTS'
-  
+
 
  export type PageOrderByInput =
     | 'id_ASC'
@@ -3945,7 +3945,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'title_ASC'
     | 'title_DESC'
-  
+
 
  export type StyleSpreadOrderByInput =
     | 'id_ASC'
@@ -3956,7 +3956,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
-  
+
 
  export type PropType =
     | 'BOOLEAN'
@@ -3964,9 +3964,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRING'
     | 'VIEW_STYLE'
     | 'TEXT_STYLE'
-  
 
- export type ElementCreateWithoutParentInput = {| 
+
+ export type ElementCreateWithoutParentInput = {|
   type: ElementType,
   index: Int,
   textLeaves?: Json,
@@ -3977,12 +3977,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
- export type StyleSpreadCreateManyWithoutSpreadStyleInput = {| 
+ export type StyleSpreadCreateManyWithoutSpreadStyleInput = {|
   create?: Array< StyleSpreadCreateWithoutSpreadStyleInput > | StyleSpreadCreateWithoutSpreadStyleInput,
   connect?: Array< StyleSpreadWhereUniqueInput > | StyleSpreadWhereUniqueInput
 |}
 
- export type ElementCreateInput = {| 
+ export type ElementCreateInput = {|
   type: ElementType,
   index: Int,
   textLeaves?: Json,
@@ -3994,7 +3994,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
- export type ColorValueWhereInput = {| 
+ export type ColorValueWhereInput = {|
   AND?: Array< ColorValueWhereInput > | ColorValueWhereInput,
   OR?: Array< ColorValueWhereInput > | ColorValueWhereInput,
   NOT?: Array< ColorValueWhereInput > | ColorValueWhereInput,
@@ -4061,12 +4061,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type WebCreateOneWithoutElementsInput = {| 
+ export type WebCreateOneWithoutElementsInput = {|
   create?: WebCreateWithoutElementsInput,
   connect?: WebWhereUniqueInput
 |}
 
- export type BorderValueWhereInput = {| 
+ export type BorderValueWhereInput = {|
   AND?: Array< BorderValueWhereInput > | BorderValueWhereInput,
   OR?: Array< BorderValueWhereInput > | BorderValueWhereInput,
   NOT?: Array< BorderValueWhereInput > | BorderValueWhereInput,
@@ -4113,7 +4113,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type WebCreateWithoutElementsInput = {| 
+ export type WebCreateWithoutElementsInput = {|
   name: String,
   creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
@@ -4123,7 +4123,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type StyleSpreadWhereInput = {| 
+ export type StyleSpreadWhereInput = {|
   AND?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
   OR?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
   NOT?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
@@ -4153,12 +4153,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   style?: StyleWhereInput
 |}
 
- export type UserCreateOneWithoutWebsInput = {| 
+ export type UserCreateOneWithoutWebsInput = {|
   create?: UserCreateWithoutWebsInput,
   connect?: UserWhereUniqueInput
 |}
 
- export type WebCreateWithoutBorderValuesInput = {| 
+ export type WebCreateWithoutBorderValuesInput = {|
   name: String,
   creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
@@ -4168,14 +4168,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   colorValues?: ColorValueCreateManyWithoutWebInput
 |}
 
- export type UserCreateWithoutWebsInput = {| 
+ export type UserCreateWithoutWebsInput = {|
   email: String,
   password: String,
   themeName?: String,
   components?: ComponentCreateManyWithoutCreatorInput
 |}
 
- export type WebCreateWithoutColorValuesInput = {| 
+ export type WebCreateWithoutColorValuesInput = {|
   name: String,
   creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
@@ -4185,12 +4185,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type ComponentCreateManyWithoutCreatorInput = {| 
+ export type ComponentCreateManyWithoutCreatorInput = {|
   create?: Array< ComponentCreateWithoutCreatorInput > | ComponentCreateWithoutCreatorInput,
   connect?: Array< ComponentWhereUniqueInput > | ComponentWhereUniqueInput
 |}
 
- export type StyleWhereInput = {| 
+ export type StyleWhereInput = {|
   AND?: Array< StyleWhereInput > | StyleWhereInput,
   OR?: Array< StyleWhereInput > | StyleWhereInput,
   NOT?: Array< StyleWhereInput > | StyleWhereInput,
@@ -4446,22 +4446,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueWhereInput
 |}
 
- export type ComponentCreateWithoutCreatorInput = {| 
+ export type ComponentCreateWithoutCreatorInput = {|
   name: String,
   props?: ComponentPropCreateManyWithoutComponentInput
 |}
 
- export type ColorValueCreateOneInput = {| 
+ export type ColorValueCreateOneInput = {|
   create?: ColorValueCreateInput,
   connect?: ColorValueWhereUniqueInput
 |}
 
- export type ComponentPropCreateManyWithoutComponentInput = {| 
+ export type ComponentPropCreateManyWithoutComponentInput = {|
   create?: Array< ComponentPropCreateWithoutComponentInput > | ComponentPropCreateWithoutComponentInput,
   connect?: Array< ComponentPropWhereUniqueInput > | ComponentPropWhereUniqueInput
 |}
 
- export type StyleCreateWithoutWebInput = {| 
+ export type StyleCreateWithoutWebInput = {|
   name: String,
   isText?: Boolean,
   display?: StyleDisplay,
@@ -4551,51 +4551,51 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueCreateOneInput
 |}
 
- export type ComponentPropCreateWithoutComponentInput = {| 
+ export type ComponentPropCreateWithoutComponentInput = {|
   name: String,
   type: PropType
 |}
 
- export type StyleCreateManyWithoutWebInput = {| 
+ export type StyleCreateManyWithoutWebInput = {|
   create?: Array< StyleCreateWithoutWebInput > | StyleCreateWithoutWebInput,
   connect?: Array< StyleWhereUniqueInput > | StyleWhereUniqueInput
 |}
 
- export type ComponentPropWhereUniqueInput = {| 
+ export type ComponentPropWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type StyleWhereUniqueInput = {| 
+ export type StyleWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type ComponentWhereUniqueInput = {| 
+ export type ComponentWhereUniqueInput = {|
   id?: ID_Input,
   name?: String
 |}
 
- export type DimensionValueCreateInput = {| 
+ export type DimensionValueCreateInput = {|
   name?: String,
   unit: DimensionValueUnit,
   value: Int,
   web: WebCreateOneWithoutDimensionValuesInput
 |}
 
- export type UserWhereUniqueInput = {| 
+ export type UserWhereUniqueInput = {|
   id?: ID_Input,
   email?: String
 |}
 
- export type ElementPropWhereUniqueInput = {| 
+ export type ElementPropWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type PageCreateManyWithoutWebInput = {| 
+ export type PageCreateManyWithoutWebInput = {|
   create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
   connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
 |}
 
- export type PageWhereInput = {| 
+ export type PageWhereInput = {|
   AND?: Array< PageWhereInput > | PageWhereInput,
   OR?: Array< PageWhereInput > | PageWhereInput,
   NOT?: Array< PageWhereInput > | PageWhereInput,
@@ -4648,13 +4648,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   element?: ElementWhereInput
 |}
 
- export type PageCreateWithoutWebInput = {| 
+ export type PageCreateWithoutWebInput = {|
   title: String,
   creator: UserCreateOneInput,
   element: ElementCreateOneInput
 |}
 
- export type ComponentWhereInput = {| 
+ export type ComponentWhereInput = {|
   AND?: Array< ComponentWhereInput > | ComponentWhereInput,
   OR?: Array< ComponentWhereInput > | ComponentWhereInput,
   NOT?: Array< ComponentWhereInput > | ComponentWhereInput,
@@ -4692,18 +4692,18 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props_none?: ComponentPropWhereInput
 |}
 
- export type UserCreateOneInput = {| 
+ export type UserCreateOneInput = {|
   create?: UserCreateInput,
   connect?: UserWhereUniqueInput
 |}
 
- export type AuthInput = {| 
+ export type AuthInput = {|
   email: String,
   password: String,
   isSignUp: Boolean
 |}
 
- export type UserCreateInput = {| 
+ export type UserCreateInput = {|
   email: String,
   password: String,
   themeName?: String,
@@ -4711,21 +4711,21 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   components?: ComponentCreateManyWithoutCreatorInput
 |}
 
- export type ElementCreateManyWithoutParentInput = {| 
+ export type ElementCreateManyWithoutParentInput = {|
   create?: Array< ElementCreateWithoutParentInput > | ElementCreateWithoutParentInput,
   connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
 |}
 
- export type WebCreateManyWithoutCreatorInput = {| 
+ export type WebCreateManyWithoutCreatorInput = {|
   create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
   connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
 |}
 
- export type PageWhereUniqueInput = {| 
+ export type PageWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type WebCreateWithoutCreatorInput = {| 
+ export type WebCreateWithoutCreatorInput = {|
   name: String,
   pages?: PageCreateManyWithoutWebInput,
   elements?: ElementCreateManyWithoutWebInput,
@@ -4735,7 +4735,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type ElementCreateWithoutPropsInput = {| 
+ export type ElementCreateWithoutPropsInput = {|
   type: ElementType,
   index: Int,
   textLeaves?: Json,
@@ -4746,12 +4746,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   component: ComponentCreateOneInput
 |}
 
- export type ElementCreateManyWithoutWebInput = {| 
+ export type ElementCreateManyWithoutWebInput = {|
   create?: Array< ElementCreateWithoutWebInput > | ElementCreateWithoutWebInput,
   connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
 |}
 
- export type WebWhereInput = {| 
+ export type WebWhereInput = {|
   AND?: Array< WebWhereInput > | WebWhereInput,
   OR?: Array< WebWhereInput > | WebWhereInput,
   NOT?: Array< WebWhereInput > | WebWhereInput,
@@ -4820,7 +4820,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues_none?: BorderValueWhereInput
 |}
 
- export type ElementCreateWithoutWebInput = {| 
+ export type ElementCreateWithoutWebInput = {|
   type: ElementType,
   index: Int,
   textLeaves?: Json,
@@ -4831,24 +4831,24 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
- export type ElementPropCreateWithoutValueStyleInput = {| 
+ export type ElementPropCreateWithoutValueStyleInput = {|
   name: String,
   type: PropType,
   value?: String,
   element: ElementCreateOneWithoutPropsInput
 |}
 
- export type ElementCreateOneWithoutChildrenInput = {| 
+ export type ElementCreateOneWithoutChildrenInput = {|
   create?: ElementCreateWithoutChildrenInput,
   connect?: ElementWhereUniqueInput
 |}
 
- export type ElementPropCreateManyWithoutValueStyleInput = {| 
+ export type ElementPropCreateManyWithoutValueStyleInput = {|
   create?: Array< ElementPropCreateWithoutValueStyleInput > | ElementPropCreateWithoutValueStyleInput,
   connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
 |}
 
- export type ElementCreateWithoutChildrenInput = {| 
+ export type ElementCreateWithoutChildrenInput = {|
   type: ElementType,
   index: Int,
   textLeaves?: Json,
@@ -4859,7 +4859,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
- export type StyleCreateInput = {| 
+ export type StyleCreateInput = {|
   name: String,
   isText?: Boolean,
   display?: StyleDisplay,
@@ -4950,62 +4950,62 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueCreateOneInput
 |}
 
- export type SharedElementCreateOneWithoutSharedByInput = {| 
+ export type SharedElementCreateOneWithoutSharedByInput = {|
   create?: SharedElementCreateWithoutSharedByInput,
   connect?: SharedElementWhereUniqueInput
 |}
 
- export type SetWebNameInput = {| 
+ export type SetWebNameInput = {|
   id: ID_Input,
   name: String
 |}
 
- export type SharedElementCreateWithoutSharedByInput = {| 
+ export type SharedElementCreateWithoutSharedByInput = {|
   name: String,
   element: ElementCreateOneInput
 |}
 
- export type StyleSpreadCreateWithoutSpreadStyleInput = {| 
+ export type StyleSpreadCreateWithoutSpreadStyleInput = {|
   index: Int,
   style: StyleCreateOneInput
 |}
 
- export type ElementCreateOneInput = {| 
+ export type ElementCreateOneInput = {|
   create?: ElementCreateInput,
   connect?: ElementWhereUniqueInput
 |}
 
- export type WebCreateOneWithoutBorderValuesInput = {| 
+ export type WebCreateOneWithoutBorderValuesInput = {|
   create?: WebCreateWithoutBorderValuesInput,
   connect?: WebWhereUniqueInput
 |}
 
- export type ElementWhereUniqueInput = {| 
+ export type ElementWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type BorderValueCreateInput = {| 
+ export type BorderValueCreateInput = {|
   name?: String,
   unit: BorderValueUnit,
   value: Int,
   web: WebCreateOneWithoutBorderValuesInput
 |}
 
- export type SharedElementWhereUniqueInput = {| 
+ export type SharedElementWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type WebCreateOneWithoutColorValuesInput = {| 
+ export type WebCreateOneWithoutColorValuesInput = {|
   create?: WebCreateWithoutColorValuesInput,
   connect?: WebWhereUniqueInput
 |}
 
- export type ComponentCreateOneInput = {| 
+ export type ComponentCreateOneInput = {|
   create?: ComponentCreateInput,
   connect?: ComponentWhereUniqueInput
 |}
 
- export type ElementPropWhereInput = {| 
+ export type ElementPropWhereInput = {|
   AND?: Array< ElementPropWhereInput > | ElementPropWhereInput,
   OR?: Array< ElementPropWhereInput > | ElementPropWhereInput,
   NOT?: Array< ElementPropWhereInput > | ElementPropWhereInput,
@@ -5059,13 +5059,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   valueStyle?: StyleWhereInput
 |}
 
- export type ComponentCreateInput = {| 
+ export type ComponentCreateInput = {|
   name: String,
   creator: UserCreateOneWithoutComponentsInput,
   props?: ComponentPropCreateManyWithoutComponentInput
 |}
 
- export type WebCreateWithoutDimensionValuesInput = {| 
+ export type WebCreateWithoutDimensionValuesInput = {|
   name: String,
   creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
@@ -5075,24 +5075,24 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type UserCreateOneWithoutComponentsInput = {| 
+ export type UserCreateOneWithoutComponentsInput = {|
   create?: UserCreateWithoutComponentsInput,
   connect?: UserWhereUniqueInput
 |}
 
- export type DimensionValueCreateOneInput = {| 
+ export type DimensionValueCreateOneInput = {|
   create?: DimensionValueCreateInput,
   connect?: DimensionValueWhereUniqueInput
 |}
 
- export type UserCreateWithoutComponentsInput = {| 
+ export type UserCreateWithoutComponentsInput = {|
   email: String,
   password: String,
   themeName?: String,
   webs?: WebCreateManyWithoutCreatorInput
 |}
 
- export type ComponentPropWhereInput = {| 
+ export type ComponentPropWhereInput = {|
   AND?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
   OR?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
   NOT?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
@@ -5131,37 +5131,37 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   component?: ComponentWhereInput
 |}
 
- export type ElementPropCreateManyWithoutElementInput = {| 
+ export type ElementPropCreateManyWithoutElementInput = {|
   create?: Array< ElementPropCreateWithoutElementInput > | ElementPropCreateWithoutElementInput,
   connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
 |}
 
- export type DeletePageInput = {| 
+ export type DeletePageInput = {|
   id: ID_Input
 |}
 
- export type ElementPropCreateWithoutElementInput = {| 
+ export type ElementPropCreateWithoutElementInput = {|
   name: String,
   type: PropType,
   value?: String,
   valueStyle?: StyleCreateOneWithoutPropsInput
 |}
 
- export type CreateWebInput = {| 
+ export type CreateWebInput = {|
   name: String,
   pageTitle: String
 |}
 
- export type StyleCreateOneWithoutPropsInput = {| 
+ export type StyleCreateOneWithoutPropsInput = {|
   create?: StyleCreateWithoutPropsInput,
   connect?: StyleWhereUniqueInput
 |}
 
- export type DeleteWebInput = {| 
+ export type DeleteWebInput = {|
   id: ID_Input
 |}
 
- export type StyleCreateWithoutPropsInput = {| 
+ export type StyleCreateWithoutPropsInput = {|
   name: String,
   isText?: Boolean,
   display?: StyleDisplay,
@@ -5251,22 +5251,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueCreateOneInput
 |}
 
- export type SetPageTitleInput = {| 
+ export type SetPageTitleInput = {|
   id: ID_Input,
   title: String
 |}
 
- export type WebCreateOneWithoutStylesInput = {| 
+ export type WebCreateOneWithoutStylesInput = {|
   create?: WebCreateWithoutStylesInput,
   connect?: WebWhereUniqueInput
 |}
 
- export type StyleCreateOneInput = {| 
+ export type StyleCreateOneInput = {|
   create?: StyleCreateInput,
   connect?: StyleWhereUniqueInput
 |}
 
- export type WebCreateWithoutStylesInput = {| 
+ export type WebCreateWithoutStylesInput = {|
   name: String,
   creator: UserCreateOneWithoutWebsInput,
   pages?: PageCreateManyWithoutWebInput,
@@ -5276,7 +5276,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type DimensionValueWhereInput = {| 
+ export type DimensionValueWhereInput = {|
   AND?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
   OR?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
   NOT?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
@@ -5323,12 +5323,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type DimensionValueCreateManyWithoutWebInput = {| 
+ export type DimensionValueCreateManyWithoutWebInput = {|
   create?: Array< DimensionValueCreateWithoutWebInput > | DimensionValueCreateWithoutWebInput,
   connect?: Array< DimensionValueWhereUniqueInput > | DimensionValueWhereUniqueInput
 |}
 
- export type ColorValueCreateInput = {| 
+ export type ColorValueCreateInput = {|
   name?: String,
   r: Int,
   g: Int,
@@ -5337,22 +5337,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web: WebCreateOneWithoutColorValuesInput
 |}
 
- export type DimensionValueCreateWithoutWebInput = {| 
+ export type DimensionValueCreateWithoutWebInput = {|
   name?: String,
   unit: DimensionValueUnit,
   value: Int
 |}
 
- export type WebCreateOneWithoutDimensionValuesInput = {| 
+ export type WebCreateOneWithoutDimensionValuesInput = {|
   create?: WebCreateWithoutDimensionValuesInput,
   connect?: WebWhereUniqueInput
 |}
 
- export type DimensionValueWhereUniqueInput = {| 
+ export type DimensionValueWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type UserWhereInput = {| 
+ export type UserWhereInput = {|
   AND?: Array< UserWhereInput > | UserWhereInput,
   OR?: Array< UserWhereInput > | UserWhereInput,
   NOT?: Array< UserWhereInput > | UserWhereInput,
@@ -5436,26 +5436,26 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   components_none?: ComponentWhereInput
 |}
 
- export type ColorValueCreateManyWithoutWebInput = {| 
+ export type ColorValueCreateManyWithoutWebInput = {|
   create?: Array< ColorValueCreateWithoutWebInput > | ColorValueCreateWithoutWebInput,
   connect?: Array< ColorValueWhereUniqueInput > | ColorValueWhereUniqueInput
 |}
 
- export type ElementCreateOneWithoutPropsInput = {| 
+ export type ElementCreateOneWithoutPropsInput = {|
   create?: ElementCreateWithoutPropsInput,
   connect?: ElementWhereUniqueInput
 |}
 
- export type SetPageElementInput = {| 
+ export type SetPageElementInput = {|
   id: ID_Input,
   element: ElementCreateInput
 |}
 
- export type WebWhereUniqueInput = {| 
+ export type WebWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type ColorValueCreateWithoutWebInput = {| 
+ export type ColorValueCreateWithoutWebInput = {|
   name?: String,
   r: Int,
   g: Int,
@@ -5463,39 +5463,39 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   a?: Float
 |}
 
- export type BorderValueWhereUniqueInput = {| 
+ export type BorderValueWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type BorderValueCreateWithoutWebInput = {| 
+ export type BorderValueCreateWithoutWebInput = {|
   name?: String,
   unit: BorderValueUnit,
   value: Int
 |}
 
- export type BorderValueCreateManyWithoutWebInput = {| 
+ export type BorderValueCreateManyWithoutWebInput = {|
   create?: Array< BorderValueCreateWithoutWebInput > | BorderValueCreateWithoutWebInput,
   connect?: Array< BorderValueWhereUniqueInput > | BorderValueWhereUniqueInput
 |}
 
- export type ColorValueWhereUniqueInput = {| 
+ export type ColorValueWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type BorderValueCreateOneInput = {| 
+ export type BorderValueCreateOneInput = {|
   create?: BorderValueCreateInput,
   connect?: BorderValueWhereUniqueInput
 |}
 
- export type SetThemeInput = {| 
+ export type SetThemeInput = {|
   themeName: String
 |}
 
- export type StyleSpreadWhereUniqueInput = {| 
+ export type StyleSpreadWhereUniqueInput = {|
   id?: ID_Input
 |}
 
- export type ElementWhereInput = {| 
+ export type ElementWhereInput = {|
   AND?: Array< ElementWhereInput > | ElementWhereInput,
   OR?: Array< ElementWhereInput > | ElementWhereInput,
   NOT?: Array< ElementWhereInput > | ElementWhereInput,
@@ -5537,7 +5537,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   props_none?: ElementPropWhereInput
 |}
 
- export type SharedElementWhereInput = {| 
+ export type SharedElementWhereInput = {|
   AND?: Array< SharedElementWhereInput > | SharedElementWhereInput,
   OR?: Array< SharedElementWhereInput > | SharedElementWhereInput,
   NOT?: Array< SharedElementWhereInput > | SharedElementWhereInput,
@@ -5579,20 +5579,20 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  * An object with an ID
 
 */
- export type Node = {| 
+ export type Node = {|
    id: ID_Output,
 |}
 
- export type SetPageTitleErrors = {| 
+ export type SetPageTitleErrors = {|
    title?: Max140CharsError,
 |}
 
- export type DeletePagePayload = {| 
+ export type DeletePagePayload = {|
    page?: Page,
 |}
 
  export type ComponentProp = {| ...Node,
- 
+
    id: ID_Output,
    component: Component,
    name: String,
@@ -5600,7 +5600,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type User = {| ...Node,
- 
+
    id: ID_Output,
    webs?: Web[],
    createdAt: DateTime,
@@ -5612,41 +5612,41 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type Component = {| ...Node,
- 
+
    id: ID_Output,
    name: String,
    creator: User,
    props?: ComponentProp[],
 |}
 
- export type SetWebNameErrors = {| 
+ export type SetWebNameErrors = {|
    name?: Max140CharsError,
 |}
 
  export type SharedElement = {| ...Node,
- 
+
    id: ID_Output,
    sharedBy?: Element[],
    name: String,
    element: Element,
 |}
 
- export type SetPageTitlePayload = {| 
+ export type SetPageTitlePayload = {|
    errors?: SetPageTitleErrors,
    page?: Page,
 |}
 
- export type DeleteWebPayload = {| 
+ export type DeleteWebPayload = {|
    web?: Web,
 |}
 
- export type CreateWebPayload = {| 
+ export type CreateWebPayload = {|
    errors?: CreateWebErrors,
    pageId?: ID_Output,
 |}
 
  export type Element = {| ...Node,
- 
+
    id: ID_Output,
    type: ElementType,
    index: Int,
@@ -5659,14 +5659,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    props?: ElementProp[],
 |}
 
- export type AuthPayload = {| 
+ export type AuthPayload = {|
    errors?: AuthErrors,
    token?: String,
    user?: User,
 |}
 
  export type Page = {| ...Node,
- 
+
    id: ID_Output,
    creator: User,
    web: Web,
@@ -5677,7 +5677,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ColorValue = {| ...Node,
- 
+
    id: ID_Output,
    web: Web,
    name?: String,
@@ -5688,7 +5688,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type Web = {| ...Node,
- 
+
    id: ID_Output,
    creator: User,
    pages?: Page[],
@@ -5703,24 +5703,24 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type StyleSpread = {| ...Node,
- 
+
    id: ID_Output,
    spreadStyle: Style,
    index: Int,
    style: Style,
 |}
 
- export type SetPageElementPayload = {| 
+ export type SetPageElementPayload = {|
    page?: Page,
 |}
 
- export type SetWebNamePayload = {| 
+ export type SetWebNamePayload = {|
    errors?: SetWebNameErrors,
    web?: Web,
 |}
 
  export type Style = {| ...Node,
- 
+
    id: ID_Output,
    web: Web,
    props?: ElementProp[],
@@ -5813,7 +5813,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type DimensionValue = {| ...Node,
- 
+
    id: ID_Output,
    web: Web,
    name?: String,
@@ -5822,7 +5822,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type BorderValue = {| ...Node,
- 
+
    id: ID_Output,
    web: Web,
    name?: String,
@@ -5830,22 +5830,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    value: Int,
 |}
 
- export type AuthErrors = {| 
+ export type AuthErrors = {|
    email?: EmailError,
    password?: PasswordError,
 |}
 
- export type CreateWebErrors = {| 
+ export type CreateWebErrors = {|
    name?: Max140CharsError,
    pageTitle?: Max140CharsError,
 |}
 
- export type SetThemePayload = {| 
+ export type SetThemePayload = {|
    user?: User,
 |}
 
  export type ElementProp = {| ...Node,
- 
+
    id: ID_Output,
    element: Element,
    name: String,
@@ -5855,14 +5855,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 */
- export type Float = number 
+ export type Float = number
 
 /*
 Raw JSON value
 */
- export type Json = string 
+ export type Json = string
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -5873,16 +5873,16 @@ export type ID_Output = string
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
- export type Boolean = boolean 
+ export type Boolean = boolean
 
- export type DateTime = Date | string 
+ export type DateTime = Date | string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
- export type String = string 
+ export type String = string
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
- export type Int = number 
+ export type Int = number

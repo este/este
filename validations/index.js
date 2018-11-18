@@ -1,5 +1,6 @@
 // @flow
 import isEmail from 'validator/lib/isEmail';
+// TOHLE? imho komplet zbytecne!
 import type {
   AuthInput,
   CreateWebInput,
@@ -7,17 +8,14 @@ import type {
   SetWebNameInput,
 } from '../server/api/__generated__/api.graphql';
 
-// The most simple and universal validation ever.
-// Note STRING_CONSTANTS are not magic, Flow checks their usage.
+// is je blbost, je to validate.required, ok
+export function required(value: string) {
+  return value.length === 0 ? 'REQUIRED' : null;
+}
 
-// What about optional? I suppose optional fields is matter of UI.
-// If something is optional, user should explicitly tap to some button to
-// add such field, and then, the field should be required.
-
-const required = value => (value.length === 0 ? 'REQUIRED' : null);
-
-const min5Chars = value =>
-  required(value) || (value.length < 5 ? 'MIN_5_CHARS' : null);
+function min5Chars(value) {
+  return required(value) || (value.length < 5 ? 'MIN_5_CHARS' : null);
+}
 
 const email = (value: string) =>
   required(value) || (!isEmail(value) ? 'EMAIL' : null);

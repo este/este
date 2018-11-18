@@ -40,5 +40,7 @@ module.exports = {
     'no-nested-ternary': 0, // That's fine.
     'react/no-multi-comp': 0, // That's fine.
     'react-hooks/rules-of-hooks': 'error',
+    'import/prefer-default-export': 0, // That's fine.
+    'import/no-useless-path-segments': 0, // Buggy. It recommends '.' instead of './'.
   },
 };
