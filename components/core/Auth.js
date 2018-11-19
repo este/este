@@ -32,7 +32,7 @@ export default function Auth(props: AuthProps) {
   const intl = useIntl();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [commit, errors, pending] = useAuthMutation();
+  const [commit, pending, errors] = useAuthMutation();
 
   function auth(isSignUp = false) {
     commit({ email, password, isSignUp }, auth => {

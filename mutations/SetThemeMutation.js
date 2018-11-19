@@ -1,9 +1,7 @@
 // @flow
 import { graphql } from 'react-relay';
-import type { Commit } from '../components/core/withMutation';
 import type { SetThemeMutation } from './__generated__/SetThemeMutation.graphql';
-
-export type SetThemeCommit = Commit<SetThemeMutation>;
+import useMutation from '../hooks/useMutation';
 
 const config = {
   mutation: graphql`
@@ -17,4 +15,6 @@ const config = {
   `,
 };
 
-export default config;
+export function useSetThemeMutation() {
+  return useMutation<SetThemeMutation, 'setTheme'>(config, 'setTheme');
+}

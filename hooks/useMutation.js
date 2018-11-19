@@ -52,7 +52,7 @@ type Errors<Mutation, Name> = ?$Shape<
 
 type Commit<Mutation, Name> = (
   input: Input<Mutation>,
-  onSuccess: (
+  onSuccess: ?(
     $NonMaybeType<$ElementType<$ElementType<Mutation, 'response'>, Name>>,
   ) => void,
 ) => void;
@@ -63,7 +63,7 @@ export default function useMutation<Mutation: Object, Name: string>(
   config: Config,
   name: Name,
   validate?: (Input<Mutation>) => Errors<Mutation, Name>,
-): [Commit<Mutation, Name>, Errors<Mutation, Name>, boolean] {
+): [Commit<Mutation, Name>, boolean, Errors<Mutation, Name>] {
   const environment = useRelayEnvironment();
   const disposableRef = useRef<Disposable>(null);
   const [errors, setErrors] = useState<Errors<Mutation, Name>>(null);
@@ -104,5 +104,5 @@ export default function useMutation<Mutation: Object, Name: string>(
     });
   }
 
-  return [commit, errors, pending];
+  return [commit, pending, errors];
 }

@@ -1,45 +1,24 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import Button from './Button';
+import useTheme from '../../hooks/useTheme';
 import { lightTheme } from '../../themes/theme';
-import withTheme, { type Theme } from './withTheme';
-import withMutation from './withMutation';
-import SetThemeMutation, {
-  type SetThemeCommit,
-} from '../../mutations/SetThemeMutation';
-import { pipe } from 'ramda';
+import { useSetThemeMutation } from '../../mutations/SetThemeMutation';
 
-type SetThemeProps = {|
-  commit: SetThemeCommit,
-  pending: boolean,
-  theme: Theme,
-|};
+export default function SetTheme() {
+  const theme = useTheme();
+  const [commit, pending] = useSetThemeMutation();
 
-class SetTheme extends React.PureComponent<SetThemeProps> {
-  getThemeToogleName() {
-    return this.props.theme === lightTheme ? 'Dark' : 'Light';
+  const toggleThemeName = theme === lightTheme ? 'Dark' : 'Light';
+
+  function toggleTheme() {
+    const themeName = toggleThemeName.toLowerCase();
+    commit({ themeName });
   }
 
-  handleButtonPress = () => {
-    const themeName = this.getThemeToogleName().toLowerCase();
-    this.props.commit({ themeName });
-  };
-
-  render() {
-    const themeName = this.getThemeToogleName();
-    return (
-      <Button
-        color="primary"
-        onPress={this.handleButtonPress}
-        disabled={this.props.pending}
-      >
-        {`${themeName} Theme`}
-      </Button>
-    );
-  }
+  return (
+    <Button color="primary" onPress={() => toggleTheme()} disabled={pending}>
+      {`${toggleThemeName} Theme`}
+    </Button>
+  );
 }
-
-export default pipe(
-  withTheme,
-  withMutation(SetThemeMutation),
-)(SetTheme);

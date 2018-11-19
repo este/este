@@ -1,8 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
 import type { AuthMutation } from './__generated__/AuthMutation.graphql';
-import validateAuth from '../validate/validateAuth';
 import useMutation from '../hooks/useMutation';
+import validateAuth from '../validate/validateAuth';
 
 const config = {
   mutation: graphql`
