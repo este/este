@@ -75,6 +75,20 @@ export default function useMutation<Mutation: Object, Name: string>(
     };
   }, []);
 
+  function createOnCompleted(onSuccess) {
+    return function onCompleted(response /* , payloadErrors */) {
+      setPending(false);
+      // Flow type refinement because of mixed.
+      if (typeof response !== 'object' || response == null) return;
+      const data = response[name];
+      if (typeof data !== 'object' || data == null) return;
+      const { errors } = data;
+      setErrors(errors);
+      if (errors != null) return;
+      if (onSuccess) onSuccess(data);
+    };
+  }
+
   function commit(input, onSuccess) {
     if (validate) {
       const errors = validate(input);
@@ -87,17 +101,7 @@ export default function useMutation<Mutation: Object, Name: string>(
     disposableRef.current = commitMutation<mixed>(environment, {
       ...config,
       variables: { input },
-      onCompleted(response /* , payloadErrors */) {
-        setPending(false);
-        // Flow type refinement because of mixed.
-        if (typeof response !== 'object' || response == null) return;
-        const data = response[name];
-        if (typeof data !== 'object' || data == null) return;
-        const { errors } = data;
-        setErrors(errors);
-        if (errors != null) return;
-        if (onSuccess) onSuccess(data);
-      },
+      onCompleted: createOnCompleted(onSuccess),
       onError(/* error */) {
         setPending(false);
       },
