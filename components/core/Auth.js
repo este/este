@@ -32,7 +32,7 @@ export default function Auth(props: AuthProps) {
   const intl = useIntl();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [commit, pending, errors] = useAuthMutation();
+  const [commit, errors, pending] = useAuthMutation();
 
   function onSuccess(auth) {
     const { token } = auth;

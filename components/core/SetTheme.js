@@ -7,7 +7,7 @@ import { useSetThemeMutation } from '../../mutations/SetThemeMutation';
 
 export default function SetTheme() {
   const theme = useTheme();
-  const [commit, pending] = useSetThemeMutation();
+  const [commit, , pending] = useSetThemeMutation();
 
   const toggleThemeName = theme === lightTheme ? 'Dark' : 'Light';
 

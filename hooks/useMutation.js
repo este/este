@@ -63,7 +63,7 @@ export default function useMutation<Mutation: Object, Name: string>(
   config: Config,
   name: Name,
   validate?: (Input<Mutation>) => Errors<Mutation, Name>,
-): [Commit<Mutation, Name>, boolean, Errors<Mutation, Name>] {
+): [Commit<Mutation, Name>, Errors<Mutation, Name>, boolean] {
   const environment = useRelayEnvironment();
   const disposableRef = useRef<Disposable>(null);
   const [errors, setErrors] = useState<Errors<Mutation, Name>>(null);
@@ -108,5 +108,8 @@ export default function useMutation<Mutation: Object, Name: string>(
     });
   }
 
-  return [commit, pending, errors];
+  // Pending is last, because mutations should be optimistic.
+  // We can omit errors:
+  // const [commit, , pending] = useFooMutation();
+  return [commit, errors, pending];
 }

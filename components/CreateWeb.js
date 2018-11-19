@@ -24,7 +24,7 @@ export default function CreateWeb() {
   const intl = useIntl();
   const [name, setName] = useState('');
   const [disabled, setDisabled] = useState(false);
-  const [commit, pending, errors] = useCreateWebMutation();
+  const [commit, errors, pending] = useCreateWebMutation();
 
   function onSuccess(createWeb) {
     const { pageId } = createWeb;

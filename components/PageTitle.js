@@ -19,7 +19,7 @@ function PageTitle(props: { data: Data }) {
   const { data } = props;
   const intl = useIntl();
   const commitLocalUpdate = useCommitLocalUpdate();
-  const [commit, pending, errors] = useSetPageTitleMutation();
+  const [commit, errors] = useSetPageTitleMutation();
 
   function handleChangeText(text) {
     commitLocalUpdate(updater => {
