@@ -765,8 +765,8 @@ input ComponentWhereUniqueInput {
 }
 
 type CreateWebErrors {
-  name: Min5Max140CharsError
-  pageTitle: Min5Max140CharsError
+  name: Max140CharsError
+  pageTitle: Max140CharsError
 }
 
 input CreateWebInput {
@@ -1394,9 +1394,8 @@ enum EmailError {
 """Raw JSON value"""
 scalar Json
 
-enum Min5Max140CharsError {
+enum Max140CharsError {
   REQUIRED
-  MIN_5_CHARS
   MAX_140_CHARS
 }
 
@@ -1623,7 +1622,7 @@ type SetPageElementPayload {
 }
 
 type SetPageTitleErrors {
-  title: Min5Max140CharsError
+  title: Max140CharsError
 }
 
 input SetPageTitleInput {
@@ -1645,7 +1644,7 @@ type SetThemePayload {
 }
 
 type SetWebNameErrors {
-  name: Min5Max140CharsError
+  name: Max140CharsError
 }
 
 input SetWebNameInput {
@@ -3717,9 +3716,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'NOT_EXISTS'
   
 
- export type Min5Max140CharsError =
+ export type Max140CharsError =
     | 'REQUIRED'
-    | 'MIN_5_CHARS'
     | 'MAX_140_CHARS'
   
 
@@ -5633,8 +5631,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type CreateWebErrors = {| 
-   name?: Min5Max140CharsError,
-   pageTitle?: Min5Max140CharsError,
+   name?: Max140CharsError,
+   pageTitle?: Max140CharsError,
 |}
 
  export type CreateWebPayload = {| 
@@ -5699,7 +5697,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type SetPageTitleErrors = {| 
-   title?: Min5Max140CharsError,
+   title?: Max140CharsError,
 |}
 
  export type SetPageTitlePayload = {| 
@@ -5712,7 +5710,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type SetWebNameErrors = {| 
-   name?: Min5Max140CharsError,
+   name?: Max140CharsError,
 |}
 
  export type SetWebNamePayload = {| 

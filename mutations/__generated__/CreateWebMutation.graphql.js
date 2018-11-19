@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f19f0490166c5352e6af38c23385c816
+ * @relayHash 44a5c304a43da78ba9c69229deef4612
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Min5Max140CharsError = "MAX_140_CHARS" | "MIN_5_CHARS" | "REQUIRED";
+export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
 export type CreateWebInput = {
   name: string,
   pageTitle: string,
@@ -21,8 +21,8 @@ export type CreateWebMutationResponse = {|
   +createWeb: ?{|
     +pageId: ?string,
     +errors: ?{|
-      +name: ?Min5Max140CharsError,
-      +pageTitle: ?Min5Max140CharsError,
+      +name: ?Max140CharsError,
+      +pageTitle: ?Max140CharsError,
     |},
   |}
 |};

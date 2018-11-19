@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash fea34eed8f69311612991fedeff95876
+ * @relayHash 6c67a6128bc186d9bcfa918ba2f7b381
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Min5Max140CharsError = "MAX_140_CHARS" | "MIN_5_CHARS" | "REQUIRED";
+export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
 export type SetPageTitleInput = {
   id: string,
   title: string,
@@ -23,7 +23,7 @@ export type SetPageTitleMutationResponse = {|
       +title: string
     |},
     +errors: ?{|
-      +title: ?Min5Max140CharsError
+      +title: ?Max140CharsError
     |},
   |}
 |};
