@@ -2,7 +2,7 @@
 /* eslint-env browser */
 import React, { useState, useEffect } from 'react';
 import useTheme from '../../hooks/useTheme';
-import usePortal from '../../hooks/usePortal';
+import Portal from '../core/Portal';
 import { findDOMNode } from 'slate-react';
 import { View } from 'react-native';
 
@@ -11,7 +11,6 @@ type Styles = {| left: Rec, right: Rec, top: Rec, bottom: Rec |};
 
 export default function EditorBreadcrumbOutline({ node }: {| node: Object |}) {
   const [styles, setStyles] = useState<?Styles>(null);
-  const Portal = usePortal();
   const theme = useTheme();
 
   useEffect(

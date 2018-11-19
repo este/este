@@ -1,9 +1,9 @@
 // @flow
-/* eslint-env browser */
 import { useState, useEffect, type Node } from 'react';
+/* eslint-env browser */
 import ReactDOM from 'react-dom';
 
-export default function usePortal() {
+export default function Portal(props: { children: Node }) {
   const [container, setContainer] = useState<?HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,7 +16,5 @@ export default function usePortal() {
     };
   }, []);
 
-  return function Portal(props: {| children: Node |}) {
-    return container ? ReactDOM.createPortal(props.children, container) : null;
-  };
+  return container ? ReactDOM.createPortal(props.children, container) : null;
 }

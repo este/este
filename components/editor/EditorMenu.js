@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
-import usePortal from '../../hooks/usePortal';
+import Portal from '../core/Portal';
 import Button from '../core/Button';
 import { useEditorDispatch, stylesSorter, type MarkType } from './Editor';
 import { FormattedMessage } from 'react-intl';
@@ -110,7 +110,6 @@ export default function EditorMenu({
   styleSheet: Object,
 |}) {
   const theme = useTheme();
-  const Portal = usePortal();
   const [position, setPosition] = useState<?Position>(null);
   const [menuView, setMenuView] = useState<MenuView>('initial');
 
