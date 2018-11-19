@@ -110,7 +110,7 @@ export default function EditorMenu({
   styleSheet: Object,
 |}) {
   const theme = useTheme();
-  const portal = usePortal();
+  const Portal = usePortal();
   const [position, setPosition] = useState<?Position>(null);
   const [menuView, setMenuView] = useState<MenuView>('initial');
 
@@ -135,7 +135,7 @@ export default function EditorMenu({
     [value],
   );
 
-  if (portal == null || position == null) return null;
+  if (position == null) return null;
 
   function renderMenuView() {
     switch (menuView) {
@@ -155,8 +155,12 @@ export default function EditorMenu({
     }
   }
 
-  return portal(
-    <View style={[theme.styles.editorMenu, position]}>{renderMenuView()}</View>,
+  return (
+    <Portal>
+      <View style={[theme.styles.editorMenu, position]}>
+        {renderMenuView()}
+      </View>
+    </Portal>
   );
 }
 

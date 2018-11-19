@@ -11,7 +11,7 @@ type Styles = {| left: Rec, right: Rec, top: Rec, bottom: Rec |};
 
 export default function EditorBreadcrumbOutline({ node }: {| node: Object |}) {
   const [styles, setStyles] = useState<?Styles>(null);
-  const portal = usePortal();
+  const Portal = usePortal();
   const theme = useTheme();
 
   useEffect(
@@ -55,14 +55,14 @@ export default function EditorBreadcrumbOutline({ node }: {| node: Object |}) {
     [node],
   );
 
-  if (portal == null || styles == null) return null;
+  if (styles == null) return null;
 
-  return portal(
-    <>
+  return (
+    <Portal>
       <View style={[theme.styles.editorBreadcrumbOutline, styles.left]} />
       <View style={[theme.styles.editorBreadcrumbOutline, styles.right]} />
       <View style={[theme.styles.editorBreadcrumbOutline, styles.top]} />
       <View style={[theme.styles.editorBreadcrumbOutline, styles.bottom]} />
-    </>,
+    </Portal>
   );
 }

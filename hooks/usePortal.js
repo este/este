@@ -16,6 +16,7 @@ export default function usePortal() {
     };
   }, []);
 
-  if (!container) return null;
-  return (children: Node) => ReactDOM.createPortal(children, container);
+  return function Portal(props: {| children: Node |}) {
+    return container ? ReactDOM.createPortal(props.children, container) : null;
+  };
 }
