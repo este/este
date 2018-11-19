@@ -34,25 +34,27 @@ export default function Auth(props: AuthProps) {
   const [password, setPassword] = useState('');
   const [commit, pending, errors] = useAuthMutation();
 
+  function onSuccess(auth) {
+    const { token } = auth;
+    if (token == null) return;
+    setCookie({ token });
+    // TODO: Typed useRouter.
+    if (Router.query.redirectUrl) {
+      Router.replace(Router.query.redirectUrl);
+    } else if (props.redirectUrl) {
+      // $FlowFixMe Wrong libdef.
+      Router.replace(props.redirectUrl);
+    } else {
+      // $FlowFixMe Wrong libdef.
+      Router.replace({
+        pathname: Router.pathname,
+        query: Router.query,
+      });
+    }
+  }
+
   function auth(isSignUp = false) {
-    commit({ email, password, isSignUp }, auth => {
-      const { token } = auth;
-      if (token == null) return;
-      setCookie({ token });
-      // TODO: Typed useRouter.
-      if (Router.query.redirectUrl) {
-        Router.replace(Router.query.redirectUrl);
-      } else if (props.redirectUrl) {
-        // $FlowFixMe Wrong libdef.
-        Router.replace(props.redirectUrl);
-      } else {
-        // $FlowFixMe Wrong libdef.
-        Router.replace({
-          pathname: Router.pathname,
-          query: Router.query,
-        });
-      }
-    });
+    commit({ email, password, isSignUp }, onSuccess);
   }
 
   return (
