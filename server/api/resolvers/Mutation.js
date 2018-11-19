@@ -5,6 +5,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import * as validations from '../../../validations';
 import validateAuth from '../../../validate/validateAuth';
 import validateCreateWeb from '../../../validate/validateCreateWeb';
+import validateSetPageTitle from '../../../validate/validateSetPageTitle';
 import type { Mutation as MutationType } from '../__generated__/api.graphql';
 
 const Mutation: MutationType = {
@@ -353,7 +354,7 @@ const Mutation: MutationType = {
   },
 
   setPageTitle: async ({ input }, info, { db }) => {
-    const errors = validations.validateSetPageTitle(input);
+    const errors = validateSetPageTitle(input);
     if (errors) return { errors };
     const page = await db.mutation.updatePage({
       where: { id: input.id },

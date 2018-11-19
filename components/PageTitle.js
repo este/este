@@ -1,17 +1,12 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import TextInput from './core/TextInput';
-import withMutation from './core/withMutation';
-import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import * as validations from '../validations';
-import { pipe } from 'ramda';
-import SetPageTitleMutation, {
-  type SetPageTitleCommit,
-  type SetPageTitleErrors,
-} from '../mutations/SetPageTitleMutation';
+import { defineMessages } from 'react-intl';
+import useIntl from '../hooks/useIntl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { PageTitle as Data } from './__generated__/PageTitle.graphql';
-import withStore, { type Store } from './core/withStore';
+import useCommitLocalUpdate from '../hooks/useCommitLocalUpdate';
+import { useSetPageTitleMutation } from '../mutations/SetPageTitleMutation';
 
 const messages = defineMessages({
   placeholder: {
@@ -20,62 +15,39 @@ const messages = defineMessages({
   },
 });
 
-type PageTitleProps = {|
-  data: Data,
-  commit: SetPageTitleCommit,
-  intl: IntlShape,
-  store: Store,
-|};
+function PageTitle(props: { data: Data }) {
+  const { data } = props;
+  const intl = useIntl();
+  const commitLocalUpdate = useCommitLocalUpdate();
+  const [commit, pending, errors] = useSetPageTitleMutation();
 
-type PageTitleState = {|
-  errors: SetPageTitleErrors,
-|};
-
-class PageTitle extends React.PureComponent<PageTitleProps, PageTitleState> {
-  state = {
-    errors: null,
-  };
-
-  handleTextInputChangeText = (text: string) => {
-    this.props.store(store => {
-      const record = store.get(this.props.data.id);
+  function handleChangeText(text) {
+    commitLocalUpdate(updater => {
+      const record = updater.get(data.id);
       if (!record) return;
       record.setValue(text, 'draftTitle');
     });
-  };
-
-  handleTextInputChangeTextThrottled = value => {
-    const input = {
-      id: this.props.data.id,
-      title: value,
-    };
-    const errors = validations.validateSetPageTitle(input);
-    this.setState({ errors });
-    if (errors == null) this.props.commit(input);
-  };
-
-  render() {
-    const { data, intl } = this.props;
-    const { errors } = this.state;
-    return (
-      <TextInput
-        error={errors && errors.title}
-        size={1}
-        value={data.draftTitle}
-        onChangeText={this.handleTextInputChangeText}
-        onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
-        placeholder={intl.formatMessage(messages.placeholder)}
-      />
-    );
   }
+
+  function handleChangeTextThrottled(value) {
+    const input = { id: data.id, title: value };
+    commit(input);
+  }
+
+  return (
+    <TextInput
+      error={errors && errors.title}
+      size={1}
+      value={data.draftTitle}
+      onChangeText={handleChangeText}
+      onChangeTextThrottled={handleChangeTextThrottled}
+      placeholder={intl.formatMessage(messages.placeholder)}
+    />
+  );
 }
 
 export default createFragmentContainer(
-  pipe(
-    injectIntl,
-    withStore,
-    withMutation(SetPageTitleMutation),
-  )(PageTitle),
+  PageTitle,
   graphql`
     fragment PageTitle on Page {
       id
