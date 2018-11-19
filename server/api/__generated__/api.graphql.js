@@ -9,21 +9,21 @@ import type { BasePrismaOptions as BPOType } from 'prisma-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>;
-    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>;
-    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>;
-    components(args: { where?: ComponentWhereInput, orderBy?: ComponentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<Component[]>;
+    me(args?: {}, info?: GraphQLResolveInfo | string, context: Context): Promise<User | null>; 
+    page(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Page | null>; 
+    web(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, context: Context): Promise<Web | null>; 
+    components(args: { where?: ComponentWhereInput, orderBy?: ComponentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, context: Context): Promise<Component[]>; 
   }
 
 export interface Mutation {
-    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<AuthPayload | null>;
-    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>;
-    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>;
-    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>;
-    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>;
-    setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>;
-    setPageElement(args: { input: SetPageElementInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageElementPayload | null>;
-    deletePage(args: { input: DeletePageInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeletePagePayload | null>;
+    auth(args: { input: AuthInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<AuthPayload | null>; 
+    createWeb(args: { input: CreateWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<CreateWebPayload | null>; 
+    deleteWeb(args: { input: DeleteWebInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeleteWebPayload | null>; 
+    setTheme(args: { input: SetThemeInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetThemePayload | null>; 
+    setPageTitle(args: { input: SetPageTitleInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageTitlePayload | null>; 
+    setWebName(args: { input: SetWebNameInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetWebNamePayload | null>; 
+    setPageElement(args: { input: SetPageElementInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<SetPageElementPayload | null>; 
+    deletePage(args: { input: DeletePageInput }, info?: GraphQLResolveInfo | string, context: Context): Promise<DeletePagePayload | null>; 
   }
 
 export interface Subscription {}
@@ -765,8 +765,8 @@ input ComponentWhereUniqueInput {
 }
 
 type CreateWebErrors {
-  name: Max140CharsError
-  pageTitle: Max140CharsError
+  name: Min5Max140CharsError
+  pageTitle: Min5Max140CharsError
 }
 
 input CreateWebInput {
@@ -1394,8 +1394,9 @@ enum EmailError {
 """Raw JSON value"""
 scalar Json
 
-enum Max140CharsError {
+enum Min5Max140CharsError {
   REQUIRED
+  MIN_5_CHARS
   MAX_140_CHARS
 }
 
@@ -1622,7 +1623,7 @@ type SetPageElementPayload {
 }
 
 type SetPageTitleErrors {
-  title: Max140CharsError
+  title: Min5Max140CharsError
 }
 
 input SetPageTitleInput {
@@ -1644,7 +1645,7 @@ type SetThemePayload {
 }
 
 type SetWebNameErrors {
-  name: Max140CharsError
+  name: Min5Max140CharsError
 }
 
 input SetWebNameInput {
@@ -3583,66 +3584,31 @@ input WebWhereUniqueInput {
 `
 
 const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
-
+ 
 
 
 /**
  * Types
 */
 
- export type StyleFlexDirection =
-    | 'ROW'
-    | 'ROW_REVERSE'
-    | 'COLUMN'
-    | 'COLUMN_REVERSE'
-
-
- export type DimensionValueUnit =
-    | 'POINT'
-    | 'PERCENTAGE'
-    | 'KEYWORD'
-
-
- export type StyleFlexWrap =
-    | 'WRAP'
-    | 'NOWRAP'
-    | 'WRAP_REVERSE'
-
-
- export type PasswordError =
-    | 'REQUIRED'
-    | 'MIN_5_CHARS'
-    | 'MAX_1024_CHARS'
-    | 'WRONG_PASSWORD'
-
-
- export type StyleJustifyContent =
-    | 'FLEX_START'
-    | 'FLEX_END'
-    | 'CENTER'
-    | 'SPACE_BETWEEN'
-    | 'SPACE_AROUND'
-    | 'SPACE_EVENLY'
-
-
- export type ComponentOrderByInput =
+ export type BorderValueOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
     | 'name_ASC'
     | 'name_DESC'
+    | 'unit_ASC'
+    | 'unit_DESC'
+    | 'value_ASC'
+    | 'value_DESC'
     | 'updatedAt_ASC'
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
-
- export type StyleAlignItems =
-    | 'FLEX_START'
-    | 'FLEX_END'
-    | 'CENTER'
-    | 'STRETCH'
-    | 'BASELINE'
-
+ export type BorderValueUnit =
+    | 'POINT'
+  
 
  export type ColorValueOrderByInput =
     | 'id_ASC'
@@ -3661,16 +3627,31 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
+ export type ComponentOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
 
- export type StyleAlignSelf =
-    | 'AUTO'
-    | 'FLEX_START'
-    | 'FLEX_END'
-    | 'CENTER'
-    | 'STRETCH'
-    | 'BASELINE'
-
+ export type ComponentPropOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
 
  export type DimensionValueOrderByInput =
     | 'id_ASC'
@@ -3685,49 +3666,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
-
- export type StyleAlignContent =
-    | 'FLEX_START'
-    | 'FLEX_END'
-    | 'CENTER'
-    | 'STRETCH'
-    | 'SPACE_BETWEEN'
-    | 'SPACE_AROUND'
-
-
- export type ElementType =
-    | 'BLOCK'
-    | 'INLINE'
-    | 'TEXT'
-
-
- export type StyleOverflow =
-    | 'VISIBLE'
-    | 'HIDDEN'
-    | 'SCROLL'
-
-
- export type ElementPropOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'value_ASC'
-    | 'value_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-
-
- export type StyleDirection =
-    | 'INHERIT'
-    | 'LTR'
-    | 'RTL'
-
+ export type DimensionValueUnit =
+    | 'POINT'
+    | 'PERCENTAGE'
+    | 'KEYWORD'
+  
 
  export type ElementOrderByInput =
     | 'id_ASC'
@@ -3742,28 +3687,132 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
+ export type ElementPropOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
+    | 'value_ASC'
+    | 'value_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+  
+
+ export type ElementType =
+    | 'BLOCK'
+    | 'INLINE'
+    | 'TEXT'
+  
+
+ export type EmailError =
+    | 'REQUIRED'
+    | 'EMAIL'
+    | 'ALREADY_EXISTS'
+    | 'NOT_EXISTS'
+  
+
+ export type Min5Max140CharsError =
+    | 'REQUIRED'
+    | 'MIN_5_CHARS'
+    | 'MAX_140_CHARS'
+  
+
+ export type PageOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'title_ASC'
+    | 'title_DESC'
+  
+
+ export type PasswordError =
+    | 'REQUIRED'
+    | 'MIN_5_CHARS'
+    | 'MAX_1024_CHARS'
+    | 'WRONG_PASSWORD'
+  
+
+ export type PropType =
+    | 'BOOLEAN'
+    | 'NUMBER'
+    | 'STRING'
+    | 'VIEW_STYLE'
+    | 'TEXT_STYLE'
+  
+
+ export type StyleAlignContent =
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'STRETCH'
+    | 'SPACE_BETWEEN'
+    | 'SPACE_AROUND'
+  
+
+ export type StyleAlignItems =
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'STRETCH'
+    | 'BASELINE'
+  
+
+ export type StyleAlignSelf =
+    | 'AUTO'
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'STRETCH'
+    | 'BASELINE'
+  
 
  export type StyleBorderStyle =
     | 'SOLID'
     | 'DOTTED'
     | 'DASHED'
+  
 
+ export type StyleDirection =
+    | 'INHERIT'
+    | 'LTR'
+    | 'RTL'
+  
 
  export type StyleDisplay =
     | 'NONE'
     | 'FLEX'
+  
 
+ export type StyleFlexDirection =
+    | 'ROW'
+    | 'ROW_REVERSE'
+    | 'COLUMN'
+    | 'COLUMN_REVERSE'
+  
+
+ export type StyleFlexWrap =
+    | 'WRAP'
+    | 'NOWRAP'
+    | 'WRAP_REVERSE'
+  
 
  export type StyleFontStyle =
     | 'NORMAL'
     | 'ITALIC'
+  
 
-
- export type Max140CharsError =
-    | 'REQUIRED'
-    | 'MAX_140_CHARS'
-
+ export type StyleFontVariant =
+    | 'SMALL_CAPS'
+  
 
  export type StyleFontWeight =
     | 'NORMAL'
@@ -3777,26 +3826,16 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'INT_700'
     | 'INT_800'
     | 'INT_900'
+  
 
-
- export type BorderValueOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'unit_ASC'
-    | 'unit_DESC'
-    | 'value_ASC'
-    | 'value_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-
-
- export type StyleFontVariant =
-    | 'SMALL_CAPS'
-
+ export type StyleJustifyContent =
+    | 'FLEX_START'
+    | 'FLEX_END'
+    | 'CENTER'
+    | 'SPACE_BETWEEN'
+    | 'SPACE_AROUND'
+    | 'SPACE_EVENLY'
+  
 
  export type StyleOrderByInput =
     | 'id_ASC'
@@ -3865,87 +3904,18 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
-
- export type StyleTextAlign =
-    | 'AUTO'
-    | 'LEFT'
-    | 'RIGHT'
-    | 'CENTER'
-    | 'JUSTIFY'
-
-
- export type ComponentPropOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-
-
- export type StyleTextAlignVertical =
-    | 'AUTO'
-    | 'TOP'
-    | 'BOTTOM'
-    | 'CENTER'
-
+ export type StyleOverflow =
+    | 'VISIBLE'
+    | 'HIDDEN'
+    | 'SCROLL'
+  
 
  export type StylePosition =
     | 'ABSOLUTE'
     | 'RELATIVE'
-
-
- export type BorderValueUnit =
-    | 'POINT'
-
-
- export type WebOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'name_ASC'
-    | 'name_DESC'
-
-
- export type StyleTextTransform =
-    | 'NONE'
-    | 'CAPITALIZE'
-    | 'UPPERCASE'
-    | 'LOWERCASE'
-
-
- export type StyleTextDecorationLine =
-    | 'NONE'
-    | 'UNDERLINE'
-    | 'LINE_THROUGH'
-    | 'UNDERLINE_LINE_THROUGH'
-
-
- export type EmailError =
-    | 'REQUIRED'
-    | 'EMAIL'
-    | 'ALREADY_EXISTS'
-    | 'NOT_EXISTS'
-
-
- export type PageOrderByInput =
-    | 'id_ASC'
-    | 'id_DESC'
-    | 'createdAt_ASC'
-    | 'createdAt_DESC'
-    | 'updatedAt_ASC'
-    | 'updatedAt_DESC'
-    | 'title_ASC'
-    | 'title_DESC'
-
+  
 
  export type StyleSpreadOrderByInput =
     | 'id_ASC'
@@ -3956,45 +3926,156 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
 
+ export type StyleTextAlign =
+    | 'AUTO'
+    | 'LEFT'
+    | 'RIGHT'
+    | 'CENTER'
+    | 'JUSTIFY'
+  
 
- export type PropType =
-    | 'BOOLEAN'
-    | 'NUMBER'
-    | 'STRING'
-    | 'VIEW_STYLE'
-    | 'TEXT_STYLE'
+ export type StyleTextAlignVertical =
+    | 'AUTO'
+    | 'TOP'
+    | 'BOTTOM'
+    | 'CENTER'
+  
 
+ export type StyleTextDecorationLine =
+    | 'NONE'
+    | 'UNDERLINE'
+    | 'LINE_THROUGH'
+    | 'UNDERLINE_LINE_THROUGH'
+  
 
- export type ElementCreateWithoutParentInput = {|
-  type: ElementType,
-  index: Int,
-  textLeaves?: Json,
-  web: WebCreateOneWithoutElementsInput,
-  children?: ElementCreateManyWithoutParentInput,
-  shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput,
-  props?: ElementPropCreateManyWithoutElementInput
+ export type StyleTextTransform =
+    | 'NONE'
+    | 'CAPITALIZE'
+    | 'UPPERCASE'
+    | 'LOWERCASE'
+  
+
+ export type WebOrderByInput =
+    | 'id_ASC'
+    | 'id_DESC'
+    | 'createdAt_ASC'
+    | 'createdAt_DESC'
+    | 'updatedAt_ASC'
+    | 'updatedAt_DESC'
+    | 'name_ASC'
+    | 'name_DESC'
+  
+
+ export type AuthInput = {| 
+  email: String,
+  password: String,
+  isSignUp: Boolean
 |}
 
- export type StyleSpreadCreateManyWithoutSpreadStyleInput = {|
-  create?: Array< StyleSpreadCreateWithoutSpreadStyleInput > | StyleSpreadCreateWithoutSpreadStyleInput,
-  connect?: Array< StyleSpreadWhereUniqueInput > | StyleSpreadWhereUniqueInput
+ export type BorderValueCreateInput = {| 
+  name?: String,
+  unit: BorderValueUnit,
+  value: Int,
+  web: WebCreateOneWithoutBorderValuesInput
 |}
 
- export type ElementCreateInput = {|
-  type: ElementType,
-  index: Int,
-  textLeaves?: Json,
-  web: WebCreateOneWithoutElementsInput,
-  parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
-  shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput,
-  props?: ElementPropCreateManyWithoutElementInput
+ export type BorderValueCreateManyWithoutWebInput = {| 
+  create?: Array< BorderValueCreateWithoutWebInput > | BorderValueCreateWithoutWebInput,
+  connect?: Array< BorderValueWhereUniqueInput > | BorderValueWhereUniqueInput
 |}
 
- export type ColorValueWhereInput = {|
+ export type BorderValueCreateOneInput = {| 
+  create?: BorderValueCreateInput,
+  connect?: BorderValueWhereUniqueInput
+|}
+
+ export type BorderValueCreateWithoutWebInput = {| 
+  name?: String,
+  unit: BorderValueUnit,
+  value: Int
+|}
+
+ export type BorderValueWhereInput = {| 
+  AND?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  OR?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  NOT?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  unit?: BorderValueUnit,
+  unit_not?: BorderValueUnit,
+  unit_in?: Array< BorderValueUnit > | BorderValueUnit,
+  unit_not_in?: Array< BorderValueUnit > | BorderValueUnit,
+  value?: Int,
+  value_not?: Int,
+  value_in?: Array< Int > | Int,
+  value_not_in?: Array< Int > | Int,
+  value_lt?: Int,
+  value_lte?: Int,
+  value_gt?: Int,
+  value_gte?: Int,
+  web?: WebWhereInput
+|}
+
+ export type BorderValueWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type ColorValueCreateInput = {| 
+  name?: String,
+  r: Int,
+  g: Int,
+  b: Int,
+  a?: Float,
+  web: WebCreateOneWithoutColorValuesInput
+|}
+
+ export type ColorValueCreateManyWithoutWebInput = {| 
+  create?: Array< ColorValueCreateWithoutWebInput > | ColorValueCreateWithoutWebInput,
+  connect?: Array< ColorValueWhereUniqueInput > | ColorValueWhereUniqueInput
+|}
+
+ export type ColorValueCreateOneInput = {| 
+  create?: ColorValueCreateInput,
+  connect?: ColorValueWhereUniqueInput
+|}
+
+ export type ColorValueCreateWithoutWebInput = {| 
+  name?: String,
+  r: Int,
+  g: Int,
+  b: Int,
+  a?: Float
+|}
+
+ export type ColorValueWhereInput = {| 
   AND?: Array< ColorValueWhereInput > | ColorValueWhereInput,
   OR?: Array< ColorValueWhereInput > | ColorValueWhereInput,
   NOT?: Array< ColorValueWhereInput > | ColorValueWhereInput,
@@ -4061,15 +4142,45 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type WebCreateOneWithoutElementsInput = {|
-  create?: WebCreateWithoutElementsInput,
-  connect?: WebWhereUniqueInput
+ export type ColorValueWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
- export type BorderValueWhereInput = {|
-  AND?: Array< BorderValueWhereInput > | BorderValueWhereInput,
-  OR?: Array< BorderValueWhereInput > | BorderValueWhereInput,
-  NOT?: Array< BorderValueWhereInput > | BorderValueWhereInput,
+ export type ComponentCreateInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutComponentsInput,
+  props?: ComponentPropCreateManyWithoutComponentInput
+|}
+
+ export type ComponentCreateManyWithoutCreatorInput = {| 
+  create?: Array< ComponentCreateWithoutCreatorInput > | ComponentCreateWithoutCreatorInput,
+  connect?: Array< ComponentWhereUniqueInput > | ComponentWhereUniqueInput
+|}
+
+ export type ComponentCreateOneInput = {| 
+  create?: ComponentCreateInput,
+  connect?: ComponentWhereUniqueInput
+|}
+
+ export type ComponentCreateWithoutCreatorInput = {| 
+  name: String,
+  props?: ComponentPropCreateManyWithoutComponentInput
+|}
+
+ export type ComponentPropCreateManyWithoutComponentInput = {| 
+  create?: Array< ComponentPropCreateWithoutComponentInput > | ComponentPropCreateWithoutComponentInput,
+  connect?: Array< ComponentPropWhereUniqueInput > | ComponentPropWhereUniqueInput
+|}
+
+ export type ComponentPropCreateWithoutComponentInput = {| 
+  name: String,
+  type: PropType
+|}
+
+ export type ComponentPropWhereInput = {| 
+  AND?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
+  OR?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
+  NOT?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -4098,10 +4209,132 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   name_not_starts_with?: String,
   name_ends_with?: String,
   name_not_ends_with?: String,
-  unit?: BorderValueUnit,
-  unit_not?: BorderValueUnit,
-  unit_in?: Array< BorderValueUnit > | BorderValueUnit,
-  unit_not_in?: Array< BorderValueUnit > | BorderValueUnit,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType,
+  component?: ComponentWhereInput
+|}
+
+ export type ComponentPropWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type ComponentWhereInput = {| 
+  AND?: Array< ComponentWhereInput > | ComponentWhereInput,
+  OR?: Array< ComponentWhereInput > | ComponentWhereInput,
+  NOT?: Array< ComponentWhereInput > | ComponentWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  creator?: UserWhereInput,
+  props_every?: ComponentPropWhereInput,
+  props_some?: ComponentPropWhereInput,
+  props_none?: ComponentPropWhereInput
+|}
+
+ export type ComponentWhereUniqueInput = {| 
+  id?: ID_Input,
+  name?: String
+|}
+
+ export type CreateWebInput = {| 
+  name: String,
+  pageTitle: String
+|}
+
+ export type DeletePageInput = {| 
+  id: ID_Input
+|}
+
+ export type DeleteWebInput = {| 
+  id: ID_Input
+|}
+
+ export type DimensionValueCreateInput = {| 
+  name?: String,
+  unit: DimensionValueUnit,
+  value: Int,
+  web: WebCreateOneWithoutDimensionValuesInput
+|}
+
+ export type DimensionValueCreateManyWithoutWebInput = {| 
+  create?: Array< DimensionValueCreateWithoutWebInput > | DimensionValueCreateWithoutWebInput,
+  connect?: Array< DimensionValueWhereUniqueInput > | DimensionValueWhereUniqueInput
+|}
+
+ export type DimensionValueCreateOneInput = {| 
+  create?: DimensionValueCreateInput,
+  connect?: DimensionValueWhereUniqueInput
+|}
+
+ export type DimensionValueCreateWithoutWebInput = {| 
+  name?: String,
+  unit: DimensionValueUnit,
+  value: Int
+|}
+
+ export type DimensionValueWhereInput = {| 
+  AND?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
+  OR?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
+  NOT?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  unit?: DimensionValueUnit,
+  unit_not?: DimensionValueUnit,
+  unit_in?: Array< DimensionValueUnit > | DimensionValueUnit,
+  unit_not_in?: Array< DimensionValueUnit > | DimensionValueUnit,
   value?: Int,
   value_not?: Int,
   value_in?: Array< Int > | Int,
@@ -4113,17 +4346,655 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebWhereInput
 |}
 
- export type WebCreateWithoutElementsInput = {|
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  styles?: StyleCreateManyWithoutWebInput,
-  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
-  colorValues?: ColorValueCreateManyWithoutWebInput,
-  borderValues?: BorderValueCreateManyWithoutWebInput
+ export type DimensionValueWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
- export type StyleSpreadWhereInput = {|
+ export type ElementCreateInput = {| 
+  type: ElementType,
+  index: Int,
+  textLeaves?: Json,
+  web: WebCreateOneWithoutElementsInput,
+  parent?: ElementCreateOneWithoutChildrenInput,
+  children?: ElementCreateManyWithoutParentInput,
+  shared?: SharedElementCreateOneWithoutSharedByInput,
+  component: ComponentCreateOneInput,
+  props?: ElementPropCreateManyWithoutElementInput
+|}
+
+ export type ElementCreateManyWithoutParentInput = {| 
+  create?: Array< ElementCreateWithoutParentInput > | ElementCreateWithoutParentInput,
+  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
+|}
+
+ export type ElementCreateManyWithoutWebInput = {| 
+  create?: Array< ElementCreateWithoutWebInput > | ElementCreateWithoutWebInput,
+  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
+|}
+
+ export type ElementCreateOneInput = {| 
+  create?: ElementCreateInput,
+  connect?: ElementWhereUniqueInput
+|}
+
+ export type ElementCreateOneWithoutChildrenInput = {| 
+  create?: ElementCreateWithoutChildrenInput,
+  connect?: ElementWhereUniqueInput
+|}
+
+ export type ElementCreateOneWithoutPropsInput = {| 
+  create?: ElementCreateWithoutPropsInput,
+  connect?: ElementWhereUniqueInput
+|}
+
+ export type ElementCreateWithoutChildrenInput = {| 
+  type: ElementType,
+  index: Int,
+  textLeaves?: Json,
+  web: WebCreateOneWithoutElementsInput,
+  parent?: ElementCreateOneWithoutChildrenInput,
+  shared?: SharedElementCreateOneWithoutSharedByInput,
+  component: ComponentCreateOneInput,
+  props?: ElementPropCreateManyWithoutElementInput
+|}
+
+ export type ElementCreateWithoutParentInput = {| 
+  type: ElementType,
+  index: Int,
+  textLeaves?: Json,
+  web: WebCreateOneWithoutElementsInput,
+  children?: ElementCreateManyWithoutParentInput,
+  shared?: SharedElementCreateOneWithoutSharedByInput,
+  component: ComponentCreateOneInput,
+  props?: ElementPropCreateManyWithoutElementInput
+|}
+
+ export type ElementCreateWithoutPropsInput = {| 
+  type: ElementType,
+  index: Int,
+  textLeaves?: Json,
+  web: WebCreateOneWithoutElementsInput,
+  parent?: ElementCreateOneWithoutChildrenInput,
+  children?: ElementCreateManyWithoutParentInput,
+  shared?: SharedElementCreateOneWithoutSharedByInput,
+  component: ComponentCreateOneInput
+|}
+
+ export type ElementCreateWithoutWebInput = {| 
+  type: ElementType,
+  index: Int,
+  textLeaves?: Json,
+  parent?: ElementCreateOneWithoutChildrenInput,
+  children?: ElementCreateManyWithoutParentInput,
+  shared?: SharedElementCreateOneWithoutSharedByInput,
+  component: ComponentCreateOneInput,
+  props?: ElementPropCreateManyWithoutElementInput
+|}
+
+ export type ElementPropCreateManyWithoutElementInput = {| 
+  create?: Array< ElementPropCreateWithoutElementInput > | ElementPropCreateWithoutElementInput,
+  connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
+|}
+
+ export type ElementPropCreateManyWithoutValueStyleInput = {| 
+  create?: Array< ElementPropCreateWithoutValueStyleInput > | ElementPropCreateWithoutValueStyleInput,
+  connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
+|}
+
+ export type ElementPropCreateWithoutElementInput = {| 
+  name: String,
+  type: PropType,
+  value?: String,
+  valueStyle?: StyleCreateOneWithoutPropsInput
+|}
+
+ export type ElementPropCreateWithoutValueStyleInput = {| 
+  name: String,
+  type: PropType,
+  value?: String,
+  element: ElementCreateOneWithoutPropsInput
+|}
+
+ export type ElementPropWhereInput = {| 
+  AND?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  OR?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  NOT?: Array< ElementPropWhereInput > | ElementPropWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType,
+  value?: String,
+  value_not?: String,
+  value_in?: Array< String > | String,
+  value_not_in?: Array< String > | String,
+  value_lt?: String,
+  value_lte?: String,
+  value_gt?: String,
+  value_gte?: String,
+  value_contains?: String,
+  value_not_contains?: String,
+  value_starts_with?: String,
+  value_not_starts_with?: String,
+  value_ends_with?: String,
+  value_not_ends_with?: String,
+  element?: ElementWhereInput,
+  valueStyle?: StyleWhereInput
+|}
+
+ export type ElementPropWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type ElementWhereInput = {| 
+  AND?: Array< ElementWhereInput > | ElementWhereInput,
+  OR?: Array< ElementWhereInput > | ElementWhereInput,
+  NOT?: Array< ElementWhereInput > | ElementWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType,
+  index?: Int,
+  index_not?: Int,
+  index_in?: Array< Int > | Int,
+  index_not_in?: Array< Int > | Int,
+  index_lt?: Int,
+  index_lte?: Int,
+  index_gt?: Int,
+  index_gte?: Int,
+  web?: WebWhereInput,
+  parent?: ElementWhereInput,
+  children_every?: ElementWhereInput,
+  children_some?: ElementWhereInput,
+  children_none?: ElementWhereInput,
+  shared?: SharedElementWhereInput,
+  component?: ComponentWhereInput,
+  props_every?: ElementPropWhereInput,
+  props_some?: ElementPropWhereInput,
+  props_none?: ElementPropWhereInput
+|}
+
+ export type ElementWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type PageCreateManyWithoutWebInput = {| 
+  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
+  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
+|}
+
+ export type PageCreateWithoutWebInput = {| 
+  title: String,
+  creator: UserCreateOneInput,
+  element: ElementCreateOneInput
+|}
+
+ export type PageWhereInput = {| 
+  AND?: Array< PageWhereInput > | PageWhereInput,
+  OR?: Array< PageWhereInput > | PageWhereInput,
+  NOT?: Array< PageWhereInput > | PageWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String,
+  creator?: UserWhereInput,
+  web?: WebWhereInput,
+  element?: ElementWhereInput
+|}
+
+ export type PageWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type SetPageElementInput = {| 
+  id: ID_Input,
+  element: ElementCreateInput
+|}
+
+ export type SetPageTitleInput = {| 
+  id: ID_Input,
+  title: String
+|}
+
+ export type SetThemeInput = {| 
+  themeName: String
+|}
+
+ export type SetWebNameInput = {| 
+  id: ID_Input,
+  name: String
+|}
+
+ export type SharedElementCreateOneWithoutSharedByInput = {| 
+  create?: SharedElementCreateWithoutSharedByInput,
+  connect?: SharedElementWhereUniqueInput
+|}
+
+ export type SharedElementCreateWithoutSharedByInput = {| 
+  name: String,
+  element: ElementCreateOneInput
+|}
+
+ export type SharedElementWhereInput = {| 
+  AND?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  OR?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  NOT?: Array< SharedElementWhereInput > | SharedElementWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  sharedBy_every?: ElementWhereInput,
+  sharedBy_some?: ElementWhereInput,
+  sharedBy_none?: ElementWhereInput,
+  element?: ElementWhereInput
+|}
+
+ export type SharedElementWhereUniqueInput = {| 
+  id?: ID_Input
+|}
+
+ export type StyleCreateInput = {| 
+  name: String,
+  isText?: Boolean,
+  display?: StyleDisplay,
+  position?: StylePosition,
+  flexDirection?: StyleFlexDirection,
+  flexWrap?: StyleFlexWrap,
+  justifyContent?: StyleJustifyContent,
+  alignItems?: StyleAlignItems,
+  alignSelf?: StyleAlignSelf,
+  alignContent?: StyleAlignContent,
+  overflow?: StyleOverflow,
+  flex?: Int,
+  flexGrow?: Int,
+  flexShrink?: Int,
+  flexBasis?: Int,
+  zIndex?: Int,
+  direction?: StyleDirection,
+  borderStyle?: StyleBorderStyle,
+  opacity?: Int,
+  fontFamily?: String,
+  fontSize?: Int,
+  fontStyle?: StyleFontStyle,
+  fontWeight?: StyleFontWeight,
+  fontVariant?: StyleFontVariant,
+  letterSpacing?: Int,
+  lineHeight?: Int,
+  textAlign?: StyleTextAlign,
+  textAlignVertical?: StyleTextAlignVertical,
+  textDecorationLine?: StyleTextDecorationLine,
+  textTransform?: StyleTextTransform,
+  web: WebCreateOneWithoutStylesInput,
+  props?: ElementPropCreateManyWithoutValueStyleInput,
+  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
+  width?: DimensionValueCreateOneInput,
+  height?: DimensionValueCreateOneInput,
+  bottom?: DimensionValueCreateOneInput,
+  end?: DimensionValueCreateOneInput,
+  left?: DimensionValueCreateOneInput,
+  right?: DimensionValueCreateOneInput,
+  start?: DimensionValueCreateOneInput,
+  top?: DimensionValueCreateOneInput,
+  minWidth?: DimensionValueCreateOneInput,
+  maxWidth?: DimensionValueCreateOneInput,
+  minHeight?: DimensionValueCreateOneInput,
+  maxHeight?: DimensionValueCreateOneInput,
+  margin?: DimensionValueCreateOneInput,
+  marginBottom?: DimensionValueCreateOneInput,
+  marginEnd?: DimensionValueCreateOneInput,
+  marginHorizontal?: DimensionValueCreateOneInput,
+  marginLeft?: DimensionValueCreateOneInput,
+  marginRight?: DimensionValueCreateOneInput,
+  marginStart?: DimensionValueCreateOneInput,
+  marginTop?: DimensionValueCreateOneInput,
+  marginVertical?: DimensionValueCreateOneInput,
+  padding?: DimensionValueCreateOneInput,
+  paddingBottom?: DimensionValueCreateOneInput,
+  paddingEnd?: DimensionValueCreateOneInput,
+  paddingHorizontal?: DimensionValueCreateOneInput,
+  paddingLeft?: DimensionValueCreateOneInput,
+  paddingRight?: DimensionValueCreateOneInput,
+  paddingStart?: DimensionValueCreateOneInput,
+  paddingTop?: DimensionValueCreateOneInput,
+  paddingVertical?: DimensionValueCreateOneInput,
+  backgroundColor?: ColorValueCreateOneInput,
+  borderColor?: ColorValueCreateOneInput,
+  borderBottomColor?: ColorValueCreateOneInput,
+  borderEndColor?: ColorValueCreateOneInput,
+  borderLeftColor?: ColorValueCreateOneInput,
+  borderRightColor?: ColorValueCreateOneInput,
+  borderStartColor?: ColorValueCreateOneInput,
+  borderTopColor?: ColorValueCreateOneInput,
+  borderRadius?: BorderValueCreateOneInput,
+  borderBottomEndRadius?: BorderValueCreateOneInput,
+  borderBottomLeftRadius?: BorderValueCreateOneInput,
+  borderBottomRightRadius?: BorderValueCreateOneInput,
+  borderBottomStartRadius?: BorderValueCreateOneInput,
+  borderTopEndRadius?: BorderValueCreateOneInput,
+  borderTopLeftRadius?: BorderValueCreateOneInput,
+  borderTopRightRadius?: BorderValueCreateOneInput,
+  borderTopStartRadius?: BorderValueCreateOneInput,
+  borderWidth?: BorderValueCreateOneInput,
+  borderBottomWidth?: BorderValueCreateOneInput,
+  borderEndWidth?: BorderValueCreateOneInput,
+  borderLeftWidth?: BorderValueCreateOneInput,
+  borderRightWidth?: BorderValueCreateOneInput,
+  borderStartWidth?: BorderValueCreateOneInput,
+  borderTopWidth?: BorderValueCreateOneInput,
+  color?: ColorValueCreateOneInput
+|}
+
+ export type StyleCreateManyWithoutWebInput = {| 
+  create?: Array< StyleCreateWithoutWebInput > | StyleCreateWithoutWebInput,
+  connect?: Array< StyleWhereUniqueInput > | StyleWhereUniqueInput
+|}
+
+ export type StyleCreateOneInput = {| 
+  create?: StyleCreateInput,
+  connect?: StyleWhereUniqueInput
+|}
+
+ export type StyleCreateOneWithoutPropsInput = {| 
+  create?: StyleCreateWithoutPropsInput,
+  connect?: StyleWhereUniqueInput
+|}
+
+ export type StyleCreateWithoutPropsInput = {| 
+  name: String,
+  isText?: Boolean,
+  display?: StyleDisplay,
+  position?: StylePosition,
+  flexDirection?: StyleFlexDirection,
+  flexWrap?: StyleFlexWrap,
+  justifyContent?: StyleJustifyContent,
+  alignItems?: StyleAlignItems,
+  alignSelf?: StyleAlignSelf,
+  alignContent?: StyleAlignContent,
+  overflow?: StyleOverflow,
+  flex?: Int,
+  flexGrow?: Int,
+  flexShrink?: Int,
+  flexBasis?: Int,
+  zIndex?: Int,
+  direction?: StyleDirection,
+  borderStyle?: StyleBorderStyle,
+  opacity?: Int,
+  fontFamily?: String,
+  fontSize?: Int,
+  fontStyle?: StyleFontStyle,
+  fontWeight?: StyleFontWeight,
+  fontVariant?: StyleFontVariant,
+  letterSpacing?: Int,
+  lineHeight?: Int,
+  textAlign?: StyleTextAlign,
+  textAlignVertical?: StyleTextAlignVertical,
+  textDecorationLine?: StyleTextDecorationLine,
+  textTransform?: StyleTextTransform,
+  web: WebCreateOneWithoutStylesInput,
+  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
+  width?: DimensionValueCreateOneInput,
+  height?: DimensionValueCreateOneInput,
+  bottom?: DimensionValueCreateOneInput,
+  end?: DimensionValueCreateOneInput,
+  left?: DimensionValueCreateOneInput,
+  right?: DimensionValueCreateOneInput,
+  start?: DimensionValueCreateOneInput,
+  top?: DimensionValueCreateOneInput,
+  minWidth?: DimensionValueCreateOneInput,
+  maxWidth?: DimensionValueCreateOneInput,
+  minHeight?: DimensionValueCreateOneInput,
+  maxHeight?: DimensionValueCreateOneInput,
+  margin?: DimensionValueCreateOneInput,
+  marginBottom?: DimensionValueCreateOneInput,
+  marginEnd?: DimensionValueCreateOneInput,
+  marginHorizontal?: DimensionValueCreateOneInput,
+  marginLeft?: DimensionValueCreateOneInput,
+  marginRight?: DimensionValueCreateOneInput,
+  marginStart?: DimensionValueCreateOneInput,
+  marginTop?: DimensionValueCreateOneInput,
+  marginVertical?: DimensionValueCreateOneInput,
+  padding?: DimensionValueCreateOneInput,
+  paddingBottom?: DimensionValueCreateOneInput,
+  paddingEnd?: DimensionValueCreateOneInput,
+  paddingHorizontal?: DimensionValueCreateOneInput,
+  paddingLeft?: DimensionValueCreateOneInput,
+  paddingRight?: DimensionValueCreateOneInput,
+  paddingStart?: DimensionValueCreateOneInput,
+  paddingTop?: DimensionValueCreateOneInput,
+  paddingVertical?: DimensionValueCreateOneInput,
+  backgroundColor?: ColorValueCreateOneInput,
+  borderColor?: ColorValueCreateOneInput,
+  borderBottomColor?: ColorValueCreateOneInput,
+  borderEndColor?: ColorValueCreateOneInput,
+  borderLeftColor?: ColorValueCreateOneInput,
+  borderRightColor?: ColorValueCreateOneInput,
+  borderStartColor?: ColorValueCreateOneInput,
+  borderTopColor?: ColorValueCreateOneInput,
+  borderRadius?: BorderValueCreateOneInput,
+  borderBottomEndRadius?: BorderValueCreateOneInput,
+  borderBottomLeftRadius?: BorderValueCreateOneInput,
+  borderBottomRightRadius?: BorderValueCreateOneInput,
+  borderBottomStartRadius?: BorderValueCreateOneInput,
+  borderTopEndRadius?: BorderValueCreateOneInput,
+  borderTopLeftRadius?: BorderValueCreateOneInput,
+  borderTopRightRadius?: BorderValueCreateOneInput,
+  borderTopStartRadius?: BorderValueCreateOneInput,
+  borderWidth?: BorderValueCreateOneInput,
+  borderBottomWidth?: BorderValueCreateOneInput,
+  borderEndWidth?: BorderValueCreateOneInput,
+  borderLeftWidth?: BorderValueCreateOneInput,
+  borderRightWidth?: BorderValueCreateOneInput,
+  borderStartWidth?: BorderValueCreateOneInput,
+  borderTopWidth?: BorderValueCreateOneInput,
+  color?: ColorValueCreateOneInput
+|}
+
+ export type StyleCreateWithoutWebInput = {| 
+  name: String,
+  isText?: Boolean,
+  display?: StyleDisplay,
+  position?: StylePosition,
+  flexDirection?: StyleFlexDirection,
+  flexWrap?: StyleFlexWrap,
+  justifyContent?: StyleJustifyContent,
+  alignItems?: StyleAlignItems,
+  alignSelf?: StyleAlignSelf,
+  alignContent?: StyleAlignContent,
+  overflow?: StyleOverflow,
+  flex?: Int,
+  flexGrow?: Int,
+  flexShrink?: Int,
+  flexBasis?: Int,
+  zIndex?: Int,
+  direction?: StyleDirection,
+  borderStyle?: StyleBorderStyle,
+  opacity?: Int,
+  fontFamily?: String,
+  fontSize?: Int,
+  fontStyle?: StyleFontStyle,
+  fontWeight?: StyleFontWeight,
+  fontVariant?: StyleFontVariant,
+  letterSpacing?: Int,
+  lineHeight?: Int,
+  textAlign?: StyleTextAlign,
+  textAlignVertical?: StyleTextAlignVertical,
+  textDecorationLine?: StyleTextDecorationLine,
+  textTransform?: StyleTextTransform,
+  props?: ElementPropCreateManyWithoutValueStyleInput,
+  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
+  width?: DimensionValueCreateOneInput,
+  height?: DimensionValueCreateOneInput,
+  bottom?: DimensionValueCreateOneInput,
+  end?: DimensionValueCreateOneInput,
+  left?: DimensionValueCreateOneInput,
+  right?: DimensionValueCreateOneInput,
+  start?: DimensionValueCreateOneInput,
+  top?: DimensionValueCreateOneInput,
+  minWidth?: DimensionValueCreateOneInput,
+  maxWidth?: DimensionValueCreateOneInput,
+  minHeight?: DimensionValueCreateOneInput,
+  maxHeight?: DimensionValueCreateOneInput,
+  margin?: DimensionValueCreateOneInput,
+  marginBottom?: DimensionValueCreateOneInput,
+  marginEnd?: DimensionValueCreateOneInput,
+  marginHorizontal?: DimensionValueCreateOneInput,
+  marginLeft?: DimensionValueCreateOneInput,
+  marginRight?: DimensionValueCreateOneInput,
+  marginStart?: DimensionValueCreateOneInput,
+  marginTop?: DimensionValueCreateOneInput,
+  marginVertical?: DimensionValueCreateOneInput,
+  padding?: DimensionValueCreateOneInput,
+  paddingBottom?: DimensionValueCreateOneInput,
+  paddingEnd?: DimensionValueCreateOneInput,
+  paddingHorizontal?: DimensionValueCreateOneInput,
+  paddingLeft?: DimensionValueCreateOneInput,
+  paddingRight?: DimensionValueCreateOneInput,
+  paddingStart?: DimensionValueCreateOneInput,
+  paddingTop?: DimensionValueCreateOneInput,
+  paddingVertical?: DimensionValueCreateOneInput,
+  backgroundColor?: ColorValueCreateOneInput,
+  borderColor?: ColorValueCreateOneInput,
+  borderBottomColor?: ColorValueCreateOneInput,
+  borderEndColor?: ColorValueCreateOneInput,
+  borderLeftColor?: ColorValueCreateOneInput,
+  borderRightColor?: ColorValueCreateOneInput,
+  borderStartColor?: ColorValueCreateOneInput,
+  borderTopColor?: ColorValueCreateOneInput,
+  borderRadius?: BorderValueCreateOneInput,
+  borderBottomEndRadius?: BorderValueCreateOneInput,
+  borderBottomLeftRadius?: BorderValueCreateOneInput,
+  borderBottomRightRadius?: BorderValueCreateOneInput,
+  borderBottomStartRadius?: BorderValueCreateOneInput,
+  borderTopEndRadius?: BorderValueCreateOneInput,
+  borderTopLeftRadius?: BorderValueCreateOneInput,
+  borderTopRightRadius?: BorderValueCreateOneInput,
+  borderTopStartRadius?: BorderValueCreateOneInput,
+  borderWidth?: BorderValueCreateOneInput,
+  borderBottomWidth?: BorderValueCreateOneInput,
+  borderEndWidth?: BorderValueCreateOneInput,
+  borderLeftWidth?: BorderValueCreateOneInput,
+  borderRightWidth?: BorderValueCreateOneInput,
+  borderStartWidth?: BorderValueCreateOneInput,
+  borderTopWidth?: BorderValueCreateOneInput,
+  color?: ColorValueCreateOneInput
+|}
+
+ export type StyleSpreadCreateManyWithoutSpreadStyleInput = {| 
+  create?: Array< StyleSpreadCreateWithoutSpreadStyleInput > | StyleSpreadCreateWithoutSpreadStyleInput,
+  connect?: Array< StyleSpreadWhereUniqueInput > | StyleSpreadWhereUniqueInput
+|}
+
+ export type StyleSpreadCreateWithoutSpreadStyleInput = {| 
+  index: Int,
+  style: StyleCreateOneInput
+|}
+
+ export type StyleSpreadWhereInput = {| 
   AND?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
   OR?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
   NOT?: Array< StyleSpreadWhereInput > | StyleSpreadWhereInput,
@@ -4153,44 +5024,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   style?: StyleWhereInput
 |}
 
- export type UserCreateOneWithoutWebsInput = {|
-  create?: UserCreateWithoutWebsInput,
-  connect?: UserWhereUniqueInput
+ export type StyleSpreadWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
- export type WebCreateWithoutBorderValuesInput = {|
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  elements?: ElementCreateManyWithoutWebInput,
-  styles?: StyleCreateManyWithoutWebInput,
-  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
-  colorValues?: ColorValueCreateManyWithoutWebInput
-|}
-
- export type UserCreateWithoutWebsInput = {|
-  email: String,
-  password: String,
-  themeName?: String,
-  components?: ComponentCreateManyWithoutCreatorInput
-|}
-
- export type WebCreateWithoutColorValuesInput = {|
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  elements?: ElementCreateManyWithoutWebInput,
-  styles?: StyleCreateManyWithoutWebInput,
-  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
-  borderValues?: BorderValueCreateManyWithoutWebInput
-|}
-
- export type ComponentCreateManyWithoutCreatorInput = {|
-  create?: Array< ComponentCreateWithoutCreatorInput > | ComponentCreateWithoutCreatorInput,
-  connect?: Array< ComponentWhereUniqueInput > | ComponentWhereUniqueInput
-|}
-
- export type StyleWhereInput = {|
+ export type StyleWhereInput = {| 
   AND?: Array< StyleWhereInput > | StyleWhereInput,
   OR?: Array< StyleWhereInput > | StyleWhereInput,
   NOT?: Array< StyleWhereInput > | StyleWhereInput,
@@ -4446,264 +5284,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueWhereInput
 |}
 
- export type ComponentCreateWithoutCreatorInput = {|
-  name: String,
-  props?: ComponentPropCreateManyWithoutComponentInput
-|}
-
- export type ColorValueCreateOneInput = {|
-  create?: ColorValueCreateInput,
-  connect?: ColorValueWhereUniqueInput
-|}
-
- export type ComponentPropCreateManyWithoutComponentInput = {|
-  create?: Array< ComponentPropCreateWithoutComponentInput > | ComponentPropCreateWithoutComponentInput,
-  connect?: Array< ComponentPropWhereUniqueInput > | ComponentPropWhereUniqueInput
-|}
-
- export type StyleCreateWithoutWebInput = {|
-  name: String,
-  isText?: Boolean,
-  display?: StyleDisplay,
-  position?: StylePosition,
-  flexDirection?: StyleFlexDirection,
-  flexWrap?: StyleFlexWrap,
-  justifyContent?: StyleJustifyContent,
-  alignItems?: StyleAlignItems,
-  alignSelf?: StyleAlignSelf,
-  alignContent?: StyleAlignContent,
-  overflow?: StyleOverflow,
-  flex?: Int,
-  flexGrow?: Int,
-  flexShrink?: Int,
-  flexBasis?: Int,
-  zIndex?: Int,
-  direction?: StyleDirection,
-  borderStyle?: StyleBorderStyle,
-  opacity?: Int,
-  fontFamily?: String,
-  fontSize?: Int,
-  fontStyle?: StyleFontStyle,
-  fontWeight?: StyleFontWeight,
-  fontVariant?: StyleFontVariant,
-  letterSpacing?: Int,
-  lineHeight?: Int,
-  textAlign?: StyleTextAlign,
-  textAlignVertical?: StyleTextAlignVertical,
-  textDecorationLine?: StyleTextDecorationLine,
-  textTransform?: StyleTextTransform,
-  props?: ElementPropCreateManyWithoutValueStyleInput,
-  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
-  width?: DimensionValueCreateOneInput,
-  height?: DimensionValueCreateOneInput,
-  bottom?: DimensionValueCreateOneInput,
-  end?: DimensionValueCreateOneInput,
-  left?: DimensionValueCreateOneInput,
-  right?: DimensionValueCreateOneInput,
-  start?: DimensionValueCreateOneInput,
-  top?: DimensionValueCreateOneInput,
-  minWidth?: DimensionValueCreateOneInput,
-  maxWidth?: DimensionValueCreateOneInput,
-  minHeight?: DimensionValueCreateOneInput,
-  maxHeight?: DimensionValueCreateOneInput,
-  margin?: DimensionValueCreateOneInput,
-  marginBottom?: DimensionValueCreateOneInput,
-  marginEnd?: DimensionValueCreateOneInput,
-  marginHorizontal?: DimensionValueCreateOneInput,
-  marginLeft?: DimensionValueCreateOneInput,
-  marginRight?: DimensionValueCreateOneInput,
-  marginStart?: DimensionValueCreateOneInput,
-  marginTop?: DimensionValueCreateOneInput,
-  marginVertical?: DimensionValueCreateOneInput,
-  padding?: DimensionValueCreateOneInput,
-  paddingBottom?: DimensionValueCreateOneInput,
-  paddingEnd?: DimensionValueCreateOneInput,
-  paddingHorizontal?: DimensionValueCreateOneInput,
-  paddingLeft?: DimensionValueCreateOneInput,
-  paddingRight?: DimensionValueCreateOneInput,
-  paddingStart?: DimensionValueCreateOneInput,
-  paddingTop?: DimensionValueCreateOneInput,
-  paddingVertical?: DimensionValueCreateOneInput,
-  backgroundColor?: ColorValueCreateOneInput,
-  borderColor?: ColorValueCreateOneInput,
-  borderBottomColor?: ColorValueCreateOneInput,
-  borderEndColor?: ColorValueCreateOneInput,
-  borderLeftColor?: ColorValueCreateOneInput,
-  borderRightColor?: ColorValueCreateOneInput,
-  borderStartColor?: ColorValueCreateOneInput,
-  borderTopColor?: ColorValueCreateOneInput,
-  borderRadius?: BorderValueCreateOneInput,
-  borderBottomEndRadius?: BorderValueCreateOneInput,
-  borderBottomLeftRadius?: BorderValueCreateOneInput,
-  borderBottomRightRadius?: BorderValueCreateOneInput,
-  borderBottomStartRadius?: BorderValueCreateOneInput,
-  borderTopEndRadius?: BorderValueCreateOneInput,
-  borderTopLeftRadius?: BorderValueCreateOneInput,
-  borderTopRightRadius?: BorderValueCreateOneInput,
-  borderTopStartRadius?: BorderValueCreateOneInput,
-  borderWidth?: BorderValueCreateOneInput,
-  borderBottomWidth?: BorderValueCreateOneInput,
-  borderEndWidth?: BorderValueCreateOneInput,
-  borderLeftWidth?: BorderValueCreateOneInput,
-  borderRightWidth?: BorderValueCreateOneInput,
-  borderStartWidth?: BorderValueCreateOneInput,
-  borderTopWidth?: BorderValueCreateOneInput,
-  color?: ColorValueCreateOneInput
-|}
-
- export type ComponentPropCreateWithoutComponentInput = {|
-  name: String,
-  type: PropType
-|}
-
- export type StyleCreateManyWithoutWebInput = {|
-  create?: Array< StyleCreateWithoutWebInput > | StyleCreateWithoutWebInput,
-  connect?: Array< StyleWhereUniqueInput > | StyleWhereUniqueInput
-|}
-
- export type ComponentPropWhereUniqueInput = {|
+ export type StyleWhereUniqueInput = {| 
   id?: ID_Input
 |}
 
- export type StyleWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type ComponentWhereUniqueInput = {|
-  id?: ID_Input,
-  name?: String
-|}
-
- export type DimensionValueCreateInput = {|
-  name?: String,
-  unit: DimensionValueUnit,
-  value: Int,
-  web: WebCreateOneWithoutDimensionValuesInput
-|}
-
- export type UserWhereUniqueInput = {|
-  id?: ID_Input,
-  email?: String
-|}
-
- export type ElementPropWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type PageCreateManyWithoutWebInput = {|
-  create?: Array< PageCreateWithoutWebInput > | PageCreateWithoutWebInput,
-  connect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput
-|}
-
- export type PageWhereInput = {|
-  AND?: Array< PageWhereInput > | PageWhereInput,
-  OR?: Array< PageWhereInput > | PageWhereInput,
-  NOT?: Array< PageWhereInput > | PageWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  title?: String,
-  title_not?: String,
-  title_in?: Array< String > | String,
-  title_not_in?: Array< String > | String,
-  title_lt?: String,
-  title_lte?: String,
-  title_gt?: String,
-  title_gte?: String,
-  title_contains?: String,
-  title_not_contains?: String,
-  title_starts_with?: String,
-  title_not_starts_with?: String,
-  title_ends_with?: String,
-  title_not_ends_with?: String,
-  creator?: UserWhereInput,
-  web?: WebWhereInput,
-  element?: ElementWhereInput
-|}
-
- export type PageCreateWithoutWebInput = {|
-  title: String,
-  creator: UserCreateOneInput,
-  element: ElementCreateOneInput
-|}
-
- export type ComponentWhereInput = {|
-  AND?: Array< ComponentWhereInput > | ComponentWhereInput,
-  OR?: Array< ComponentWhereInput > | ComponentWhereInput,
-  NOT?: Array< ComponentWhereInput > | ComponentWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  creator?: UserWhereInput,
-  props_every?: ComponentPropWhereInput,
-  props_some?: ComponentPropWhereInput,
-  props_none?: ComponentPropWhereInput
-|}
-
- export type UserCreateOneInput = {|
-  create?: UserCreateInput,
-  connect?: UserWhereUniqueInput
-|}
-
- export type AuthInput = {|
-  email: String,
-  password: String,
-  isSignUp: Boolean
-|}
-
- export type UserCreateInput = {|
+ export type UserCreateInput = {| 
   email: String,
   password: String,
   themeName?: String,
@@ -4711,648 +5296,36 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   components?: ComponentCreateManyWithoutCreatorInput
 |}
 
- export type ElementCreateManyWithoutParentInput = {|
-  create?: Array< ElementCreateWithoutParentInput > | ElementCreateWithoutParentInput,
-  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
+ export type UserCreateOneInput = {| 
+  create?: UserCreateInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type WebCreateManyWithoutCreatorInput = {|
-  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
-  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
-|}
-
- export type PageWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type WebCreateWithoutCreatorInput = {|
-  name: String,
-  pages?: PageCreateManyWithoutWebInput,
-  elements?: ElementCreateManyWithoutWebInput,
-  styles?: StyleCreateManyWithoutWebInput,
-  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
-  colorValues?: ColorValueCreateManyWithoutWebInput,
-  borderValues?: BorderValueCreateManyWithoutWebInput
-|}
-
- export type ElementCreateWithoutPropsInput = {|
-  type: ElementType,
-  index: Int,
-  textLeaves?: Json,
-  web: WebCreateOneWithoutElementsInput,
-  parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
-  shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput
-|}
-
- export type ElementCreateManyWithoutWebInput = {|
-  create?: Array< ElementCreateWithoutWebInput > | ElementCreateWithoutWebInput,
-  connect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput
-|}
-
- export type WebWhereInput = {|
-  AND?: Array< WebWhereInput > | WebWhereInput,
-  OR?: Array< WebWhereInput > | WebWhereInput,
-  NOT?: Array< WebWhereInput > | WebWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  createdAt?: DateTime,
-  createdAt_not?: DateTime,
-  createdAt_in?: Array< DateTime > | DateTime,
-  createdAt_not_in?: Array< DateTime > | DateTime,
-  createdAt_lt?: DateTime,
-  createdAt_lte?: DateTime,
-  createdAt_gt?: DateTime,
-  createdAt_gte?: DateTime,
-  updatedAt?: DateTime,
-  updatedAt_not?: DateTime,
-  updatedAt_in?: Array< DateTime > | DateTime,
-  updatedAt_not_in?: Array< DateTime > | DateTime,
-  updatedAt_lt?: DateTime,
-  updatedAt_lte?: DateTime,
-  updatedAt_gt?: DateTime,
-  updatedAt_gte?: DateTime,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  creator?: UserWhereInput,
-  pages_every?: PageWhereInput,
-  pages_some?: PageWhereInput,
-  pages_none?: PageWhereInput,
-  elements_every?: ElementWhereInput,
-  elements_some?: ElementWhereInput,
-  elements_none?: ElementWhereInput,
-  styles_every?: StyleWhereInput,
-  styles_some?: StyleWhereInput,
-  styles_none?: StyleWhereInput,
-  dimensionValues_every?: DimensionValueWhereInput,
-  dimensionValues_some?: DimensionValueWhereInput,
-  dimensionValues_none?: DimensionValueWhereInput,
-  colorValues_every?: ColorValueWhereInput,
-  colorValues_some?: ColorValueWhereInput,
-  colorValues_none?: ColorValueWhereInput,
-  borderValues_every?: BorderValueWhereInput,
-  borderValues_some?: BorderValueWhereInput,
-  borderValues_none?: BorderValueWhereInput
-|}
-
- export type ElementCreateWithoutWebInput = {|
-  type: ElementType,
-  index: Int,
-  textLeaves?: Json,
-  parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
-  shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput,
-  props?: ElementPropCreateManyWithoutElementInput
-|}
-
- export type ElementPropCreateWithoutValueStyleInput = {|
-  name: String,
-  type: PropType,
-  value?: String,
-  element: ElementCreateOneWithoutPropsInput
-|}
-
- export type ElementCreateOneWithoutChildrenInput = {|
-  create?: ElementCreateWithoutChildrenInput,
-  connect?: ElementWhereUniqueInput
-|}
-
- export type ElementPropCreateManyWithoutValueStyleInput = {|
-  create?: Array< ElementPropCreateWithoutValueStyleInput > | ElementPropCreateWithoutValueStyleInput,
-  connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
-|}
-
- export type ElementCreateWithoutChildrenInput = {|
-  type: ElementType,
-  index: Int,
-  textLeaves?: Json,
-  web: WebCreateOneWithoutElementsInput,
-  parent?: ElementCreateOneWithoutChildrenInput,
-  shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput,
-  props?: ElementPropCreateManyWithoutElementInput
-|}
-
- export type StyleCreateInput = {|
-  name: String,
-  isText?: Boolean,
-  display?: StyleDisplay,
-  position?: StylePosition,
-  flexDirection?: StyleFlexDirection,
-  flexWrap?: StyleFlexWrap,
-  justifyContent?: StyleJustifyContent,
-  alignItems?: StyleAlignItems,
-  alignSelf?: StyleAlignSelf,
-  alignContent?: StyleAlignContent,
-  overflow?: StyleOverflow,
-  flex?: Int,
-  flexGrow?: Int,
-  flexShrink?: Int,
-  flexBasis?: Int,
-  zIndex?: Int,
-  direction?: StyleDirection,
-  borderStyle?: StyleBorderStyle,
-  opacity?: Int,
-  fontFamily?: String,
-  fontSize?: Int,
-  fontStyle?: StyleFontStyle,
-  fontWeight?: StyleFontWeight,
-  fontVariant?: StyleFontVariant,
-  letterSpacing?: Int,
-  lineHeight?: Int,
-  textAlign?: StyleTextAlign,
-  textAlignVertical?: StyleTextAlignVertical,
-  textDecorationLine?: StyleTextDecorationLine,
-  textTransform?: StyleTextTransform,
-  web: WebCreateOneWithoutStylesInput,
-  props?: ElementPropCreateManyWithoutValueStyleInput,
-  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
-  width?: DimensionValueCreateOneInput,
-  height?: DimensionValueCreateOneInput,
-  bottom?: DimensionValueCreateOneInput,
-  end?: DimensionValueCreateOneInput,
-  left?: DimensionValueCreateOneInput,
-  right?: DimensionValueCreateOneInput,
-  start?: DimensionValueCreateOneInput,
-  top?: DimensionValueCreateOneInput,
-  minWidth?: DimensionValueCreateOneInput,
-  maxWidth?: DimensionValueCreateOneInput,
-  minHeight?: DimensionValueCreateOneInput,
-  maxHeight?: DimensionValueCreateOneInput,
-  margin?: DimensionValueCreateOneInput,
-  marginBottom?: DimensionValueCreateOneInput,
-  marginEnd?: DimensionValueCreateOneInput,
-  marginHorizontal?: DimensionValueCreateOneInput,
-  marginLeft?: DimensionValueCreateOneInput,
-  marginRight?: DimensionValueCreateOneInput,
-  marginStart?: DimensionValueCreateOneInput,
-  marginTop?: DimensionValueCreateOneInput,
-  marginVertical?: DimensionValueCreateOneInput,
-  padding?: DimensionValueCreateOneInput,
-  paddingBottom?: DimensionValueCreateOneInput,
-  paddingEnd?: DimensionValueCreateOneInput,
-  paddingHorizontal?: DimensionValueCreateOneInput,
-  paddingLeft?: DimensionValueCreateOneInput,
-  paddingRight?: DimensionValueCreateOneInput,
-  paddingStart?: DimensionValueCreateOneInput,
-  paddingTop?: DimensionValueCreateOneInput,
-  paddingVertical?: DimensionValueCreateOneInput,
-  backgroundColor?: ColorValueCreateOneInput,
-  borderColor?: ColorValueCreateOneInput,
-  borderBottomColor?: ColorValueCreateOneInput,
-  borderEndColor?: ColorValueCreateOneInput,
-  borderLeftColor?: ColorValueCreateOneInput,
-  borderRightColor?: ColorValueCreateOneInput,
-  borderStartColor?: ColorValueCreateOneInput,
-  borderTopColor?: ColorValueCreateOneInput,
-  borderRadius?: BorderValueCreateOneInput,
-  borderBottomEndRadius?: BorderValueCreateOneInput,
-  borderBottomLeftRadius?: BorderValueCreateOneInput,
-  borderBottomRightRadius?: BorderValueCreateOneInput,
-  borderBottomStartRadius?: BorderValueCreateOneInput,
-  borderTopEndRadius?: BorderValueCreateOneInput,
-  borderTopLeftRadius?: BorderValueCreateOneInput,
-  borderTopRightRadius?: BorderValueCreateOneInput,
-  borderTopStartRadius?: BorderValueCreateOneInput,
-  borderWidth?: BorderValueCreateOneInput,
-  borderBottomWidth?: BorderValueCreateOneInput,
-  borderEndWidth?: BorderValueCreateOneInput,
-  borderLeftWidth?: BorderValueCreateOneInput,
-  borderRightWidth?: BorderValueCreateOneInput,
-  borderStartWidth?: BorderValueCreateOneInput,
-  borderTopWidth?: BorderValueCreateOneInput,
-  color?: ColorValueCreateOneInput
-|}
-
- export type SharedElementCreateOneWithoutSharedByInput = {|
-  create?: SharedElementCreateWithoutSharedByInput,
-  connect?: SharedElementWhereUniqueInput
-|}
-
- export type SetWebNameInput = {|
-  id: ID_Input,
-  name: String
-|}
-
- export type SharedElementCreateWithoutSharedByInput = {|
-  name: String,
-  element: ElementCreateOneInput
-|}
-
- export type StyleSpreadCreateWithoutSpreadStyleInput = {|
-  index: Int,
-  style: StyleCreateOneInput
-|}
-
- export type ElementCreateOneInput = {|
-  create?: ElementCreateInput,
-  connect?: ElementWhereUniqueInput
-|}
-
- export type WebCreateOneWithoutBorderValuesInput = {|
-  create?: WebCreateWithoutBorderValuesInput,
-  connect?: WebWhereUniqueInput
-|}
-
- export type ElementWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type BorderValueCreateInput = {|
-  name?: String,
-  unit: BorderValueUnit,
-  value: Int,
-  web: WebCreateOneWithoutBorderValuesInput
-|}
-
- export type SharedElementWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type WebCreateOneWithoutColorValuesInput = {|
-  create?: WebCreateWithoutColorValuesInput,
-  connect?: WebWhereUniqueInput
-|}
-
- export type ComponentCreateOneInput = {|
-  create?: ComponentCreateInput,
-  connect?: ComponentWhereUniqueInput
-|}
-
- export type ElementPropWhereInput = {|
-  AND?: Array< ElementPropWhereInput > | ElementPropWhereInput,
-  OR?: Array< ElementPropWhereInput > | ElementPropWhereInput,
-  NOT?: Array< ElementPropWhereInput > | ElementPropWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  type?: PropType,
-  type_not?: PropType,
-  type_in?: Array< PropType > | PropType,
-  type_not_in?: Array< PropType > | PropType,
-  value?: String,
-  value_not?: String,
-  value_in?: Array< String > | String,
-  value_not_in?: Array< String > | String,
-  value_lt?: String,
-  value_lte?: String,
-  value_gt?: String,
-  value_gte?: String,
-  value_contains?: String,
-  value_not_contains?: String,
-  value_starts_with?: String,
-  value_not_starts_with?: String,
-  value_ends_with?: String,
-  value_not_ends_with?: String,
-  element?: ElementWhereInput,
-  valueStyle?: StyleWhereInput
-|}
-
- export type ComponentCreateInput = {|
-  name: String,
-  creator: UserCreateOneWithoutComponentsInput,
-  props?: ComponentPropCreateManyWithoutComponentInput
-|}
-
- export type WebCreateWithoutDimensionValuesInput = {|
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  elements?: ElementCreateManyWithoutWebInput,
-  styles?: StyleCreateManyWithoutWebInput,
-  colorValues?: ColorValueCreateManyWithoutWebInput,
-  borderValues?: BorderValueCreateManyWithoutWebInput
-|}
-
- export type UserCreateOneWithoutComponentsInput = {|
+ export type UserCreateOneWithoutComponentsInput = {| 
   create?: UserCreateWithoutComponentsInput,
   connect?: UserWhereUniqueInput
 |}
 
- export type DimensionValueCreateOneInput = {|
-  create?: DimensionValueCreateInput,
-  connect?: DimensionValueWhereUniqueInput
+ export type UserCreateOneWithoutWebsInput = {| 
+  create?: UserCreateWithoutWebsInput,
+  connect?: UserWhereUniqueInput
 |}
 
- export type UserCreateWithoutComponentsInput = {|
+ export type UserCreateWithoutComponentsInput = {| 
   email: String,
   password: String,
   themeName?: String,
   webs?: WebCreateManyWithoutCreatorInput
 |}
 
- export type ComponentPropWhereInput = {|
-  AND?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
-  OR?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
-  NOT?: Array< ComponentPropWhereInput > | ComponentPropWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  type?: PropType,
-  type_not?: PropType,
-  type_in?: Array< PropType > | PropType,
-  type_not_in?: Array< PropType > | PropType,
-  component?: ComponentWhereInput
+ export type UserCreateWithoutWebsInput = {| 
+  email: String,
+  password: String,
+  themeName?: String,
+  components?: ComponentCreateManyWithoutCreatorInput
 |}
 
- export type ElementPropCreateManyWithoutElementInput = {|
-  create?: Array< ElementPropCreateWithoutElementInput > | ElementPropCreateWithoutElementInput,
-  connect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput
-|}
-
- export type DeletePageInput = {|
-  id: ID_Input
-|}
-
- export type ElementPropCreateWithoutElementInput = {|
-  name: String,
-  type: PropType,
-  value?: String,
-  valueStyle?: StyleCreateOneWithoutPropsInput
-|}
-
- export type CreateWebInput = {|
-  name: String,
-  pageTitle: String
-|}
-
- export type StyleCreateOneWithoutPropsInput = {|
-  create?: StyleCreateWithoutPropsInput,
-  connect?: StyleWhereUniqueInput
-|}
-
- export type DeleteWebInput = {|
-  id: ID_Input
-|}
-
- export type StyleCreateWithoutPropsInput = {|
-  name: String,
-  isText?: Boolean,
-  display?: StyleDisplay,
-  position?: StylePosition,
-  flexDirection?: StyleFlexDirection,
-  flexWrap?: StyleFlexWrap,
-  justifyContent?: StyleJustifyContent,
-  alignItems?: StyleAlignItems,
-  alignSelf?: StyleAlignSelf,
-  alignContent?: StyleAlignContent,
-  overflow?: StyleOverflow,
-  flex?: Int,
-  flexGrow?: Int,
-  flexShrink?: Int,
-  flexBasis?: Int,
-  zIndex?: Int,
-  direction?: StyleDirection,
-  borderStyle?: StyleBorderStyle,
-  opacity?: Int,
-  fontFamily?: String,
-  fontSize?: Int,
-  fontStyle?: StyleFontStyle,
-  fontWeight?: StyleFontWeight,
-  fontVariant?: StyleFontVariant,
-  letterSpacing?: Int,
-  lineHeight?: Int,
-  textAlign?: StyleTextAlign,
-  textAlignVertical?: StyleTextAlignVertical,
-  textDecorationLine?: StyleTextDecorationLine,
-  textTransform?: StyleTextTransform,
-  web: WebCreateOneWithoutStylesInput,
-  spreadStyles?: StyleSpreadCreateManyWithoutSpreadStyleInput,
-  width?: DimensionValueCreateOneInput,
-  height?: DimensionValueCreateOneInput,
-  bottom?: DimensionValueCreateOneInput,
-  end?: DimensionValueCreateOneInput,
-  left?: DimensionValueCreateOneInput,
-  right?: DimensionValueCreateOneInput,
-  start?: DimensionValueCreateOneInput,
-  top?: DimensionValueCreateOneInput,
-  minWidth?: DimensionValueCreateOneInput,
-  maxWidth?: DimensionValueCreateOneInput,
-  minHeight?: DimensionValueCreateOneInput,
-  maxHeight?: DimensionValueCreateOneInput,
-  margin?: DimensionValueCreateOneInput,
-  marginBottom?: DimensionValueCreateOneInput,
-  marginEnd?: DimensionValueCreateOneInput,
-  marginHorizontal?: DimensionValueCreateOneInput,
-  marginLeft?: DimensionValueCreateOneInput,
-  marginRight?: DimensionValueCreateOneInput,
-  marginStart?: DimensionValueCreateOneInput,
-  marginTop?: DimensionValueCreateOneInput,
-  marginVertical?: DimensionValueCreateOneInput,
-  padding?: DimensionValueCreateOneInput,
-  paddingBottom?: DimensionValueCreateOneInput,
-  paddingEnd?: DimensionValueCreateOneInput,
-  paddingHorizontal?: DimensionValueCreateOneInput,
-  paddingLeft?: DimensionValueCreateOneInput,
-  paddingRight?: DimensionValueCreateOneInput,
-  paddingStart?: DimensionValueCreateOneInput,
-  paddingTop?: DimensionValueCreateOneInput,
-  paddingVertical?: DimensionValueCreateOneInput,
-  backgroundColor?: ColorValueCreateOneInput,
-  borderColor?: ColorValueCreateOneInput,
-  borderBottomColor?: ColorValueCreateOneInput,
-  borderEndColor?: ColorValueCreateOneInput,
-  borderLeftColor?: ColorValueCreateOneInput,
-  borderRightColor?: ColorValueCreateOneInput,
-  borderStartColor?: ColorValueCreateOneInput,
-  borderTopColor?: ColorValueCreateOneInput,
-  borderRadius?: BorderValueCreateOneInput,
-  borderBottomEndRadius?: BorderValueCreateOneInput,
-  borderBottomLeftRadius?: BorderValueCreateOneInput,
-  borderBottomRightRadius?: BorderValueCreateOneInput,
-  borderBottomStartRadius?: BorderValueCreateOneInput,
-  borderTopEndRadius?: BorderValueCreateOneInput,
-  borderTopLeftRadius?: BorderValueCreateOneInput,
-  borderTopRightRadius?: BorderValueCreateOneInput,
-  borderTopStartRadius?: BorderValueCreateOneInput,
-  borderWidth?: BorderValueCreateOneInput,
-  borderBottomWidth?: BorderValueCreateOneInput,
-  borderEndWidth?: BorderValueCreateOneInput,
-  borderLeftWidth?: BorderValueCreateOneInput,
-  borderRightWidth?: BorderValueCreateOneInput,
-  borderStartWidth?: BorderValueCreateOneInput,
-  borderTopWidth?: BorderValueCreateOneInput,
-  color?: ColorValueCreateOneInput
-|}
-
- export type SetPageTitleInput = {|
-  id: ID_Input,
-  title: String
-|}
-
- export type WebCreateOneWithoutStylesInput = {|
-  create?: WebCreateWithoutStylesInput,
-  connect?: WebWhereUniqueInput
-|}
-
- export type StyleCreateOneInput = {|
-  create?: StyleCreateInput,
-  connect?: StyleWhereUniqueInput
-|}
-
- export type WebCreateWithoutStylesInput = {|
-  name: String,
-  creator: UserCreateOneWithoutWebsInput,
-  pages?: PageCreateManyWithoutWebInput,
-  elements?: ElementCreateManyWithoutWebInput,
-  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
-  colorValues?: ColorValueCreateManyWithoutWebInput,
-  borderValues?: BorderValueCreateManyWithoutWebInput
-|}
-
- export type DimensionValueWhereInput = {|
-  AND?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
-  OR?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
-  NOT?: Array< DimensionValueWhereInput > | DimensionValueWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
-  name?: String,
-  name_not?: String,
-  name_in?: Array< String > | String,
-  name_not_in?: Array< String > | String,
-  name_lt?: String,
-  name_lte?: String,
-  name_gt?: String,
-  name_gte?: String,
-  name_contains?: String,
-  name_not_contains?: String,
-  name_starts_with?: String,
-  name_not_starts_with?: String,
-  name_ends_with?: String,
-  name_not_ends_with?: String,
-  unit?: DimensionValueUnit,
-  unit_not?: DimensionValueUnit,
-  unit_in?: Array< DimensionValueUnit > | DimensionValueUnit,
-  unit_not_in?: Array< DimensionValueUnit > | DimensionValueUnit,
-  value?: Int,
-  value_not?: Int,
-  value_in?: Array< Int > | Int,
-  value_not_in?: Array< Int > | Int,
-  value_lt?: Int,
-  value_lte?: Int,
-  value_gt?: Int,
-  value_gte?: Int,
-  web?: WebWhereInput
-|}
-
- export type DimensionValueCreateManyWithoutWebInput = {|
-  create?: Array< DimensionValueCreateWithoutWebInput > | DimensionValueCreateWithoutWebInput,
-  connect?: Array< DimensionValueWhereUniqueInput > | DimensionValueWhereUniqueInput
-|}
-
- export type ColorValueCreateInput = {|
-  name?: String,
-  r: Int,
-  g: Int,
-  b: Int,
-  a?: Float,
-  web: WebCreateOneWithoutColorValuesInput
-|}
-
- export type DimensionValueCreateWithoutWebInput = {|
-  name?: String,
-  unit: DimensionValueUnit,
-  value: Int
-|}
-
- export type WebCreateOneWithoutDimensionValuesInput = {|
-  create?: WebCreateWithoutDimensionValuesInput,
-  connect?: WebWhereUniqueInput
-|}
-
- export type DimensionValueWhereUniqueInput = {|
-  id?: ID_Input
-|}
-
- export type UserWhereInput = {|
+ export type UserWhereInput = {| 
   AND?: Array< UserWhereInput > | UserWhereInput,
   OR?: Array< UserWhereInput > | UserWhereInput,
   NOT?: Array< UserWhereInput > | UserWhereInput,
@@ -5436,69 +5409,105 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   components_none?: ComponentWhereInput
 |}
 
- export type ColorValueCreateManyWithoutWebInput = {|
-  create?: Array< ColorValueCreateWithoutWebInput > | ColorValueCreateWithoutWebInput,
-  connect?: Array< ColorValueWhereUniqueInput > | ColorValueWhereUniqueInput
+ export type UserWhereUniqueInput = {| 
+  id?: ID_Input,
+  email?: String
 |}
 
- export type ElementCreateOneWithoutPropsInput = {|
-  create?: ElementCreateWithoutPropsInput,
-  connect?: ElementWhereUniqueInput
+ export type WebCreateManyWithoutCreatorInput = {| 
+  create?: Array< WebCreateWithoutCreatorInput > | WebCreateWithoutCreatorInput,
+  connect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput
 |}
 
- export type SetPageElementInput = {|
-  id: ID_Input,
-  element: ElementCreateInput
+ export type WebCreateOneWithoutBorderValuesInput = {| 
+  create?: WebCreateWithoutBorderValuesInput,
+  connect?: WebWhereUniqueInput
 |}
 
- export type WebWhereUniqueInput = {|
-  id?: ID_Input
+ export type WebCreateOneWithoutColorValuesInput = {| 
+  create?: WebCreateWithoutColorValuesInput,
+  connect?: WebWhereUniqueInput
 |}
 
- export type ColorValueCreateWithoutWebInput = {|
-  name?: String,
-  r: Int,
-  g: Int,
-  b: Int,
-  a?: Float
+ export type WebCreateOneWithoutDimensionValuesInput = {| 
+  create?: WebCreateWithoutDimensionValuesInput,
+  connect?: WebWhereUniqueInput
 |}
 
- export type BorderValueWhereUniqueInput = {|
-  id?: ID_Input
+ export type WebCreateOneWithoutElementsInput = {| 
+  create?: WebCreateWithoutElementsInput,
+  connect?: WebWhereUniqueInput
 |}
 
- export type BorderValueCreateWithoutWebInput = {|
-  name?: String,
-  unit: BorderValueUnit,
-  value: Int
+ export type WebCreateOneWithoutStylesInput = {| 
+  create?: WebCreateWithoutStylesInput,
+  connect?: WebWhereUniqueInput
 |}
 
- export type BorderValueCreateManyWithoutWebInput = {|
-  create?: Array< BorderValueCreateWithoutWebInput > | BorderValueCreateWithoutWebInput,
-  connect?: Array< BorderValueWhereUniqueInput > | BorderValueWhereUniqueInput
+ export type WebCreateWithoutBorderValuesInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  elements?: ElementCreateManyWithoutWebInput,
+  styles?: StyleCreateManyWithoutWebInput,
+  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
+  colorValues?: ColorValueCreateManyWithoutWebInput
 |}
 
- export type ColorValueWhereUniqueInput = {|
-  id?: ID_Input
+ export type WebCreateWithoutColorValuesInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  elements?: ElementCreateManyWithoutWebInput,
+  styles?: StyleCreateManyWithoutWebInput,
+  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
+  borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type BorderValueCreateOneInput = {|
-  create?: BorderValueCreateInput,
-  connect?: BorderValueWhereUniqueInput
+ export type WebCreateWithoutCreatorInput = {| 
+  name: String,
+  pages?: PageCreateManyWithoutWebInput,
+  elements?: ElementCreateManyWithoutWebInput,
+  styles?: StyleCreateManyWithoutWebInput,
+  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
+  colorValues?: ColorValueCreateManyWithoutWebInput,
+  borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type SetThemeInput = {|
-  themeName: String
+ export type WebCreateWithoutDimensionValuesInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  elements?: ElementCreateManyWithoutWebInput,
+  styles?: StyleCreateManyWithoutWebInput,
+  colorValues?: ColorValueCreateManyWithoutWebInput,
+  borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type StyleSpreadWhereUniqueInput = {|
-  id?: ID_Input
+ export type WebCreateWithoutElementsInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  styles?: StyleCreateManyWithoutWebInput,
+  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
+  colorValues?: ColorValueCreateManyWithoutWebInput,
+  borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
- export type ElementWhereInput = {|
-  AND?: Array< ElementWhereInput > | ElementWhereInput,
-  OR?: Array< ElementWhereInput > | ElementWhereInput,
-  NOT?: Array< ElementWhereInput > | ElementWhereInput,
+ export type WebCreateWithoutStylesInput = {| 
+  name: String,
+  creator: UserCreateOneWithoutWebsInput,
+  pages?: PageCreateManyWithoutWebInput,
+  elements?: ElementCreateManyWithoutWebInput,
+  dimensionValues?: DimensionValueCreateManyWithoutWebInput,
+  colorValues?: ColorValueCreateManyWithoutWebInput,
+  borderValues?: BorderValueCreateManyWithoutWebInput
+|}
+
+ export type WebWhereInput = {| 
+  AND?: Array< WebWhereInput > | WebWhereInput,
+  OR?: Array< WebWhereInput > | WebWhereInput,
+  NOT?: Array< WebWhereInput > | WebWhereInput,
   id?: ID_Input,
   id_not?: ID_Input,
   id_in?: Array< ID_Input > | ID_Input,
@@ -5513,48 +5522,22 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
-  index?: Int,
-  index_not?: Int,
-  index_in?: Array< Int > | Int,
-  index_not_in?: Array< Int > | Int,
-  index_lt?: Int,
-  index_lte?: Int,
-  index_gt?: Int,
-  index_gte?: Int,
-  web?: WebWhereInput,
-  parent?: ElementWhereInput,
-  children_every?: ElementWhereInput,
-  children_some?: ElementWhereInput,
-  children_none?: ElementWhereInput,
-  shared?: SharedElementWhereInput,
-  component?: ComponentWhereInput,
-  props_every?: ElementPropWhereInput,
-  props_some?: ElementPropWhereInput,
-  props_none?: ElementPropWhereInput
-|}
-
- export type SharedElementWhereInput = {|
-  AND?: Array< SharedElementWhereInput > | SharedElementWhereInput,
-  OR?: Array< SharedElementWhereInput > | SharedElementWhereInput,
-  NOT?: Array< SharedElementWhereInput > | SharedElementWhereInput,
-  id?: ID_Input,
-  id_not?: ID_Input,
-  id_in?: Array< ID_Input > | ID_Input,
-  id_not_in?: Array< ID_Input > | ID_Input,
-  id_lt?: ID_Input,
-  id_lte?: ID_Input,
-  id_gt?: ID_Input,
-  id_gte?: ID_Input,
-  id_contains?: ID_Input,
-  id_not_contains?: ID_Input,
-  id_starts_with?: ID_Input,
-  id_not_starts_with?: ID_Input,
-  id_ends_with?: ID_Input,
-  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
   name?: String,
   name_not?: String,
   name_in?: Array< String > | String,
@@ -5569,84 +5552,115 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   name_not_starts_with?: String,
   name_ends_with?: String,
   name_not_ends_with?: String,
-  sharedBy_every?: ElementWhereInput,
-  sharedBy_some?: ElementWhereInput,
-  sharedBy_none?: ElementWhereInput,
-  element?: ElementWhereInput
+  creator?: UserWhereInput,
+  pages_every?: PageWhereInput,
+  pages_some?: PageWhereInput,
+  pages_none?: PageWhereInput,
+  elements_every?: ElementWhereInput,
+  elements_some?: ElementWhereInput,
+  elements_none?: ElementWhereInput,
+  styles_every?: StyleWhereInput,
+  styles_some?: StyleWhereInput,
+  styles_none?: StyleWhereInput,
+  dimensionValues_every?: DimensionValueWhereInput,
+  dimensionValues_some?: DimensionValueWhereInput,
+  dimensionValues_none?: DimensionValueWhereInput,
+  colorValues_every?: ColorValueWhereInput,
+  colorValues_some?: ColorValueWhereInput,
+  colorValues_none?: ColorValueWhereInput,
+  borderValues_every?: BorderValueWhereInput,
+  borderValues_some?: BorderValueWhereInput,
+  borderValues_none?: BorderValueWhereInput
+|}
+
+ export type WebWhereUniqueInput = {| 
+  id?: ID_Input
 |}
 
 /*
  * An object with an ID
 
 */
- export type Node = {|
+ export type Node = {| 
    id: ID_Output,
 |}
 
- export type SetPageTitleErrors = {|
-   title?: Max140CharsError,
+ export type AuthErrors = {| 
+   email?: EmailError,
+   password?: PasswordError,
 |}
 
- export type DeletePagePayload = {|
-   page?: Page,
+ export type AuthPayload = {| 
+   errors?: AuthErrors,
+   token?: String,
+   user?: User,
 |}
 
- export type ComponentProp = {| ...Node,
-
+ export type BorderValue = {| ...Node,
+ 
    id: ID_Output,
-   component: Component,
-   name: String,
-   type: PropType,
+   web: Web,
+   name?: String,
+   unit: BorderValueUnit,
+   value: Int,
 |}
 
- export type User = {| ...Node,
-
+ export type ColorValue = {| ...Node,
+ 
    id: ID_Output,
-   webs?: Web[],
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   email: String,
-   password: String,
-   themeName?: String,
-   components?: Component[],
+   web: Web,
+   name?: String,
+   r: Int,
+   g: Int,
+   b: Int,
+   a?: Float,
 |}
 
  export type Component = {| ...Node,
-
+ 
    id: ID_Output,
    name: String,
    creator: User,
    props?: ComponentProp[],
 |}
 
- export type SetWebNameErrors = {|
-   name?: Max140CharsError,
-|}
-
- export type SharedElement = {| ...Node,
-
+ export type ComponentProp = {| ...Node,
+ 
    id: ID_Output,
-   sharedBy?: Element[],
+   component: Component,
    name: String,
-   element: Element,
+   type: PropType,
 |}
 
- export type SetPageTitlePayload = {|
-   errors?: SetPageTitleErrors,
-   page?: Page,
+ export type CreateWebErrors = {| 
+   name?: Min5Max140CharsError,
+   pageTitle?: Min5Max140CharsError,
 |}
 
- export type DeleteWebPayload = {|
-   web?: Web,
-|}
-
- export type CreateWebPayload = {|
+ export type CreateWebPayload = {| 
    errors?: CreateWebErrors,
    pageId?: ID_Output,
 |}
 
- export type Element = {| ...Node,
+ export type DeletePagePayload = {| 
+   page?: Page,
+|}
 
+ export type DeleteWebPayload = {| 
+   web?: Web,
+|}
+
+ export type DimensionValue = {| ...Node,
+ 
+   id: ID_Output,
+   web: Web,
+   name?: String,
+   unit: DimensionValueUnit,
+   value: Int,
+|}
+
+ export type Element = {| ...Node,
+ 
    id: ID_Output,
    type: ElementType,
    index: Int,
@@ -5659,14 +5673,18 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    props?: ElementProp[],
 |}
 
- export type AuthPayload = {|
-   errors?: AuthErrors,
-   token?: String,
-   user?: User,
+ export type ElementProp = {| ...Node,
+ 
+   id: ID_Output,
+   element: Element,
+   name: String,
+   type: PropType,
+   valueStyle?: Style,
+   value?: String,
 |}
 
  export type Page = {| ...Node,
-
+ 
    id: ID_Output,
    creator: User,
    web: Web,
@@ -5676,51 +5694,42 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    title: String,
 |}
 
- export type ColorValue = {| ...Node,
-
-   id: ID_Output,
-   web: Web,
-   name?: String,
-   r: Int,
-   g: Int,
-   b: Int,
-   a?: Float,
-|}
-
- export type Web = {| ...Node,
-
-   id: ID_Output,
-   creator: User,
-   pages?: Page[],
-   elements?: Element[],
-   styles?: Style[],
-   dimensionValues?: DimensionValue[],
-   colorValues?: ColorValue[],
-   borderValues?: BorderValue[],
-   createdAt: DateTime,
-   updatedAt: DateTime,
-   name: String,
-|}
-
- export type StyleSpread = {| ...Node,
-
-   id: ID_Output,
-   spreadStyle: Style,
-   index: Int,
-   style: Style,
-|}
-
- export type SetPageElementPayload = {|
+ export type SetPageElementPayload = {| 
    page?: Page,
 |}
 
- export type SetWebNamePayload = {|
+ export type SetPageTitleErrors = {| 
+   title?: Min5Max140CharsError,
+|}
+
+ export type SetPageTitlePayload = {| 
+   errors?: SetPageTitleErrors,
+   page?: Page,
+|}
+
+ export type SetThemePayload = {| 
+   user?: User,
+|}
+
+ export type SetWebNameErrors = {| 
+   name?: Min5Max140CharsError,
+|}
+
+ export type SetWebNamePayload = {| 
    errors?: SetWebNameErrors,
    web?: Web,
 |}
 
- export type Style = {| ...Node,
+ export type SharedElement = {| ...Node,
+ 
+   id: ID_Output,
+   sharedBy?: Element[],
+   name: String,
+   element: Element,
+|}
 
+ export type Style = {| ...Node,
+ 
    id: ID_Output,
    web: Web,
    props?: ElementProp[],
@@ -5812,57 +5821,52 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    textTransform?: StyleTextTransform,
 |}
 
- export type DimensionValue = {| ...Node,
-
+ export type StyleSpread = {| ...Node,
+ 
    id: ID_Output,
-   web: Web,
-   name?: String,
-   unit: DimensionValueUnit,
-   value: Int,
+   spreadStyle: Style,
+   index: Int,
+   style: Style,
 |}
 
- export type BorderValue = {| ...Node,
-
+ export type User = {| ...Node,
+ 
    id: ID_Output,
-   web: Web,
-   name?: String,
-   unit: BorderValueUnit,
-   value: Int,
+   webs?: Web[],
+   createdAt: DateTime,
+   updatedAt: DateTime,
+   email: String,
+   password: String,
+   themeName?: String,
+   components?: Component[],
 |}
 
- export type AuthErrors = {|
-   email?: EmailError,
-   password?: PasswordError,
-|}
-
- export type CreateWebErrors = {|
-   name?: Max140CharsError,
-   pageTitle?: Max140CharsError,
-|}
-
- export type SetThemePayload = {|
-   user?: User,
-|}
-
- export type ElementProp = {| ...Node,
-
+ export type Web = {| ...Node,
+ 
    id: ID_Output,
-   element: Element,
+   creator: User,
+   pages?: Page[],
+   elements?: Element[],
+   styles?: Style[],
+   dimensionValues?: DimensionValue[],
+   colorValues?: ColorValue[],
+   borderValues?: BorderValue[],
+   createdAt: DateTime,
+   updatedAt: DateTime,
    name: String,
-   type: PropType,
-   valueStyle?: Style,
-   value?: String,
 |}
 
 /*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
+The `Boolean` scalar type represents `true` or `false`.
 */
- export type Float = number
+ export type Boolean = boolean 
+
+ export type DateTime = Date | string 
 
 /*
-Raw JSON value
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
- export type Json = string
+ export type Float = number 
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -5871,18 +5875,16 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Output = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
- export type Boolean = boolean
+ export type Int = number 
 
- export type DateTime = Date | string
+/*
+Raw JSON value
+*/
+ export type Json = string 
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
 */
- export type String = string
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
- export type Int = number
+ export type String = string 

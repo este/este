@@ -1,6 +1,8 @@
 // @flow
 import isEmail from 'validator/lib/isEmail';
 
+// Helpers
+
 function required(value) {
   return value.length === 0 ? 'REQUIRED' : null;
 }
@@ -13,22 +15,20 @@ function max140(value) {
   return value.length > 140 ? 'MAX_140_CHARS' : null;
 }
 
-function max1024(value) {
+function max1024Chars(value) {
   return value.length > 1024 ? 'MAX_1024_CHARS' : null;
 }
+
+// Validates
 
 export function email(value: string) {
   return required(value) || (!isEmail(value) ? 'EMAIL' : null);
 }
 
-export function min5Max140(value: string) {
-  return required(value) || min5(value) || max140(value);
-}
-
-export function min5Max1024(value: string) {
-  return required(value) || min5(value) || max1024(value);
-}
-
 export function password(value: string) {
-  return min5Max1024(value);
+  return required(value) || min5(value) || max1024Chars(value);
+}
+
+export function max140Chars(value: string) {
+  return required(value) || max140(value);
 }

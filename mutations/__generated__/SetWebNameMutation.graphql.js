@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 8877ac2dab1922941b072249704f8628
+ * @relayHash 862d8cddf8f39a7f1f52b895d592d6b4
  */
 
 /* eslint-disable */
@@ -9,7 +9,7 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED";
+export type Min5Max140CharsError = "MAX_140_CHARS" | "MIN_5_CHARS" | "REQUIRED";
 export type SetWebNameInput = {
   id: string,
   name: string,
@@ -24,7 +24,7 @@ export type SetWebNameMutationResponse = {|
       +id: string,
     |},
     +errors: ?{|
-      +name: ?Max140CharsError
+      +name: ?Min5Max140CharsError
     |},
   |}
 |};

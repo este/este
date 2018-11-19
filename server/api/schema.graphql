@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Nov 16 2018 00:36:00 GMT+0100 (Central European Standard Time)
+# timestamp: Mon Nov 19 2018 02:35:32 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -712,8 +712,8 @@ input ComponentWhereUniqueInput {
 }
 
 type CreateWebErrors {
-  name: Max140CharsError
-  pageTitle: Max140CharsError
+  name: Min5Max140CharsError
+  pageTitle: Min5Max140CharsError
 }
 
 input CreateWebInput {
@@ -1341,8 +1341,9 @@ enum EmailError {
 """Raw JSON value"""
 scalar Json
 
-enum Max140CharsError {
+enum Min5Max140CharsError {
   REQUIRED
+  MIN_5_CHARS
   MAX_140_CHARS
 }
 
@@ -1569,7 +1570,7 @@ type SetPageElementPayload {
 }
 
 type SetPageTitleErrors {
-  title: Max140CharsError
+  title: Min5Max140CharsError
 }
 
 input SetPageTitleInput {
@@ -1591,7 +1592,7 @@ type SetThemePayload {
 }
 
 type SetWebNameErrors {
-  name: Max140CharsError
+  name: Min5Max140CharsError
 }
 
 input SetWebNameInput {
