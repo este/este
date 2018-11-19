@@ -1,10 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
-import type { Commit, Errors } from '../components/core/withMutation';
 import type { SetWebNameMutation } from './__generated__/SetWebNameMutation.graphql';
-
-export type SetWebNameCommit = Commit<SetWebNameMutation>;
-export type SetWebNameErrors = Errors<SetWebNameMutation, 'setWebName'>;
+import useMutation from '../hooks/useMutation';
+import validateSetWebName from '../validate/validateSetWebName';
 
 const config = {
   mutation: graphql`
@@ -22,4 +20,10 @@ const config = {
   `,
 };
 
-export default config;
+export function useSetWebNameMutation() {
+  return useMutation<SetWebNameMutation, 'setWebName'>(
+    config,
+    'setWebName',
+    validateSetWebName,
+  );
+}

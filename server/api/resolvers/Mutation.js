@@ -1,11 +1,10 @@
 // @flow
 import bcrypt from 'bcryptjs';
 import jsonwebtoken from 'jsonwebtoken';
-// TODO: Remove
-import * as validations from '../../../validations';
 import validateAuth from '../../../validate/validateAuth';
 import validateCreateWeb from '../../../validate/validateCreateWeb';
 import validateSetPageTitle from '../../../validate/validateSetPageTitle';
+import validateSetWebName from '../../../validate/validateSetWebName';
 import type { Mutation as MutationType } from '../__generated__/api.graphql';
 
 const Mutation: MutationType = {
@@ -365,7 +364,7 @@ const Mutation: MutationType = {
   },
 
   setWebName: async ({ input }, info, { db }) => {
-    const errors = validations.validateSetWebName(input);
+    const errors = validateSetWebName(input);
     if (errors) return { errors };
     const web = await db.mutation.updateWeb({
       where: { id: input.id },

@@ -29,8 +29,8 @@ function PageTitle(props: { data: Data }) {
     });
   }
 
-  function handleChangeTextThrottled(value) {
-    const input = { id: data.id, title: value };
+  function handleChangeTextThrottled(text) {
+    const input = { id: data.id, title: text };
     commit(input);
   }
 

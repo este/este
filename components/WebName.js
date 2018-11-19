@@ -1,17 +1,12 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import TextInput from './core/TextInput';
-import withMutation from './core/withMutation';
-import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
-import * as validations from '../validations';
-import { pipe } from 'ramda';
-import SetWebNameMutation, {
-  type SetWebNameCommit,
-  type SetWebNameErrors,
-} from '../mutations/SetWebNameMutation';
+import { defineMessages } from 'react-intl';
+import useIntl from '../hooks/useIntl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import type { WebName as Data } from './__generated__/WebName.graphql';
-import withStore, { type Store } from './core/withStore';
+import useCommitLocalUpdate from '../hooks/useCommitLocalUpdate';
+import { useSetWebNameMutation } from '../mutations/SetWebNameMutation';
 
 const messages = defineMessages({
   placeholder: {
@@ -20,63 +15,39 @@ const messages = defineMessages({
   },
 });
 
-type WebNameProps = {|
-  data: Data,
-  commit: SetWebNameCommit,
-  intl: IntlShape,
-  store: Store,
-|};
+function WebName(props: { data: Data }) {
+  const { data } = props;
+  const intl = useIntl();
+  const commitLocalUpdate = useCommitLocalUpdate();
+  const [commit, errors] = useSetWebNameMutation();
 
-type WebNameState = {|
-  errors: SetWebNameErrors,
-|};
-
-class WebName extends React.PureComponent<WebNameProps, WebNameState> {
-  state = {
-    errors: null,
-  };
-
-  handleTextInputChangeText = (text: string) => {
-    this.props.store(store => {
-      const record = store.get(this.props.data.id);
+  function handleChangeText(text) {
+    commitLocalUpdate(updater => {
+      const record = updater.get(data.id);
       if (!record) return;
       record.setValue(text, 'draftName');
     });
-  };
-
-  handleTextInputChangeTextThrottled = value => {
-    const input = {
-      id: this.props.data.id,
-      name: value,
-    };
-    const errors = validations.validateSetWebName(input);
-    this.setState({ errors });
-    if (errors == null) this.props.commit(input);
-  };
-
-  render() {
-    const { data, intl } = this.props;
-    const { errors } = this.state;
-
-    return (
-      <TextInput
-        error={errors && errors.name}
-        size={1}
-        value={data.draftName}
-        onChangeText={this.handleTextInputChangeText}
-        onChangeTextThrottled={this.handleTextInputChangeTextThrottled}
-        placeholder={intl.formatMessage(messages.placeholder)}
-      />
-    );
   }
+
+  function handleChangeTextThrottled(text) {
+    const input = { id: data.id, name: text };
+    commit(input);
+  }
+
+  return (
+    <TextInput
+      error={errors && errors.name}
+      size={1}
+      value={data.draftName}
+      onChangeText={handleChangeText}
+      onChangeTextThrottled={handleChangeTextThrottled}
+      placeholder={intl.formatMessage(messages.placeholder)}
+    />
+  );
 }
 
 export default createFragmentContainer(
-  pipe(
-    injectIntl,
-    withStore,
-    withMutation(SetWebNameMutation),
-  )(WebName),
+  WebName,
   graphql`
     fragment WebName on Web {
       id
