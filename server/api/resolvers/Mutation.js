@@ -4,6 +4,7 @@ import jsonwebtoken from 'jsonwebtoken';
 // TODO: Remove
 import * as validations from '../../../validations';
 import validateAuth from '../../../validate/validateAuth';
+import validateCreateWeb from '../../../validate/validateCreateWeb';
 import type { Mutation as MutationType } from '../__generated__/api.graphql';
 
 const Mutation: MutationType = {
@@ -49,7 +50,7 @@ const Mutation: MutationType = {
   // Permissions are defined in server/api/permissions by graphql-shield.
   createWeb: async ({ input }, info, { userId, db }) => {
     if (userId == null) return null;
-    const errors = validations.validateCreateWeb(input);
+    const errors = validateCreateWeb(input);
     if (errors) return { errors };
 
     // Fetch seed data first.

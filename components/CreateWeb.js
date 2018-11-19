@@ -1,18 +1,13 @@
 // @flow
-import * as React from 'react';
-import { CreateButton } from './core/buttons';
+import React, { useState } from 'react';
 import TextInput from './core/TextInput';
-import { injectIntl, defineMessages, type IntlShape } from 'react-intl';
 import Row from './core/Row';
-import withMutation from './core/withMutation';
-import * as validations from '../validations';
+import { CreateButton } from './core/buttons';
+import { defineMessages } from 'react-intl';
+import useIntl from '../hooks/useIntl';
+import { useCreateWebMutation } from '../mutations/CreateWebMutation';
 import Router from 'next/router';
 import type { Href } from '../browser/sitemap';
-import { pipe } from 'ramda';
-import CreateWebMutation, {
-  type CreateWebCommit,
-  type CreateWebErrors,
-} from '../mutations/CreateWebMutation';
 
 export const messages = defineMessages({
   pageTitle: {
@@ -25,101 +20,49 @@ export const messages = defineMessages({
   },
 });
 
-type CreateWebProps = {|
-  commit: CreateWebCommit,
-  pending: boolean,
-  intl: IntlShape,
-|};
+export default function CreateWeb() {
+  const intl = useIntl();
+  const [name, setName] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [commit, pending, errors] = useCreateWebMutation();
 
-type CreateWebState = {|
-  errors: CreateWebErrors,
-  name: string,
-  disabled: boolean,
-|};
-
-class CreateWeb extends React.PureComponent<CreateWebProps, CreateWebState> {
-  state = {
-    errors: null,
-    name: '',
-    disabled: false,
-  };
-
-  // That's how we bind event handlers.
-  // https://reactjs.org/docs/faq-functions.html#why-is-binding-necessary-at-all
-  setName = name => this.setState({ name });
-
-  redirectToEditor = id => () => {
+  function onSuccess(createWeb) {
+    const { pageId } = createWeb;
+    // Anything can fail, endpoint can be updated, this is fine.
+    if (pageId == null) return;
+    setDisabled(true);
     const href: Href = {
       pathname: '/editor',
-      query: { id },
+      query: { id: pageId },
     };
     // $FlowFixMe Wrong libdef.
     Router.push(href);
-  };
-
-  handleCompleted = ({ createWeb }) => {
-    // Payload can be a null, because resolver can throw or be deprecated or
-    // whatever. Serious errors are handled globally, so nothing to do here.
-    if (!createWeb) return;
-    const { errors, pageId } = createWeb;
-    if (errors) {
-      this.setState({ errors });
-      return;
-    }
-    // We can only redirect if we have pageId. Remember, anything can fail if
-    // network and a server is involved. Handle it gradually.
-    if (pageId == null) return;
-    // Disable form before the redirect so it's not confusing for a user.
-    this.setState({ disabled: true }, this.redirectToEditor(pageId));
-  };
-
-  createWeb = () => {
-    const pageTitle = this.props.intl.formatMessage(messages.pageTitle);
-
-    // Create input object from state, props, whatever.
-    const input = {
-      name: this.state.name,
-      pageTitle,
-    };
-
-    const errors = validations.validateCreateWeb(input);
-    if (errors) {
-      this.setState({ errors });
-      return;
-    }
-
-    this.props.commit(input, this.handleCompleted);
-  };
-
-  render() {
-    const { errors } = this.state;
-    const disabled = this.props.pending || this.state.disabled;
-
-    return (
-      <>
-        <TextInput
-          label={this.props.intl.formatMessage(messages.label)}
-          disabled={disabled}
-          error={errors && errors.name}
-          focusOnError={errors}
-          onChangeText={this.setName}
-          value={this.state.name}
-          onSubmitEditing={this.createWeb}
-          placeholder="…"
-        />
-        <Row>
-          <CreateButton
-            color="primary"
-            disabled={disabled}
-            onPress={this.createWeb}
-          />
-        </Row>
-      </>
-    );
   }
-}
 
-export default pipe(
-  injectIntl,
-  withMutation(CreateWebMutation),
-)(CreateWeb);
+  function createWeb() {
+    const input = { name, pageTitle: intl.formatMessage(messages.pageTitle) };
+    commit(input, onSuccess);
+  }
+
+  return (
+    <>
+      <TextInput
+        label={intl.formatMessage(messages.label)}
+        disabled={disabled || pending}
+        error={errors && errors.name}
+        focusOnError={errors}
+        onChangeText={setName}
+        value={name}
+        onSubmitEditing={createWeb}
+        placeholder="…"
+      />
+      <Row>
+        <CreateButton
+          color="primary"
+          disabled={disabled || pending}
+          onPress={createWeb}
+        />
+      </Row>
+    </>
+  );
+}

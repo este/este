@@ -1,10 +1,8 @@
 // @flow
 import { graphql } from 'react-relay';
-import type { Commit, Errors } from '../components/core/withMutation';
 import type { CreateWebMutation } from './__generated__/CreateWebMutation.graphql';
-
-export type CreateWebCommit = Commit<CreateWebMutation>;
-export type CreateWebErrors = Errors<CreateWebMutation, 'createWeb'>;
+import useMutation from '../hooks/useMutation';
+import validateCreateWeb from '../validate/validateCreateWeb';
 
 const config = {
   mutation: graphql`
@@ -20,4 +18,10 @@ const config = {
   `,
 };
 
-export default config;
+export function useCreateWebMutation() {
+  return useMutation<CreateWebMutation, 'createWeb'>(
+    config,
+    'createWeb',
+    validateCreateWeb,
+  );
+}
