@@ -1,10 +1,7 @@
 // @flow
 import { graphql } from 'react-relay';
-import type { Commit, Errors } from '../components/core/withMutation';
 import type { DeleteWebMutation } from './__generated__/DeleteWebMutation.graphql';
-
-export type DeleteWebCommit = Commit<DeleteWebMutation>;
-export type DeleteWebErrors = Errors<DeleteWebMutation, 'setWebName'>;
+import useMutation from '../hooks/useMutation';
 
 const config = {
   mutation: graphql`
@@ -18,4 +15,6 @@ const config = {
   `,
 };
 
-export default config;
+export function useDeleteWebMutation() {
+  return useMutation<DeleteWebMutation, 'deleteWeb'>(config, 'deleteWeb');
+}
