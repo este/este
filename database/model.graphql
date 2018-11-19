@@ -27,12 +27,15 @@ type User {
 type Web {
   id: ID! @unique
   creator: User!
-  pages: [Page!]! @relation(name: "WebPages")
-  elements: [Element!]! @relation(name: "WebElements")
-  styles: [Style!]! @relation(name: "WebStyles")
-  dimensionValues: [DimensionValue!]! @relation(name: "WebDimensionValues")
-  colorValues: [ColorValue!]! @relation(name: "WebColorValues")
-  borderValues: [BorderValue!]! @relation(name: "WebBorderValues")
+  pages: [Page!]! @relation(name: "WebPages", onDelete: CASCADE)
+  elements: [Element!]! @relation(name: "WebElements", onDelete: CASCADE)
+  styles: [Style!]! @relation(name: "WebStyles", onDelete: CASCADE)
+  dimensionValues: [DimensionValue!]!
+    @relation(name: "WebDimensionValues", onDelete: CASCADE)
+  colorValues: [ColorValue!]!
+    @relation(name: "WebColorValues", onDelete: CASCADE)
+  borderValues: [BorderValue!]!
+    @relation(name: "WebBorderValues", onDelete: CASCADE)
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
@@ -64,7 +67,7 @@ type Element {
   shared: SharedElement @relation(name: "ElementShared")
   # Will get shared || children as children prop.
   component: Component! @relation(name: "ElementComponents")
-  props: [ElementProp!]! @relation(name: "ElementProps")
+  props: [ElementProp!]! @relation(name: "ElementProps", onDelete: CASCADE)
 }
 
 # Slate model
@@ -123,7 +126,8 @@ type Style {
   # There are two kinds of style. Layout style and text style. Layout is for
   # View, text is for Text. Text has everything View has plus own props.
   isText: Boolean @default(value: "false")
-  spreadStyles: [StyleSpread!]! @relation(name: "StyleSpreadStyles")
+  spreadStyles: [StyleSpread!]!
+    @relation(name: "StyleSpreadStyles", onDelete: CASCADE)
 
   # View
   display: StyleDisplay
