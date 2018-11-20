@@ -1,6 +1,6 @@
 // @flow
-import * as React from 'react';
-import withTheme, { type Theme } from './withTheme';
+import React from 'react';
+import useTheme from '../../hooks/useTheme';
 import Text, { type TextProps } from './Text';
 import { TouchableOpacity } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
@@ -20,45 +20,42 @@ export type ButtonProps = {|
   activeOpacity?: number,
 |};
 
-class Button extends React.PureComponent<{| ...ButtonProps, theme: Theme |}> {
-  render() {
-    const {
-      accessible,
-      accessibilityLabel,
-      disabled,
-      onPress,
-      onPressIn,
-      onFocus,
-      onBlur,
-      testID,
-      style,
-      theme,
-      touchableStyle,
-      activeOpacity,
-      ...props
-    } = this.props;
+export default function Button(props: ButtonProps) {
+  const {
+    accessible,
+    accessibilityLabel,
+    disabled,
+    onPress,
+    onPressIn,
+    onFocus,
+    onBlur,
+    testID,
+    style,
+    touchableStyle,
+    activeOpacity,
+    ...rest
+  } = props;
 
-    return (
-      <TouchableOpacity
-        accessible={accessible}
-        accessibilityLabel={accessibilityLabel}
-        accessibilityRole="button"
-        disabled={disabled}
-        onPress={onPress}
-        onPressIn={onPressIn}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        testID={testID}
-        style={touchableStyle}
-        activeOpacity={activeOpacity}
-      >
-        <Text
-          style={[style, disabled === true && theme.styles.stateDisabled]}
-          {...props}
-        />
-      </TouchableOpacity>
-    );
-  }
+  const theme = useTheme();
+
+  return (
+    <TouchableOpacity
+      accessible={accessible}
+      accessibilityLabel={accessibilityLabel}
+      accessibilityRole="button"
+      disabled={disabled}
+      onPress={onPress}
+      onPressIn={onPressIn}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      testID={testID}
+      style={touchableStyle}
+      activeOpacity={activeOpacity}
+    >
+      <Text
+        style={[style, disabled === true && theme.styles.stateDisabled]}
+        {...rest}
+      />
+    </TouchableOpacity>
+  );
 }
-
-export default withTheme(Button);
