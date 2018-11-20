@@ -1,8 +1,8 @@
 // @flow
 import PropTypes from 'prop-types';
-import * as React from 'react';
+import React, { type Node, type ComponentType } from 'react';
 import type { ColorName } from '../../themes/types';
-import withTheme, { type Theme } from './withTheme';
+import useTheme from '../../hooks/useTheme';
 import { StyleSheet, Text as NativeText } from 'react-native';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -14,7 +14,7 @@ export type TextProps = {|
   italic?: boolean,
   size?: number,
   style?: TextStyleProp,
-  children?: React.Node,
+  children?: Node,
   // React Native does not export Text props Flow types yet, so add them as-go.
   // Feel free to add any used prop.
   accessibilityRole?: any,
@@ -71,51 +71,59 @@ const getColorStyle = (themeStyles, color) => {
   }
 };
 
-class Text extends React.PureComponent<{| ...TextProps, theme: Theme |}> {
-  static contextTypes = {
-    isInAParentText: PropTypes.bool,
-  };
+function Text(props: TextProps) {
+  const {
+    align,
+    bold,
+    color,
+    decoration,
+    italic,
+    size,
+    style,
+    // $FlowFixMe Intentionally ignored, will be removed soon anyway.
+    isInAParentText,
+    ...rest
+  } = props;
+  const theme = useTheme();
 
-  context: {
-    isInAParentText: ?true,
-  };
-
-  render() {
-    const {
-      align,
-      bold,
-      color,
-      decoration,
-      italic,
-      size,
-      style,
-      theme,
-      ...props
-    } = this.props;
-    const { isInAParentText } = this.context;
-
-    return (
-      <NativeText
-        style={[
-          !isInAParentText && theme.styles.text,
-          style,
-          align != null && alignStyles[align],
-          bold != null &&
-            (bold
-              ? theme.styles.textWeightBold
-              : theme.styles.textWeightNormal),
-          color != null && getColorStyle(theme.styles, color),
-          decoration != null && decorationStyles[decoration],
-          italic != null &&
-            (italic ? italicStyles.italic : italicStyles.normal),
-          size != null
-            ? theme.typography.fontSizeWithLineHeight(size)
-            : !isInAParentText && theme.typography.fontSizeWithLineHeight(0),
-        ]}
-        {...props}
-      />
-    );
-  }
+  return (
+    <NativeText
+      style={[
+        !isInAParentText && theme.styles.text,
+        style,
+        align != null && alignStyles[align],
+        bold != null &&
+          (bold ? theme.styles.textWeightBold : theme.styles.textWeightNormal),
+        color != null && getColorStyle(theme.styles, color),
+        decoration != null && decorationStyles[decoration],
+        italic != null && (italic ? italicStyles.italic : italicStyles.normal),
+        size != null
+          ? theme.typography.fontSizeWithLineHeight(size)
+          : !isInAParentText && theme.typography.fontSizeWithLineHeight(0),
+      ]}
+      {...rest}
+    />
+  );
 }
 
-export default withTheme(Text);
+// For legacy context.
+// TODO: Remove it. RNW soon will use new React context.
+function withIsInAParentText<Props: {}>(
+  Component: ComponentType<Props>,
+): ComponentType<$Diff<Props, { isInAParentText: boolean | void }>> {
+  class IsInAParentText extends React.Component<Props> {
+    static contextTypes = {
+      isInAParentText: PropTypes.bool,
+    };
+    context: {
+      isInAParentText: ?true,
+    };
+    render() {
+      const { isInAParentText } = this.context;
+      return <Component {...this.props} isInAParentText={isInAParentText} />;
+    }
+  }
+  return IsInAParentText;
+}
+
+export default withIsInAParentText(Text);
