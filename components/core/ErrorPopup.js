@@ -2,10 +2,10 @@
 import * as React from 'react';
 import ErrorMessage from './ErrorMessage';
 import withTheme, { type Theme } from './withTheme';
-import ErrorContext, { type ContextError } from './ErrorContext';
+import AppErrorContext, { type AppError } from './AppErrorContext';
 
 type ErrorPopupProps = {|
-  error: ?ContextError,
+  error: ?AppError,
   theme: Theme,
 |};
 
@@ -71,7 +71,7 @@ const ErrorPopupWithTheme = withTheme(ErrorPopup);
 
 // https://reactjs.org/docs/context.html#accessing-context-in-lifecycle-methods
 export default () => (
-  <ErrorContext.Consumer>
-    {({ error }) => <ErrorPopupWithTheme error={error} />}
-  </ErrorContext.Consumer>
+  <AppErrorContext.Consumer>
+    {({ appError }) => <ErrorPopupWithTheme error={appError} />}
+  </AppErrorContext.Consumer>
 );

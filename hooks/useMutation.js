@@ -9,6 +9,7 @@ import {
   type UploadableMap,
   type SelectorStoreUpdater,
 } from 'react-relay';
+import useAppError from './useAppError';
 
 // Subset of react-relay MutationConfig type.
 // Variables and event handlers are added in useMutation hook.
@@ -68,6 +69,7 @@ export default function useMutation<Mutation: Object, Name: string>(
   const disposableRef = useRef<Disposable>(null);
   const [errors, setErrors] = useState<Errors<Mutation, Name>>(null);
   const [pending, setPending] = useState(false);
+  const { dispatchAppError } = useAppError();
 
   useEffect(() => {
     return () => {
@@ -76,8 +78,12 @@ export default function useMutation<Mutation: Object, Name: string>(
   }, []);
 
   function createOnCompleted(onSuccess) {
-    return function onCompleted(response /* , payloadErrors */) {
+    return function onCompleted(response, payloadErrors) {
       setPending(false);
+      if (payloadErrors) {
+        payloadErrors.forEach(error => dispatchAppError(error));
+        return;
+      }
       // Flow type refinement because of mixed.
       if (typeof response !== 'object' || response == null) return;
       const data = response[name];
@@ -87,6 +93,11 @@ export default function useMutation<Mutation: Object, Name: string>(
       if (errors != null) return;
       if (onSuccess) onSuccess(data);
     };
+  }
+
+  function onError(error) {
+    setPending(false);
+    dispatchAppError(error);
   }
 
   function commit(input, onSuccess) {
@@ -102,14 +113,12 @@ export default function useMutation<Mutation: Object, Name: string>(
       ...config,
       variables: { input },
       onCompleted: createOnCompleted(onSuccess),
-      onError(/* error */) {
-        setPending(false);
-      },
+      onError,
     });
   }
 
   // Pending is last, because mutations should be optimistic.
-  // We can omit errors:
+  // Note we can omit errors if we need only pending.
   // const [commit, , pending] = useFooMutation();
   return [commit, errors, pending];
 }

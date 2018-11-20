@@ -10,9 +10,9 @@ import createRelayEnvironment from '../client/createRelayEnvironment';
 import { fetchQuery } from 'relay-runtime';
 import LocaleContext from '../components/core/LocaleContext';
 import EnvironmentContext from '../components/core/EnvironmentContext';
-import ErrorContext, {
-  type ContextError,
-} from '../components/core/ErrorContext';
+import AppErrorContext, {
+  type AppError,
+} from '../components/core/AppErrorContext';
 import RelayProvider from '../components/core/RelayProvider';
 // $FlowFixMe Wrong libdef.
 import Error from 'next/error';
@@ -38,9 +38,9 @@ type Props = {|
 |};
 
 type State = {|
-  errorContext: {
-    error: ?ContextError,
-    dispatchError: ContextError => void,
+  appErrorContext: {
+    error: ?AppError,
+    dispatchAppError: AppError => void,
   },
 |};
 
@@ -169,12 +169,12 @@ class MyApp extends App {
   state: State;
 
   state = {
-    errorContext: {
-      error: null,
+    appErrorContext: {
+      appError: null,
       // https://reactjs.org/docs/context.html#updating-context-from-a-nested-component
-      dispatchError: (error: ContextError) => {
+      dispatchAppError: (appError: AppError) => {
         this.setState(state => {
-          return { errorContext: { ...state.errorContext, error } };
+          return { appErrorContext: { ...state.appErrorContext, appError } };
         });
       },
     },
@@ -224,7 +224,7 @@ class MyApp extends App {
           // https://github.com/yahoo/react-intl/issues/999#issuecomment-335799491
           textComponent={React.Fragment}
         >
-          <ErrorContext.Provider value={this.state.errorContext}>
+          <AppErrorContext.Provider value={this.state.appErrorContext}>
             <LocaleContext.Provider value={this.localeContext}>
               <EnvironmentContext.Provider value={environment}>
                 <RelayProvider environment={environment}>
@@ -232,7 +232,7 @@ class MyApp extends App {
                 </RelayProvider>
               </EnvironmentContext.Provider>
             </LocaleContext.Provider>
-          </ErrorContext.Provider>
+          </AppErrorContext.Provider>
         </IntlProvider>
         {/* </React.StrictMode> */}
       </Container>
