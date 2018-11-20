@@ -80,7 +80,7 @@
     "prisma-binding": "^2.0.2",
     "prop-types": "^15.6.0",
     "raf": "^3.4.0",
-    "ramda": "^0.25.0",
+    "ramda": "^0.26.0",
     "react": "^16.7.0-alpha.0",
     "react-art": "^16.5.1",
     "react-dom": "^16.7.0-alpha.0",
@@ -95,7 +95,7 @@
     "url": "^0.11.0",
     "validator": "^10.1.0",
     "webpack-bundle-analyzer": "^3.0.1",
-    "webpack-bundle-size-analyzer": "^2.7.0"
+    "webpack-bundle-size-analyzer": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
