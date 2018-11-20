@@ -321,22 +321,20 @@ function stylesToStyleSheet(
   return styleSheet;
 }
 
-function setTextStyle(editor, action) {
-  const { styleId } = action;
-  // This would be ideal:
-  // editor.setBlocks({
-  //   data: { props: { style: { valueStyle: { id: styleId } } } },
-  // });
-  // But setBlocks properties data are not deeply merged. Therefore,
-  // we have to copy paste Commands.setBlocksAtRange code.
-  // https://github.com/ianstormtaylor/slate/issues/2429
+// Proposal for Commands.setBlocksAtRange to allow set per block properties.
+function setBlocksAtRangeWithCallback(editor, range, callback) {
   const { value } = editor;
-  const { document, selection: range } = value;
+  const { document } = value;
   const blocks = document.getLeafBlocksAtRange(range);
+
   const { start, end, isCollapsed } = range;
   const isStartVoid = document.hasVoidParent(start.key, editor);
   const startBlock = document.getClosestBlock(start.key);
   const endBlock = document.getClosestBlock(end.key);
+
+  // Check if we have a "hanging" selection case where the even though the
+  // selection extends into the start of the end node, we actually want to
+  // ignore that for UX reasons.
   const isHanging =
     isCollapsed === false &&
     start.offset === 0 &&
@@ -344,29 +342,37 @@ function setTextStyle(editor, action) {
     isStartVoid === false &&
     start.key === startBlock.getFirstText().key &&
     end.key === endBlock.getFirstText().key;
+
+  // If it's a hanging selection, ignore the last block.
   const sets = isHanging ? blocks.slice(0, -1) : blocks;
+
   editor.withoutNormalizing(() => {
     sets.forEach(block => {
-      const data = assocPath(
-        ['props', 'style', 'valueStyle', 'id'],
-        styleId,
-        block.data.toJSON(),
-      );
-      editor.setNodeByKey(block.key, {
-        type: block.type,
-        data,
-      });
+      editor.setNodeByKey(block.key, callback(block));
     });
+  });
+}
+
+function setTextStyle(editor, styleId) {
+  const range = editor.value.selection;
+  setBlocksAtRangeWithCallback(editor, range, block => {
+    const data = assocPath(
+      ['props', 'style', 'valueStyle', 'id'],
+      styleId,
+      block.data.toJSON(),
+    );
+    return { type: block.type, data };
   });
 }
 
 function maybeSavePage(editor, value, newValue) {
   const documentChanged = value.document !== newValue.document;
-  if (!documentChanged) return;
-  // Ideally, we should save only changed nodes / elements.
-  const root = newValue.document.nodes.get(0);
   // eslint-disable-next-line
-  console.log(JSON.stringify(root.toJSON(), null, 2));
+  if (!documentChanged) return;
+  // TODO: Save only changed element.
+  // const root = newValue.document.nodes.get(0);
+  // eslint-disable-next-line
+  // console.log(JSON.stringify(root.toJSON(), null, 2));
 }
 
 function EditorWithData({
@@ -428,7 +434,7 @@ function EditorWithData({
         break;
       }
       case 'setTextStyle': {
-        setTextStyle(editor, action);
+        setTextStyle(editor, action.styleId);
         break;
       }
       default:
@@ -478,74 +484,63 @@ function EditorWithData({
       return;
     }
 
-    // By default, Slate splits blocks to the same type. That's fine for lists.
-    // But for anything else, we want default text style instead (P after H1).
-    // Convention over configuration by text styles names is the best IMHO.
-    // 1) Try to find closest parent node related text.
-    //    e.g. header-text, container-text, etc.
-    // 2) Try to find node named 'text'.
-    // 3) First isText without spread, for rare case the user renamed it.
-    // 4) Throw an error. App must not allow to delete text style.
+    function getNodeTextStyleId(node) {
+      const { data } = node;
+      if (!data) return '';
+      const props = data.get('props');
+      if (!props) return '';
+      return props.style?.valueStyle?.id ?? '';
+    }
+
+    // A heuristic to get the best TextStyle id based on the caret position.
     function getDefaultTextStyleId() {
       const styles = getTextStyles();
-      const ancestorWithTextStyle = ancestors.find(ancestor => {
-        const { name } = stylesById[ancestor.type];
-        const textName = `${name}-text`;
-        return styles.find(style => style.name === textName);
-      });
-      if (ancestorWithTextStyle != null)
-        return stylesById[ancestorWithTextStyle.get('type')].id;
+      // // TODO: If there is a parent 'header' and 'header-text', return header-text.
+      // // As result, it will automatically return proper text by naming convention.
+      // const ancestorWithTextStyle = ancestors.find(ancestor => {
+      //   const { name } = stylesById[getNodeTextStyleId(ancestor)];
+      //   if (!name) return;
+      //   return styles.find(style => style.name === `${name}-text`);
+      // });
+      // if (ancestorWithTextStyle != null)
+      //   return stylesById[].id;
       const named = styles.find(style => style.name === 'text');
       if (named != null) return named.id;
-      const firstWithoutSpread = styles.find(s => s.style.length === 1);
-      if (firstWithoutSpread != null) return firstWithoutSpread.id;
-      throw Error('missing text style');
+      throw Error('App must have text style.');
     }
 
     function handleKeyBackspace() {
-      const { value } = editor;
-      const { selection } = value;
-      const { isExpanded, start } = selection;
-      if (isExpanded) return next();
-      if (start.offset !== 0) return next();
-
-      const { startBlock } = value;
-      const type = getDefaultTextStyleId();
-      if (startBlock.type === type) return next();
-
+      const {
+        value: { selection, startBlock },
+      } = editor;
+      if (selection.isExpanded) return next();
+      if (selection.start.offset !== 0) return next();
+      const textStyleId = getDefaultTextStyleId();
+      const hasSameTextStyle = getNodeTextStyleId(startBlock) === textStyleId;
+      if (hasSameTextStyle) return next();
       event.preventDefault();
-      editor.setBlocks(type);
-
-      // if (startBlock.type == 'list-item') {
-      //   editor.unwrapBlock('bulleted-list');
-      // }
+      setTextStyle(editor, textStyleId);
     }
 
     function handleKeyEnter() {
-      const { value } = editor;
-      const { selection } = value;
-      const { start, end, isExpanded } = selection;
-      if (isExpanded) return next();
-
-      const { startBlock } = value;
+      const {
+        value: { selection, startBlock },
+      } = editor;
+      if (selection.isExpanded) return next();
       const caretOnEmptyText =
-        start.offset === 0 && startBlock.text.length === 0;
+        selection.start.offset === 0 && startBlock.text.length === 0;
       if (caretOnEmptyText) return handleKeyBackspace();
-      const caretOnTextEnd = end.offset === startBlock.text.length;
+      const caretOnTextEnd = selection.end.offset === startBlock.text.length;
       if (!caretOnTextEnd) return next();
-
-      // TODO: Heuristic detection.
-      const isItem = false;
-
-      if (isItem) {
-        // Default action is to split an element.
+      // TODO: Detect isItem by ancestors name-item.
+      const isItemSoWeLetSlateToSplitBlockWithDefaultStrategy = false;
+      if (isItemSoWeLetSlateToSplitBlockWithDefaultStrategy) {
         return next();
       }
-
-      // For headings, quotes, etc., we want to continue with a text.
+      // For headings, quotes, etc., we want to continue with a text style.
       event.preventDefault();
-      const type = getDefaultTextStyleId();
-      editor.splitBlock().setBlocks(type);
+      const textStyleId = getDefaultTextStyleId();
+      setTextStyle(editor.splitBlock(), textStyleId);
     }
 
     switch (event.key) {
