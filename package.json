@@ -73,7 +73,7 @@
     "is-hotkey": "^0.1.4",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.1.1",
-    "lodash": "^4.17.10",
+    "lodash.throttle": "^4.1.1",
     "next": "^7.0.0",
     "nprogress": "^0.2.0",
     "open-color": "^1.6.3",

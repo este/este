@@ -1,17 +1,15 @@
 // @flow
-import * as React from 'react';
+import React, { useRef, useEffect, useMemo, type Element } from 'react';
 import { View, TextInput as TextInputNative } from 'react-native';
-import withTheme, { type Theme } from './withTheme';
+import useTheme from '../../hooks/useTheme';
 import Text from './Text';
 import type { TextStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import ErrorMessage, { type MessageError } from './ErrorMessage';
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 
-export const onChangeTextThrottle = 1000;
-
-export type TextInputProps = {|
+export default function TextInput(props: {|
   disabled?: boolean,
-  label?: string | React.Element<any>,
+  label?: string | Element<any>,
   error?: ?MessageError,
   size?: number,
   style?: TextStyleProp,
@@ -28,86 +26,67 @@ export type TextInputProps = {|
   defaultValue?: string,
   // Feel free to add any missing prop.
   // https://github.com/este/este/issues/1557
-|};
+|}) {
+  const {
+    disabled,
+    label,
+    error,
+    size = 0,
+    style,
+    focusOnError,
+    placeholder,
+    onChangeText,
+    onChangeTextThrottled,
+    ...restProps
+  } = props;
 
-// That's because TextInputProps is exported to reuse.
-type TextInputPropsWithTheme = {|
-  ...TextInputProps,
-  theme: Theme,
-|};
+  const inputRef = useRef(null);
+  const theme = useTheme();
 
-class TextInput extends React.PureComponent<TextInputPropsWithTheme> {
-  inputRef = React.createRef();
+  // Validation creates a new object which can be used for focusOnError.
+  useEffect(
+    () => {
+      if (error == null || inputRef.current == null) return;
+      inputRef.current.focus();
+    },
+    [focusOnError],
+  );
 
-  handleOnChangeTextThrottled = throttle(value => {
-    const { onChangeTextThrottled } = this.props;
-    if (onChangeTextThrottled) onChangeTextThrottled(value);
-  }, onChangeTextThrottle);
+  const handleOnChangeTextThrottled = useMemo(() => {
+    return throttle(text => {
+      if (onChangeTextThrottled) onChangeTextThrottled(text);
+    }, 1000);
+  }, []);
 
-  componentDidUpdate(prevProps) {
-    this.maybeFocusOnError(prevProps);
+  function handleOnChangeText(text: string) {
+    if (onChangeText) onChangeText(text);
+    handleOnChangeTextThrottled(text);
   }
 
-  handleOnChangeText = value => {
-    const { onChangeText } = this.props;
-    if (onChangeText) onChangeText(value);
-    this.handleOnChangeTextThrottled(value);
-  };
-
-  maybeFocusOnError(prevProps) {
-    const doFocus =
-      this.props.error != null &&
-      // Simple trick not trick. Validation creates a new object, which we can
-      // use to detect whether validation happen, therefore, focus this input.
-      // Otherwise, we would have to expose input ref and maintain list of
-      // focusable fields in form with switch with manual mapping... omg.
-      this.props.focusOnError !== prevProps.focusOnError;
-    if (!doFocus || !this.inputRef.current) return;
-    this.inputRef.current.focus();
-  }
-
-  render() {
-    const {
-      disabled,
-      label,
-      error,
-      size = 0,
-      style,
-      theme,
-      focusOnError,
-      placeholder,
-      onChangeText,
-      onChangeTextThrottled,
-      ...props
-    } = this.props;
-
-    return (
-      <View>
-        {label != null && (
-          <Text color="gray" size={size - 1}>
-            {label}
-          </Text>
-        )}
-        <TextInputNative
-          disabled={disabled}
-          placeholderTextColor={theme.placeholderTextColor}
-          style={[
-            theme.styles.textInput,
-            theme.typography.fontSizeWithLineHeight(size),
-            style,
-          ]}
-          ref={this.inputRef}
-          placeholder={placeholder}
-          blurOnSubmit={false}
-          onChangeText={this.handleOnChangeText}
-          {...props}
-        />
-        <View style={theme.styles.textInputError}>
-          <ErrorMessage size={size - 1} error={error} />
-        </View>
+  return (
+    <View>
+      {label != null && (
+        <Text color="gray" size={size - 1}>
+          {label}
+        </Text>
+      )}
+      <TextInputNative
+        disabled={disabled}
+        placeholderTextColor={theme.placeholderTextColor}
+        style={[
+          theme.styles.textInput,
+          theme.typography.fontSizeWithLineHeight(size),
+          style,
+        ]}
+        ref={inputRef}
+        placeholder={placeholder}
+        blurOnSubmit={false}
+        onChangeText={handleOnChangeText}
+        {...restProps}
+      />
+      <View style={theme.styles.textInputError}>
+        <ErrorMessage size={size - 1} error={error} />
       </View>
-    );
-  }
+    </View>
+  );
 }
-
-export default withTheme(TextInput);
