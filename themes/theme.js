@@ -161,10 +161,6 @@ const stylesJson = {
     minHeight: typography.rhythm(1),
   },
 
-  picker: {
-    color: colors.black,
-  },
-
   errorPopup: {
     backgroundColor: colors.danger,
     position: 'absolute',
