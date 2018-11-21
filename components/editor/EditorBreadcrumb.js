@@ -50,50 +50,54 @@ function EditorBreadcrumb({
   const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
   const [activeIndex, setActiveIndex] = useState(null);
   const row = useMemo(
-    () => (
-      <Row rhythm={0.5} wrap>
-        <EditorBreadcrumbButton
-          label="⋮"
-          isActive={kebabMenuVisible}
-          onPress={() => setKebabMenuVisible(!kebabMenuVisible)}
-        />
-        {kebabMenuVisible ? (
+    () => {
+      return (
+        <Row rhythm={0.5} wrap>
           <EditorBreadcrumbButton
-            label={breadcrumbPosition === 'bottom' ? '↑' : '↓'}
-            onPress={() =>
-              setBreadcrumbPosition(
-                breadcrumbPosition === 'bottom' ? 'top' : 'bottom',
-              )
-            }
+            label="⋮"
+            isActive={kebabMenuVisible}
+            onPress={() => setKebabMenuVisible(!kebabMenuVisible)}
           />
-        ) : (
-          ancestors.map((node, index) => {
-            const { name } = componentsById[node.type];
-            function getLabel() {
-              if (name !== 'View' && name !== 'Text') return name;
-              const componentProps = node.data.get('props');
-              const style = stylesById[componentProps.style.valueStyle.id];
-              return style.name;
-            }
-            return (
-              <EditorBreadcrumbButton
-                key={node.key}
-                label={getLabel()}
-                isActive={activeIndex === index}
-                onPress={() => {
-                  setActiveIndex(activeIndex === index ? null : index);
-                }}
-              />
-            );
-          })
-        )}
-      </Row>
-    ),
+          {kebabMenuVisible ? (
+            <EditorBreadcrumbButton
+              label={breadcrumbPosition === 'bottom' ? '↑' : '↓'}
+              onPress={() =>
+                setBreadcrumbPosition(
+                  breadcrumbPosition === 'bottom' ? 'top' : 'bottom',
+                )
+              }
+            />
+          ) : (
+            ancestors.map((node, index) => {
+              const { name } = componentsById[node.type];
+              function getLabel() {
+                if (name !== 'View' && name !== 'Text') return name;
+                const componentProps = node.data.get('props');
+                const style = stylesById[componentProps.style.valueStyle.id];
+                return style.name;
+              }
+              return (
+                <EditorBreadcrumbButton
+                  key={node.key}
+                  label={getLabel()}
+                  isActive={activeIndex === index}
+                  onPress={() => {
+                    setActiveIndex(activeIndex === index ? null : index);
+                  }}
+                />
+              );
+            })
+          )}
+        </Row>
+      );
+    },
     [
       kebabMenuVisible,
       breadcrumbPosition,
       activeIndex,
-      ancestors.map(({ key, type }) => `${key}-${type}`).join(),
+      // It's probably faster to render breadcrumb then check via toJSON()
+      // ancestors.toJSON()
+      ancestors,
       stylesById,
       componentsById,
     ],
