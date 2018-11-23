@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Thu Nov 15 2018 01:34:47 GMT+0100 (Central European Standard Time)
+# timestamp: Fri Nov 23 2018 23:05:49 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -130,6 +130,129 @@ type BorderValuePreviousValues {
   value: Int!
 }
 
+input BorderValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BorderValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BorderValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BorderValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  unit: BorderValueUnit
+
+  """All values that are not equal to given value."""
+  unit_not: BorderValueUnit
+
+  """All values that are contained in given list."""
+  unit_in: [BorderValueUnit!]
+
+  """All values that are not contained in given list."""
+  unit_not_in: [BorderValueUnit!]
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+}
+
 type BorderValueSubscriptionPayload {
   mutation: MutationType!
   node: BorderValue
@@ -187,6 +310,12 @@ input BorderValueUpdateInput {
   web: WebUpdateOneRequiredWithoutBorderValuesInput
 }
 
+input BorderValueUpdateManyDataInput {
+  name: String
+  unit: BorderValueUnit
+  value: Int
+}
+
 input BorderValueUpdateManyMutationInput {
   name: String
   unit: BorderValueUnit
@@ -199,7 +328,14 @@ input BorderValueUpdateManyWithoutWebInput {
   disconnect: [BorderValueWhereUniqueInput!]
   delete: [BorderValueWhereUniqueInput!]
   update: [BorderValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [BorderValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [BorderValueScalarWhereInput!]
   upsert: [BorderValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input BorderValueUpdateManyWithWhereNestedInput {
+  where: BorderValueScalarWhereInput!
+  data: BorderValueUpdateManyDataInput!
 }
 
 input BorderValueUpdateOneInput {
@@ -445,6 +581,185 @@ type ColorValuePreviousValues {
   a: Float
 }
 
+input ColorValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  r: Int
+
+  """All values that are not equal to given value."""
+  r_not: Int
+
+  """All values that are contained in given list."""
+  r_in: [Int!]
+
+  """All values that are not contained in given list."""
+  r_not_in: [Int!]
+
+  """All values less than the given value."""
+  r_lt: Int
+
+  """All values less than or equal the given value."""
+  r_lte: Int
+
+  """All values greater than the given value."""
+  r_gt: Int
+
+  """All values greater than or equal the given value."""
+  r_gte: Int
+  g: Int
+
+  """All values that are not equal to given value."""
+  g_not: Int
+
+  """All values that are contained in given list."""
+  g_in: [Int!]
+
+  """All values that are not contained in given list."""
+  g_not_in: [Int!]
+
+  """All values less than the given value."""
+  g_lt: Int
+
+  """All values less than or equal the given value."""
+  g_lte: Int
+
+  """All values greater than the given value."""
+  g_gt: Int
+
+  """All values greater than or equal the given value."""
+  g_gte: Int
+  b: Int
+
+  """All values that are not equal to given value."""
+  b_not: Int
+
+  """All values that are contained in given list."""
+  b_in: [Int!]
+
+  """All values that are not contained in given list."""
+  b_not_in: [Int!]
+
+  """All values less than the given value."""
+  b_lt: Int
+
+  """All values less than or equal the given value."""
+  b_lte: Int
+
+  """All values greater than the given value."""
+  b_gt: Int
+
+  """All values greater than or equal the given value."""
+  b_gte: Int
+  a: Float
+
+  """All values that are not equal to given value."""
+  a_not: Float
+
+  """All values that are contained in given list."""
+  a_in: [Float!]
+
+  """All values that are not contained in given list."""
+  a_not_in: [Float!]
+
+  """All values less than the given value."""
+  a_lt: Float
+
+  """All values less than or equal the given value."""
+  a_lte: Float
+
+  """All values greater than the given value."""
+  a_gt: Float
+
+  """All values greater than or equal the given value."""
+  a_gte: Float
+}
+
 type ColorValueSubscriptionPayload {
   mutation: MutationType!
   node: ColorValue
@@ -502,6 +817,14 @@ input ColorValueUpdateInput {
   web: WebUpdateOneRequiredWithoutColorValuesInput
 }
 
+input ColorValueUpdateManyDataInput {
+  name: String
+  r: Int
+  g: Int
+  b: Int
+  a: Float
+}
+
 input ColorValueUpdateManyMutationInput {
   name: String
   r: Int
@@ -516,7 +839,14 @@ input ColorValueUpdateManyWithoutWebInput {
   disconnect: [ColorValueWhereUniqueInput!]
   delete: [ColorValueWhereUniqueInput!]
   update: [ColorValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [ColorValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [ColorValueScalarWhereInput!]
   upsert: [ColorValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ColorValueUpdateManyWithWhereNestedInput {
+  where: ColorValueScalarWhereInput!
+  data: ColorValueUpdateManyDataInput!
 }
 
 input ColorValueUpdateOneInput {
@@ -738,6 +1068,7 @@ input ColorValueWhereUniqueInput {
 
 type Component implements Node {
   id: ID!
+  type: ComponentType!
   name: String!
   creator: User!
   props(where: ComponentPropWhereInput, orderBy: ComponentPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ComponentProp!]
@@ -754,6 +1085,7 @@ type ComponentConnection {
 }
 
 input ComponentCreateInput {
+  type: ComponentType
   name: String!
   creator: UserCreateOneWithoutComponentsInput!
   props: ComponentPropCreateManyWithoutComponentInput
@@ -775,11 +1107,13 @@ input ComponentCreateOneWithoutPropsInput {
 }
 
 input ComponentCreateWithoutCreatorInput {
+  type: ComponentType
   name: String!
   props: ComponentPropCreateManyWithoutComponentInput
 }
 
 input ComponentCreateWithoutPropsInput {
+  type: ComponentType
   name: String!
   creator: UserCreateOneWithoutComponentsInput!
 }
@@ -796,6 +1130,8 @@ type ComponentEdge {
 enum ComponentOrderByInput {
   id_ASC
   id_DESC
+  type_ASC
+  type_DESC
   name_ASC
   name_DESC
   updatedAt_ASC
@@ -806,6 +1142,7 @@ enum ComponentOrderByInput {
 
 type ComponentPreviousValues {
   id: ID!
+  type: ComponentType!
   name: String!
 }
 
@@ -870,6 +1207,107 @@ type ComponentPropPreviousValues {
   type: PropType!
 }
 
+input ComponentPropScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentPropScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentPropScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentPropScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+}
+
 type ComponentPropSubscriptionPayload {
   mutation: MutationType!
   node: ComponentProp
@@ -915,6 +1353,11 @@ input ComponentPropUpdateInput {
   component: ComponentUpdateOneRequiredWithoutPropsInput
 }
 
+input ComponentPropUpdateManyDataInput {
+  name: String
+  type: PropType
+}
+
 input ComponentPropUpdateManyMutationInput {
   name: String
   type: PropType
@@ -926,7 +1369,14 @@ input ComponentPropUpdateManyWithoutComponentInput {
   disconnect: [ComponentPropWhereUniqueInput!]
   delete: [ComponentPropWhereUniqueInput!]
   update: [ComponentPropUpdateWithWhereUniqueWithoutComponentInput!]
+  updateMany: [ComponentPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ComponentPropScalarWhereInput!]
   upsert: [ComponentPropUpsertWithWhereUniqueWithoutComponentInput!]
+}
+
+input ComponentPropUpdateManyWithWhereNestedInput {
+  where: ComponentPropScalarWhereInput!
+  data: ComponentPropUpdateManyDataInput!
 }
 
 input ComponentPropUpdateWithoutComponentDataInput {
@@ -1051,6 +1501,107 @@ input ComponentPropWhereUniqueInput {
   id: ID
 }
 
+input ComponentScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: ComponentType
+
+  """All values that are not equal to given value."""
+  type_not: ComponentType
+
+  """All values that are contained in given list."""
+  type_in: [ComponentType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ComponentType!]
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
 type ComponentSubscriptionPayload {
   mutation: MutationType!
   node: Component
@@ -1090,19 +1641,32 @@ input ComponentSubscriptionWhereInput {
   node: ComponentWhereInput
 }
 
+enum ComponentType {
+  BLOCK
+  INLINE
+}
+
 input ComponentUpdateDataInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
+input ComponentUpdateManyDataInput {
+  type: ComponentType
+  name: String
+}
+
 input ComponentUpdateManyMutationInput {
+  type: ComponentType
   name: String
 }
 
@@ -1112,7 +1676,14 @@ input ComponentUpdateManyWithoutCreatorInput {
   disconnect: [ComponentWhereUniqueInput!]
   delete: [ComponentWhereUniqueInput!]
   update: [ComponentUpdateWithWhereUniqueWithoutCreatorInput!]
+  updateMany: [ComponentUpdateManyWithWhereNestedInput!]
+  deleteMany: [ComponentScalarWhereInput!]
   upsert: [ComponentUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ComponentUpdateManyWithWhereNestedInput {
+  where: ComponentScalarWhereInput!
+  data: ComponentUpdateManyDataInput!
 }
 
 input ComponentUpdateOneRequiredInput {
@@ -1130,11 +1701,13 @@ input ComponentUpdateOneRequiredWithoutPropsInput {
 }
 
 input ComponentUpdateWithoutCreatorDataInput {
+  type: ComponentType
   name: String
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateWithoutPropsDataInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
 }
@@ -1209,6 +1782,16 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  type: ComponentType
+
+  """All values that are not equal to given value."""
+  type_not: ComponentType
+
+  """All values that are contained in given list."""
+  type_in: [ComponentType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ComponentType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -1334,6 +1917,129 @@ type DimensionValuePreviousValues {
   value: Int!
 }
 
+input DimensionValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DimensionValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DimensionValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DimensionValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  unit: DimensionValueUnit
+
+  """All values that are not equal to given value."""
+  unit_not: DimensionValueUnit
+
+  """All values that are contained in given list."""
+  unit_in: [DimensionValueUnit!]
+
+  """All values that are not contained in given list."""
+  unit_not_in: [DimensionValueUnit!]
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+}
+
 type DimensionValueSubscriptionPayload {
   mutation: MutationType!
   node: DimensionValue
@@ -1393,6 +2099,12 @@ input DimensionValueUpdateInput {
   web: WebUpdateOneRequiredWithoutDimensionValuesInput
 }
 
+input DimensionValueUpdateManyDataInput {
+  name: String
+  unit: DimensionValueUnit
+  value: Int
+}
+
 input DimensionValueUpdateManyMutationInput {
   name: String
   unit: DimensionValueUnit
@@ -1405,7 +2117,14 @@ input DimensionValueUpdateManyWithoutWebInput {
   disconnect: [DimensionValueWhereUniqueInput!]
   delete: [DimensionValueWhereUniqueInput!]
   update: [DimensionValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [DimensionValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [DimensionValueScalarWhereInput!]
   upsert: [DimensionValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input DimensionValueUpdateManyWithWhereNestedInput {
+  where: DimensionValueScalarWhereInput!
+  data: DimensionValueUpdateManyDataInput!
 }
 
 input DimensionValueUpdateOneInput {
@@ -1569,15 +2288,15 @@ input DimensionValueWhereUniqueInput {
 
 type Element implements Node {
   id: ID!
-  type: ElementType!
   index: Int!
   web: Web!
   parent: Element
-  textLeaves: Json
-  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  type: ElementType!
   shared: SharedElement
   component: Component!
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
+  textLeaves: Json
 }
 
 """A connection to a list of items."""
@@ -1591,14 +2310,14 @@ type ElementConnection {
 }
 
 input ElementCreateInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
@@ -1633,8 +2352,8 @@ input ElementCreateOneWithoutPropsInput {
 }
 
 input ElementCreateWithoutChildrenInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
@@ -1644,46 +2363,46 @@ input ElementCreateWithoutChildrenInput {
 }
 
 input ElementCreateWithoutParentInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 input ElementCreateWithoutPropsInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
 }
 
 input ElementCreateWithoutSharedInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 input ElementCreateWithoutWebInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
@@ -1699,10 +2418,10 @@ type ElementEdge {
 enum ElementOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   index_ASC
   index_DESC
+  type_ASC
+  type_DESC
   textLeaves_ASC
   textLeaves_DESC
   updatedAt_ASC
@@ -1713,8 +2432,8 @@ enum ElementOrderByInput {
 
 type ElementPreviousValues {
   id: ID!
-  type: ElementType!
   index: Int!
+  type: ElementType!
   textLeaves: Json
 }
 
@@ -1724,6 +2443,7 @@ type ElementProp implements Node {
   name: String!
   type: PropType!
   valueStyle: Style
+  valueJson: Json
   value: String
 }
 
@@ -1740,6 +2460,7 @@ type ElementPropConnection {
 input ElementPropCreateInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   element: ElementCreateOneWithoutPropsInput!
   valueStyle: StyleCreateOneWithoutPropsInput
@@ -1758,6 +2479,7 @@ input ElementPropCreateManyWithoutValueStyleInput {
 input ElementPropCreateWithoutElementInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   valueStyle: StyleCreateOneWithoutPropsInput
 }
@@ -1765,6 +2487,7 @@ input ElementPropCreateWithoutElementInput {
 input ElementPropCreateWithoutValueStyleInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   element: ElementCreateOneWithoutPropsInput!
 }
@@ -1785,6 +2508,8 @@ enum ElementPropOrderByInput {
   name_DESC
   type_ASC
   type_DESC
+  valueJson_ASC
+  valueJson_DESC
   value_ASC
   value_DESC
   updatedAt_ASC
@@ -1797,7 +2522,149 @@ type ElementPropPreviousValues {
   id: ID!
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
+}
+
+input ElementPropScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementPropScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementPropScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementPropScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
 }
 
 type ElementPropSubscriptionPayload {
@@ -1842,14 +2709,23 @@ input ElementPropSubscriptionWhereInput {
 input ElementPropUpdateInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
   valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
+input ElementPropUpdateManyDataInput {
+  name: String
+  type: PropType
+  valueJson: Json
+  value: String
+}
+
 input ElementPropUpdateManyMutationInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
 }
 
@@ -1859,6 +2735,8 @@ input ElementPropUpdateManyWithoutElementInput {
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
   update: [ElementPropUpdateWithWhereUniqueWithoutElementInput!]
+  updateMany: [ElementPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementPropScalarWhereInput!]
   upsert: [ElementPropUpsertWithWhereUniqueWithoutElementInput!]
 }
 
@@ -1868,12 +2746,20 @@ input ElementPropUpdateManyWithoutValueStyleInput {
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
   update: [ElementPropUpdateWithWhereUniqueWithoutValueStyleInput!]
+  updateMany: [ElementPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementPropScalarWhereInput!]
   upsert: [ElementPropUpsertWithWhereUniqueWithoutValueStyleInput!]
+}
+
+input ElementPropUpdateManyWithWhereNestedInput {
+  where: ElementPropScalarWhereInput!
+  data: ElementPropUpdateManyDataInput!
 }
 
 input ElementPropUpdateWithoutElementDataInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   valueStyle: StyleUpdateOneWithoutPropsInput
 }
@@ -1881,6 +2767,7 @@ input ElementPropUpdateWithoutElementDataInput {
 input ElementPropUpdateWithoutValueStyleDataInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
 }
@@ -2054,6 +2941,89 @@ input ElementPropWhereUniqueInput {
   id: ID
 }
 
+input ElementScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
+}
+
 type ElementSubscriptionPayload {
   mutation: MutationType!
   node: Element
@@ -2094,38 +3064,44 @@ input ElementSubscriptionWhereInput {
 }
 
 enum ElementType {
-  BLOCK
-  INLINE
-  TEXT
+  SHARED
+  COMPONENT
+  TEXT_NODE
 }
 
 input ElementUpdateDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
-input ElementUpdateManyMutationInput {
-  type: ElementType
+input ElementUpdateManyDataInput {
   index: Int
+  type: ElementType
+  textLeaves: Json
+}
+
+input ElementUpdateManyMutationInput {
+  index: Int
+  type: ElementType
   textLeaves: Json
 }
 
@@ -2135,6 +3111,8 @@ input ElementUpdateManyWithoutParentInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutParentInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutParentInput!]
 }
 
@@ -2144,6 +3122,8 @@ input ElementUpdateManyWithoutSharedInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutSharedInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutSharedInput!]
 }
 
@@ -2153,7 +3133,14 @@ input ElementUpdateManyWithoutWebInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ElementUpdateManyWithWhereNestedInput {
+  where: ElementScalarWhereInput!
+  data: ElementUpdateManyDataInput!
 }
 
 input ElementUpdateOneRequiredInput {
@@ -2180,8 +3167,8 @@ input ElementUpdateOneWithoutChildrenInput {
 }
 
 input ElementUpdateWithoutChildrenDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
@@ -2191,46 +3178,46 @@ input ElementUpdateWithoutChildrenDataInput {
 }
 
 input ElementUpdateWithoutParentDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateWithoutPropsDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
 }
 
 input ElementUpdateWithoutSharedDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateWithoutWebDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
@@ -2331,16 +3318,6 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
   index: Int
 
   """All values that are not equal to given value."""
@@ -2363,13 +3340,23 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
   web: WebWhereInput
   parent: ElementWhereInput
+  shared: SharedElementWhereInput
+  component: ComponentWhereInput
   children_every: ElementWhereInput
   children_some: ElementWhereInput
   children_none: ElementWhereInput
-  shared: SharedElementWhereInput
-  component: ComponentWhereInput
   props_every: ElementPropWhereInput
   props_some: ElementPropWhereInput
   props_none: ElementPropWhereInput
@@ -2562,6 +3549,141 @@ type PagePreviousValues {
   title: String!
 }
 
+input PageScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+}
+
 type PageSubscriptionPayload {
   mutation: MutationType!
   node: Page
@@ -2608,6 +3730,10 @@ input PageUpdateInput {
   element: ElementUpdateOneRequiredInput
 }
 
+input PageUpdateManyDataInput {
+  title: String
+}
+
 input PageUpdateManyMutationInput {
   title: String
 }
@@ -2618,7 +3744,14 @@ input PageUpdateManyWithoutWebInput {
   disconnect: [PageWhereUniqueInput!]
   delete: [PageWhereUniqueInput!]
   update: [PageUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [PageUpdateManyWithWhereNestedInput!]
+  deleteMany: [PageScalarWhereInput!]
   upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input PageUpdateManyWithWhereNestedInput {
+  where: PageScalarWhereInput!
+  data: PageUpdateManyDataInput!
 }
 
 input PageUpdateWithoutWebDataInput {
@@ -2790,6 +3923,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
+  JSON
 }
 
 type Query {
@@ -3759,6 +4893,519 @@ type StylePreviousValues {
   textTransform: StyleTextTransform
 }
 
+input StyleScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StyleScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StyleScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StyleScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  isText: Boolean
+
+  """All values that are not equal to given value."""
+  isText_not: Boolean
+  display: StyleDisplay
+
+  """All values that are not equal to given value."""
+  display_not: StyleDisplay
+
+  """All values that are contained in given list."""
+  display_in: [StyleDisplay!]
+
+  """All values that are not contained in given list."""
+  display_not_in: [StyleDisplay!]
+  position: StylePosition
+
+  """All values that are not equal to given value."""
+  position_not: StylePosition
+
+  """All values that are contained in given list."""
+  position_in: [StylePosition!]
+
+  """All values that are not contained in given list."""
+  position_not_in: [StylePosition!]
+  flexDirection: StyleFlexDirection
+
+  """All values that are not equal to given value."""
+  flexDirection_not: StyleFlexDirection
+
+  """All values that are contained in given list."""
+  flexDirection_in: [StyleFlexDirection!]
+
+  """All values that are not contained in given list."""
+  flexDirection_not_in: [StyleFlexDirection!]
+  flexWrap: StyleFlexWrap
+
+  """All values that are not equal to given value."""
+  flexWrap_not: StyleFlexWrap
+
+  """All values that are contained in given list."""
+  flexWrap_in: [StyleFlexWrap!]
+
+  """All values that are not contained in given list."""
+  flexWrap_not_in: [StyleFlexWrap!]
+  justifyContent: StyleJustifyContent
+
+  """All values that are not equal to given value."""
+  justifyContent_not: StyleJustifyContent
+
+  """All values that are contained in given list."""
+  justifyContent_in: [StyleJustifyContent!]
+
+  """All values that are not contained in given list."""
+  justifyContent_not_in: [StyleJustifyContent!]
+  alignItems: StyleAlignItems
+
+  """All values that are not equal to given value."""
+  alignItems_not: StyleAlignItems
+
+  """All values that are contained in given list."""
+  alignItems_in: [StyleAlignItems!]
+
+  """All values that are not contained in given list."""
+  alignItems_not_in: [StyleAlignItems!]
+  alignSelf: StyleAlignSelf
+
+  """All values that are not equal to given value."""
+  alignSelf_not: StyleAlignSelf
+
+  """All values that are contained in given list."""
+  alignSelf_in: [StyleAlignSelf!]
+
+  """All values that are not contained in given list."""
+  alignSelf_not_in: [StyleAlignSelf!]
+  alignContent: StyleAlignContent
+
+  """All values that are not equal to given value."""
+  alignContent_not: StyleAlignContent
+
+  """All values that are contained in given list."""
+  alignContent_in: [StyleAlignContent!]
+
+  """All values that are not contained in given list."""
+  alignContent_not_in: [StyleAlignContent!]
+  overflow: StyleOverflow
+
+  """All values that are not equal to given value."""
+  overflow_not: StyleOverflow
+
+  """All values that are contained in given list."""
+  overflow_in: [StyleOverflow!]
+
+  """All values that are not contained in given list."""
+  overflow_not_in: [StyleOverflow!]
+  flex: Int
+
+  """All values that are not equal to given value."""
+  flex_not: Int
+
+  """All values that are contained in given list."""
+  flex_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flex_not_in: [Int!]
+
+  """All values less than the given value."""
+  flex_lt: Int
+
+  """All values less than or equal the given value."""
+  flex_lte: Int
+
+  """All values greater than the given value."""
+  flex_gt: Int
+
+  """All values greater than or equal the given value."""
+  flex_gte: Int
+  flexGrow: Int
+
+  """All values that are not equal to given value."""
+  flexGrow_not: Int
+
+  """All values that are contained in given list."""
+  flexGrow_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexGrow_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexGrow_lt: Int
+
+  """All values less than or equal the given value."""
+  flexGrow_lte: Int
+
+  """All values greater than the given value."""
+  flexGrow_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexGrow_gte: Int
+  flexShrink: Int
+
+  """All values that are not equal to given value."""
+  flexShrink_not: Int
+
+  """All values that are contained in given list."""
+  flexShrink_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexShrink_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexShrink_lt: Int
+
+  """All values less than or equal the given value."""
+  flexShrink_lte: Int
+
+  """All values greater than the given value."""
+  flexShrink_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexShrink_gte: Int
+  flexBasis: Int
+
+  """All values that are not equal to given value."""
+  flexBasis_not: Int
+
+  """All values that are contained in given list."""
+  flexBasis_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexBasis_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexBasis_lt: Int
+
+  """All values less than or equal the given value."""
+  flexBasis_lte: Int
+
+  """All values greater than the given value."""
+  flexBasis_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexBasis_gte: Int
+  zIndex: Int
+
+  """All values that are not equal to given value."""
+  zIndex_not: Int
+
+  """All values that are contained in given list."""
+  zIndex_in: [Int!]
+
+  """All values that are not contained in given list."""
+  zIndex_not_in: [Int!]
+
+  """All values less than the given value."""
+  zIndex_lt: Int
+
+  """All values less than or equal the given value."""
+  zIndex_lte: Int
+
+  """All values greater than the given value."""
+  zIndex_gt: Int
+
+  """All values greater than or equal the given value."""
+  zIndex_gte: Int
+  direction: StyleDirection
+
+  """All values that are not equal to given value."""
+  direction_not: StyleDirection
+
+  """All values that are contained in given list."""
+  direction_in: [StyleDirection!]
+
+  """All values that are not contained in given list."""
+  direction_not_in: [StyleDirection!]
+  borderStyle: StyleBorderStyle
+
+  """All values that are not equal to given value."""
+  borderStyle_not: StyleBorderStyle
+
+  """All values that are contained in given list."""
+  borderStyle_in: [StyleBorderStyle!]
+
+  """All values that are not contained in given list."""
+  borderStyle_not_in: [StyleBorderStyle!]
+  opacity: Int
+
+  """All values that are not equal to given value."""
+  opacity_not: Int
+
+  """All values that are contained in given list."""
+  opacity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  opacity_not_in: [Int!]
+
+  """All values less than the given value."""
+  opacity_lt: Int
+
+  """All values less than or equal the given value."""
+  opacity_lte: Int
+
+  """All values greater than the given value."""
+  opacity_gt: Int
+
+  """All values greater than or equal the given value."""
+  opacity_gte: Int
+  fontFamily: String
+
+  """All values that are not equal to given value."""
+  fontFamily_not: String
+
+  """All values that are contained in given list."""
+  fontFamily_in: [String!]
+
+  """All values that are not contained in given list."""
+  fontFamily_not_in: [String!]
+
+  """All values less than the given value."""
+  fontFamily_lt: String
+
+  """All values less than or equal the given value."""
+  fontFamily_lte: String
+
+  """All values greater than the given value."""
+  fontFamily_gt: String
+
+  """All values greater than or equal the given value."""
+  fontFamily_gte: String
+
+  """All values containing the given string."""
+  fontFamily_contains: String
+
+  """All values not containing the given string."""
+  fontFamily_not_contains: String
+
+  """All values starting with the given string."""
+  fontFamily_starts_with: String
+
+  """All values not starting with the given string."""
+  fontFamily_not_starts_with: String
+
+  """All values ending with the given string."""
+  fontFamily_ends_with: String
+
+  """All values not ending with the given string."""
+  fontFamily_not_ends_with: String
+  fontSize: Int
+
+  """All values that are not equal to given value."""
+  fontSize_not: Int
+
+  """All values that are contained in given list."""
+  fontSize_in: [Int!]
+
+  """All values that are not contained in given list."""
+  fontSize_not_in: [Int!]
+
+  """All values less than the given value."""
+  fontSize_lt: Int
+
+  """All values less than or equal the given value."""
+  fontSize_lte: Int
+
+  """All values greater than the given value."""
+  fontSize_gt: Int
+
+  """All values greater than or equal the given value."""
+  fontSize_gte: Int
+  fontStyle: StyleFontStyle
+
+  """All values that are not equal to given value."""
+  fontStyle_not: StyleFontStyle
+
+  """All values that are contained in given list."""
+  fontStyle_in: [StyleFontStyle!]
+
+  """All values that are not contained in given list."""
+  fontStyle_not_in: [StyleFontStyle!]
+  fontWeight: StyleFontWeight
+
+  """All values that are not equal to given value."""
+  fontWeight_not: StyleFontWeight
+
+  """All values that are contained in given list."""
+  fontWeight_in: [StyleFontWeight!]
+
+  """All values that are not contained in given list."""
+  fontWeight_not_in: [StyleFontWeight!]
+  fontVariant: StyleFontVariant
+
+  """All values that are not equal to given value."""
+  fontVariant_not: StyleFontVariant
+
+  """All values that are contained in given list."""
+  fontVariant_in: [StyleFontVariant!]
+
+  """All values that are not contained in given list."""
+  fontVariant_not_in: [StyleFontVariant!]
+  letterSpacing: Int
+
+  """All values that are not equal to given value."""
+  letterSpacing_not: Int
+
+  """All values that are contained in given list."""
+  letterSpacing_in: [Int!]
+
+  """All values that are not contained in given list."""
+  letterSpacing_not_in: [Int!]
+
+  """All values less than the given value."""
+  letterSpacing_lt: Int
+
+  """All values less than or equal the given value."""
+  letterSpacing_lte: Int
+
+  """All values greater than the given value."""
+  letterSpacing_gt: Int
+
+  """All values greater than or equal the given value."""
+  letterSpacing_gte: Int
+  lineHeight: Int
+
+  """All values that are not equal to given value."""
+  lineHeight_not: Int
+
+  """All values that are contained in given list."""
+  lineHeight_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lineHeight_not_in: [Int!]
+
+  """All values less than the given value."""
+  lineHeight_lt: Int
+
+  """All values less than or equal the given value."""
+  lineHeight_lte: Int
+
+  """All values greater than the given value."""
+  lineHeight_gt: Int
+
+  """All values greater than or equal the given value."""
+  lineHeight_gte: Int
+  textAlign: StyleTextAlign
+
+  """All values that are not equal to given value."""
+  textAlign_not: StyleTextAlign
+
+  """All values that are contained in given list."""
+  textAlign_in: [StyleTextAlign!]
+
+  """All values that are not contained in given list."""
+  textAlign_not_in: [StyleTextAlign!]
+  textAlignVertical: StyleTextAlignVertical
+
+  """All values that are not equal to given value."""
+  textAlignVertical_not: StyleTextAlignVertical
+
+  """All values that are contained in given list."""
+  textAlignVertical_in: [StyleTextAlignVertical!]
+
+  """All values that are not contained in given list."""
+  textAlignVertical_not_in: [StyleTextAlignVertical!]
+  textDecorationLine: StyleTextDecorationLine
+
+  """All values that are not equal to given value."""
+  textDecorationLine_not: StyleTextDecorationLine
+
+  """All values that are contained in given list."""
+  textDecorationLine_in: [StyleTextDecorationLine!]
+
+  """All values that are not contained in given list."""
+  textDecorationLine_not_in: [StyleTextDecorationLine!]
+  textTransform: StyleTextTransform
+
+  """All values that are not equal to given value."""
+  textTransform_not: StyleTextTransform
+
+  """All values that are contained in given list."""
+  textTransform_in: [StyleTextTransform!]
+
+  """All values that are not contained in given list."""
+  textTransform_not_in: [StyleTextTransform!]
+}
+
 type StyleSpread implements Node {
   id: ID!
   spreadStyle: Style!
@@ -3817,6 +5464,79 @@ type StyleSpreadPreviousValues {
   index: Int!
 }
 
+input StyleSpreadScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StyleSpreadScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StyleSpreadScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StyleSpreadScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+}
+
 type StyleSpreadSubscriptionPayload {
   mutation: MutationType!
   node: StyleSpread
@@ -3862,6 +5582,10 @@ input StyleSpreadUpdateInput {
   style: StyleUpdateOneRequiredInput
 }
 
+input StyleSpreadUpdateManyDataInput {
+  index: Int
+}
+
 input StyleSpreadUpdateManyMutationInput {
   index: Int
 }
@@ -3872,7 +5596,14 @@ input StyleSpreadUpdateManyWithoutSpreadStyleInput {
   disconnect: [StyleSpreadWhereUniqueInput!]
   delete: [StyleSpreadWhereUniqueInput!]
   update: [StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput!]
+  updateMany: [StyleSpreadUpdateManyWithWhereNestedInput!]
+  deleteMany: [StyleSpreadScalarWhereInput!]
   upsert: [StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput!]
+}
+
+input StyleSpreadUpdateManyWithWhereNestedInput {
+  where: StyleSpreadScalarWhereInput!
+  data: StyleSpreadUpdateManyDataInput!
 }
 
 input StyleSpreadUpdateWithoutSpreadStyleDataInput {
@@ -4220,6 +5951,39 @@ input StyleUpdateInput {
   color: ColorValueUpdateOneInput
 }
 
+input StyleUpdateManyDataInput {
+  name: String
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+}
+
 input StyleUpdateManyMutationInput {
   name: String
   isText: Boolean
@@ -4259,7 +6023,14 @@ input StyleUpdateManyWithoutWebInput {
   disconnect: [StyleWhereUniqueInput!]
   delete: [StyleWhereUniqueInput!]
   update: [StyleUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [StyleUpdateManyWithWhereNestedInput!]
+  deleteMany: [StyleScalarWhereInput!]
   upsert: [StyleUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input StyleUpdateManyWithWhereNestedInput {
+  where: StyleScalarWhereInput!
+  data: StyleUpdateManyDataInput!
 }
 
 input StyleUpdateOneRequiredInput {
@@ -5771,6 +7542,141 @@ type WebPreviousValues {
   name: String!
 }
 
+input WebScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WebScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WebScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WebScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
 type WebSubscriptionPayload {
   mutation: MutationType!
   node: Web
@@ -5821,6 +7727,10 @@ input WebUpdateInput {
   borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
+input WebUpdateManyDataInput {
+  name: String
+}
+
 input WebUpdateManyMutationInput {
   name: String
 }
@@ -5831,7 +7741,14 @@ input WebUpdateManyWithoutCreatorInput {
   disconnect: [WebWhereUniqueInput!]
   delete: [WebWhereUniqueInput!]
   update: [WebUpdateWithWhereUniqueWithoutCreatorInput!]
+  updateMany: [WebUpdateManyWithWhereNestedInput!]
+  deleteMany: [WebScalarWhereInput!]
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input WebUpdateManyWithWhereNestedInput {
+  where: WebScalarWhereInput!
+  data: WebUpdateManyDataInput!
 }
 
 input WebUpdateOneRequiredWithoutBorderValuesInput {

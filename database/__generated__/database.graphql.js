@@ -317,6 +317,129 @@ type BorderValuePreviousValues {
   value: Int!
 }
 
+input BorderValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BorderValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BorderValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BorderValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  unit: BorderValueUnit
+
+  """All values that are not equal to given value."""
+  unit_not: BorderValueUnit
+
+  """All values that are contained in given list."""
+  unit_in: [BorderValueUnit!]
+
+  """All values that are not contained in given list."""
+  unit_not_in: [BorderValueUnit!]
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+}
+
 type BorderValueSubscriptionPayload {
   mutation: MutationType!
   node: BorderValue
@@ -374,6 +497,12 @@ input BorderValueUpdateInput {
   web: WebUpdateOneRequiredWithoutBorderValuesInput
 }
 
+input BorderValueUpdateManyDataInput {
+  name: String
+  unit: BorderValueUnit
+  value: Int
+}
+
 input BorderValueUpdateManyMutationInput {
   name: String
   unit: BorderValueUnit
@@ -386,7 +515,14 @@ input BorderValueUpdateManyWithoutWebInput {
   disconnect: [BorderValueWhereUniqueInput!]
   delete: [BorderValueWhereUniqueInput!]
   update: [BorderValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [BorderValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [BorderValueScalarWhereInput!]
   upsert: [BorderValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input BorderValueUpdateManyWithWhereNestedInput {
+  where: BorderValueScalarWhereInput!
+  data: BorderValueUpdateManyDataInput!
 }
 
 input BorderValueUpdateOneInput {
@@ -632,6 +768,185 @@ type ColorValuePreviousValues {
   a: Float
 }
 
+input ColorValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ColorValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ColorValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ColorValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  r: Int
+
+  """All values that are not equal to given value."""
+  r_not: Int
+
+  """All values that are contained in given list."""
+  r_in: [Int!]
+
+  """All values that are not contained in given list."""
+  r_not_in: [Int!]
+
+  """All values less than the given value."""
+  r_lt: Int
+
+  """All values less than or equal the given value."""
+  r_lte: Int
+
+  """All values greater than the given value."""
+  r_gt: Int
+
+  """All values greater than or equal the given value."""
+  r_gte: Int
+  g: Int
+
+  """All values that are not equal to given value."""
+  g_not: Int
+
+  """All values that are contained in given list."""
+  g_in: [Int!]
+
+  """All values that are not contained in given list."""
+  g_not_in: [Int!]
+
+  """All values less than the given value."""
+  g_lt: Int
+
+  """All values less than or equal the given value."""
+  g_lte: Int
+
+  """All values greater than the given value."""
+  g_gt: Int
+
+  """All values greater than or equal the given value."""
+  g_gte: Int
+  b: Int
+
+  """All values that are not equal to given value."""
+  b_not: Int
+
+  """All values that are contained in given list."""
+  b_in: [Int!]
+
+  """All values that are not contained in given list."""
+  b_not_in: [Int!]
+
+  """All values less than the given value."""
+  b_lt: Int
+
+  """All values less than or equal the given value."""
+  b_lte: Int
+
+  """All values greater than the given value."""
+  b_gt: Int
+
+  """All values greater than or equal the given value."""
+  b_gte: Int
+  a: Float
+
+  """All values that are not equal to given value."""
+  a_not: Float
+
+  """All values that are contained in given list."""
+  a_in: [Float!]
+
+  """All values that are not contained in given list."""
+  a_not_in: [Float!]
+
+  """All values less than the given value."""
+  a_lt: Float
+
+  """All values less than or equal the given value."""
+  a_lte: Float
+
+  """All values greater than the given value."""
+  a_gt: Float
+
+  """All values greater than or equal the given value."""
+  a_gte: Float
+}
+
 type ColorValueSubscriptionPayload {
   mutation: MutationType!
   node: ColorValue
@@ -689,6 +1004,14 @@ input ColorValueUpdateInput {
   web: WebUpdateOneRequiredWithoutColorValuesInput
 }
 
+input ColorValueUpdateManyDataInput {
+  name: String
+  r: Int
+  g: Int
+  b: Int
+  a: Float
+}
+
 input ColorValueUpdateManyMutationInput {
   name: String
   r: Int
@@ -703,7 +1026,14 @@ input ColorValueUpdateManyWithoutWebInput {
   disconnect: [ColorValueWhereUniqueInput!]
   delete: [ColorValueWhereUniqueInput!]
   update: [ColorValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [ColorValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [ColorValueScalarWhereInput!]
   upsert: [ColorValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ColorValueUpdateManyWithWhereNestedInput {
+  where: ColorValueScalarWhereInput!
+  data: ColorValueUpdateManyDataInput!
 }
 
 input ColorValueUpdateOneInput {
@@ -925,6 +1255,7 @@ input ColorValueWhereUniqueInput {
 
 type Component implements Node {
   id: ID!
+  type: ComponentType!
   name: String!
   creator: User!
   props(where: ComponentPropWhereInput, orderBy: ComponentPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ComponentProp!]
@@ -941,6 +1272,7 @@ type ComponentConnection {
 }
 
 input ComponentCreateInput {
+  type: ComponentType
   name: String!
   creator: UserCreateOneWithoutComponentsInput!
   props: ComponentPropCreateManyWithoutComponentInput
@@ -962,11 +1294,13 @@ input ComponentCreateOneWithoutPropsInput {
 }
 
 input ComponentCreateWithoutCreatorInput {
+  type: ComponentType
   name: String!
   props: ComponentPropCreateManyWithoutComponentInput
 }
 
 input ComponentCreateWithoutPropsInput {
+  type: ComponentType
   name: String!
   creator: UserCreateOneWithoutComponentsInput!
 }
@@ -983,6 +1317,8 @@ type ComponentEdge {
 enum ComponentOrderByInput {
   id_ASC
   id_DESC
+  type_ASC
+  type_DESC
   name_ASC
   name_DESC
   updatedAt_ASC
@@ -993,6 +1329,7 @@ enum ComponentOrderByInput {
 
 type ComponentPreviousValues {
   id: ID!
+  type: ComponentType!
   name: String!
 }
 
@@ -1057,6 +1394,107 @@ type ComponentPropPreviousValues {
   type: PropType!
 }
 
+input ComponentPropScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentPropScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentPropScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentPropScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+}
+
 type ComponentPropSubscriptionPayload {
   mutation: MutationType!
   node: ComponentProp
@@ -1102,6 +1540,11 @@ input ComponentPropUpdateInput {
   component: ComponentUpdateOneRequiredWithoutPropsInput
 }
 
+input ComponentPropUpdateManyDataInput {
+  name: String
+  type: PropType
+}
+
 input ComponentPropUpdateManyMutationInput {
   name: String
   type: PropType
@@ -1113,7 +1556,14 @@ input ComponentPropUpdateManyWithoutComponentInput {
   disconnect: [ComponentPropWhereUniqueInput!]
   delete: [ComponentPropWhereUniqueInput!]
   update: [ComponentPropUpdateWithWhereUniqueWithoutComponentInput!]
+  updateMany: [ComponentPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ComponentPropScalarWhereInput!]
   upsert: [ComponentPropUpsertWithWhereUniqueWithoutComponentInput!]
+}
+
+input ComponentPropUpdateManyWithWhereNestedInput {
+  where: ComponentPropScalarWhereInput!
+  data: ComponentPropUpdateManyDataInput!
 }
 
 input ComponentPropUpdateWithoutComponentDataInput {
@@ -1238,6 +1688,107 @@ input ComponentPropWhereUniqueInput {
   id: ID
 }
 
+input ComponentScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ComponentScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ComponentScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ComponentScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  type: ComponentType
+
+  """All values that are not equal to given value."""
+  type_not: ComponentType
+
+  """All values that are contained in given list."""
+  type_in: [ComponentType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ComponentType!]
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
 type ComponentSubscriptionPayload {
   mutation: MutationType!
   node: Component
@@ -1277,19 +1828,32 @@ input ComponentSubscriptionWhereInput {
   node: ComponentWhereInput
 }
 
+enum ComponentType {
+  BLOCK
+  INLINE
+}
+
 input ComponentUpdateDataInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
+input ComponentUpdateManyDataInput {
+  type: ComponentType
+  name: String
+}
+
 input ComponentUpdateManyMutationInput {
+  type: ComponentType
   name: String
 }
 
@@ -1299,7 +1863,14 @@ input ComponentUpdateManyWithoutCreatorInput {
   disconnect: [ComponentWhereUniqueInput!]
   delete: [ComponentWhereUniqueInput!]
   update: [ComponentUpdateWithWhereUniqueWithoutCreatorInput!]
+  updateMany: [ComponentUpdateManyWithWhereNestedInput!]
+  deleteMany: [ComponentScalarWhereInput!]
   upsert: [ComponentUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input ComponentUpdateManyWithWhereNestedInput {
+  where: ComponentScalarWhereInput!
+  data: ComponentUpdateManyDataInput!
 }
 
 input ComponentUpdateOneRequiredInput {
@@ -1317,11 +1888,13 @@ input ComponentUpdateOneRequiredWithoutPropsInput {
 }
 
 input ComponentUpdateWithoutCreatorDataInput {
+  type: ComponentType
   name: String
   props: ComponentPropUpdateManyWithoutComponentInput
 }
 
 input ComponentUpdateWithoutPropsDataInput {
+  type: ComponentType
   name: String
   creator: UserUpdateOneRequiredWithoutComponentsInput
 }
@@ -1396,6 +1969,16 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  type: ComponentType
+
+  """All values that are not equal to given value."""
+  type_not: ComponentType
+
+  """All values that are contained in given list."""
+  type_in: [ComponentType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ComponentType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -1521,6 +2104,129 @@ type DimensionValuePreviousValues {
   value: Int!
 }
 
+input DimensionValueScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DimensionValueScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DimensionValueScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DimensionValueScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  unit: DimensionValueUnit
+
+  """All values that are not equal to given value."""
+  unit_not: DimensionValueUnit
+
+  """All values that are contained in given list."""
+  unit_in: [DimensionValueUnit!]
+
+  """All values that are not contained in given list."""
+  unit_not_in: [DimensionValueUnit!]
+  value: Int
+
+  """All values that are not equal to given value."""
+  value_not: Int
+
+  """All values that are contained in given list."""
+  value_in: [Int!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [Int!]
+
+  """All values less than the given value."""
+  value_lt: Int
+
+  """All values less than or equal the given value."""
+  value_lte: Int
+
+  """All values greater than the given value."""
+  value_gt: Int
+
+  """All values greater than or equal the given value."""
+  value_gte: Int
+}
+
 type DimensionValueSubscriptionPayload {
   mutation: MutationType!
   node: DimensionValue
@@ -1580,6 +2286,12 @@ input DimensionValueUpdateInput {
   web: WebUpdateOneRequiredWithoutDimensionValuesInput
 }
 
+input DimensionValueUpdateManyDataInput {
+  name: String
+  unit: DimensionValueUnit
+  value: Int
+}
+
 input DimensionValueUpdateManyMutationInput {
   name: String
   unit: DimensionValueUnit
@@ -1592,7 +2304,14 @@ input DimensionValueUpdateManyWithoutWebInput {
   disconnect: [DimensionValueWhereUniqueInput!]
   delete: [DimensionValueWhereUniqueInput!]
   update: [DimensionValueUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [DimensionValueUpdateManyWithWhereNestedInput!]
+  deleteMany: [DimensionValueScalarWhereInput!]
   upsert: [DimensionValueUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input DimensionValueUpdateManyWithWhereNestedInput {
+  where: DimensionValueScalarWhereInput!
+  data: DimensionValueUpdateManyDataInput!
 }
 
 input DimensionValueUpdateOneInput {
@@ -1756,15 +2475,15 @@ input DimensionValueWhereUniqueInput {
 
 type Element implements Node {
   id: ID!
-  type: ElementType!
   index: Int!
   web: Web!
   parent: Element
-  textLeaves: Json
-  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  type: ElementType!
   shared: SharedElement
   component: Component!
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
+  textLeaves: Json
 }
 
 """A connection to a list of items."""
@@ -1778,14 +2497,14 @@ type ElementConnection {
 }
 
 input ElementCreateInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
@@ -1820,8 +2539,8 @@ input ElementCreateOneWithoutPropsInput {
 }
 
 input ElementCreateWithoutChildrenInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
@@ -1831,46 +2550,46 @@ input ElementCreateWithoutChildrenInput {
 }
 
 input ElementCreateWithoutParentInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 input ElementCreateWithoutPropsInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
 }
 
 input ElementCreateWithoutSharedInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 input ElementCreateWithoutWebInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
@@ -1886,10 +2605,10 @@ type ElementEdge {
 enum ElementOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   index_ASC
   index_DESC
+  type_ASC
+  type_DESC
   textLeaves_ASC
   textLeaves_DESC
   updatedAt_ASC
@@ -1900,8 +2619,8 @@ enum ElementOrderByInput {
 
 type ElementPreviousValues {
   id: ID!
-  type: ElementType!
   index: Int!
+  type: ElementType!
   textLeaves: Json
 }
 
@@ -1911,6 +2630,7 @@ type ElementProp implements Node {
   name: String!
   type: PropType!
   valueStyle: Style
+  valueJson: Json
   value: String
 }
 
@@ -1927,6 +2647,7 @@ type ElementPropConnection {
 input ElementPropCreateInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   element: ElementCreateOneWithoutPropsInput!
   valueStyle: StyleCreateOneWithoutPropsInput
@@ -1945,6 +2666,7 @@ input ElementPropCreateManyWithoutValueStyleInput {
 input ElementPropCreateWithoutElementInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   valueStyle: StyleCreateOneWithoutPropsInput
 }
@@ -1952,6 +2674,7 @@ input ElementPropCreateWithoutElementInput {
 input ElementPropCreateWithoutValueStyleInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   element: ElementCreateOneWithoutPropsInput!
 }
@@ -1972,6 +2695,8 @@ enum ElementPropOrderByInput {
   name_DESC
   type_ASC
   type_DESC
+  valueJson_ASC
+  valueJson_DESC
   value_ASC
   value_DESC
   updatedAt_ASC
@@ -1984,7 +2709,149 @@ type ElementPropPreviousValues {
   id: ID!
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
+}
+
+input ElementPropScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementPropScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementPropScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementPropScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  type: PropType
+
+  """All values that are not equal to given value."""
+  type_not: PropType
+
+  """All values that are contained in given list."""
+  type_in: [PropType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [PropType!]
+  value: String
+
+  """All values that are not equal to given value."""
+  value_not: String
+
+  """All values that are contained in given list."""
+  value_in: [String!]
+
+  """All values that are not contained in given list."""
+  value_not_in: [String!]
+
+  """All values less than the given value."""
+  value_lt: String
+
+  """All values less than or equal the given value."""
+  value_lte: String
+
+  """All values greater than the given value."""
+  value_gt: String
+
+  """All values greater than or equal the given value."""
+  value_gte: String
+
+  """All values containing the given string."""
+  value_contains: String
+
+  """All values not containing the given string."""
+  value_not_contains: String
+
+  """All values starting with the given string."""
+  value_starts_with: String
+
+  """All values not starting with the given string."""
+  value_not_starts_with: String
+
+  """All values ending with the given string."""
+  value_ends_with: String
+
+  """All values not ending with the given string."""
+  value_not_ends_with: String
 }
 
 type ElementPropSubscriptionPayload {
@@ -2029,14 +2896,23 @@ input ElementPropSubscriptionWhereInput {
 input ElementPropUpdateInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
   valueStyle: StyleUpdateOneWithoutPropsInput
 }
 
+input ElementPropUpdateManyDataInput {
+  name: String
+  type: PropType
+  valueJson: Json
+  value: String
+}
+
 input ElementPropUpdateManyMutationInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
 }
 
@@ -2046,6 +2922,8 @@ input ElementPropUpdateManyWithoutElementInput {
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
   update: [ElementPropUpdateWithWhereUniqueWithoutElementInput!]
+  updateMany: [ElementPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementPropScalarWhereInput!]
   upsert: [ElementPropUpsertWithWhereUniqueWithoutElementInput!]
 }
 
@@ -2055,12 +2933,20 @@ input ElementPropUpdateManyWithoutValueStyleInput {
   disconnect: [ElementPropWhereUniqueInput!]
   delete: [ElementPropWhereUniqueInput!]
   update: [ElementPropUpdateWithWhereUniqueWithoutValueStyleInput!]
+  updateMany: [ElementPropUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementPropScalarWhereInput!]
   upsert: [ElementPropUpsertWithWhereUniqueWithoutValueStyleInput!]
+}
+
+input ElementPropUpdateManyWithWhereNestedInput {
+  where: ElementPropScalarWhereInput!
+  data: ElementPropUpdateManyDataInput!
 }
 
 input ElementPropUpdateWithoutElementDataInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   valueStyle: StyleUpdateOneWithoutPropsInput
 }
@@ -2068,6 +2954,7 @@ input ElementPropUpdateWithoutElementDataInput {
 input ElementPropUpdateWithoutValueStyleDataInput {
   name: String
   type: PropType
+  valueJson: Json
   value: String
   element: ElementUpdateOneRequiredWithoutPropsInput
 }
@@ -2241,6 +3128,89 @@ input ElementPropWhereUniqueInput {
   id: ID
 }
 
+input ElementScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ElementScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ElementScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ElementScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
+}
+
 type ElementSubscriptionPayload {
   mutation: MutationType!
   node: Element
@@ -2281,38 +3251,44 @@ input ElementSubscriptionWhereInput {
 }
 
 enum ElementType {
-  BLOCK
-  INLINE
-  TEXT
+  SHARED
+  COMPONENT
+  TEXT_NODE
 }
 
 input ElementUpdateDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
-input ElementUpdateManyMutationInput {
-  type: ElementType
+input ElementUpdateManyDataInput {
   index: Int
+  type: ElementType
+  textLeaves: Json
+}
+
+input ElementUpdateManyMutationInput {
+  index: Int
+  type: ElementType
   textLeaves: Json
 }
 
@@ -2322,6 +3298,8 @@ input ElementUpdateManyWithoutParentInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutParentInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutParentInput!]
 }
 
@@ -2331,6 +3309,8 @@ input ElementUpdateManyWithoutSharedInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutSharedInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutSharedInput!]
 }
 
@@ -2340,7 +3320,14 @@ input ElementUpdateManyWithoutWebInput {
   disconnect: [ElementWhereUniqueInput!]
   delete: [ElementWhereUniqueInput!]
   update: [ElementUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [ElementUpdateManyWithWhereNestedInput!]
+  deleteMany: [ElementScalarWhereInput!]
   upsert: [ElementUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input ElementUpdateManyWithWhereNestedInput {
+  where: ElementScalarWhereInput!
+  data: ElementUpdateManyDataInput!
 }
 
 input ElementUpdateOneRequiredInput {
@@ -2367,8 +3354,8 @@ input ElementUpdateOneWithoutChildrenInput {
 }
 
 input ElementUpdateWithoutChildrenDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
@@ -2378,46 +3365,46 @@ input ElementUpdateWithoutChildrenDataInput {
 }
 
 input ElementUpdateWithoutParentDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateWithoutPropsDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
 }
 
 input ElementUpdateWithoutSharedDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   web: WebUpdateOneRequiredWithoutElementsInput
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
 input ElementUpdateWithoutWebDataInput {
-  type: ElementType
   index: Int
+  type: ElementType
   textLeaves: Json
   parent: ElementUpdateOneWithoutChildrenInput
-  children: ElementUpdateManyWithoutParentInput
   shared: SharedElementUpdateOneWithoutSharedByInput
   component: ComponentUpdateOneRequiredInput
+  children: ElementUpdateManyWithoutParentInput
   props: ElementPropUpdateManyWithoutElementInput
 }
 
@@ -2518,16 +3505,6 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
   index: Int
 
   """All values that are not equal to given value."""
@@ -2550,13 +3527,23 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
   web: WebWhereInput
   parent: ElementWhereInput
+  shared: SharedElementWhereInput
+  component: ComponentWhereInput
   children_every: ElementWhereInput
   children_some: ElementWhereInput
   children_none: ElementWhereInput
-  shared: SharedElementWhereInput
-  component: ComponentWhereInput
   props_every: ElementPropWhereInput
   props_some: ElementPropWhereInput
   props_none: ElementPropWhereInput
@@ -2749,6 +3736,141 @@ type PagePreviousValues {
   title: String!
 }
 
+input PageScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [PageScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [PageScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [PageScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+}
+
 type PageSubscriptionPayload {
   mutation: MutationType!
   node: Page
@@ -2795,6 +3917,10 @@ input PageUpdateInput {
   element: ElementUpdateOneRequiredInput
 }
 
+input PageUpdateManyDataInput {
+  title: String
+}
+
 input PageUpdateManyMutationInput {
   title: String
 }
@@ -2805,7 +3931,14 @@ input PageUpdateManyWithoutWebInput {
   disconnect: [PageWhereUniqueInput!]
   delete: [PageWhereUniqueInput!]
   update: [PageUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [PageUpdateManyWithWhereNestedInput!]
+  deleteMany: [PageScalarWhereInput!]
   upsert: [PageUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input PageUpdateManyWithWhereNestedInput {
+  where: PageScalarWhereInput!
+  data: PageUpdateManyDataInput!
 }
 
 input PageUpdateWithoutWebDataInput {
@@ -2977,6 +4110,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
+  JSON
 }
 
 type Query {
@@ -3946,6 +5080,519 @@ type StylePreviousValues {
   textTransform: StyleTextTransform
 }
 
+input StyleScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StyleScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StyleScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StyleScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  isText: Boolean
+
+  """All values that are not equal to given value."""
+  isText_not: Boolean
+  display: StyleDisplay
+
+  """All values that are not equal to given value."""
+  display_not: StyleDisplay
+
+  """All values that are contained in given list."""
+  display_in: [StyleDisplay!]
+
+  """All values that are not contained in given list."""
+  display_not_in: [StyleDisplay!]
+  position: StylePosition
+
+  """All values that are not equal to given value."""
+  position_not: StylePosition
+
+  """All values that are contained in given list."""
+  position_in: [StylePosition!]
+
+  """All values that are not contained in given list."""
+  position_not_in: [StylePosition!]
+  flexDirection: StyleFlexDirection
+
+  """All values that are not equal to given value."""
+  flexDirection_not: StyleFlexDirection
+
+  """All values that are contained in given list."""
+  flexDirection_in: [StyleFlexDirection!]
+
+  """All values that are not contained in given list."""
+  flexDirection_not_in: [StyleFlexDirection!]
+  flexWrap: StyleFlexWrap
+
+  """All values that are not equal to given value."""
+  flexWrap_not: StyleFlexWrap
+
+  """All values that are contained in given list."""
+  flexWrap_in: [StyleFlexWrap!]
+
+  """All values that are not contained in given list."""
+  flexWrap_not_in: [StyleFlexWrap!]
+  justifyContent: StyleJustifyContent
+
+  """All values that are not equal to given value."""
+  justifyContent_not: StyleJustifyContent
+
+  """All values that are contained in given list."""
+  justifyContent_in: [StyleJustifyContent!]
+
+  """All values that are not contained in given list."""
+  justifyContent_not_in: [StyleJustifyContent!]
+  alignItems: StyleAlignItems
+
+  """All values that are not equal to given value."""
+  alignItems_not: StyleAlignItems
+
+  """All values that are contained in given list."""
+  alignItems_in: [StyleAlignItems!]
+
+  """All values that are not contained in given list."""
+  alignItems_not_in: [StyleAlignItems!]
+  alignSelf: StyleAlignSelf
+
+  """All values that are not equal to given value."""
+  alignSelf_not: StyleAlignSelf
+
+  """All values that are contained in given list."""
+  alignSelf_in: [StyleAlignSelf!]
+
+  """All values that are not contained in given list."""
+  alignSelf_not_in: [StyleAlignSelf!]
+  alignContent: StyleAlignContent
+
+  """All values that are not equal to given value."""
+  alignContent_not: StyleAlignContent
+
+  """All values that are contained in given list."""
+  alignContent_in: [StyleAlignContent!]
+
+  """All values that are not contained in given list."""
+  alignContent_not_in: [StyleAlignContent!]
+  overflow: StyleOverflow
+
+  """All values that are not equal to given value."""
+  overflow_not: StyleOverflow
+
+  """All values that are contained in given list."""
+  overflow_in: [StyleOverflow!]
+
+  """All values that are not contained in given list."""
+  overflow_not_in: [StyleOverflow!]
+  flex: Int
+
+  """All values that are not equal to given value."""
+  flex_not: Int
+
+  """All values that are contained in given list."""
+  flex_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flex_not_in: [Int!]
+
+  """All values less than the given value."""
+  flex_lt: Int
+
+  """All values less than or equal the given value."""
+  flex_lte: Int
+
+  """All values greater than the given value."""
+  flex_gt: Int
+
+  """All values greater than or equal the given value."""
+  flex_gte: Int
+  flexGrow: Int
+
+  """All values that are not equal to given value."""
+  flexGrow_not: Int
+
+  """All values that are contained in given list."""
+  flexGrow_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexGrow_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexGrow_lt: Int
+
+  """All values less than or equal the given value."""
+  flexGrow_lte: Int
+
+  """All values greater than the given value."""
+  flexGrow_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexGrow_gte: Int
+  flexShrink: Int
+
+  """All values that are not equal to given value."""
+  flexShrink_not: Int
+
+  """All values that are contained in given list."""
+  flexShrink_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexShrink_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexShrink_lt: Int
+
+  """All values less than or equal the given value."""
+  flexShrink_lte: Int
+
+  """All values greater than the given value."""
+  flexShrink_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexShrink_gte: Int
+  flexBasis: Int
+
+  """All values that are not equal to given value."""
+  flexBasis_not: Int
+
+  """All values that are contained in given list."""
+  flexBasis_in: [Int!]
+
+  """All values that are not contained in given list."""
+  flexBasis_not_in: [Int!]
+
+  """All values less than the given value."""
+  flexBasis_lt: Int
+
+  """All values less than or equal the given value."""
+  flexBasis_lte: Int
+
+  """All values greater than the given value."""
+  flexBasis_gt: Int
+
+  """All values greater than or equal the given value."""
+  flexBasis_gte: Int
+  zIndex: Int
+
+  """All values that are not equal to given value."""
+  zIndex_not: Int
+
+  """All values that are contained in given list."""
+  zIndex_in: [Int!]
+
+  """All values that are not contained in given list."""
+  zIndex_not_in: [Int!]
+
+  """All values less than the given value."""
+  zIndex_lt: Int
+
+  """All values less than or equal the given value."""
+  zIndex_lte: Int
+
+  """All values greater than the given value."""
+  zIndex_gt: Int
+
+  """All values greater than or equal the given value."""
+  zIndex_gte: Int
+  direction: StyleDirection
+
+  """All values that are not equal to given value."""
+  direction_not: StyleDirection
+
+  """All values that are contained in given list."""
+  direction_in: [StyleDirection!]
+
+  """All values that are not contained in given list."""
+  direction_not_in: [StyleDirection!]
+  borderStyle: StyleBorderStyle
+
+  """All values that are not equal to given value."""
+  borderStyle_not: StyleBorderStyle
+
+  """All values that are contained in given list."""
+  borderStyle_in: [StyleBorderStyle!]
+
+  """All values that are not contained in given list."""
+  borderStyle_not_in: [StyleBorderStyle!]
+  opacity: Int
+
+  """All values that are not equal to given value."""
+  opacity_not: Int
+
+  """All values that are contained in given list."""
+  opacity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  opacity_not_in: [Int!]
+
+  """All values less than the given value."""
+  opacity_lt: Int
+
+  """All values less than or equal the given value."""
+  opacity_lte: Int
+
+  """All values greater than the given value."""
+  opacity_gt: Int
+
+  """All values greater than or equal the given value."""
+  opacity_gte: Int
+  fontFamily: String
+
+  """All values that are not equal to given value."""
+  fontFamily_not: String
+
+  """All values that are contained in given list."""
+  fontFamily_in: [String!]
+
+  """All values that are not contained in given list."""
+  fontFamily_not_in: [String!]
+
+  """All values less than the given value."""
+  fontFamily_lt: String
+
+  """All values less than or equal the given value."""
+  fontFamily_lte: String
+
+  """All values greater than the given value."""
+  fontFamily_gt: String
+
+  """All values greater than or equal the given value."""
+  fontFamily_gte: String
+
+  """All values containing the given string."""
+  fontFamily_contains: String
+
+  """All values not containing the given string."""
+  fontFamily_not_contains: String
+
+  """All values starting with the given string."""
+  fontFamily_starts_with: String
+
+  """All values not starting with the given string."""
+  fontFamily_not_starts_with: String
+
+  """All values ending with the given string."""
+  fontFamily_ends_with: String
+
+  """All values not ending with the given string."""
+  fontFamily_not_ends_with: String
+  fontSize: Int
+
+  """All values that are not equal to given value."""
+  fontSize_not: Int
+
+  """All values that are contained in given list."""
+  fontSize_in: [Int!]
+
+  """All values that are not contained in given list."""
+  fontSize_not_in: [Int!]
+
+  """All values less than the given value."""
+  fontSize_lt: Int
+
+  """All values less than or equal the given value."""
+  fontSize_lte: Int
+
+  """All values greater than the given value."""
+  fontSize_gt: Int
+
+  """All values greater than or equal the given value."""
+  fontSize_gte: Int
+  fontStyle: StyleFontStyle
+
+  """All values that are not equal to given value."""
+  fontStyle_not: StyleFontStyle
+
+  """All values that are contained in given list."""
+  fontStyle_in: [StyleFontStyle!]
+
+  """All values that are not contained in given list."""
+  fontStyle_not_in: [StyleFontStyle!]
+  fontWeight: StyleFontWeight
+
+  """All values that are not equal to given value."""
+  fontWeight_not: StyleFontWeight
+
+  """All values that are contained in given list."""
+  fontWeight_in: [StyleFontWeight!]
+
+  """All values that are not contained in given list."""
+  fontWeight_not_in: [StyleFontWeight!]
+  fontVariant: StyleFontVariant
+
+  """All values that are not equal to given value."""
+  fontVariant_not: StyleFontVariant
+
+  """All values that are contained in given list."""
+  fontVariant_in: [StyleFontVariant!]
+
+  """All values that are not contained in given list."""
+  fontVariant_not_in: [StyleFontVariant!]
+  letterSpacing: Int
+
+  """All values that are not equal to given value."""
+  letterSpacing_not: Int
+
+  """All values that are contained in given list."""
+  letterSpacing_in: [Int!]
+
+  """All values that are not contained in given list."""
+  letterSpacing_not_in: [Int!]
+
+  """All values less than the given value."""
+  letterSpacing_lt: Int
+
+  """All values less than or equal the given value."""
+  letterSpacing_lte: Int
+
+  """All values greater than the given value."""
+  letterSpacing_gt: Int
+
+  """All values greater than or equal the given value."""
+  letterSpacing_gte: Int
+  lineHeight: Int
+
+  """All values that are not equal to given value."""
+  lineHeight_not: Int
+
+  """All values that are contained in given list."""
+  lineHeight_in: [Int!]
+
+  """All values that are not contained in given list."""
+  lineHeight_not_in: [Int!]
+
+  """All values less than the given value."""
+  lineHeight_lt: Int
+
+  """All values less than or equal the given value."""
+  lineHeight_lte: Int
+
+  """All values greater than the given value."""
+  lineHeight_gt: Int
+
+  """All values greater than or equal the given value."""
+  lineHeight_gte: Int
+  textAlign: StyleTextAlign
+
+  """All values that are not equal to given value."""
+  textAlign_not: StyleTextAlign
+
+  """All values that are contained in given list."""
+  textAlign_in: [StyleTextAlign!]
+
+  """All values that are not contained in given list."""
+  textAlign_not_in: [StyleTextAlign!]
+  textAlignVertical: StyleTextAlignVertical
+
+  """All values that are not equal to given value."""
+  textAlignVertical_not: StyleTextAlignVertical
+
+  """All values that are contained in given list."""
+  textAlignVertical_in: [StyleTextAlignVertical!]
+
+  """All values that are not contained in given list."""
+  textAlignVertical_not_in: [StyleTextAlignVertical!]
+  textDecorationLine: StyleTextDecorationLine
+
+  """All values that are not equal to given value."""
+  textDecorationLine_not: StyleTextDecorationLine
+
+  """All values that are contained in given list."""
+  textDecorationLine_in: [StyleTextDecorationLine!]
+
+  """All values that are not contained in given list."""
+  textDecorationLine_not_in: [StyleTextDecorationLine!]
+  textTransform: StyleTextTransform
+
+  """All values that are not equal to given value."""
+  textTransform_not: StyleTextTransform
+
+  """All values that are contained in given list."""
+  textTransform_in: [StyleTextTransform!]
+
+  """All values that are not contained in given list."""
+  textTransform_not_in: [StyleTextTransform!]
+}
+
 type StyleSpread implements Node {
   id: ID!
   spreadStyle: Style!
@@ -4004,6 +5651,79 @@ type StyleSpreadPreviousValues {
   index: Int!
 }
 
+input StyleSpreadScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StyleSpreadScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StyleSpreadScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StyleSpreadScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  index: Int
+
+  """All values that are not equal to given value."""
+  index_not: Int
+
+  """All values that are contained in given list."""
+  index_in: [Int!]
+
+  """All values that are not contained in given list."""
+  index_not_in: [Int!]
+
+  """All values less than the given value."""
+  index_lt: Int
+
+  """All values less than or equal the given value."""
+  index_lte: Int
+
+  """All values greater than the given value."""
+  index_gt: Int
+
+  """All values greater than or equal the given value."""
+  index_gte: Int
+}
+
 type StyleSpreadSubscriptionPayload {
   mutation: MutationType!
   node: StyleSpread
@@ -4049,6 +5769,10 @@ input StyleSpreadUpdateInput {
   style: StyleUpdateOneRequiredInput
 }
 
+input StyleSpreadUpdateManyDataInput {
+  index: Int
+}
+
 input StyleSpreadUpdateManyMutationInput {
   index: Int
 }
@@ -4059,7 +5783,14 @@ input StyleSpreadUpdateManyWithoutSpreadStyleInput {
   disconnect: [StyleSpreadWhereUniqueInput!]
   delete: [StyleSpreadWhereUniqueInput!]
   update: [StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput!]
+  updateMany: [StyleSpreadUpdateManyWithWhereNestedInput!]
+  deleteMany: [StyleSpreadScalarWhereInput!]
   upsert: [StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput!]
+}
+
+input StyleSpreadUpdateManyWithWhereNestedInput {
+  where: StyleSpreadScalarWhereInput!
+  data: StyleSpreadUpdateManyDataInput!
 }
 
 input StyleSpreadUpdateWithoutSpreadStyleDataInput {
@@ -4407,6 +6138,39 @@ input StyleUpdateInput {
   color: ColorValueUpdateOneInput
 }
 
+input StyleUpdateManyDataInput {
+  name: String
+  isText: Boolean
+  display: StyleDisplay
+  position: StylePosition
+  flexDirection: StyleFlexDirection
+  flexWrap: StyleFlexWrap
+  justifyContent: StyleJustifyContent
+  alignItems: StyleAlignItems
+  alignSelf: StyleAlignSelf
+  alignContent: StyleAlignContent
+  overflow: StyleOverflow
+  flex: Int
+  flexGrow: Int
+  flexShrink: Int
+  flexBasis: Int
+  zIndex: Int
+  direction: StyleDirection
+  borderStyle: StyleBorderStyle
+  opacity: Int
+  fontFamily: String
+  fontSize: Int
+  fontStyle: StyleFontStyle
+  fontWeight: StyleFontWeight
+  fontVariant: StyleFontVariant
+  letterSpacing: Int
+  lineHeight: Int
+  textAlign: StyleTextAlign
+  textAlignVertical: StyleTextAlignVertical
+  textDecorationLine: StyleTextDecorationLine
+  textTransform: StyleTextTransform
+}
+
 input StyleUpdateManyMutationInput {
   name: String
   isText: Boolean
@@ -4446,7 +6210,14 @@ input StyleUpdateManyWithoutWebInput {
   disconnect: [StyleWhereUniqueInput!]
   delete: [StyleWhereUniqueInput!]
   update: [StyleUpdateWithWhereUniqueWithoutWebInput!]
+  updateMany: [StyleUpdateManyWithWhereNestedInput!]
+  deleteMany: [StyleScalarWhereInput!]
   upsert: [StyleUpsertWithWhereUniqueWithoutWebInput!]
+}
+
+input StyleUpdateManyWithWhereNestedInput {
+  where: StyleScalarWhereInput!
+  data: StyleUpdateManyDataInput!
 }
 
 input StyleUpdateOneRequiredInput {
@@ -5958,6 +7729,141 @@ type WebPreviousValues {
   name: String!
 }
 
+input WebScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [WebScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [WebScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [WebScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
 type WebSubscriptionPayload {
   mutation: MutationType!
   node: Web
@@ -6008,6 +7914,10 @@ input WebUpdateInput {
   borderValues: BorderValueUpdateManyWithoutWebInput
 }
 
+input WebUpdateManyDataInput {
+  name: String
+}
+
 input WebUpdateManyMutationInput {
   name: String
 }
@@ -6018,7 +7928,14 @@ input WebUpdateManyWithoutCreatorInput {
   disconnect: [WebWhereUniqueInput!]
   delete: [WebWhereUniqueInput!]
   update: [WebUpdateWithWhereUniqueWithoutCreatorInput!]
+  updateMany: [WebUpdateManyWithWhereNestedInput!]
+  deleteMany: [WebScalarWhereInput!]
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
+}
+
+input WebUpdateManyWithWhereNestedInput {
+  where: WebScalarWhereInput!
+  data: WebUpdateManyDataInput!
 }
 
 input WebUpdateOneRequiredWithoutBorderValuesInput {
@@ -6382,6 +8299,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ComponentOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'name_ASC'
     | 'name_DESC'
     | 'updatedAt_ASC'
@@ -6401,6 +8320,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
+
+ export type ComponentType =
+    | 'BLOCK'
+    | 'INLINE'
   
 
  export type DimensionValueOrderByInput =
@@ -6427,10 +8351,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
     | 'index_ASC'
     | 'index_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'textLeaves_ASC'
     | 'textLeaves_DESC'
     | 'updatedAt_ASC'
@@ -6446,6 +8370,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'name_DESC'
     | 'type_ASC'
     | 'type_DESC'
+    | 'valueJson_ASC'
+    | 'valueJson_DESC'
     | 'value_ASC'
     | 'value_DESC'
     | 'updatedAt_ASC'
@@ -6455,9 +8381,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   
 
  export type ElementType =
-    | 'BLOCK'
-    | 'INLINE'
-    | 'TEXT'
+    | 'SHARED'
+    | 'COMPONENT'
+    | 'TEXT_NODE'
   
 
  export type MutationType =
@@ -6487,6 +8413,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRING'
     | 'VIEW_STYLE'
     | 'TEXT_STYLE'
+    | 'JSON'
   
 
  export type SharedElementOrderByInput =
@@ -6757,6 +8684,52 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   value: Int
 |}
 
+ export type BorderValueScalarWhereInput = {| 
+  AND?: Array< BorderValueScalarWhereInput > | BorderValueScalarWhereInput,
+  OR?: Array< BorderValueScalarWhereInput > | BorderValueScalarWhereInput,
+  NOT?: Array< BorderValueScalarWhereInput > | BorderValueScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  unit?: BorderValueUnit,
+  unit_not?: BorderValueUnit,
+  unit_in?: Array< BorderValueUnit > | BorderValueUnit,
+  unit_not_in?: Array< BorderValueUnit > | BorderValueUnit,
+  value?: Int,
+  value_not?: Int,
+  value_in?: Array< Int > | Int,
+  value_not_in?: Array< Int > | Int,
+  value_lt?: Int,
+  value_lte?: Int,
+  value_gt?: Int,
+  value_gte?: Int
+|}
+
  export type BorderValueSubscriptionWhereInput = {| 
   AND?: Array< BorderValueSubscriptionWhereInput > | BorderValueSubscriptionWhereInput,
   OR?: Array< BorderValueSubscriptionWhereInput > | BorderValueSubscriptionWhereInput,
@@ -6782,6 +8755,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebUpdateOneRequiredWithoutBorderValuesInput
 |}
 
+ export type BorderValueUpdateManyDataInput = {| 
+  name?: String,
+  unit?: BorderValueUnit,
+  value?: Int
+|}
+
  export type BorderValueUpdateManyMutationInput = {| 
   name?: String,
   unit?: BorderValueUnit,
@@ -6794,7 +8773,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< BorderValueWhereUniqueInput > | BorderValueWhereUniqueInput,
   delete?: Array< BorderValueWhereUniqueInput > | BorderValueWhereUniqueInput,
   update?: Array< BorderValueUpdateWithWhereUniqueWithoutWebInput > | BorderValueUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< BorderValueUpdateManyWithWhereNestedInput > | BorderValueUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< BorderValueScalarWhereInput > | BorderValueScalarWhereInput,
   upsert?: Array< BorderValueUpsertWithWhereUniqueWithoutWebInput > | BorderValueUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type BorderValueUpdateManyWithWhereNestedInput = {| 
+  where: BorderValueScalarWhereInput,
+  data: BorderValueUpdateManyDataInput
 |}
 
  export type BorderValueUpdateOneInput = {| 
@@ -6906,6 +8892,72 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   a?: Float
 |}
 
+ export type ColorValueScalarWhereInput = {| 
+  AND?: Array< ColorValueScalarWhereInput > | ColorValueScalarWhereInput,
+  OR?: Array< ColorValueScalarWhereInput > | ColorValueScalarWhereInput,
+  NOT?: Array< ColorValueScalarWhereInput > | ColorValueScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  r?: Int,
+  r_not?: Int,
+  r_in?: Array< Int > | Int,
+  r_not_in?: Array< Int > | Int,
+  r_lt?: Int,
+  r_lte?: Int,
+  r_gt?: Int,
+  r_gte?: Int,
+  g?: Int,
+  g_not?: Int,
+  g_in?: Array< Int > | Int,
+  g_not_in?: Array< Int > | Int,
+  g_lt?: Int,
+  g_lte?: Int,
+  g_gt?: Int,
+  g_gte?: Int,
+  b?: Int,
+  b_not?: Int,
+  b_in?: Array< Int > | Int,
+  b_not_in?: Array< Int > | Int,
+  b_lt?: Int,
+  b_lte?: Int,
+  b_gt?: Int,
+  b_gte?: Int,
+  a?: Float,
+  a_not?: Float,
+  a_in?: Array< Float > | Float,
+  a_not_in?: Array< Float > | Float,
+  a_lt?: Float,
+  a_lte?: Float,
+  a_gt?: Float,
+  a_gte?: Float
+|}
+
  export type ColorValueSubscriptionWhereInput = {| 
   AND?: Array< ColorValueSubscriptionWhereInput > | ColorValueSubscriptionWhereInput,
   OR?: Array< ColorValueSubscriptionWhereInput > | ColorValueSubscriptionWhereInput,
@@ -6935,6 +8987,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebUpdateOneRequiredWithoutColorValuesInput
 |}
 
+ export type ColorValueUpdateManyDataInput = {| 
+  name?: String,
+  r?: Int,
+  g?: Int,
+  b?: Int,
+  a?: Float
+|}
+
  export type ColorValueUpdateManyMutationInput = {| 
   name?: String,
   r?: Int,
@@ -6949,7 +9009,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ColorValueWhereUniqueInput > | ColorValueWhereUniqueInput,
   delete?: Array< ColorValueWhereUniqueInput > | ColorValueWhereUniqueInput,
   update?: Array< ColorValueUpdateWithWhereUniqueWithoutWebInput > | ColorValueUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< ColorValueUpdateManyWithWhereNestedInput > | ColorValueUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ColorValueScalarWhereInput > | ColorValueScalarWhereInput,
   upsert?: Array< ColorValueUpsertWithWhereUniqueWithoutWebInput > | ColorValueUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type ColorValueUpdateManyWithWhereNestedInput = {| 
+  where: ColorValueScalarWhereInput,
+  data: ColorValueUpdateManyDataInput
 |}
 
  export type ColorValueUpdateOneInput = {| 
@@ -7057,6 +9124,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentCreateInput = {| 
+  type?: ComponentType,
   name: String,
   creator: UserCreateOneWithoutComponentsInput,
   props?: ComponentPropCreateManyWithoutComponentInput
@@ -7078,11 +9146,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentCreateWithoutCreatorInput = {| 
+  type?: ComponentType,
   name: String,
   props?: ComponentPropCreateManyWithoutComponentInput
 |}
 
  export type ComponentCreateWithoutPropsInput = {| 
+  type?: ComponentType,
   name: String,
   creator: UserCreateOneWithoutComponentsInput
 |}
@@ -7103,6 +9173,44 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   type: PropType
 |}
 
+ export type ComponentPropScalarWhereInput = {| 
+  AND?: Array< ComponentPropScalarWhereInput > | ComponentPropScalarWhereInput,
+  OR?: Array< ComponentPropScalarWhereInput > | ComponentPropScalarWhereInput,
+  NOT?: Array< ComponentPropScalarWhereInput > | ComponentPropScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType
+|}
+
  export type ComponentPropSubscriptionWhereInput = {| 
   AND?: Array< ComponentPropSubscriptionWhereInput > | ComponentPropSubscriptionWhereInput,
   OR?: Array< ComponentPropSubscriptionWhereInput > | ComponentPropSubscriptionWhereInput,
@@ -7120,6 +9228,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   component?: ComponentUpdateOneRequiredWithoutPropsInput
 |}
 
+ export type ComponentPropUpdateManyDataInput = {| 
+  name?: String,
+  type?: PropType
+|}
+
  export type ComponentPropUpdateManyMutationInput = {| 
   name?: String,
   type?: PropType
@@ -7131,7 +9244,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ComponentPropWhereUniqueInput > | ComponentPropWhereUniqueInput,
   delete?: Array< ComponentPropWhereUniqueInput > | ComponentPropWhereUniqueInput,
   update?: Array< ComponentPropUpdateWithWhereUniqueWithoutComponentInput > | ComponentPropUpdateWithWhereUniqueWithoutComponentInput,
+  updateMany?: Array< ComponentPropUpdateManyWithWhereNestedInput > | ComponentPropUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ComponentPropScalarWhereInput > | ComponentPropScalarWhereInput,
   upsert?: Array< ComponentPropUpsertWithWhereUniqueWithoutComponentInput > | ComponentPropUpsertWithWhereUniqueWithoutComponentInput
+|}
+
+ export type ComponentPropUpdateManyWithWhereNestedInput = {| 
+  where: ComponentPropScalarWhereInput,
+  data: ComponentPropUpdateManyDataInput
 |}
 
  export type ComponentPropUpdateWithoutComponentDataInput = {| 
@@ -7193,6 +9313,44 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id?: ID_Input
 |}
 
+ export type ComponentScalarWhereInput = {| 
+  AND?: Array< ComponentScalarWhereInput > | ComponentScalarWhereInput,
+  OR?: Array< ComponentScalarWhereInput > | ComponentScalarWhereInput,
+  NOT?: Array< ComponentScalarWhereInput > | ComponentScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  type?: ComponentType,
+  type_not?: ComponentType,
+  type_in?: Array< ComponentType > | ComponentType,
+  type_not_in?: Array< ComponentType > | ComponentType,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String
+|}
+
  export type ComponentSubscriptionWhereInput = {| 
   AND?: Array< ComponentSubscriptionWhereInput > | ComponentSubscriptionWhereInput,
   OR?: Array< ComponentSubscriptionWhereInput > | ComponentSubscriptionWhereInput,
@@ -7205,18 +9363,26 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentUpdateDataInput = {| 
+  type?: ComponentType,
   name?: String,
   creator?: UserUpdateOneRequiredWithoutComponentsInput,
   props?: ComponentPropUpdateManyWithoutComponentInput
 |}
 
  export type ComponentUpdateInput = {| 
+  type?: ComponentType,
   name?: String,
   creator?: UserUpdateOneRequiredWithoutComponentsInput,
   props?: ComponentPropUpdateManyWithoutComponentInput
 |}
 
+ export type ComponentUpdateManyDataInput = {| 
+  type?: ComponentType,
+  name?: String
+|}
+
  export type ComponentUpdateManyMutationInput = {| 
+  type?: ComponentType,
   name?: String
 |}
 
@@ -7226,7 +9392,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ComponentWhereUniqueInput > | ComponentWhereUniqueInput,
   delete?: Array< ComponentWhereUniqueInput > | ComponentWhereUniqueInput,
   update?: Array< ComponentUpdateWithWhereUniqueWithoutCreatorInput > | ComponentUpdateWithWhereUniqueWithoutCreatorInput,
+  updateMany?: Array< ComponentUpdateManyWithWhereNestedInput > | ComponentUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ComponentScalarWhereInput > | ComponentScalarWhereInput,
   upsert?: Array< ComponentUpsertWithWhereUniqueWithoutCreatorInput > | ComponentUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type ComponentUpdateManyWithWhereNestedInput = {| 
+  where: ComponentScalarWhereInput,
+  data: ComponentUpdateManyDataInput
 |}
 
  export type ComponentUpdateOneRequiredInput = {| 
@@ -7244,11 +9417,13 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentUpdateWithoutCreatorDataInput = {| 
+  type?: ComponentType,
   name?: String,
   props?: ComponentPropUpdateManyWithoutComponentInput
 |}
 
  export type ComponentUpdateWithoutPropsDataInput = {| 
+  type?: ComponentType,
   name?: String,
   creator?: UserUpdateOneRequiredWithoutComponentsInput
 |}
@@ -7292,6 +9467,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
+  type?: ComponentType,
+  type_not?: ComponentType,
+  type_in?: Array< ComponentType > | ComponentType,
+  type_not_in?: Array< ComponentType > | ComponentType,
   name?: String,
   name_not?: String,
   name_in?: Array< String > | String,
@@ -7340,6 +9519,52 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   value: Int
 |}
 
+ export type DimensionValueScalarWhereInput = {| 
+  AND?: Array< DimensionValueScalarWhereInput > | DimensionValueScalarWhereInput,
+  OR?: Array< DimensionValueScalarWhereInput > | DimensionValueScalarWhereInput,
+  NOT?: Array< DimensionValueScalarWhereInput > | DimensionValueScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  unit?: DimensionValueUnit,
+  unit_not?: DimensionValueUnit,
+  unit_in?: Array< DimensionValueUnit > | DimensionValueUnit,
+  unit_not_in?: Array< DimensionValueUnit > | DimensionValueUnit,
+  value?: Int,
+  value_not?: Int,
+  value_in?: Array< Int > | Int,
+  value_not_in?: Array< Int > | Int,
+  value_lt?: Int,
+  value_lte?: Int,
+  value_gt?: Int,
+  value_gte?: Int
+|}
+
  export type DimensionValueSubscriptionWhereInput = {| 
   AND?: Array< DimensionValueSubscriptionWhereInput > | DimensionValueSubscriptionWhereInput,
   OR?: Array< DimensionValueSubscriptionWhereInput > | DimensionValueSubscriptionWhereInput,
@@ -7365,6 +9590,12 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   web?: WebUpdateOneRequiredWithoutDimensionValuesInput
 |}
 
+ export type DimensionValueUpdateManyDataInput = {| 
+  name?: String,
+  unit?: DimensionValueUnit,
+  value?: Int
+|}
+
  export type DimensionValueUpdateManyMutationInput = {| 
   name?: String,
   unit?: DimensionValueUnit,
@@ -7377,7 +9608,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< DimensionValueWhereUniqueInput > | DimensionValueWhereUniqueInput,
   delete?: Array< DimensionValueWhereUniqueInput > | DimensionValueWhereUniqueInput,
   update?: Array< DimensionValueUpdateWithWhereUniqueWithoutWebInput > | DimensionValueUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< DimensionValueUpdateManyWithWhereNestedInput > | DimensionValueUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< DimensionValueScalarWhereInput > | DimensionValueScalarWhereInput,
   upsert?: Array< DimensionValueUpsertWithWhereUniqueWithoutWebInput > | DimensionValueUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type DimensionValueUpdateManyWithWhereNestedInput = {| 
+  where: DimensionValueScalarWhereInput,
+  data: DimensionValueUpdateManyDataInput
 |}
 
  export type DimensionValueUpdateOneInput = {| 
@@ -7463,14 +9701,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
@@ -7505,8 +9743,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateWithoutChildrenInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
@@ -7516,52 +9754,53 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateWithoutParentInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
  export type ElementCreateWithoutPropsInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput
+  component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput
 |}
 
  export type ElementCreateWithoutSharedInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
  export type ElementCreateWithoutWebInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
  export type ElementPropCreateInput = {| 
   name: String,
   type: PropType,
+  valueJson?: Json,
   value?: String,
   element: ElementCreateOneWithoutPropsInput,
   valueStyle?: StyleCreateOneWithoutPropsInput
@@ -7580,6 +9819,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropCreateWithoutElementInput = {| 
   name: String,
   type: PropType,
+  valueJson?: Json,
   value?: String,
   valueStyle?: StyleCreateOneWithoutPropsInput
 |}
@@ -7587,8 +9827,61 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropCreateWithoutValueStyleInput = {| 
   name: String,
   type: PropType,
+  valueJson?: Json,
   value?: String,
   element: ElementCreateOneWithoutPropsInput
+|}
+
+ export type ElementPropScalarWhereInput = {| 
+  AND?: Array< ElementPropScalarWhereInput > | ElementPropScalarWhereInput,
+  OR?: Array< ElementPropScalarWhereInput > | ElementPropScalarWhereInput,
+  NOT?: Array< ElementPropScalarWhereInput > | ElementPropScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  type?: PropType,
+  type_not?: PropType,
+  type_in?: Array< PropType > | PropType,
+  type_not_in?: Array< PropType > | PropType,
+  value?: String,
+  value_not?: String,
+  value_in?: Array< String > | String,
+  value_not_in?: Array< String > | String,
+  value_lt?: String,
+  value_lte?: String,
+  value_gt?: String,
+  value_gte?: String,
+  value_contains?: String,
+  value_not_contains?: String,
+  value_starts_with?: String,
+  value_not_starts_with?: String,
+  value_ends_with?: String,
+  value_not_ends_with?: String
 |}
 
  export type ElementPropSubscriptionWhereInput = {| 
@@ -7605,14 +9898,23 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropUpdateInput = {| 
   name?: String,
   type?: PropType,
+  valueJson?: Json,
   value?: String,
   element?: ElementUpdateOneRequiredWithoutPropsInput,
   valueStyle?: StyleUpdateOneWithoutPropsInput
 |}
 
+ export type ElementPropUpdateManyDataInput = {| 
+  name?: String,
+  type?: PropType,
+  valueJson?: Json,
+  value?: String
+|}
+
  export type ElementPropUpdateManyMutationInput = {| 
   name?: String,
   type?: PropType,
+  valueJson?: Json,
   value?: String
 |}
 
@@ -7622,6 +9924,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   delete?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   update?: Array< ElementPropUpdateWithWhereUniqueWithoutElementInput > | ElementPropUpdateWithWhereUniqueWithoutElementInput,
+  updateMany?: Array< ElementPropUpdateManyWithWhereNestedInput > | ElementPropUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ElementPropScalarWhereInput > | ElementPropScalarWhereInput,
   upsert?: Array< ElementPropUpsertWithWhereUniqueWithoutElementInput > | ElementPropUpsertWithWhereUniqueWithoutElementInput
 |}
 
@@ -7631,12 +9935,20 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   delete?: Array< ElementPropWhereUniqueInput > | ElementPropWhereUniqueInput,
   update?: Array< ElementPropUpdateWithWhereUniqueWithoutValueStyleInput > | ElementPropUpdateWithWhereUniqueWithoutValueStyleInput,
+  updateMany?: Array< ElementPropUpdateManyWithWhereNestedInput > | ElementPropUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ElementPropScalarWhereInput > | ElementPropScalarWhereInput,
   upsert?: Array< ElementPropUpsertWithWhereUniqueWithoutValueStyleInput > | ElementPropUpsertWithWhereUniqueWithoutValueStyleInput
+|}
+
+ export type ElementPropUpdateManyWithWhereNestedInput = {| 
+  where: ElementPropScalarWhereInput,
+  data: ElementPropUpdateManyDataInput
 |}
 
  export type ElementPropUpdateWithoutElementDataInput = {| 
   name?: String,
   type?: PropType,
+  valueJson?: Json,
   value?: String,
   valueStyle?: StyleUpdateOneWithoutPropsInput
 |}
@@ -7644,6 +9956,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropUpdateWithoutValueStyleDataInput = {| 
   name?: String,
   type?: PropType,
+  valueJson?: Json,
   value?: String,
   element?: ElementUpdateOneRequiredWithoutPropsInput
 |}
@@ -7728,6 +10041,38 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id?: ID_Input
 |}
 
+ export type ElementScalarWhereInput = {| 
+  AND?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
+  OR?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
+  NOT?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  index?: Int,
+  index_not?: Int,
+  index_in?: Array< Int > | Int,
+  index_not_in?: Array< Int > | Int,
+  index_lt?: Int,
+  index_lte?: Int,
+  index_gt?: Int,
+  index_gte?: Int,
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType
+|}
+
  export type ElementSubscriptionWhereInput = {| 
   AND?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
   OR?: Array< ElementSubscriptionWhereInput > | ElementSubscriptionWhereInput,
@@ -7740,32 +10085,38 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementUpdateDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
   parent?: ElementUpdateOneWithoutChildrenInput,
-  children?: ElementUpdateManyWithoutParentInput,
   shared?: SharedElementUpdateOneWithoutSharedByInput,
   component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput,
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
  export type ElementUpdateInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
   parent?: ElementUpdateOneWithoutChildrenInput,
-  children?: ElementUpdateManyWithoutParentInput,
   shared?: SharedElementUpdateOneWithoutSharedByInput,
   component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput,
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
- export type ElementUpdateManyMutationInput = {| 
-  type?: ElementType,
+ export type ElementUpdateManyDataInput = {| 
   index?: Int,
+  type?: ElementType,
+  textLeaves?: Json
+|}
+
+ export type ElementUpdateManyMutationInput = {| 
+  index?: Int,
+  type?: ElementType,
   textLeaves?: Json
 |}
 
@@ -7775,6 +10126,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   delete?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   update?: Array< ElementUpdateWithWhereUniqueWithoutParentInput > | ElementUpdateWithWhereUniqueWithoutParentInput,
+  updateMany?: Array< ElementUpdateManyWithWhereNestedInput > | ElementUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
   upsert?: Array< ElementUpsertWithWhereUniqueWithoutParentInput > | ElementUpsertWithWhereUniqueWithoutParentInput
 |}
 
@@ -7784,6 +10137,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   delete?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   update?: Array< ElementUpdateWithWhereUniqueWithoutSharedInput > | ElementUpdateWithWhereUniqueWithoutSharedInput,
+  updateMany?: Array< ElementUpdateManyWithWhereNestedInput > | ElementUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
   upsert?: Array< ElementUpsertWithWhereUniqueWithoutSharedInput > | ElementUpsertWithWhereUniqueWithoutSharedInput
 |}
 
@@ -7793,7 +10148,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   delete?: Array< ElementWhereUniqueInput > | ElementWhereUniqueInput,
   update?: Array< ElementUpdateWithWhereUniqueWithoutWebInput > | ElementUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< ElementUpdateManyWithWhereNestedInput > | ElementUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< ElementScalarWhereInput > | ElementScalarWhereInput,
   upsert?: Array< ElementUpsertWithWhereUniqueWithoutWebInput > | ElementUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type ElementUpdateManyWithWhereNestedInput = {| 
+  where: ElementScalarWhereInput,
+  data: ElementUpdateManyDataInput
 |}
 
  export type ElementUpdateOneRequiredInput = {| 
@@ -7820,8 +10182,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementUpdateWithoutChildrenDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
   parent?: ElementUpdateOneWithoutChildrenInput,
@@ -7831,46 +10193,46 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementUpdateWithoutParentDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
-  children?: ElementUpdateManyWithoutParentInput,
   shared?: SharedElementUpdateOneWithoutSharedByInput,
   component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput,
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
  export type ElementUpdateWithoutPropsDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
   parent?: ElementUpdateOneWithoutChildrenInput,
-  children?: ElementUpdateManyWithoutParentInput,
   shared?: SharedElementUpdateOneWithoutSharedByInput,
-  component?: ComponentUpdateOneRequiredInput
+  component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput
 |}
 
  export type ElementUpdateWithoutSharedDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web?: WebUpdateOneRequiredWithoutElementsInput,
   parent?: ElementUpdateOneWithoutChildrenInput,
-  children?: ElementUpdateManyWithoutParentInput,
   component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput,
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
  export type ElementUpdateWithoutWebDataInput = {| 
-  type?: ElementType,
   index?: Int,
+  type?: ElementType,
   textLeaves?: Json,
   parent?: ElementUpdateOneWithoutChildrenInput,
-  children?: ElementUpdateManyWithoutParentInput,
   shared?: SharedElementUpdateOneWithoutSharedByInput,
   component?: ComponentUpdateOneRequiredInput,
+  children?: ElementUpdateManyWithoutParentInput,
   props?: ElementPropUpdateManyWithoutElementInput
 |}
 
@@ -7940,10 +10302,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
   index?: Int,
   index_not?: Int,
   index_in?: Array< Int > | Int,
@@ -7952,13 +10310,17 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   index_lte?: Int,
   index_gt?: Int,
   index_gte?: Int,
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType,
   web?: WebWhereInput,
   parent?: ElementWhereInput,
+  shared?: SharedElementWhereInput,
+  component?: ComponentWhereInput,
   children_every?: ElementWhereInput,
   children_some?: ElementWhereInput,
   children_none?: ElementWhereInput,
-  shared?: SharedElementWhereInput,
-  component?: ComponentWhereInput,
   props_every?: ElementPropWhereInput,
   props_some?: ElementPropWhereInput,
   props_none?: ElementPropWhereInput
@@ -7986,6 +10348,56 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   element: ElementCreateOneInput
 |}
 
+ export type PageScalarWhereInput = {| 
+  AND?: Array< PageScalarWhereInput > | PageScalarWhereInput,
+  OR?: Array< PageScalarWhereInput > | PageScalarWhereInput,
+  NOT?: Array< PageScalarWhereInput > | PageScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  title?: String,
+  title_not?: String,
+  title_in?: Array< String > | String,
+  title_not_in?: Array< String > | String,
+  title_lt?: String,
+  title_lte?: String,
+  title_gt?: String,
+  title_gte?: String,
+  title_contains?: String,
+  title_not_contains?: String,
+  title_starts_with?: String,
+  title_not_starts_with?: String,
+  title_ends_with?: String,
+  title_not_ends_with?: String
+|}
+
  export type PageSubscriptionWhereInput = {| 
   AND?: Array< PageSubscriptionWhereInput > | PageSubscriptionWhereInput,
   OR?: Array< PageSubscriptionWhereInput > | PageSubscriptionWhereInput,
@@ -8004,6 +10416,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   element?: ElementUpdateOneRequiredInput
 |}
 
+ export type PageUpdateManyDataInput = {| 
+  title?: String
+|}
+
  export type PageUpdateManyMutationInput = {| 
   title?: String
 |}
@@ -8014,7 +10430,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
   delete?: Array< PageWhereUniqueInput > | PageWhereUniqueInput,
   update?: Array< PageUpdateWithWhereUniqueWithoutWebInput > | PageUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< PageUpdateManyWithWhereNestedInput > | PageUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< PageScalarWhereInput > | PageScalarWhereInput,
   upsert?: Array< PageUpsertWithWhereUniqueWithoutWebInput > | PageUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type PageUpdateManyWithWhereNestedInput = {| 
+  where: PageScalarWhereInput,
+  data: PageUpdateManyDataInput
 |}
 
  export type PageUpdateWithoutWebDataInput = {| 
@@ -8570,6 +10993,200 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueCreateOneInput
 |}
 
+ export type StyleScalarWhereInput = {| 
+  AND?: Array< StyleScalarWhereInput > | StyleScalarWhereInput,
+  OR?: Array< StyleScalarWhereInput > | StyleScalarWhereInput,
+  NOT?: Array< StyleScalarWhereInput > | StyleScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String,
+  isText?: Boolean,
+  isText_not?: Boolean,
+  display?: StyleDisplay,
+  display_not?: StyleDisplay,
+  display_in?: Array< StyleDisplay > | StyleDisplay,
+  display_not_in?: Array< StyleDisplay > | StyleDisplay,
+  position?: StylePosition,
+  position_not?: StylePosition,
+  position_in?: Array< StylePosition > | StylePosition,
+  position_not_in?: Array< StylePosition > | StylePosition,
+  flexDirection?: StyleFlexDirection,
+  flexDirection_not?: StyleFlexDirection,
+  flexDirection_in?: Array< StyleFlexDirection > | StyleFlexDirection,
+  flexDirection_not_in?: Array< StyleFlexDirection > | StyleFlexDirection,
+  flexWrap?: StyleFlexWrap,
+  flexWrap_not?: StyleFlexWrap,
+  flexWrap_in?: Array< StyleFlexWrap > | StyleFlexWrap,
+  flexWrap_not_in?: Array< StyleFlexWrap > | StyleFlexWrap,
+  justifyContent?: StyleJustifyContent,
+  justifyContent_not?: StyleJustifyContent,
+  justifyContent_in?: Array< StyleJustifyContent > | StyleJustifyContent,
+  justifyContent_not_in?: Array< StyleJustifyContent > | StyleJustifyContent,
+  alignItems?: StyleAlignItems,
+  alignItems_not?: StyleAlignItems,
+  alignItems_in?: Array< StyleAlignItems > | StyleAlignItems,
+  alignItems_not_in?: Array< StyleAlignItems > | StyleAlignItems,
+  alignSelf?: StyleAlignSelf,
+  alignSelf_not?: StyleAlignSelf,
+  alignSelf_in?: Array< StyleAlignSelf > | StyleAlignSelf,
+  alignSelf_not_in?: Array< StyleAlignSelf > | StyleAlignSelf,
+  alignContent?: StyleAlignContent,
+  alignContent_not?: StyleAlignContent,
+  alignContent_in?: Array< StyleAlignContent > | StyleAlignContent,
+  alignContent_not_in?: Array< StyleAlignContent > | StyleAlignContent,
+  overflow?: StyleOverflow,
+  overflow_not?: StyleOverflow,
+  overflow_in?: Array< StyleOverflow > | StyleOverflow,
+  overflow_not_in?: Array< StyleOverflow > | StyleOverflow,
+  flex?: Int,
+  flex_not?: Int,
+  flex_in?: Array< Int > | Int,
+  flex_not_in?: Array< Int > | Int,
+  flex_lt?: Int,
+  flex_lte?: Int,
+  flex_gt?: Int,
+  flex_gte?: Int,
+  flexGrow?: Int,
+  flexGrow_not?: Int,
+  flexGrow_in?: Array< Int > | Int,
+  flexGrow_not_in?: Array< Int > | Int,
+  flexGrow_lt?: Int,
+  flexGrow_lte?: Int,
+  flexGrow_gt?: Int,
+  flexGrow_gte?: Int,
+  flexShrink?: Int,
+  flexShrink_not?: Int,
+  flexShrink_in?: Array< Int > | Int,
+  flexShrink_not_in?: Array< Int > | Int,
+  flexShrink_lt?: Int,
+  flexShrink_lte?: Int,
+  flexShrink_gt?: Int,
+  flexShrink_gte?: Int,
+  flexBasis?: Int,
+  flexBasis_not?: Int,
+  flexBasis_in?: Array< Int > | Int,
+  flexBasis_not_in?: Array< Int > | Int,
+  flexBasis_lt?: Int,
+  flexBasis_lte?: Int,
+  flexBasis_gt?: Int,
+  flexBasis_gte?: Int,
+  zIndex?: Int,
+  zIndex_not?: Int,
+  zIndex_in?: Array< Int > | Int,
+  zIndex_not_in?: Array< Int > | Int,
+  zIndex_lt?: Int,
+  zIndex_lte?: Int,
+  zIndex_gt?: Int,
+  zIndex_gte?: Int,
+  direction?: StyleDirection,
+  direction_not?: StyleDirection,
+  direction_in?: Array< StyleDirection > | StyleDirection,
+  direction_not_in?: Array< StyleDirection > | StyleDirection,
+  borderStyle?: StyleBorderStyle,
+  borderStyle_not?: StyleBorderStyle,
+  borderStyle_in?: Array< StyleBorderStyle > | StyleBorderStyle,
+  borderStyle_not_in?: Array< StyleBorderStyle > | StyleBorderStyle,
+  opacity?: Int,
+  opacity_not?: Int,
+  opacity_in?: Array< Int > | Int,
+  opacity_not_in?: Array< Int > | Int,
+  opacity_lt?: Int,
+  opacity_lte?: Int,
+  opacity_gt?: Int,
+  opacity_gte?: Int,
+  fontFamily?: String,
+  fontFamily_not?: String,
+  fontFamily_in?: Array< String > | String,
+  fontFamily_not_in?: Array< String > | String,
+  fontFamily_lt?: String,
+  fontFamily_lte?: String,
+  fontFamily_gt?: String,
+  fontFamily_gte?: String,
+  fontFamily_contains?: String,
+  fontFamily_not_contains?: String,
+  fontFamily_starts_with?: String,
+  fontFamily_not_starts_with?: String,
+  fontFamily_ends_with?: String,
+  fontFamily_not_ends_with?: String,
+  fontSize?: Int,
+  fontSize_not?: Int,
+  fontSize_in?: Array< Int > | Int,
+  fontSize_not_in?: Array< Int > | Int,
+  fontSize_lt?: Int,
+  fontSize_lte?: Int,
+  fontSize_gt?: Int,
+  fontSize_gte?: Int,
+  fontStyle?: StyleFontStyle,
+  fontStyle_not?: StyleFontStyle,
+  fontStyle_in?: Array< StyleFontStyle > | StyleFontStyle,
+  fontStyle_not_in?: Array< StyleFontStyle > | StyleFontStyle,
+  fontWeight?: StyleFontWeight,
+  fontWeight_not?: StyleFontWeight,
+  fontWeight_in?: Array< StyleFontWeight > | StyleFontWeight,
+  fontWeight_not_in?: Array< StyleFontWeight > | StyleFontWeight,
+  fontVariant?: StyleFontVariant,
+  fontVariant_not?: StyleFontVariant,
+  fontVariant_in?: Array< StyleFontVariant > | StyleFontVariant,
+  fontVariant_not_in?: Array< StyleFontVariant > | StyleFontVariant,
+  letterSpacing?: Int,
+  letterSpacing_not?: Int,
+  letterSpacing_in?: Array< Int > | Int,
+  letterSpacing_not_in?: Array< Int > | Int,
+  letterSpacing_lt?: Int,
+  letterSpacing_lte?: Int,
+  letterSpacing_gt?: Int,
+  letterSpacing_gte?: Int,
+  lineHeight?: Int,
+  lineHeight_not?: Int,
+  lineHeight_in?: Array< Int > | Int,
+  lineHeight_not_in?: Array< Int > | Int,
+  lineHeight_lt?: Int,
+  lineHeight_lte?: Int,
+  lineHeight_gt?: Int,
+  lineHeight_gte?: Int,
+  textAlign?: StyleTextAlign,
+  textAlign_not?: StyleTextAlign,
+  textAlign_in?: Array< StyleTextAlign > | StyleTextAlign,
+  textAlign_not_in?: Array< StyleTextAlign > | StyleTextAlign,
+  textAlignVertical?: StyleTextAlignVertical,
+  textAlignVertical_not?: StyleTextAlignVertical,
+  textAlignVertical_in?: Array< StyleTextAlignVertical > | StyleTextAlignVertical,
+  textAlignVertical_not_in?: Array< StyleTextAlignVertical > | StyleTextAlignVertical,
+  textDecorationLine?: StyleTextDecorationLine,
+  textDecorationLine_not?: StyleTextDecorationLine,
+  textDecorationLine_in?: Array< StyleTextDecorationLine > | StyleTextDecorationLine,
+  textDecorationLine_not_in?: Array< StyleTextDecorationLine > | StyleTextDecorationLine,
+  textTransform?: StyleTextTransform,
+  textTransform_not?: StyleTextTransform,
+  textTransform_in?: Array< StyleTextTransform > | StyleTextTransform,
+  textTransform_not_in?: Array< StyleTextTransform > | StyleTextTransform
+|}
+
  export type StyleSpreadCreateInput = {| 
   index: Int,
   spreadStyle: StyleCreateOneWithoutSpreadStylesInput,
@@ -8584,6 +11201,34 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type StyleSpreadCreateWithoutSpreadStyleInput = {| 
   index: Int,
   style: StyleCreateOneInput
+|}
+
+ export type StyleSpreadScalarWhereInput = {| 
+  AND?: Array< StyleSpreadScalarWhereInput > | StyleSpreadScalarWhereInput,
+  OR?: Array< StyleSpreadScalarWhereInput > | StyleSpreadScalarWhereInput,
+  NOT?: Array< StyleSpreadScalarWhereInput > | StyleSpreadScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  index?: Int,
+  index_not?: Int,
+  index_in?: Array< Int > | Int,
+  index_not_in?: Array< Int > | Int,
+  index_lt?: Int,
+  index_lte?: Int,
+  index_gt?: Int,
+  index_gte?: Int
 |}
 
  export type StyleSpreadSubscriptionWhereInput = {| 
@@ -8603,6 +11248,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   style?: StyleUpdateOneRequiredInput
 |}
 
+ export type StyleSpreadUpdateManyDataInput = {| 
+  index?: Int
+|}
+
  export type StyleSpreadUpdateManyMutationInput = {| 
   index?: Int
 |}
@@ -8613,7 +11262,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< StyleSpreadWhereUniqueInput > | StyleSpreadWhereUniqueInput,
   delete?: Array< StyleSpreadWhereUniqueInput > | StyleSpreadWhereUniqueInput,
   update?: Array< StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput > | StyleSpreadUpdateWithWhereUniqueWithoutSpreadStyleInput,
+  updateMany?: Array< StyleSpreadUpdateManyWithWhereNestedInput > | StyleSpreadUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< StyleSpreadScalarWhereInput > | StyleSpreadScalarWhereInput,
   upsert?: Array< StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput > | StyleSpreadUpsertWithWhereUniqueWithoutSpreadStyleInput
+|}
+
+ export type StyleSpreadUpdateManyWithWhereNestedInput = {| 
+  where: StyleSpreadScalarWhereInput,
+  data: StyleSpreadUpdateManyDataInput
 |}
 
  export type StyleSpreadUpdateWithoutSpreadStyleDataInput = {| 
@@ -8859,6 +11515,39 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   color?: ColorValueUpdateOneInput
 |}
 
+ export type StyleUpdateManyDataInput = {| 
+  name?: String,
+  isText?: Boolean,
+  display?: StyleDisplay,
+  position?: StylePosition,
+  flexDirection?: StyleFlexDirection,
+  flexWrap?: StyleFlexWrap,
+  justifyContent?: StyleJustifyContent,
+  alignItems?: StyleAlignItems,
+  alignSelf?: StyleAlignSelf,
+  alignContent?: StyleAlignContent,
+  overflow?: StyleOverflow,
+  flex?: Int,
+  flexGrow?: Int,
+  flexShrink?: Int,
+  flexBasis?: Int,
+  zIndex?: Int,
+  direction?: StyleDirection,
+  borderStyle?: StyleBorderStyle,
+  opacity?: Int,
+  fontFamily?: String,
+  fontSize?: Int,
+  fontStyle?: StyleFontStyle,
+  fontWeight?: StyleFontWeight,
+  fontVariant?: StyleFontVariant,
+  letterSpacing?: Int,
+  lineHeight?: Int,
+  textAlign?: StyleTextAlign,
+  textAlignVertical?: StyleTextAlignVertical,
+  textDecorationLine?: StyleTextDecorationLine,
+  textTransform?: StyleTextTransform
+|}
+
  export type StyleUpdateManyMutationInput = {| 
   name?: String,
   isText?: Boolean,
@@ -8898,7 +11587,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< StyleWhereUniqueInput > | StyleWhereUniqueInput,
   delete?: Array< StyleWhereUniqueInput > | StyleWhereUniqueInput,
   update?: Array< StyleUpdateWithWhereUniqueWithoutWebInput > | StyleUpdateWithWhereUniqueWithoutWebInput,
+  updateMany?: Array< StyleUpdateManyWithWhereNestedInput > | StyleUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< StyleScalarWhereInput > | StyleScalarWhereInput,
   upsert?: Array< StyleUpsertWithWhereUniqueWithoutWebInput > | StyleUpsertWithWhereUniqueWithoutWebInput
+|}
+
+ export type StyleUpdateManyWithWhereNestedInput = {| 
+  where: StyleScalarWhereInput,
+  data: StyleUpdateManyDataInput
 |}
 
  export type StyleUpdateOneRequiredInput = {| 
@@ -9805,6 +12501,56 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueCreateManyWithoutWebInput
 |}
 
+ export type WebScalarWhereInput = {| 
+  AND?: Array< WebScalarWhereInput > | WebScalarWhereInput,
+  OR?: Array< WebScalarWhereInput > | WebScalarWhereInput,
+  NOT?: Array< WebScalarWhereInput > | WebScalarWhereInput,
+  id?: ID_Input,
+  id_not?: ID_Input,
+  id_in?: Array< ID_Input > | ID_Input,
+  id_not_in?: Array< ID_Input > | ID_Input,
+  id_lt?: ID_Input,
+  id_lte?: ID_Input,
+  id_gt?: ID_Input,
+  id_gte?: ID_Input,
+  id_contains?: ID_Input,
+  id_not_contains?: ID_Input,
+  id_starts_with?: ID_Input,
+  id_not_starts_with?: ID_Input,
+  id_ends_with?: ID_Input,
+  id_not_ends_with?: ID_Input,
+  createdAt?: DateTime,
+  createdAt_not?: DateTime,
+  createdAt_in?: Array< DateTime > | DateTime,
+  createdAt_not_in?: Array< DateTime > | DateTime,
+  createdAt_lt?: DateTime,
+  createdAt_lte?: DateTime,
+  createdAt_gt?: DateTime,
+  createdAt_gte?: DateTime,
+  updatedAt?: DateTime,
+  updatedAt_not?: DateTime,
+  updatedAt_in?: Array< DateTime > | DateTime,
+  updatedAt_not_in?: Array< DateTime > | DateTime,
+  updatedAt_lt?: DateTime,
+  updatedAt_lte?: DateTime,
+  updatedAt_gt?: DateTime,
+  updatedAt_gte?: DateTime,
+  name?: String,
+  name_not?: String,
+  name_in?: Array< String > | String,
+  name_not_in?: Array< String > | String,
+  name_lt?: String,
+  name_lte?: String,
+  name_gt?: String,
+  name_gte?: String,
+  name_contains?: String,
+  name_not_contains?: String,
+  name_starts_with?: String,
+  name_not_starts_with?: String,
+  name_ends_with?: String,
+  name_not_ends_with?: String
+|}
+
  export type WebSubscriptionWhereInput = {| 
   AND?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
   OR?: Array< WebSubscriptionWhereInput > | WebSubscriptionWhereInput,
@@ -9827,6 +12573,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   borderValues?: BorderValueUpdateManyWithoutWebInput
 |}
 
+ export type WebUpdateManyDataInput = {| 
+  name?: String
+|}
+
  export type WebUpdateManyMutationInput = {| 
   name?: String
 |}
@@ -9837,7 +12587,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   disconnect?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
   delete?: Array< WebWhereUniqueInput > | WebWhereUniqueInput,
   update?: Array< WebUpdateWithWhereUniqueWithoutCreatorInput > | WebUpdateWithWhereUniqueWithoutCreatorInput,
+  updateMany?: Array< WebUpdateManyWithWhereNestedInput > | WebUpdateManyWithWhereNestedInput,
+  deleteMany?: Array< WebScalarWhereInput > | WebScalarWhereInput,
   upsert?: Array< WebUpsertWithWhereUniqueWithoutCreatorInput > | WebUpsertWithWhereUniqueWithoutCreatorInput
+|}
+
+ export type WebUpdateManyWithWhereNestedInput = {| 
+  where: WebScalarWhereInput,
+  data: WebUpdateManyDataInput
 |}
 
  export type WebUpdateOneRequiredWithoutBorderValuesInput = {| 
@@ -10221,6 +12978,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type Component = {| ...Node,
  
    id: ID_Output,
+   type: ComponentType,
    name: String,
    creator: User,
    props?: ComponentProp[],
@@ -10247,6 +13005,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type ComponentPreviousValues = {| 
    id: ID_Output,
+   type: ComponentType,
    name: String,
 |}
 
@@ -10342,15 +13101,15 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type Element = {| ...Node,
  
    id: ID_Output,
-   type: ElementType,
    index: Int,
    web: Web,
    parent?: Element,
-   textLeaves?: Json,
-   children?: Element[],
+   type: ElementType,
    shared?: SharedElement,
    component: Component,
+   children?: Element[],
    props?: ElementProp[],
+   textLeaves?: Json,
 |}
 
 /*
@@ -10374,8 +13133,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 
  export type ElementPreviousValues = {| 
    id: ID_Output,
-   type: ElementType,
    index: Int,
+   type: ElementType,
    textLeaves?: Json,
 |}
 
@@ -10386,6 +13145,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    name: String,
    type: PropType,
    valueStyle?: Style,
+   valueJson?: Json,
    value?: String,
 |}
 
@@ -10412,6 +13172,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    id: ID_Output,
    name: String,
    type: PropType,
+   valueJson?: Json,
    value?: String,
 |}
 

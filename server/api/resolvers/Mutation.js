@@ -246,7 +246,6 @@ const Mutation: MutationType = {
               ],
             },
             index: 0,
-            type: 'BLOCK',
             children: {
               create: [
                 {
@@ -262,7 +261,6 @@ const Mutation: MutationType = {
                     ],
                   },
                   index: 0,
-                  type: 'BLOCK',
                   children: {
                     create: [
                       {
@@ -278,14 +276,13 @@ const Mutation: MutationType = {
                           ],
                         },
                         index: 0,
-                        type: 'BLOCK',
                         children: {
                           create: [
                             {
                               web: { connect: { id: web.id } },
                               component: { connect: { id: text.id } },
                               index: 0,
-                              type: 'TEXT',
+                              type: 'TEXT_NODE',
                               // $FlowFixMe JSON expects string for some reason.
                               textLeaves: [{ text: 'Title' }],
                             },
@@ -305,14 +302,13 @@ const Mutation: MutationType = {
                           ],
                         },
                         index: 1,
-                        type: 'BLOCK',
                         children: {
                           create: [
                             {
                               web: { connect: { id: web.id } },
                               component: { connect: { id: text.id } },
                               index: 0,
-                              type: 'TEXT',
+                              type: 'TEXT_NODE',
                               // $FlowFixMe JSON expects string for some reason.
                               textLeaves: [{ text: 'Paragraph.' }],
                             },

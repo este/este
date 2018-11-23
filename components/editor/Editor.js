@@ -48,35 +48,46 @@ function arrayOfItemsWithIdToObject<T: { +id: string }>(
   }, {});
 }
 
-function elementsToSlateValue(pageElementId, elementsArray) {
+function elementsToSlateValue(pageElementId, elementsArray, componentsById) {
   const elements = arrayOfItemsWithIdToObject(elementsArray);
 
   function walk(id) {
     const element = elements[id];
-    if (element.type === 'TEXT')
-      return {
-        object: 'text',
-        leaves: element.textLeaves,
-      };
-    // Flow type refinement.
-    const { children, props } = element;
-    if (children == null || props == null) throw Error('Should not be null.');
-    const nodes = children
-      .map(child => elements[child.id])
-      .sort((a, b) => a.index - b.index)
-      .map(child => walk(child.id));
-    const objectProps = props.reduce((prev, prop) => {
-      return { ...prev, [prop.name]: prop };
-    }, {});
-    return {
-      object: element.type.toLowerCase(),
-      type: element.component.id,
-      nodes,
-      data: {
-        id,
-        props: objectProps,
-      },
-    };
+    switch (element.type) {
+      case 'SHARED':
+        throw Error('Not implemented yet');
+      case 'COMPONENT': {
+        const { children, props } = element;
+        // Flow type refinement.
+        if (children == null || props == null)
+          throw Error('Should not be null.');
+        const nodes = children
+          .map(child => elements[child.id])
+          .sort((a, b) => a.index - b.index)
+          .map(child => walk(child.id));
+        const objectProps = props.reduce((prev, prop) => {
+          return { ...prev, [prop.name]: prop };
+        }, {});
+        return {
+          object: componentsById[element.component.id].type.toLowerCase(),
+          type: element.component.id,
+          nodes,
+          data: {
+            id,
+            props: objectProps,
+          },
+        };
+      }
+      case 'TEXT_NODE': {
+        return {
+          object: 'text',
+          leaves: element.textLeaves,
+        };
+      }
+      default:
+        // eslint-disable-next-line no-unused-expressions
+        (element.type: empty);
+    }
   }
 
   const node = walk(pageElementId);
@@ -322,6 +333,7 @@ function stylesToStyleSheet(
 }
 
 // Proposal for Commands.setBlocksAtRange to allow set per block properties.
+// https://github.com/ianstormtaylor/slate/issues/2447
 function setBlocksAtRangeWithCallback(editor, range, callback) {
   const { value } = editor;
   const { document } = value;
@@ -385,19 +397,23 @@ function EditorWithData({
   components,
 }) {
   const editorRef = useRef(null);
+  const componentsById = useMemo(() => arrayOfItemsWithIdToObject(components), [
+    components,
+  ]);
   // We could leverage Relay for lazy resolving via store and client scheme.
   // TODO: Move state to Relay store once Relay 2 is stable.
   const [value, setValue] = useState(() => {
-    const model = elementsToSlateValue(page.element.id, elements);
+    const model = elementsToSlateValue(
+      page.element.id,
+      elements,
+      componentsById,
+    );
     // For SSR.
     KeyUtils.resetGenerator();
     return Value.fromJSON(model);
   });
   const stylesById = useMemo(() => arrayOfItemsWithIdToObject(styles), [
     styles,
-  ]);
-  const componentsById = useMemo(() => arrayOfItemsWithIdToObject(components), [
-    components,
   ]);
   const styleSheet = useMemo(
     () =>
@@ -575,7 +591,8 @@ function EditorWithData({
     const { node, attributes, children } = props;
     const component = componentsById[node.type];
     // It's up to component to handle its props.
-    // TODO: Redesign. Probably inject dynamic component.
+    // TODO: Musim mit nejakou component registry.
+    // Do te se koukam, co to dela.
     switch (component.name) {
       case 'View': {
         const componentProps = resolveComponentProps(node.data);
@@ -601,6 +618,7 @@ function EditorWithData({
   function renderMark(props, editor, next) {
     const { children, mark, attributes } = props;
     const type: MarkType = mark.type;
+    // Only bold and italic are supported right now.
     switch (type) {
       case 'bold':
         return (
@@ -693,6 +711,7 @@ export default createFragmentContainer(
       components {
         id
         name
+        type
         props {
           id
           name

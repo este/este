@@ -1,19 +1,4 @@
-# Prisma does not support interfaces nor union types yet, so we emulate it.
-# Soon: https://github.com/prisma/prisma/issues/3408
-# https://www.prisma.io/docs/data-model-and-migrations/data-model-knul/#more-sdl-features
-# TODO: Use custom scalars instead of Int and Float, e.g. 0-256, 0-1, etc.
-# As for tree structure, we use parent/children because it's the most
-# straightforward approach for now. We don't need recursive queries because we
-# can fetch all related objects from App and resolve them in the client.
-# Parents and children are enforced with referential integrity. In the future,
-# I'd like to try closure tables, but Prisma doesn't support composite keys yet.
-# So, it can be improved ofc but it's good enough for now.
-# TODO: Detect parent/child circular references. Maybe closure tables prevent them.
-# https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
-# https://coderwall.com/p/lixing/closure-tables-for-browsing-trees-in-sql
-
 type User {
-  # Props order: ID, own IDs, foreign IDs, scalars.
   id: ID! @unique
   webs: [Web!]!
   createdAt: DateTime!
@@ -51,30 +36,38 @@ type Page {
   title: String!
 }
 
+# We are using parent / children, but in the future closure tables seem to be
+# the best. Also, union type could replace element type workaround. For props,
+# composite key should ensure unique per element prop name.
+# Soon: https://github.com/prisma/prisma/issues/3408
+# https://datubaze.files.wordpress.com/2016/03/celkos-trees-and-hierarchies-in-sql_2004.pdf
+# https://coderwall.com/p/lixing/closure-tables-for-browsing-trees-in-sql
 type Element {
   id: ID! @unique
-  type: ElementType!
   index: Int!
   web: Web! @relation(name: "WebElements")
   parent: Element @relation(name: "ElementTree")
-  # if type == 'TEXT'
-  # Slate text model with bold and italic marks only. Example:
-  # [{ text: 'Hello ' }, { text: 'World', marks: [{ type: 'bold' }] }];
-  textLeaves: Json
-  # else
-  children: [Element!]! @relation(name: "ElementTree")
-  # children or shared, not both.
+  type: ElementType! @default(value: "COMPONENT")
+  # type SHARED
   shared: SharedElement @relation(name: "ElementShared")
-  # Will get shared || children as children prop.
+  # type COMPONENT
   component: Component! @relation(name: "ElementComponents")
+  children: [Element!]! @relation(name: "ElementTree")
   props: [ElementProp!]! @relation(name: "ElementProps", onDelete: CASCADE)
+  # type TEXT_NODE
+  # Only bold and italic is supported right now. Example:
+  # [{ text: 'Hello ' }, { text: 'World', marks: [{ type: 'bold' }] }];
+  # Note TEXT_NODE is not Text component. In the future, it should be just a
+  # text string and Slate marks should be components. But it means, we will have
+  # to redo all logic related to nesting, overlapping, etc.
+  # https://docs.slatejs.org/guides/data-model#marks
+  textLeaves: Json
 }
 
-# Slate model
 enum ElementType {
-  BLOCK
-  INLINE
-  TEXT
+  SHARED
+  COMPONENT
+  TEXT_NODE
 }
 
 type SharedElement {
@@ -86,9 +79,15 @@ type SharedElement {
 
 type Component {
   id: ID! @unique
+  type: ComponentType! @default(value: "BLOCK")
   name: String! @unique
   creator: User! @relation(name: "UserComponents")
   props: [ComponentProp!]! @relation(name: "ComponentProps")
+}
+
+enum ComponentType {
+  BLOCK
+  INLINE
 }
 
 type ComponentProp {
@@ -104,6 +103,8 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
+  JSON
+  # TEXT_CONTENT
 }
 
 # We will have proper indexes to ensure unique name for element prop soon.
@@ -114,9 +115,11 @@ type ElementProp {
   name: String!
   type: PropType!
   valueStyle: Style @relation(name: "StyleProp")
+  valueJson: Json
   value: String
 }
 
+# TODO: Should be union of View and Text style, imho.
 # https://github.com/facebook/react-native/blob/master/Libraries/StyleSheet/StyleSheetTypes.js
 type Style {
   id: ID! @unique

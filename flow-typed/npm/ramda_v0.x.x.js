@@ -1,5 +1,5 @@
-// flow-typed signature: 3723ceb7814b2a59890d2089277c3330
-// flow-typed version: 68683d93f0/ramda_v0.x.x/flow_>=v0.82.x
+// flow-typed signature: 8fe1b4ff3b03e2c0d3828f44d8584462
+// flow-typed version: f76e4b9985/ramda_v0.x.x/flow_>=v0.82.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -594,8 +594,11 @@ declare module ramda {
   declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
   declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
 
-  declare function concat<V, T: Array<V> | string>(x: T, y: T): T;
-  declare function concat<V, T: Array<V> | string>(x: T): (y: T) => T;
+  declare function concat<V, T: Array<V>>(x: T, y: T): T;
+  declare function concat<V, T: Array<V>>(x: T): (y: T) => T;
+
+  declare function concat(x: string, y: string): string;
+  declare function concat(x: string): (y: string) => string;
 
   declare function contains<E, T: Array<E> | string>(x: E, xs: T): boolean;
   declare function contains<E, T: Array<E> | string>(
@@ -1424,7 +1427,7 @@ declare module ramda {
   declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
     (<A, B>(a: A) => (b: B) => B & A);
 
-  declare type MergeWith = (<A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
+  declare type MergeWith = (<A, B, T: $Values<A> & $Values<B>>(
     fn: (a: T, b: T) => T,
     a: A,
     b: B
@@ -1441,22 +1444,22 @@ declare module ramda {
     ) => (b: B) => A & B);
 
   declare type MergeWithKey = (<
-    S: string,
-    A: { [k: string]: mixed },
-    B: { [k: string]: mixed },
-    T
+    A,
+    B,
+    S: $Keys<A> & $Keys<B>,
+    T: $ElementType<A, $Keys<A>> & $ElementType<B, $Keys<B>>,
   >(
     fn: (s: S, a: T, b: T) => T,
     a: A,
     b: B
   ) => A & B) &
-    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A, b: B) => A & B) &
-    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A) => (b: B) => A & B) &
-    (<S: string, A: { [k: string]: mixed }, B: { [k: string]: mixed }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
       a: A,
     ) => (b: B) => A & B);

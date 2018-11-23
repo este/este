@@ -491,12 +491,14 @@ input ColorValueWhereUniqueInput {
 
 type Component implements Node {
   id: ID!
+  type: ComponentType!
   name: String!
   creator: User!
   props(where: ComponentPropWhereInput, orderBy: ComponentPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ComponentProp!]
 }
 
 input ComponentCreateInput {
+  type: ComponentType
   name: String!
   creator: UserCreateOneWithoutComponentsInput!
   props: ComponentPropCreateManyWithoutComponentInput
@@ -513,6 +515,7 @@ input ComponentCreateOneInput {
 }
 
 input ComponentCreateWithoutCreatorInput {
+  type: ComponentType
   name: String!
   props: ComponentPropCreateManyWithoutComponentInput
 }
@@ -520,6 +523,8 @@ input ComponentCreateWithoutCreatorInput {
 enum ComponentOrderByInput {
   id_ASC
   id_DESC
+  type_ASC
+  type_DESC
   name_ASC
   name_DESC
   updatedAt_ASC
@@ -664,6 +669,11 @@ input ComponentPropWhereUniqueInput {
   id: ID
 }
 
+enum ComponentType {
+  BLOCK
+  INLINE
+}
+
 input ComponentWhereInput {
   """Logical AND on all given filters."""
   AND: [ComponentWhereInput!]
@@ -713,6 +723,16 @@ input ComponentWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  type: ComponentType
+
+  """All values that are not equal to given value."""
+  type_not: ComponentType
+
+  """All values that are contained in given list."""
+  type_in: [ComponentType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ComponentType!]
   name: String
 
   """All values that are not equal to given value."""
@@ -979,26 +999,26 @@ input DimensionValueWhereUniqueInput {
 
 type Element implements Node {
   id: ID!
-  type: ElementType!
   index: Int!
   web: Web!
   parent: Element
-  textLeaves: Json
-  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
+  type: ElementType!
   shared: SharedElement
   component: Component!
+  children(where: ElementWhereInput, orderBy: ElementOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Element!]
   props(where: ElementPropWhereInput, orderBy: ElementPropOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ElementProp!]
+  textLeaves: Json
 }
 
 input ElementCreateInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
@@ -1028,8 +1048,8 @@ input ElementCreateOneWithoutPropsInput {
 }
 
 input ElementCreateWithoutChildrenInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
@@ -1039,45 +1059,45 @@ input ElementCreateWithoutChildrenInput {
 }
 
 input ElementCreateWithoutParentInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 input ElementCreateWithoutPropsInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   web: WebCreateOneWithoutElementsInput!
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
 }
 
 input ElementCreateWithoutWebInput {
-  type: ElementType!
   index: Int!
+  type: ElementType
   textLeaves: Json
   parent: ElementCreateOneWithoutChildrenInput
-  children: ElementCreateManyWithoutParentInput
   shared: SharedElementCreateOneWithoutSharedByInput
   component: ComponentCreateOneInput!
+  children: ElementCreateManyWithoutParentInput
   props: ElementPropCreateManyWithoutElementInput
 }
 
 enum ElementOrderByInput {
   id_ASC
   id_DESC
-  type_ASC
-  type_DESC
   index_ASC
   index_DESC
+  type_ASC
+  type_DESC
   textLeaves_ASC
   textLeaves_DESC
   updatedAt_ASC
@@ -1092,6 +1112,7 @@ type ElementProp implements Node {
   name: String!
   type: PropType!
   valueStyle: Style
+  valueJson: Json
   value: String
 }
 
@@ -1108,6 +1129,7 @@ input ElementPropCreateManyWithoutValueStyleInput {
 input ElementPropCreateWithoutElementInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   valueStyle: StyleCreateOneWithoutPropsInput
 }
@@ -1115,6 +1137,7 @@ input ElementPropCreateWithoutElementInput {
 input ElementPropCreateWithoutValueStyleInput {
   name: String!
   type: PropType!
+  valueJson: Json
   value: String
   element: ElementCreateOneWithoutPropsInput!
 }
@@ -1126,6 +1149,8 @@ enum ElementPropOrderByInput {
   name_DESC
   type_ASC
   type_DESC
+  valueJson_ASC
+  valueJson_DESC
   value_ASC
   value_DESC
   updatedAt_ASC
@@ -1282,9 +1307,9 @@ input ElementPropWhereUniqueInput {
 }
 
 enum ElementType {
-  BLOCK
-  INLINE
-  TEXT
+  SHARED
+  COMPONENT
+  TEXT_NODE
 }
 
 input ElementWhereInput {
@@ -1336,16 +1361,6 @@ input ElementWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  type: ElementType
-
-  """All values that are not equal to given value."""
-  type_not: ElementType
-
-  """All values that are contained in given list."""
-  type_in: [ElementType!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [ElementType!]
   index: Int
 
   """All values that are not equal to given value."""
@@ -1368,13 +1383,23 @@ input ElementWhereInput {
 
   """All values greater than or equal the given value."""
   index_gte: Int
+  type: ElementType
+
+  """All values that are not equal to given value."""
+  type_not: ElementType
+
+  """All values that are contained in given list."""
+  type_in: [ElementType!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [ElementType!]
   web: WebWhereInput
   parent: ElementWhereInput
+  shared: SharedElementWhereInput
+  component: ComponentWhereInput
   children_every: ElementWhereInput
   children_some: ElementWhereInput
   children_none: ElementWhereInput
-  shared: SharedElementWhereInput
-  component: ComponentWhereInput
   props_every: ElementPropWhereInput
   props_some: ElementPropWhereInput
   props_none: ElementPropWhereInput
@@ -1603,6 +1628,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
+  JSON
 }
 
 type Query {
@@ -3631,6 +3657,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ComponentOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'name_ASC'
     | 'name_DESC'
     | 'updatedAt_ASC'
@@ -3650,6 +3678,11 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'updatedAt_DESC'
     | 'createdAt_ASC'
     | 'createdAt_DESC'
+  
+
+ export type ComponentType =
+    | 'BLOCK'
+    | 'INLINE'
   
 
  export type DimensionValueOrderByInput =
@@ -3676,10 +3709,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementOrderByInput =
     | 'id_ASC'
     | 'id_DESC'
-    | 'type_ASC'
-    | 'type_DESC'
     | 'index_ASC'
     | 'index_DESC'
+    | 'type_ASC'
+    | 'type_DESC'
     | 'textLeaves_ASC'
     | 'textLeaves_DESC'
     | 'updatedAt_ASC'
@@ -3695,6 +3728,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'name_DESC'
     | 'type_ASC'
     | 'type_DESC'
+    | 'valueJson_ASC'
+    | 'valueJson_DESC'
     | 'value_ASC'
     | 'value_DESC'
     | 'updatedAt_ASC'
@@ -3704,9 +3739,9 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   
 
  export type ElementType =
-    | 'BLOCK'
-    | 'INLINE'
-    | 'TEXT'
+    | 'SHARED'
+    | 'COMPONENT'
+    | 'TEXT_NODE'
   
 
  export type EmailError =
@@ -3745,6 +3780,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRING'
     | 'VIEW_STYLE'
     | 'TEXT_STYLE'
+    | 'JSON'
   
 
  export type StyleAlignContent =
@@ -4145,6 +4181,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentCreateInput = {| 
+  type?: ComponentType,
   name: String,
   creator: UserCreateOneWithoutComponentsInput,
   props?: ComponentPropCreateManyWithoutComponentInput
@@ -4161,6 +4198,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ComponentCreateWithoutCreatorInput = {| 
+  type?: ComponentType,
   name: String,
   props?: ComponentPropCreateManyWithoutComponentInput
 |}
@@ -4236,6 +4274,10 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
+  type?: ComponentType,
+  type_not?: ComponentType,
+  type_in?: Array< ComponentType > | ComponentType,
+  type_not_in?: Array< ComponentType > | ComponentType,
   name?: String,
   name_not?: String,
   name_in?: Array< String > | String,
@@ -4349,14 +4391,14 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
@@ -4386,8 +4428,8 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateWithoutChildrenInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
@@ -4397,35 +4439,35 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
 |}
 
  export type ElementCreateWithoutParentInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
  export type ElementCreateWithoutPropsInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   web: WebCreateOneWithoutElementsInput,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
-  component: ComponentCreateOneInput
+  component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput
 |}
 
  export type ElementCreateWithoutWebInput = {| 
-  type: ElementType,
   index: Int,
+  type?: ElementType,
   textLeaves?: Json,
   parent?: ElementCreateOneWithoutChildrenInput,
-  children?: ElementCreateManyWithoutParentInput,
   shared?: SharedElementCreateOneWithoutSharedByInput,
   component: ComponentCreateOneInput,
+  children?: ElementCreateManyWithoutParentInput,
   props?: ElementPropCreateManyWithoutElementInput
 |}
 
@@ -4442,6 +4484,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropCreateWithoutElementInput = {| 
   name: String,
   type: PropType,
+  valueJson?: Json,
   value?: String,
   valueStyle?: StyleCreateOneWithoutPropsInput
 |}
@@ -4449,6 +4492,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type ElementPropCreateWithoutValueStyleInput = {| 
   name: String,
   type: PropType,
+  valueJson?: Json,
   value?: String,
   element: ElementCreateOneWithoutPropsInput
 |}
@@ -4529,10 +4573,6 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   id_not_starts_with?: ID_Input,
   id_ends_with?: ID_Input,
   id_not_ends_with?: ID_Input,
-  type?: ElementType,
-  type_not?: ElementType,
-  type_in?: Array< ElementType > | ElementType,
-  type_not_in?: Array< ElementType > | ElementType,
   index?: Int,
   index_not?: Int,
   index_in?: Array< Int > | Int,
@@ -4541,13 +4581,17 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
   index_lte?: Int,
   index_gt?: Int,
   index_gte?: Int,
+  type?: ElementType,
+  type_not?: ElementType,
+  type_in?: Array< ElementType > | ElementType,
+  type_not_in?: Array< ElementType > | ElementType,
   web?: WebWhereInput,
   parent?: ElementWhereInput,
+  shared?: SharedElementWhereInput,
+  component?: ComponentWhereInput,
   children_every?: ElementWhereInput,
   children_some?: ElementWhereInput,
   children_none?: ElementWhereInput,
-  shared?: SharedElementWhereInput,
-  component?: ComponentWhereInput,
   props_every?: ElementPropWhereInput,
   props_some?: ElementPropWhereInput,
   props_none?: ElementPropWhereInput
@@ -5617,6 +5661,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type Component = {| ...Node,
  
    id: ID_Output,
+   type: ComponentType,
    name: String,
    creator: User,
    props?: ComponentProp[],
@@ -5660,15 +5705,15 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
  export type Element = {| ...Node,
  
    id: ID_Output,
-   type: ElementType,
    index: Int,
    web: Web,
    parent?: Element,
-   textLeaves?: Json,
-   children?: Element[],
+   type: ElementType,
    shared?: SharedElement,
    component: Component,
+   children?: Element[],
    props?: ElementProp[],
+   textLeaves?: Json,
 |}
 
  export type ElementProp = {| ...Node,
@@ -5678,6 +5723,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
    name: String,
    type: PropType,
    valueStyle?: Style,
+   valueJson?: Json,
    value?: String,
 |}
 

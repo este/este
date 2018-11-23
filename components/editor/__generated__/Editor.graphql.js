@@ -9,9 +9,10 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 export type BorderValueUnit = "POINT";
+export type ComponentType = "BLOCK" | "INLINE";
 export type DimensionValueUnit = "KEYWORD" | "PERCENTAGE" | "POINT";
-export type ElementType = "BLOCK" | "INLINE" | "TEXT";
-export type PropType = "BOOLEAN" | "NUMBER" | "STRING" | "TEXT_STYLE" | "VIEW_STYLE";
+export type ElementType = "COMPONENT" | "SHARED" | "TEXT_NODE";
+export type PropType = "BOOLEAN" | "JSON" | "NUMBER" | "STRING" | "TEXT_STYLE" | "VIEW_STYLE";
 export type StyleAlignContent = "CENTER" | "FLEX_END" | "FLEX_START" | "SPACE_AROUND" | "SPACE_BETWEEN" | "STRETCH";
 export type StyleAlignItems = "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";
 export type StyleAlignSelf = "AUTO" | "BASELINE" | "CENTER" | "FLEX_END" | "FLEX_START" | "STRETCH";
@@ -36,6 +37,7 @@ export type Editor = {|
   +components: $ReadOnlyArray<{|
     +id: string,
     +name: string,
+    +type: ComponentType,
     +props: ?$ReadOnlyArray<{|
       +id: string,
       +name: string,
@@ -378,6 +380,7 @@ return {
       "selections": [
         v0,
         v1,
+        v2,
         {
           "kind": "LinkedField",
           "alias": null,
@@ -1367,5 +1370,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '97667bed1fbc181f653dcff82409727c';
+(node/*: any*/).hash = 'b1c60d0a3dc30433a4d21ae392b879ae';
 module.exports = node;
