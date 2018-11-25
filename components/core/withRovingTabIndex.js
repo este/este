@@ -36,7 +36,7 @@ const withRovingTabIndex = <Props, Component: React.ComponentType<Props>>(
       const node = this.node;
       if (node == null) return;
       node.removeEventListener('focusin', this.handleFocusin);
-      node.addEventListener('keydown', this.handleKeydown);
+      node.removeEventListener('keydown', this.handleKeydown);
     }
 
     setTabIndexes(focused) {
