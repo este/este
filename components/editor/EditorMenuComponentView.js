@@ -1,5 +1,5 @@
 // @flow
-import React, { type Node } from 'react';
+import React, { type Node, useState } from 'react';
 import useTheme from '../../hooks/useTheme';
 import { TextInput } from 'react-native';
 import { useEscapeFix } from './EditorMenu';
@@ -16,6 +16,8 @@ export default function ComponentView({
 |}): Node {
   const theme = useTheme();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
+  const [state, setState] = useState({});
+
   const component = components.find(c => c.id === componentId);
   if (component == null || component.props == null) return null;
   let textInputFocused = false;
@@ -35,11 +37,9 @@ export default function ComponentView({
       case 'URL': {
         let autoFocus = false;
         if (!textInputFocused) {
-          autoFocus = true;
           textInputFocused = true;
+          autoFocus = true;
         }
-        // onChangeText={this.handleTextInputChangeText}
-        // value={text}
         return (
           <TextInput
             onFocus={escapeFixHandleFocus}
@@ -50,11 +50,12 @@ export default function ComponentView({
               theme.styles.editorMenuTextInput,
               theme.typography.fontSizeWithLineHeight(0),
             ]}
+            onChangeText={text => setState({ ...state, [prop.name]: text })}
+            value={state[prop.name] || ''}
             // onSubmitEditing={() => {
             //   console.log('sdf');
             // }}
             placeholder="example.com"
-            value="b"
             blurOnSubmit={false}
             key={prop.id}
           />
