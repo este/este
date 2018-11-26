@@ -1,6 +1,6 @@
 // @flow
 /* eslint-env browser */
-import React, { useState, useEffect, useCallback, type Node } from 'react';
+import React, { useState, useEffect, useRef, type Node } from 'react';
 import { View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
 import Portal from '../core/Portal';
@@ -14,6 +14,8 @@ import {
 import type { ComponentType } from './__generated__/Editor.graphql';
 import { FormattedMessage } from 'react-intl';
 import EditorMenuComponentView from './EditorMenuComponentView';
+import useEscapeFix from '../../hooks/useEscapeFix';
+import getFocusableNodes from '../../client/getFocusableNodes';
 
 function EditorMenuButton({
   children,
@@ -24,7 +26,7 @@ function EditorMenuButton({
 }: {|
   children: Node,
   isActive?: boolean,
-  onPress: () => void,
+  onPress: (event: Event) => void,
   onFocus?: () => void,
   onBlur?: () => void,
 |}) {
@@ -33,7 +35,7 @@ function EditorMenuButton({
     <Button
       onPressIn={event => {
         event.preventDefault();
-        onPress();
+        onPress(event);
       }}
       color={isActive === true ? 'success' : 'gray'}
       bold
@@ -51,17 +53,26 @@ function EditorMenuMarkButton({
   label,
   activeMarks,
   onPress,
+  onFocus,
+  onBlur,
 }: {|
   type: MarkType,
   label: string,
   activeMarks: Object,
   onPress: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
 |}) {
   function isMarkType(markType) {
     return activeMarks.some(mark => mark.type === markType);
   }
   return (
-    <EditorMenuButton isActive={isMarkType(type)} onPress={onPress}>
+    <EditorMenuButton
+      isActive={isMarkType(type)}
+      onPress={onPress}
+      onFocus={onFocus}
+      onBlur={onBlur}
+    >
       {label}
     </EditorMenuButton>
   );
@@ -69,9 +80,17 @@ function EditorMenuMarkButton({
 
 function DefaultView({ activeMarks, setMenuView, components, selection }) {
   const dispatch = useEditorDispatch();
+  const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(() => {
+    dispatch({ type: 'moveToAnchor' });
+  });
   const inlineComponents = components.filter(
     component => component.type === ('INLINE': ComponentType),
   );
+
+  function handleStylesPress() {
+    setMenuView({ type: 'styles' });
+  }
+
   return (
     <>
       <EditorMenuMarkButton
@@ -79,12 +98,16 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
         label="b"
         activeMarks={activeMarks}
         onPress={() => dispatch({ type: 'toggleMark', mark: 'bold' })}
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
       />
       <EditorMenuMarkButton
         type="italic"
         label="i"
         activeMarks={activeMarks}
         onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
       />
       {inlineComponents.map(component => {
         return (
@@ -96,33 +119,23 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
                 selectionFocus: selection.focus,
               })
             }
+            onFocus={escapeFixHandleFocus}
+            onBlur={escapeFixHandleBlur}
             key={component.id}
           >
             {component.name.toLowerCase()}
           </EditorMenuButton>
         );
       })}
-      <EditorMenuButton onPress={() => setMenuView({ type: 'styles' })}>
+      <EditorMenuButton
+        onPress={handleStylesPress}
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
+      >
         <FormattedMessage defaultMessage="styles" id="editorMenu.styles" />
       </EditorMenuButton>
     </>
   );
-}
-
-// Workaround for https://github.com/necolas/react-native-web/issues/1189
-// TODO: Remove it, ensure correct tab and escape keys behavior.
-// Even EditorMenu should focus back to text on Escape.
-export function useEscapeFix(onClose: () => void): [() => void, () => void] {
-  const handleKeydown = useCallback((event: any) => {
-    if (event.key === 'Escape') onClose();
-  }, []);
-  const onFocus = useCallback((event: any) => {
-    event.currentTarget.addEventListener('keydown', handleKeydown);
-  }, []);
-  const onBlur = useCallback((event: any) => {
-    event.currentTarget.removeEventListener('keydown', handleKeydown);
-  }, []);
-  return [onFocus, onBlur];
 }
 
 function StylesView({ styleSheet, blocks, onClose }) {
@@ -175,6 +188,7 @@ export default function EditorMenu({
   const theme = useTheme();
   const [position, setPosition] = useState<?Position>(null);
   const [menuView, setMenuView] = useState<MenuView>({ type: 'default' });
+  const viewRef = useRef(null);
 
   useEffect(
     () => {
@@ -205,6 +219,13 @@ export default function EditorMenu({
 
   if (position == null) return null;
 
+  function handleClose() {
+    setMenuView({ type: 'default' });
+    if (!viewRef.current) return;
+    const first = getFocusableNodes(viewRef.current)[0];
+    if (first) first.focus();
+  }
+
   function renderMenuView() {
     switch (menuView.type) {
       case 'default':
@@ -221,7 +242,7 @@ export default function EditorMenu({
           <StylesView
             styleSheet={styleSheet}
             blocks={value.blocks}
-            onClose={() => setMenuView({ type: 'default' })}
+            onClose={handleClose}
           />
         );
       case 'component': {
@@ -229,7 +250,7 @@ export default function EditorMenu({
           <EditorMenuComponentView
             componentId={menuView.componentId}
             components={components}
-            onClose={() => setMenuView({ type: 'default' })}
+            onClose={handleClose}
           />
         );
       }
@@ -242,7 +263,7 @@ export default function EditorMenu({
 
   return (
     <Portal>
-      <View style={[theme.styles.editorMenu, position]}>
+      <View ref={viewRef} style={[theme.styles.editorMenu, position]}>
         {renderMenuView()}
       </View>
     </Portal>

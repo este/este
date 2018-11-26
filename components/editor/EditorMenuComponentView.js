@@ -2,7 +2,7 @@
 import React, { type Node, useState } from 'react';
 import useTheme from '../../hooks/useTheme';
 import { TextInput } from 'react-native';
-import { useEscapeFix } from './EditorMenu';
+import useEscapeFix from '../../hooks/useEscapeFix';
 import { type Components } from './Editor';
 
 export default function ComponentView({
@@ -16,7 +16,7 @@ export default function ComponentView({
 |}): Node {
   const theme = useTheme();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
-  const [state, setState] = useState({});
+  const [state, setState] = useState<{ [string]: string }>({});
 
   const component = components.find(c => c.id === componentId);
   if (component == null || component.props == null) return null;

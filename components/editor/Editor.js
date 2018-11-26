@@ -19,7 +19,8 @@ export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
   | {| type: 'toggleMark', mark: MarkType |}
-  | {| type: 'setTextStyle', styleId: string |};
+  | {| type: 'setTextStyle', styleId: string |}
+  | {| type: 'moveToAnchor' |};
 
 type EditorDispatch = (action: EditorAction) => void;
 
@@ -455,6 +456,11 @@ function EditorWithData({
         setTextStyle(editor, action.styleId);
         break;
       }
+      case 'moveToAnchor': {
+        if (editor.value.selection.isCollapsed) return;
+        editor.moveToAnchor().focus();
+        break;
+      }
       default:
         // eslint-disable-next-line no-unused-expressions
         (action.type: empty);
@@ -562,9 +568,7 @@ function EditorWithData({
     }
 
     function handleKeyEscape() {
-      const { value } = editor;
-      if (value.selection.isCollapsed) return next();
-      editor.moveToAnchor();
+      dispatch({ type: 'moveToAnchor' });
     }
 
     switch (event.key) {
