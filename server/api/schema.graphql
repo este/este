@@ -1,5 +1,5 @@
 # source: http://localhost:4000
-# timestamp: Fri Nov 23 2018 23:33:26 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Nov 25 2018 01:00:46 GMT+0100 (Central European Standard Time)
 
 type AuthErrors {
   email: EmailError
@@ -1575,7 +1575,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
-  JSON
+  URL
 }
 
 type Query {

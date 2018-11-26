@@ -187,29 +187,28 @@ const stylesJson = {
   editorMenuButton: {
     paddingVertical: typography.rhythm(0.2),
     paddingHorizontal: typography.rhythm(0.25),
-    // It's web only style.
+    // It's web only style, therefore any.
     ...(fontSmoothing: any),
   },
 
-  editorMenuLink: {
+  editorMenuTextInput: {
     color: colors.white,
     fontFamily,
-    fontWeight,
     paddingVertical: typography.rhythm(0.2),
-    paddingHorizontal: typography.rhythm(0.2),
-    // It's web only style.
+    paddingHorizontal: typography.rhythm(0.25),
+    // It's web only style, therefore any.
     ...(fontSmoothing: any),
   },
 
-  editorBlockquote: {
-    borderLeftWidth: 2,
-    borderColor: colorLib(colors.gray).lighten(0.1),
-    paddingLeft: typography.rhythm(0.4),
-  },
-
-  editorListItem: {
-    paddingHorizontal: typography.rhythm(0.5),
-  },
+  // editorBlockquote: {
+  //   borderLeftWidth: 2,
+  //   borderColor: colorLib(colors.gray).lighten(0.1),
+  //   paddingLeft: typography.rhythm(0.4),
+  // },
+  //
+  // editorListItem: {
+  //   paddingHorizontal: typography.rhythm(0.5),
+  // },
 
   editorBreadcrumb: {
     left: 0,

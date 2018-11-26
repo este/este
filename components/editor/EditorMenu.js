@@ -1,14 +1,33 @@
 // @flow
 /* eslint-env browser */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, type Node } from 'react';
 import { View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
 import Portal from '../core/Portal';
 import Button from '../core/Button';
-import { useEditorDispatch, stylesSorter, type MarkType } from './Editor';
+import {
+  useEditorDispatch,
+  stylesSorter,
+  type MarkType,
+  type Components,
+} from './Editor';
+import type { ComponentType } from './__generated__/Editor.graphql';
 import { FormattedMessage } from 'react-intl';
+import EditorMenuComponentView from './EditorMenuComponentView';
 
-function EditorMenuButton({ children, isActive, onPress }) {
+function EditorMenuButton({
+  children,
+  isActive,
+  onPress,
+  onFocus,
+  onBlur,
+}: {|
+  children: Node,
+  isActive?: boolean,
+  onPress: () => void,
+  onFocus?: () => void,
+  onBlur?: () => void,
+|}) {
   const theme = useTheme();
   return (
     <Button
@@ -16,9 +35,11 @@ function EditorMenuButton({ children, isActive, onPress }) {
         event.preventDefault();
         onPress();
       }}
-      color={isActive ? 'success' : 'gray'}
+      color={isActive === true ? 'success' : 'gray'}
       bold
       style={theme.styles.editorMenuButton}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {children}
     </Button>
@@ -46,8 +67,11 @@ function EditorMenuMarkButton({
   );
 }
 
-function DefaultView({ activeMarks, setMenuView }) {
+function DefaultView({ activeMarks, setMenuView, components, selection }) {
   const dispatch = useEditorDispatch();
+  const inlineComponents = components.filter(
+    component => component.type === ('INLINE': ComponentType),
+  );
   return (
     <>
       <EditorMenuMarkButton
@@ -62,20 +86,48 @@ function DefaultView({ activeMarks, setMenuView }) {
         activeMarks={activeMarks}
         onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
       />
-      <EditorMenuButton isActive={false} onPress={() => setMenuView('styles')}>
+      {inlineComponents.map(component => {
+        return (
+          <EditorMenuButton
+            onPress={() =>
+              setMenuView({
+                type: 'component',
+                componentId: component.id,
+                selectionFocus: selection.focus,
+              })
+            }
+            key={component.id}
+          >
+            {component.name.toLowerCase()}
+          </EditorMenuButton>
+        );
+      })}
+      <EditorMenuButton onPress={() => setMenuView({ type: 'styles' })}>
         <FormattedMessage defaultMessage="styles" id="editorMenu.styles" />
       </EditorMenuButton>
     </>
   );
 }
 
-// const text = {fontSize: 16, fontFamily}
-// const h1 = {...text, fontSize: 24}
+// Workaround for https://github.com/necolas/react-native-web/issues/1189
+// TODO: Remove it, ensure correct tab and escape keys behavior.
+// Even EditorMenu should focus back to text on Escape.
+export function useEscapeFix(onClose: () => void): [() => void, () => void] {
+  const handleKeydown = useCallback((event: any) => {
+    if (event.key === 'Escape') onClose();
+  }, []);
+  const onFocus = useCallback((event: any) => {
+    event.currentTarget.addEventListener('keydown', handleKeydown);
+  }, []);
+  const onBlur = useCallback((event: any) => {
+    event.currentTarget.removeEventListener('keydown', handleKeydown);
+  }, []);
+  return [onFocus, onBlur];
+}
 
-// TODO: Consider show the first two semantic btns in default view.
-// E.g. b i h1 h2 ... for more.
-function StylesView({ styleSheet, blocks }) {
+function StylesView({ styleSheet, blocks, onClose }) {
   const dispatch = useEditorDispatch();
+  const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
   const styles = Object.keys(styleSheet)
     .filter(id => styleSheet[id].isText)
     .map(id => {
@@ -86,6 +138,8 @@ function StylesView({ styleSheet, blocks }) {
   return styles.map(style => {
     return (
       <EditorMenuButton
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
         isActive={blocks.some(node => {
           const props = node.data.get('props');
           return props.style?.valueStyle?.id === style.id;
@@ -99,30 +153,45 @@ function StylesView({ styleSheet, blocks }) {
   });
 }
 
-type MenuView = 'initial' | 'styles';
+type MenuView =
+  | {| type: 'default' |}
+  | {| type: 'styles' |}
+  | {|
+      type: 'component',
+      componentId: string,
+      selectionFocus: Object,
+    |};
 type Position = {| left: number, top: number |};
 
 export default function EditorMenu({
   value,
   styleSheet,
+  components,
 }: {|
   value: Object,
   styleSheet: Object,
+  components: Components,
 |}) {
   const theme = useTheme();
   const [position, setPosition] = useState<?Position>(null);
-  const [menuView, setMenuView] = useState<MenuView>('initial');
+  const [menuView, setMenuView] = useState<MenuView>({ type: 'default' });
 
   useEffect(
     () => {
       const { selection, fragment } = value;
-      const hideMenu =
-        selection.isBlurred || selection.isCollapsed || fragment.text === '';
+      if (
+        menuView.type === 'component' &&
+        menuView.selectionFocus === selection.focus
+      ) {
+        return;
+      }
+      const hideMenu = selection.isCollapsed || fragment.text === '';
       if (hideMenu) {
-        setMenuView('initial');
+        setMenuView({ type: 'default' });
         setPosition(null);
         return;
       }
+      if (selection.isBlurred) return;
       const rect = window
         .getSelection()
         .getRangeAt(0)
@@ -137,19 +206,36 @@ export default function EditorMenu({
   if (position == null) return null;
 
   function renderMenuView() {
-    switch (menuView) {
-      case 'initial':
+    switch (menuView.type) {
+      case 'default':
         return (
           <DefaultView
             activeMarks={value.activeMarks}
             setMenuView={setMenuView}
+            components={components}
+            selection={value.selection}
           />
         );
       case 'styles':
-        return <StylesView styleSheet={styleSheet} blocks={value.blocks} />;
+        return (
+          <StylesView
+            styleSheet={styleSheet}
+            blocks={value.blocks}
+            onClose={() => setMenuView({ type: 'default' })}
+          />
+        );
+      case 'component': {
+        return (
+          <EditorMenuComponentView
+            componentId={menuView.componentId}
+            components={components}
+            onClose={() => setMenuView({ type: 'default' })}
+          />
+        );
+      }
       default:
         // eslint-disable-next-line no-unused-expressions
-        (menuView: empty);
+        (menuView.type: empty);
         return null;
     }
   }
@@ -163,70 +249,7 @@ export default function EditorMenu({
   );
 }
 
-// import * as React from 'react';
-// import ReactDOM from 'react-dom';
-// import { View } from 'react-native';
-// import withTheme, { type Theme } from '../core/withTheme';
 // import { findDOMNode } from 'slate-react';
-// import EditorMenuButtons from './EditorMenuButtons';
-// import EditorMenuLink from './EditorMenuLink';
-// import EditorMenuLinkPreview from './EditorMenuLinkPreview';
-// // import type { OnEditorAction } from './Editor';
-// type OnEditorAction = any;
-//
-// export type EditorMenuView = null | 'buttons' | 'link' | 'linkPreview';
-//
-// type EditorMenuProps = {|
-//   value: Object,
-//   onEditorAction: OnEditorAction,
-//   theme: Theme,
-// |};
-//
-// type EditorMenuState = {|
-//   left: number,
-//   top: number,
-//   view: EditorMenuView,
-//   hasLinks: boolean,
-//   linkNode: ?Object,
-// |};
-//
-// class EditorMenu extends React.PureComponent<EditorMenuProps, EditorMenuState> {
-//   state = {
-//     left: 0,
-//     top: 0,
-//     view: null,
-//     hasLinks: false,
-//     linkNode: null,
-//   };
-//
-//   componentDidMount() {
-//     this.el = window.document.createElement('div');
-//     this.modalRoot = window.document.getElementById('__next');
-//     if (this.modalRoot && this.el) this.modalRoot.appendChild(this.el);
-//     this.maybeUpdateLeftTopState();
-//   }
-//
-//   componentDidUpdate(prevProps) {
-//     // https://reactjs.org/docs/react-component.html#componentdidmount
-//     // setState in componentDidUpdate is valid for tooltips, but we have to wrap
-//     // it in a condition.
-//     // Without PureComponent, it would cause a loop. With PureComponent, it
-//     // would cause double measuring of selection rect.
-//     // We can't use ref with setNativeProps, because:
-//     // 1) if this.el is set in componentDidMount, we can't set position because
-//     //    ref is not available yet.
-//     // 2) if this.el is set in constructor, server and client HTML would be
-//     //    different.
-//     // Therefore, this is the only right approach.
-//     if (this.props.value !== prevProps.value) {
-//       this.maybeUpdateLeftTopState();
-//     }
-//   }
-//
-//   componentWillUnmount() {
-//     if (this.modalRoot && this.el) this.modalRoot.removeChild(this.el);
-//   }
-//
 //   static getDerivedStateFromProps(
 //     props: EditorMenuProps,
 //     state: EditorMenuState,
@@ -250,58 +273,6 @@ export default function EditorMenu({
 //     return { ...newState, view: null };
 //   }
 //
-//   handleActionsSelectView = view => {
-//     this.setState({ view });
-//   };
-//
-//   handleEditorMenuLinkClose = focusEditor => {
-//     this.setState({ view: 'buttons' }, () => {
-//       if (focusEditor === true) this.props.onEditorAction({ type: 'FOCUS' });
-//     });
-//   };
-//
-//   handleEditorMenuLinkSubmit = href => {
-//     this.props.onEditorAction({ type: 'LINK', href });
-//   };
-//
-//   handleKeyModK(change: Object) {
-//     const { value } = this.props;
-//     const { fragment, selection } = value;
-//     if (selection.isCollapsed) {
-//       const { linkNode } = this.state;
-//       if (!linkNode) return;
-//       const href = linkNode.data.get('href');
-//       // TODO: Use router push for web links.
-//       window.open(href);
-//       return;
-//     }
-//     if (fragment.text === '') return;
-//     if (this.state.hasLinks) {
-//       this.props.onEditorAction({ type: 'LINK', href: null, change });
-//     } else {
-//       this.setState({ view: 'link' });
-//     }
-//   }
-//
-//   modalRoot: ?HTMLDivElement;
-//   el: ?HTMLDivElement;
-//
-//   maybeUpdateLeftTopState() {
-//     switch (this.state.view) {
-//       case 'buttons': {
-//         const rect = window
-//           .getSelection()
-//           .getRangeAt(0)
-//           .getBoundingClientRect();
-//         this.setState({
-//           left: rect.left,
-//           top: window.pageYOffset + rect.bottom,
-//         });
-//         break;
-//       }
-//       case 'link': {
-//         break;
-//       }
 //       case 'linkPreview': {
 //         const { linkNode } = this.state;
 //         if (!linkNode) return;
@@ -354,22 +325,3 @@ export default function EditorMenu({
 //     }
 //   }
 //
-//   render() {
-//     const { el } = this;
-//     if (el == null) return null;
-//     const view = this.renderView();
-//     if (view == null) return null;
-//     const { left, top } = this.state;
-//     return ReactDOM.createPortal(
-//       <View style={[this.props.theme.styles.editorMenu, { left, top }]}>
-//         {view}
-//       </View>,
-//       el,
-//     );
-//   }
-// }
-//
-// // This is workaround for https://github.com/este/este/issues/1571
-// export type EditorMenuType = typeof EditorMenu;
-//
-// export default withTheme(EditorMenu);

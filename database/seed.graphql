@@ -13,14 +13,16 @@ mutation {
             name: "Text"
             props: { create: { name: "style", type: TEXT_STYLE } }
           }
-          # {
-          #   name: "Link"
-          #   type: INLINE
-          #   props: {
-          #     create: { name: "style", type: TEXT_STYLE }
-          #     create: { name: "href", type: URL }
-          #   }
-          # }
+          {
+            name: "Link"
+            type: INLINE
+            props: {
+              create: [
+                { name: "style", type: TEXT_STYLE }
+                { name: "href", type: URL }
+              ]
+            }
+          }
         ]
       }
     }

@@ -103,8 +103,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
-  JSON
-  # TEXT_CONTENT
+  URL
 }
 
 # We will have proper indexes to ensure unique name for element prop soon.

@@ -13,6 +13,8 @@ import { assocPath } from 'ramda';
 
 export type MarkType = 'bold' | 'italic';
 
+export type Components = $ElementType<Data, 'components'>;
+
 export type EditorAction =
   | {| type: 'focus' |}
   | {| type: 'update', value: Object |}
@@ -55,7 +57,7 @@ function elementsToSlateValue(pageElementId, elementsArray, componentsById) {
     const element = elements[id];
     switch (element.type) {
       case 'SHARED':
-        throw Error('Not implemented yet');
+        throw Error('Not implemented yet.');
       case 'COMPONENT': {
         const { children, props } = element;
         // Flow type refinement.
@@ -665,7 +667,11 @@ function EditorWithData({
         renderMark={renderMark}
       />
       <EditorDispatchContext.Provider value={dispatch}>
-        <EditorMenu value={value} styleSheet={styleSheet} />
+        <EditorMenu
+          value={value}
+          styleSheet={styleSheet}
+          components={components}
+        />
         <EditorBreadcrumb
           ancestors={ancestors}
           stylesById={stylesById}

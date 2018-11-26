@@ -1628,7 +1628,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
-  JSON
+  URL
 }
 
 type Query {
@@ -3780,7 +3780,7 @@ const prisma: BindingConstructor<Prisma> = makePrismaBindingClass({typeDefs})
     | 'STRING'
     | 'VIEW_STYLE'
     | 'TEXT_STYLE'
-    | 'JSON'
+    | 'URL'
   
 
  export type StyleAlignContent =

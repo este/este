@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Fri Nov 23 2018 23:05:49 GMT+0100 (Central European Standard Time)
+# timestamp: Sun Nov 25 2018 00:49:14 GMT+0100 (Central European Standard Time)
 
 type AggregateBorderValue {
   count: Int!
@@ -3923,7 +3923,7 @@ enum PropType {
   STRING
   VIEW_STYLE
   TEXT_STYLE
-  JSON
+  URL
 }
 
 type Query {
