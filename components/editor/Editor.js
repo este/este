@@ -561,6 +561,12 @@ function EditorWithData({
       setTextStyle(editor.splitBlock(), textStyleId);
     }
 
+    function handleKeyEscape() {
+      const { value } = editor;
+      if (value.selection.isCollapsed) return next();
+      editor.moveToAnchor();
+    }
+
     switch (event.key) {
       // case ' ':
       //   return handleKeySpace(event, change, next);
@@ -568,6 +574,8 @@ function EditorWithData({
         return handleKeyBackspace();
       case 'Enter':
         return handleKeyEnter();
+      case 'Escape':
+        return handleKeyEscape();
     }
 
     return next();
