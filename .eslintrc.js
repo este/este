@@ -42,5 +42,8 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'import/prefer-default-export': 0, // That's fine.
     'import/no-useless-path-segments': 0, // Buggy. It recommends '.' instead of './'.
+    'jsx-a11y/no-autofocus': 0, // It's handy, and:
+    // User agents should provide a method for users to disable the autofocus attribute behaviour.
+    // https://w3c.github.io/html/sec-forms.html#autofocusing-a-form-control-the-autofocus-attribute
   },
 };
