@@ -198,6 +198,7 @@ const stylesJson = {
     paddingHorizontal: typography.rhythm(0.25),
     // It's web only style, therefore any.
     ...(fontSmoothing: any),
+    ...StyleSheet.flatten(typography.fontSizeWithLineHeight(0)),
   },
 
   editorMenuError: {

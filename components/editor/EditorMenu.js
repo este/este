@@ -5,19 +5,15 @@ import { View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
 import Portal from '../core/Portal';
 import Button from '../core/Button';
-import {
-  useEditorDispatch,
-  stylesSorter,
-  type MarkType,
-  type Components,
-} from './Editor';
+import { useEditorDispatch, type MarkType, type Components } from './Editor';
 import type { ComponentType } from './__generated__/Editor.graphql';
 import { FormattedMessage } from 'react-intl';
 import EditorMenuComponentView from './EditorMenuComponentView';
+import EditorMenuStylesView from './EditorMenuStylesView';
 import useEscapeFix from '../../hooks/useEscapeFix';
 import getFocusableNodes from '../../client/getFocusableNodes';
 
-function EditorMenuButton({
+export function EditorMenuButton({
   children,
   isActive,
   onPress,
@@ -78,12 +74,6 @@ function EditorMenuMarkButton({
   );
 }
 
-// Key navigation is must, but it steals focus from the selection, so we can't
-// update position. But closing after key action actually makes a sense.
-function closeMenuIfSelectionIsBlurred(selection, dispatch) {
-  if (selection.isBlurred) dispatch({ type: 'moveToAnchor' });
-}
-
 function DefaultView({ activeMarks, setMenuView, components, selection }) {
   const dispatch = useEditorDispatch();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(() => {
@@ -100,7 +90,9 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
   function toggleMark(mark) {
     return () => {
       dispatch({ type: 'toggleMark', mark });
-      closeMenuIfSelectionIsBlurred(selection, dispatch);
+      // Key navigation is must, but it steals focus from the selection, so we can't
+      // update position. But closing after key action actually makes a sense.
+      if (selection.isBlurred) dispatch({ type: 'moveToAnchor' });
     };
   }
 
@@ -148,40 +140,6 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
       })}
     </>
   );
-}
-
-function StylesView({ styleSheet, blocks, onClose, selection }) {
-  const dispatch = useEditorDispatch();
-  const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
-  const styles = Object.keys(styleSheet)
-    .filter(id => styleSheet[id].isText)
-    .map(id => {
-      const { name } = styleSheet[id];
-      return { id, name };
-    })
-    .sort(stylesSorter);
-  // <input autoFocus />
-  // <View>
-  return styles.map(style => {
-    return (
-      <EditorMenuButton
-        onFocus={escapeFixHandleFocus}
-        onBlur={escapeFixHandleBlur}
-        isActive={blocks.some(node => {
-          const props = node.data.get('props');
-          return props.style?.valueStyle?.id === style.id;
-        })}
-        onPress={() => {
-          dispatch({ type: 'setTextStyle', styleId: style.id });
-          closeMenuIfSelectionIsBlurred(selection, dispatch);
-        }}
-        key={style.id}
-      >
-        {style.name}
-      </EditorMenuButton>
-    );
-  });
-  // </View>
 }
 
 type MenuView =
@@ -256,7 +214,7 @@ function EditorMenu({
         );
       case 'styles':
         return (
-          <StylesView
+          <EditorMenuStylesView
             styleSheet={styleSheet}
             blocks={value.blocks}
             onClose={handleClose}

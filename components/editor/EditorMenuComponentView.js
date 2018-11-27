@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ComponentView({
+export default function EditorMenuComponentView({
   components,
   componentId,
   onClose,
@@ -105,10 +105,7 @@ export default function ComponentView({
                   onFocus={escapeFixHandleFocus}
                   onBlur={escapeFixHandleBlur}
                   keyboardType="url"
-                  style={[
-                    theme.styles.editorMenuTextInput,
-                    theme.typography.fontSizeWithLineHeight(0),
-                  ]}
+                  style={theme.styles.editorMenuTextInput}
                   onChangeText={text => {
                     setState(update(index, { ...prop, value: text }, state));
                   }}
