@@ -604,9 +604,7 @@ function EditorWithData({
   }) {
     const { node, attributes, children } = props;
     const component = componentsById[node.type];
-    // It's up to component to handle its props.
-    // TODO: Musim mit nejakou component registry.
-    // Do te se koukam, co to dela.
+    // TODO: Component registry. Manual for now, from npm in the future.
     switch (component.name) {
       case 'View': {
         const componentProps = resolveComponentProps(node.data);

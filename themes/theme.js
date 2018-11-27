@@ -200,6 +200,10 @@ const stylesJson = {
     ...(fontSmoothing: any),
   },
 
+  editorMenuError: {
+    paddingHorizontal: typography.rhythm(0.25),
+  },
+
   // editorBlockquote: {
   //   borderLeftWidth: 2,
   //   borderColor: colorLib(colors.gray).lighten(0.1),

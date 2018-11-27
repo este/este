@@ -25,6 +25,7 @@
   "error.required": "Please fill out this field.",
   "error.unauthorized": "Unauthorized.",
   "error.unknown": "An unknown error occurred. We will fix it as quickly as possible.",
+  "error.url": "URL address is not valid.",
   "error.wrongPassword": "Wrong password.",
   "footer.madeBy": "made by",
   "link.edit": "Edit",

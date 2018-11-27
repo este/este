@@ -78,6 +78,12 @@ function EditorMenuMarkButton({
   );
 }
 
+// Key navigation is must, but it steals focus from the selection, so we can't
+// update position. But closing after key action actually makes a sense.
+function closeMenuIfSelectionIsBlurred(selection, dispatch) {
+  if (selection.isBlurred) dispatch({ type: 'moveToAnchor' });
+}
+
 function DefaultView({ activeMarks, setMenuView, components, selection }) {
   const dispatch = useEditorDispatch();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(() => {
@@ -91,13 +97,27 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
     setMenuView({ type: 'styles' });
   }
 
+  function toggleMark(mark) {
+    return () => {
+      dispatch({ type: 'toggleMark', mark });
+      closeMenuIfSelectionIsBlurred(selection, dispatch);
+    };
+  }
+
   return (
     <>
+      <EditorMenuButton
+        onPress={handleStylesPress}
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
+      >
+        <FormattedMessage defaultMessage="styles" id="editorMenu.styles" />
+      </EditorMenuButton>
       <EditorMenuMarkButton
         type="bold"
         label="b"
         activeMarks={activeMarks}
-        onPress={() => dispatch({ type: 'toggleMark', mark: 'bold' })}
+        onPress={toggleMark('bold')}
         onFocus={escapeFixHandleFocus}
         onBlur={escapeFixHandleBlur}
       />
@@ -105,7 +125,7 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
         type="italic"
         label="i"
         activeMarks={activeMarks}
-        onPress={() => dispatch({ type: 'toggleMark', mark: 'italic' })}
+        onPress={toggleMark('italic')}
         onFocus={escapeFixHandleFocus}
         onBlur={escapeFixHandleBlur}
       />
@@ -116,7 +136,6 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
               setMenuView({
                 type: 'component',
                 componentId: component.id,
-                selectionFocus: selection.focus,
               })
             }
             onFocus={escapeFixHandleFocus}
@@ -127,18 +146,11 @@ function DefaultView({ activeMarks, setMenuView, components, selection }) {
           </EditorMenuButton>
         );
       })}
-      <EditorMenuButton
-        onPress={handleStylesPress}
-        onFocus={escapeFixHandleFocus}
-        onBlur={escapeFixHandleBlur}
-      >
-        <FormattedMessage defaultMessage="styles" id="editorMenu.styles" />
-      </EditorMenuButton>
     </>
   );
 }
 
-function StylesView({ styleSheet, blocks, onClose }) {
+function StylesView({ styleSheet, blocks, onClose, selection }) {
   const dispatch = useEditorDispatch();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
   const styles = Object.keys(styleSheet)
@@ -148,6 +160,8 @@ function StylesView({ styleSheet, blocks, onClose }) {
       return { id, name };
     })
     .sort(stylesSorter);
+  // <input autoFocus />
+  // <View>
   return styles.map(style => {
     return (
       <EditorMenuButton
@@ -157,26 +171,26 @@ function StylesView({ styleSheet, blocks, onClose }) {
           const props = node.data.get('props');
           return props.style?.valueStyle?.id === style.id;
         })}
-        onPress={() => dispatch({ type: 'setTextStyle', styleId: style.id })}
+        onPress={() => {
+          dispatch({ type: 'setTextStyle', styleId: style.id });
+          closeMenuIfSelectionIsBlurred(selection, dispatch);
+        }}
         key={style.id}
       >
         {style.name}
       </EditorMenuButton>
     );
   });
+  // </View>
 }
 
 type MenuView =
   | {| type: 'default' |}
   | {| type: 'styles' |}
-  | {|
-      type: 'component',
-      componentId: string,
-      selectionFocus: Object,
-    |};
+  | {| type: 'component', componentId: string |};
 type Position = {| left: number, top: number |};
 
-export default function EditorMenu({
+function EditorMenu({
   value,
   styleSheet,
   components,
@@ -190,40 +204,43 @@ export default function EditorMenu({
   const [menuView, setMenuView] = useState<MenuView>({ type: 'default' });
   const viewRef = useRef(null);
 
+  function maybeComputeAndUpdatePosition() {
+    // It's not reliable on blurred selection.
+    if (value.selection.isBlurred) return;
+    const rect = window
+      .getSelection()
+      .getRangeAt(0)
+      .getBoundingClientRect();
+    const left = rect.left;
+    const top = window.pageYOffset + rect.bottom;
+    setPosition({ left, top });
+  }
+
   useEffect(
     () => {
       const { selection, fragment } = value;
-      if (
-        menuView.type === 'component' &&
-        menuView.selectionFocus === selection.focus
-      ) {
-        return;
-      }
       const hideMenu = selection.isCollapsed || fragment.text === '';
       if (hideMenu) {
         setMenuView({ type: 'default' });
         setPosition(null);
         return;
       }
-      if (selection.isBlurred) return;
-      const rect = window
-        .getSelection()
-        .getRangeAt(0)
-        .getBoundingClientRect();
-      const left = rect.left;
-      const top = window.pageYOffset + rect.bottom;
-      setPosition({ left, top });
+      maybeComputeAndUpdatePosition();
     },
-    [value],
+    [value.selection.isCollapsed, value.selection.isFocused, value.fragment],
   );
 
   if (position == null) return null;
 
+  function focusFirst(ref) {
+    if (!ref.current) return;
+    const first = getFocusableNodes(ref.current)[0];
+    if (first) first.focus();
+  }
+
   function handleClose() {
     setMenuView({ type: 'default' });
-    if (!viewRef.current) return;
-    const first = getFocusableNodes(viewRef.current)[0];
-    if (first) first.focus();
+    focusFirst(viewRef);
   }
 
   function renderMenuView() {
@@ -243,6 +260,7 @@ export default function EditorMenu({
             styleSheet={styleSheet}
             blocks={value.blocks}
             onClose={handleClose}
+            selection={value.selection}
           />
         );
       case 'component': {
@@ -269,6 +287,8 @@ export default function EditorMenu({
     </Portal>
   );
 }
+
+export default EditorMenu;
 
 // import { findDOMNode } from 'slate-react';
 //   static getDerivedStateFromProps(
