@@ -9,12 +9,14 @@ import type {
 } from '../../mutations/__generated__/AuthMutation.graphql';
 
 export type MessageError =
+  // Uppercase, because GraphQL enums are.
   | 'NOT_AUTHORIZED'
   | 'NET_ERROR'
   | 'UNKNOWN'
   | Max140CharsError
   | EmailError
-  | PasswordError;
+  | PasswordError
+  | 'URL';
 
 type ErrorMessageProps = {|
   ...TextProps,
@@ -94,6 +96,13 @@ class ErrorMessage extends React.PureComponent<ErrorMessageProps> {
       case 'NOT_EXISTS':
         return (
           <FormattedMessage defaultMessage="Not exists." id="error.notExists" />
+        );
+      case 'URL':
+        return (
+          <FormattedMessage
+            defaultMessage="URL address is not valid."
+            id="error.url"
+          />
         );
       default:
         // eslint-disable-next-line no-unused-expressions

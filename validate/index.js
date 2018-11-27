@@ -1,5 +1,6 @@
 // @flow
 import isEmail from 'validator/lib/isEmail';
+import isURL from 'validator/lib/isURL';
 
 // Helpers
 
@@ -23,6 +24,10 @@ function max1024Chars(value) {
 
 export function email(value: string) {
   return required(value) || (!isEmail(value) ? 'EMAIL' : null);
+}
+
+export function url(value: string) {
+  return required(value) || (!isURL(value) ? 'URL' : null);
 }
 
 export function password(value: string) {
