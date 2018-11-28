@@ -1,6 +1,6 @@
 // @flow
 import React, { useState, useMemo } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, ScrollView } from 'react-native';
 import useEscapeFix from '../../hooks/useEscapeFix';
 import useTheme from '../../hooks/useTheme';
 import {
@@ -38,8 +38,25 @@ export default function EditorMenuStylesView({
     },
     [styleSheets],
   );
+  const handleKeyArrowsFocus = useKeyArrows([textInputValue]);
 
-  const handleKeyArrowsFocus = useKeyArrows();
+  const filteredStyles = styles.filter(style => {
+    if (textInputValue.length === 0) return true;
+    return style.name.startsWith(textInputValue);
+  });
+
+  function setTextStyle(styleId) {
+    dispatch({ type: 'setTextStyle', styleId });
+    // Key navigation is must, but it steals focus from the selection,
+    // so we can't update position. But closing after key action actually
+    // makes a sense.
+    if (selection.isBlurred) dispatch({ type: 'moveToAnchor' });
+  }
+
+  function handleSubmitEditing() {
+    if (filteredStyles.length !== 1) return;
+    setTextStyle(filteredStyles[0].id);
+  }
 
   return (
     <View onFocus={handleKeyArrowsFocus}>
@@ -50,32 +67,31 @@ export default function EditorMenuStylesView({
         onBlur={escapeFixHandleBlur}
         style={theme.styles.editorMenuTextInput}
         onChangeText={setTextInputValue}
-        // onSubmitEditing={handleSubmitEditing}
+        onSubmitEditing={handleSubmitEditing}
         placeholder="style name"
         blurOnSubmit={false}
       />
-      {/* TODO: Memoize it. */}
-      {styles.map(style => {
-        return (
-          <EditorMenuButton
-            onFocus={escapeFixHandleFocus}
-            onBlur={escapeFixHandleBlur}
-            isActive={blocks.some(node => {
-              const props = node.data.get('props');
-              return props.style?.valueStyle?.id === style.id;
-            })}
-            onPress={() => {
-              dispatch({ type: 'setTextStyle', styleId: style.id });
-              // Key navigation is must, but it steals focus from the selection, so we can't
-              // update position. But closing after key action actually makes a sense.
-              if (selection.isBlurred) dispatch({ type: 'moveToAnchor' });
-            }}
-            key={style.id}
-          >
-            {style.name}
-          </EditorMenuButton>
-        );
-      })}
+      <ScrollView
+        style={theme.styles.editorMenuStylesScrollView}
+        contentContainerStyle={theme.styles.editorMenuStylesContentContainer}
+      >
+        {filteredStyles.map(style => {
+          return (
+            <EditorMenuButton
+              onFocus={escapeFixHandleFocus}
+              onBlur={escapeFixHandleBlur}
+              isActive={blocks.some(node => {
+                const props = node.data.get('props');
+                return props.style?.valueStyle?.id === style.id;
+              })}
+              onPress={() => setTextStyle(style.id)}
+              key={style.id}
+            >
+              {style.name}
+            </EditorMenuButton>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }

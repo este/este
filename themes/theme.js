@@ -205,6 +205,16 @@ const stylesJson = {
     paddingHorizontal: typography.rhythm(0.25),
   },
 
+  editorMenuStylesScrollView: {
+    maxHeight: 180,
+    paddingTop: 4,
+    paddingBottom: 8,
+  },
+
+  editorMenuStylesContentContainer: {
+    paddingHorizontal: 4,
+  },
+
   // editorBlockquote: {
   //   borderLeftWidth: 2,
   //   borderColor: colorLib(colors.gray).lighten(0.1),
