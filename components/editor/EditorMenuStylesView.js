@@ -9,7 +9,7 @@ import {
   type EditorStyleSheets,
 } from './Editor';
 import { EditorMenuButton } from './EditorMenu';
-import useArrows from '../../hooks/useArrows';
+import useKeyArrows from '../../hooks/useKeyArrows';
 
 export default function EditorMenuStylesView({
   styleSheets,
@@ -39,10 +39,10 @@ export default function EditorMenuStylesView({
     [styleSheets],
   );
 
-  const handleArrowsFocus = useArrows();
+  const handleKeyArrowsFocus = useKeyArrows();
 
   return (
-    <View onFocus={handleArrowsFocus}>
+    <View onFocus={handleKeyArrowsFocus}>
       <TextInput
         autoFocus
         value={textInputValue}

@@ -1,6 +1,10 @@
 // @flow
 import { useMemo, useState, useEffect } from 'react';
 
+// TODO: Reimplement the rest of the withRovingTabIndex.
+// This approach seems to be the most unobtrusive.
+// https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
+
 function setTabIndexes(focusables, focused) {
   focusables.forEach(focusable => {
     // eslint-disable-next-line no-param-reassign
@@ -8,7 +12,7 @@ function setTabIndexes(focusables, focused) {
   });
 }
 
-export default function useArrows() {
+export default function useKeyArrows() {
   const [targets, setTargets] = useState(null);
 
   // Note the logic is inside the effect. It's perfect imho, closures ftw.
@@ -53,7 +57,7 @@ export default function useArrows() {
 
   // Memoize callback because why not.
   // Use useMemo instead of useCallback, because useCallback has wrong type imho.
-  const handleArrowsFocus = useMemo(() => {
+  const handleKeyArrowsFocus = useMemo(() => {
     return (event: SyntheticEvent<HTMLDivElement>) => {
       setTargets([event.currentTarget, event.target]);
     };
@@ -61,5 +65,5 @@ export default function useArrows() {
 
   // We don't have to handle blur, because currentTarget.removeEventListener
   // is called on component unmount in useEffect. That's perfect design.
-  return handleArrowsFocus;
+  return handleKeyArrowsFocus;
 }
