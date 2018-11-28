@@ -12,7 +12,7 @@ function setTabIndexes(focusables, focused) {
   });
 }
 
-export default function useKeyArrows() {
+export default function useKeyArrows(inputs: ?$ReadOnlyArray<mixed>) {
   const [targets, setTargets] = useState(null);
 
   // Note the logic is inside the effect. It's perfect imho, closures ftw.
@@ -38,10 +38,12 @@ export default function useKeyArrows() {
         switch (event.key) {
           case 'ArrowUp': {
             moveFocus(-1);
+            event.preventDefault();
             break;
           }
           case 'ArrowDown': {
             moveFocus(1);
+            event.preventDefault();
             break;
           }
         }
@@ -52,7 +54,7 @@ export default function useKeyArrows() {
         currentTarget.removeEventListener('keydown', handleKeyDown);
       };
     },
-    [targets],
+    inputs ? [...inputs, targets] : [targets],
   );
 
   // Memoize callback because why not.
