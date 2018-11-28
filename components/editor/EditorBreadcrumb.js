@@ -1,5 +1,4 @@
 // @flow
-// $FlowFixMe
 import React, { useState, useMemo, memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import useTheme from '../../hooks/useTheme';
@@ -35,16 +34,18 @@ const styles = StyleSheet.create({
   top: { top: 0 },
 });
 
-function EditorBreadcrumb({
-  ancestors,
-  stylesById,
-  componentsById,
-}: {|
+type EditorBreadcrumbProps = {|
   ancestors: Object,
   // TODO: Type it somehow. Probably import types from Editor.
   stylesById: Object,
   componentsById: Object,
-|}) {
+|};
+
+function EditorBreadcrumb({
+  ancestors,
+  stylesById,
+  componentsById,
+}: EditorBreadcrumbProps) {
   const theme = useTheme();
   const [kebabMenuVisible, setKebabMenuVisible] = useState(false);
   const [breadcrumbPosition, setBreadcrumbPosition] = useState('bottom');
@@ -118,4 +119,6 @@ function EditorBreadcrumb({
   );
 }
 
-export default withRovingTabIndex(memo(EditorBreadcrumb));
+export default withRovingTabIndex(
+  memo<EditorBreadcrumbProps>(EditorBreadcrumb),
+);
