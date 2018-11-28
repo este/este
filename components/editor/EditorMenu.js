@@ -5,7 +5,12 @@ import { View } from 'react-native';
 import useTheme from '../../hooks/useTheme';
 import Portal from '../core/Portal';
 import Button from '../core/Button';
-import { useEditorDispatch, type MarkType, type Components } from './Editor';
+import {
+  useEditorDispatch,
+  type MarkType,
+  type Components,
+  type EditorStyleSheets,
+} from './Editor';
 import type { ComponentType } from './__generated__/Editor.graphql';
 import { FormattedMessage } from 'react-intl';
 import EditorMenuComponentView from './EditorMenuComponentView';
@@ -150,11 +155,11 @@ type Position = {| left: number, top: number |};
 
 function EditorMenu({
   value,
-  styleSheet,
+  styleSheets,
   components,
 }: {|
   value: Object,
-  styleSheet: Object,
+  styleSheets: EditorStyleSheets,
   components: Components,
 |}) {
   const theme = useTheme();
@@ -215,7 +220,7 @@ function EditorMenu({
       case 'styles':
         return (
           <EditorMenuStylesView
-            styleSheet={styleSheet}
+            styleSheets={styleSheets}
             blocks={value.blocks}
             onClose={handleClose}
             selection={value.selection}

@@ -10,6 +10,7 @@ import EditorMenu from './EditorMenu';
 import { isKeyHotkey } from 'is-hotkey';
 import EditorBreadcrumb from './EditorBreadcrumb';
 import { assocPath } from 'ramda';
+import type { DangerouslyImpreciseStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 export type MarkType = 'bold' | 'italic';
 
@@ -21,6 +22,14 @@ export type EditorAction =
   | {| type: 'toggleMark', mark: MarkType |}
   | {| type: 'setTextStyle', styleId: string |}
   | {| type: 'moveToAnchor' |};
+
+export type EditorStyleSheets = {
+  [string]: {|
+    name: string,
+    isText: boolean,
+    style: Array<DangerouslyImpreciseStyleProp>,
+  |},
+};
 
 type EditorDispatch = (action: EditorAction) => void;
 
@@ -104,7 +113,7 @@ function elementsToSlateValue(pageElementId, elementsArray, componentsById) {
 
 // Eager approach is simple, but lazy resolving with a cache would be better.
 // TODO: Rethink it for Relay store and client schema once Relay 2 is completed.
-function stylesToStyleSheet(
+function stylesToStyleSheets(
   styles,
   borderValues,
   colorValues,
@@ -418,9 +427,9 @@ function EditorWithData({
   const stylesById = useMemo(() => arrayOfItemsWithIdToObject(styles), [
     styles,
   ]);
-  const styleSheet = useMemo(
+  const styleSheets = useMemo<EditorStyleSheets>(
     () =>
-      stylesToStyleSheet(
+      stylesToStyleSheets(
         styles,
         borderValues,
         colorValues,
@@ -481,9 +490,9 @@ function EditorWithData({
     }
 
     function getTextStyles() {
-      return Object.keys(styleSheet)
+      return Object.keys(styleSheets)
         .map(id => {
-          const { name, isText, style } = styleSheet[id];
+          const { name, isText, style } = styleSheets[id];
           return { id, name, isText, style };
         })
         .filter(style => style.isText);
@@ -591,7 +600,7 @@ function EditorWithData({
       const value = props[key];
       const newValue =
         value.type.indexOf('STYLE') !== -1
-          ? styleSheet[value.valueStyle.id].style
+          ? styleSheets[value.valueStyle.id].style
           : value.value;
       return { ...prev, [key]: newValue };
     }, {});
@@ -679,7 +688,7 @@ function EditorWithData({
       <EditorDispatchContext.Provider value={dispatch}>
         <EditorMenu
           value={value}
-          styleSheet={styleSheet}
+          styleSheets={styleSheets}
           components={components}
         />
         <EditorBreadcrumb

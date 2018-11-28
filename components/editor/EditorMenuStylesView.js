@@ -1,33 +1,60 @@
 // @flow
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import { View, TextInput } from 'react-native';
 import useEscapeFix from '../../hooks/useEscapeFix';
-import { useEditorDispatch, stylesSorter } from './Editor';
+import useTheme from '../../hooks/useTheme';
+import {
+  useEditorDispatch,
+  stylesSorter,
+  type EditorStyleSheets,
+} from './Editor';
 import { EditorMenuButton } from './EditorMenu';
+import useArrows from '../../hooks/useArrows';
 
 export default function EditorMenuStylesView({
-  styleSheet,
+  styleSheets,
   blocks,
   onClose,
   selection,
 }: {
-  styleSheet: Object,
+  styleSheets: EditorStyleSheets,
   blocks: Object,
   onClose: () => void,
   selection: Object,
 }) {
   const dispatch = useEditorDispatch();
   const [escapeFixHandleFocus, escapeFixHandleBlur] = useEscapeFix(onClose);
-  const styles = Object.keys(styleSheet)
-    .filter(id => styleSheet[id].isText)
-    .map(id => {
-      const { name } = styleSheet[id];
-      return { id, name };
-    })
-    .sort(stylesSorter);
+  const theme = useTheme();
+  const [textInputValue, setTextInputValue] = useState('');
+  const styles = useMemo(
+    () => {
+      return Object.keys(styleSheets)
+        .filter(id => styleSheets[id].isText)
+        .map(id => {
+          const { name } = styleSheets[id];
+          return { id, name };
+        })
+        .sort(stylesSorter);
+    },
+    [styleSheets],
+  );
+
+  const handleArrowsFocus = useArrows();
+
   return (
-    <View>
-      <input autoFocus />
+    <View onFocus={handleArrowsFocus}>
+      <TextInput
+        autoFocus
+        value={textInputValue}
+        onFocus={escapeFixHandleFocus}
+        onBlur={escapeFixHandleBlur}
+        style={theme.styles.editorMenuTextInput}
+        onChangeText={setTextInputValue}
+        // onSubmitEditing={handleSubmitEditing}
+        placeholder="style name"
+        blurOnSubmit={false}
+      />
+      {/* TODO: Memoize it. */}
       {styles.map(style => {
         return (
           <EditorMenuButton
