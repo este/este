@@ -40,8 +40,6 @@
 
 - Open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
 
-1JiUysGEQEPChinEtwMHsLG67QeSkvnDBB
-
 ## Links
 
 - [twitter.com/steida](https://twitter.com/steida)
