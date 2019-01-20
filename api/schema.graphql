@@ -1,0 +1,122 @@
+# https://github.com/prisma/vscode-graphql/issues/94
+
+# https://blog.apollographql.com/designing-graphql-mutations-e09de826ed97
+# https://medium.com/@__xuorig__/graphql-mutation-design-anemic-mutations-dd107ba70496
+# https://graphql.org/learn/best-practices/#nullability
+
+# https://itnext.io/the-definitive-guide-to-handling-graphql-errors-e0c58b52b5e1
+enum EmailError {
+  REQUIRED
+  EMAIL
+  ALREADY_EXISTS
+  NOT_EXISTS
+}
+
+enum PasswordError {
+  REQUIRED
+  MIN_5_CHARS
+  MAX_1024_CHARS
+  WRONG_PASSWORD
+}
+
+enum Max140CharsError {
+  REQUIRED
+  MAX_140_CHARS
+}
+
+scalar DateTime
+
+type User {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String!
+  # TODO: Make it optional. Now it's required because of:
+  # https://github.com/prisma/prisma/issues/3621
+  themeName: String!
+  webs: [Web]
+}
+
+type Web {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator: User!
+  name: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+  createAccount: Boolean!
+}
+
+type SignInErrors {
+  email: EmailError
+  password: PasswordError
+}
+
+type SignInPayload {
+  errors: SignInErrors
+  token: String
+}
+
+input SetUserThemeInput {
+  name: String!
+}
+
+type SetUserThemePayload {
+  # Nullable, because it can fail of course.
+  user: User
+}
+
+input CreateWebInput {
+  name: String!
+}
+
+type CreateWebErrors {
+  name: Max140CharsError
+}
+
+type CreateWebPayload {
+  errors: CreateWebErrors
+  web: Web
+}
+
+input UpdateWebInput {
+  id: ID!
+  name: String!
+}
+
+type UpdateWebErrors {
+  name: Max140CharsError
+}
+
+type UpdateWebPayload {
+  errors: UpdateWebErrors
+  web: Web
+}
+
+input DeleteWebInput {
+  id: ID!
+}
+
+type DeleteWebPayload {
+  web: Web
+}
+
+type Mutation {
+  signIn(input: SignInInput!): SignInPayload!
+  setUserTheme(input: SetUserThemeInput!): SetUserThemePayload!
+  createWeb(input: CreateWebInput!): CreateWebPayload!
+  updateWeb(input: UpdateWebInput!): UpdateWebPayload!
+  deleteWeb(input: DeleteWebInput!): DeleteWebPayload!
+}
+
+type Query {
+  # https://medium.com/workflowgen/graphql-schema-design-the-viewer-field-aeabfacffe72
+  viewer: User
+  requiredViewer: User!
+  # non-null, because
+  web(id: ID!): Web!
+}

@@ -1,0 +1,13 @@
+language: typescript
+
+schema: ./schema.graphql
+context: ./types.ts:Context
+models:
+  files:
+    - ./types.ts
+
+output: ./generated/graphqlgen.ts
+
+resolver-scaffolding:
+  output: ./generated/resolvers/
+  layout: file-per-type

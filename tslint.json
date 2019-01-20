@@ -1,0 +1,24 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "linterOptions": {
+    "exclude": ["**/generated/**/*.*"]
+  },
+  "rules": {
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false,
+    "member-access": false,
+    "curly": false,
+    "no-shadowed-variable": false,
+    // Never ever think about it. Arrow is better because const fn: Fb = ...
+    "only-arrow-functions": true,
+    "interface-name": [true, "never-prefix"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+# Do not use optional fields yet.
+# https://github.com/prisma/prisma/issues/3621
+
+type User {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  email: String! @unique
+  password: String!
+  themeName: String!
+  webs: [Web]
+}
+
+type Web {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  creator: User!
+  name: String!
+}
