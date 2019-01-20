@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.15
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
