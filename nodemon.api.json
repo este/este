@@ -1,7 +1,0 @@
-{
-  "watch": ["server"],
-  "exec":
-    "node -r esm -r dotenv/config -r flow-remove-types/register server/api/index.js",
-  "ext": "js graphql",
-  "ignore": ["server/schema.graphql"]
-}
