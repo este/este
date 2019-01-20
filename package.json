@@ -27,7 +27,7 @@
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
     "gen:api": "cd api && graphqlgen",
-    "gen:relay": "relay-compiler --src . --include 'components/**' 'pages/**' --schema api/schema.graphql --language typescript --artifactDirectory generated",
+    "gen:relay": "relay-compiler --src . --include 'components/**' 'pages/**' --schema 'api/schema.graphql' --language typescript --artifactDirectory 'generated'",
     "gen": "run-s gen:api gen:relay",
     "env": "npm run ts-node scripts/env",
     "production": "npm run build && npm start",
