@@ -7,4 +7,5 @@ jobs:
     steps:
       - checkout
       - run: npm install
+      - run: npm run env dev
       - run: npm test
