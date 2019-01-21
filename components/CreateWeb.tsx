@@ -37,14 +37,9 @@ const mutation = graphql`
 
 const CreateWeb: React.FunctionComponent = () => {
   const { intl, theme } = useAppContext();
-  const { fields, commit, errors, pending } = useMutation<
-    CreateWebMutation,
-    'createWeb'
-  >(
+  const { fields, commit, errors, pending } = useMutation<CreateWebMutation>(
     mutation,
-    {
-      name: '',
-    },
+    { name: '' },
     { validator: validateCreateWeb },
   );
 

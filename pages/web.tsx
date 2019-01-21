@@ -31,13 +31,10 @@ interface WebProps {
 const Web: React.FunctionComponent<WebProps> = ({ data }) => {
   const { web } = data;
   const { theme } = useAppContext();
-  const { fields, commit, errors, pending, state } = useMutation<
-    webMutation,
-    'updateWeb'
-  >(mutation, {
-    id: web.id,
-    name: web.name,
-  });
+  const { fields, commit, errors, pending, state } = useMutation<webMutation>(
+    mutation,
+    { id: web.id, name: web.name },
+  );
 
   return (
     <Layout title={web.name} data={data}>

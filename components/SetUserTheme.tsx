@@ -25,10 +25,11 @@ interface SetUserThemeProps {
 const SetUserTheme: React.FunctionComponent<SetUserThemeProps> = ({
   data: { viewer },
 }) => {
-  const darkIsEnabled = viewer && viewer.themeName === darkThemeName;
-  const { commit, pending } = useMutation<SetUserThemeMutation, 'setUserTheme'>(
+  const { commit, pending, state } = useMutation<SetUserThemeMutation>(
     mutation,
+    { name: (viewer && viewer.themeName) || '' },
   );
+  const darkIsEnabled = state.name === darkThemeName;
 
   const toggleLightDarkTheme = () => {
     commit({ merge: { name: darkIsEnabled ? '' : darkThemeName } });

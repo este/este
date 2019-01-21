@@ -24,10 +24,7 @@ interface DeleteWebProps {
 
 const DeleteWeb: React.FunctionComponent<DeleteWebProps> = ({ id }) => {
   const confirm = useConfirm();
-  const { commit, pending } = useMutation<DeleteWebMutation, 'deleteWeb'>(
-    mutation,
-    { id },
-  );
+  const { commit, pending } = useMutation<DeleteWebMutation>(mutation, { id });
 
   const deleteWeb = () => {
     if (!confirm()) return;

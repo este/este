@@ -43,10 +43,7 @@ interface SignIn {
 const SignIn: React.FunctionComponent<SignIn> = ({ data }) => {
   const { intl, theme } = useAppContext();
   const auth = useAuth();
-  const { fields, commit, errors, pending } = useMutation<
-    signinMutation,
-    'signIn'
-  >(
+  const { fields, commit, errors, pending } = useMutation<signinMutation>(
     mutation,
     {
       createAccount: false,
