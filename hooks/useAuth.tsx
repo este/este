@@ -15,7 +15,6 @@ const browserRedirectToIndexAfterSignOut = () => {
 
 const useAuth = () => {
   const signIn = (token: string) => {
-    // TODO: Secure cookie.
     window.document.cookie = cookie.serialize(cookieName, token, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',
