@@ -38,7 +38,8 @@
 
 ## Tips
 
-- Open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
+- `npm run dev`, then open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
+- After `prisma/docker-compose.yml` change, run `npm run docker:up`
 
 ## Links
 
