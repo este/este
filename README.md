@@ -1,7 +1,7 @@
+# Este
+
 [![CircleCI](https://circleci.com/gh/este/este/tree/master.svg?style=svg)](https://circleci.com/gh/este/este/tree/master)
 [![Dependency Status](https://david-dm.org/este/este.svg)](https://david-dm.org/este/este)
-
-# Este
 
 - [reactjs.org](https://reactjs.org/)
 - [nextjs.org](https://nextjs.org/)
