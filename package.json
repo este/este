@@ -30,7 +30,6 @@
     "gen:relay:ci": "npm run gen:relay -- --watchman false",
     "gen": "run-s gen:api gen:relay",
     "env": "npm run ts-node scripts/env",
-    "production": "npm run build && npm start",
     "analyze": "cross-env BUNDLE_ANALYZE=both next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",

@@ -22,15 +22,14 @@
 - `cd este`
 - `npm install`
 - `npm run docker:up`
-- `npm run deploy:db`
+- `npm run prisma:deploy`
 - `npm run env dev`
 
 ## Tasks
 
 - `npm run dev` start development
-- `npm run deploy:db` after `prisma/datamodel.graphql` change
+- `npm run prisma:deploy` after `prisma/datamodel.graphql` change
 - `npm run gen:api` after `api/schema.graphql` change
-- `npm run production` build and start
 - `npm run prisma delete` get rid of the whole service
 - `npm run env dev` copy `.env.dev` to `.env`
 - `npm run env production` copy `.env.production` to `.env`
