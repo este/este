@@ -40,6 +40,7 @@
 
 - `npm run dev`, then open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
 - After `prisma/docker-compose.yml` change, run `npm run docker:up`
+- To deploy local Prisma to demo server, set up Prisma with demo database, and put its endpoint to .env.production (copy paste .env.dev), then `npm run env production`, then `npm run prisma:deploy`.
 
 ## Links
 

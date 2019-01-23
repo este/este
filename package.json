@@ -23,7 +23,6 @@
     "test:build": "npm run build",
     "test": "run-s gen:relay:ci test:lint test:tsc test:build",
     "deps": "rimraf 'package-lock.json' 'node_modules' && npm i",
-    "deploy:db": "cd prisma && prisma deploy",
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
     "gen:api": "cd api && graphqlgen",
@@ -35,7 +34,9 @@
     "analyze": "cross-env BUNDLE_ANALYZE=both next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
-    "fix:lint": "tslint -p . --fix"
+    "fix:lint": "tslint -p . --fix",
+    "prisma:deploy": "prisma deploy --env-file .env",
+    "prisma:delete": "prisma delete --env-file .env"
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",

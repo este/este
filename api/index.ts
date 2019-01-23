@@ -34,7 +34,10 @@ const getUser = async (req: IncomingMessage): Promise<User | null> => {
   if (!hasUserId(decoded)) return null;
   let user = null;
   try {
-    user = await db.user({ id: decoded.userId });
+    // https://github.com/prisma/prisma/issues/3907
+    if (await db.$exists.user({ id: decoded.userId })) {
+      user = await db.user({ id: decoded.userId });
+    }
   } catch (error) {
     // tslint:disable-next-line:no-console
     console.log(error);
