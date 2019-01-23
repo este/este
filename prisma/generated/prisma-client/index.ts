@@ -2,13 +2,13 @@
 // Please don't change this file manually but run `prisma generate` to update it.
 // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-import { DocumentNode } from "graphql";
+import { DocumentNode } from 'graphql';
 import {
   makePrismaClientClass,
   BaseClientOptions,
-  Model
-} from "prisma-client-lib";
-import { typeDefs } from "./prisma-schema";
+  Model,
+} from 'prisma-client-lib';
+import { typeDefs } from './prisma-schema';
 
 export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
@@ -30,7 +30,7 @@ export interface Prisma {
   $exists: Exists;
   $graphql: <T = any>(
     query: string,
-    variables?: { [key: string]: any }
+    variables?: { [key: string]: any },
   ) => Promise<T>;
 
   /**
@@ -38,43 +38,51 @@ export interface Prisma {
    */
 
   user: (where: UserWhereUniqueInput) => UserPromise;
-  users: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<User>;
-  usersConnection: (args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => UserConnectionPromise;
+  users: (
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => FragmentableArray<User>;
+  usersConnection: (
+    args?: {
+      where?: UserWhereInput;
+      orderBy?: UserOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => UserConnectionPromise;
   web: (where: WebWhereUniqueInput) => WebPromise;
-  webs: (args?: {
-    where?: WebWhereInput;
-    orderBy?: WebOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Web>;
-  websConnection: (args?: {
-    where?: WebWhereInput;
-    orderBy?: WebOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => WebConnectionPromise;
+  webs: (
+    args?: {
+      where?: WebWhereInput;
+      orderBy?: WebOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => FragmentableArray<Web>;
+  websConnection: (
+    args?: {
+      where?: WebWhereInput;
+      orderBy?: WebOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => WebConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
@@ -82,35 +90,47 @@ export interface Prisma {
    */
 
   createUser: (data: UserCreateInput) => UserPromise;
-  updateUser: (args: {
-    data: UserUpdateInput;
-    where: UserWhereUniqueInput;
-  }) => UserPromise;
-  updateManyUsers: (args: {
-    data: UserUpdateManyMutationInput;
-    where?: UserWhereInput;
-  }) => BatchPayloadPromise;
-  upsertUser: (args: {
-    where: UserWhereUniqueInput;
-    create: UserCreateInput;
-    update: UserUpdateInput;
-  }) => UserPromise;
+  updateUser: (
+    args: {
+      data: UserUpdateInput;
+      where: UserWhereUniqueInput;
+    },
+  ) => UserPromise;
+  updateManyUsers: (
+    args: {
+      data: UserUpdateManyMutationInput;
+      where?: UserWhereInput;
+    },
+  ) => BatchPayloadPromise;
+  upsertUser: (
+    args: {
+      where: UserWhereUniqueInput;
+      create: UserCreateInput;
+      update: UserUpdateInput;
+    },
+  ) => UserPromise;
   deleteUser: (where: UserWhereUniqueInput) => UserPromise;
   deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
   createWeb: (data: WebCreateInput) => WebPromise;
-  updateWeb: (args: {
-    data: WebUpdateInput;
-    where: WebWhereUniqueInput;
-  }) => WebPromise;
-  updateManyWebs: (args: {
-    data: WebUpdateManyMutationInput;
-    where?: WebWhereInput;
-  }) => BatchPayloadPromise;
-  upsertWeb: (args: {
-    where: WebWhereUniqueInput;
-    create: WebCreateInput;
-    update: WebUpdateInput;
-  }) => WebPromise;
+  updateWeb: (
+    args: {
+      data: WebUpdateInput;
+      where: WebWhereUniqueInput;
+    },
+  ) => WebPromise;
+  updateManyWebs: (
+    args: {
+      data: WebUpdateManyMutationInput;
+      where?: WebWhereInput;
+    },
+  ) => BatchPayloadPromise;
+  upsertWeb: (
+    args: {
+      where: WebWhereUniqueInput;
+      create: WebCreateInput;
+      update: WebUpdateInput;
+    },
+  ) => WebPromise;
   deleteWeb: (where: WebWhereUniqueInput) => WebPromise;
   deleteManyWebs: (where?: WebWhereInput) => BatchPayloadPromise;
 
@@ -123,10 +143,10 @@ export interface Prisma {
 
 export interface Subscription {
   user: (
-    where?: UserSubscriptionWhereInput
+    where?: UserSubscriptionWhereInput,
   ) => UserSubscriptionPayloadSubscription;
   web: (
-    where?: WebSubscriptionWhereInput
+    where?: WebSubscriptionWhereInput,
   ) => WebSubscriptionPayloadSubscription;
 }
 
@@ -139,30 +159,30 @@ export interface ClientConstructor<T> {
  */
 
 export type WebOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "name_ASC"
-  | "name_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'name_ASC'
+  | 'name_DESC';
 
 export type UserOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
-  | "updatedAt_ASC"
-  | "updatedAt_DESC"
-  | "email_ASC"
-  | "email_DESC"
-  | "password_ASC"
-  | "password_DESC"
-  | "themeName_ASC"
-  | "themeName_DESC";
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'password_ASC'
+  | 'password_DESC'
+  | 'themeName_ASC'
+  | 'themeName_DESC';
 
-export type MutationType = "CREATED" | "UPDATED" | "DELETED";
+export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
 
 export interface WebUpdateManyWithoutCreatorInput {
   create?: WebCreateWithoutCreatorInput[] | WebCreateWithoutCreatorInput;
@@ -658,15 +678,17 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   email: () => Promise<String>;
   password: () => Promise<String>;
   themeName: () => Promise<String>;
-  webs: <T = FragmentableArray<Web>>(args?: {
-    where?: WebWhereInput;
-    orderBy?: WebOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  webs: <T = FragmentableArray<Web>>(
+    args?: {
+      where?: WebWhereInput;
+      orderBy?: WebOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => T;
 }
 
 export interface UserSubscription
@@ -678,15 +700,17 @@ export interface UserSubscription
   email: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   themeName: () => Promise<AsyncIterator<String>>;
-  webs: <T = Promise<AsyncIterator<WebSubscription>>>(args?: {
-    where?: WebWhereInput;
-    orderBy?: WebOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  webs: <T = Promise<AsyncIterator<WebSubscription>>>(
+    args?: {
+      where?: WebWhereInput;
+      orderBy?: WebOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    },
+  ) => T;
 }
 
 export interface UserConnection {
@@ -858,13 +882,13 @@ export type String = string;
 
 export const models: Model[] = [
   {
-    name: "User",
-    embedded: false
+    name: 'User',
+    embedded: false,
   },
   {
-    name: "Web",
-    embedded: false
-  }
+    name: 'Web',
+    embedded: false,
+  },
 ];
 
 /**
@@ -874,6 +898,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `${process.env["PRISMA_ENDPOINT"]}}`
+  endpoint: `${process.env['PRISMA_ENDPOINT']}`,
 });
 export const prisma = new Prisma();
