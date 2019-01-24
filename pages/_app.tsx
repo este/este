@@ -1,12 +1,9 @@
+import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import getConfig from 'next/config';
+import Error from 'next/error';
 import React from 'react';
 import { defineMessages, IntlProvider } from 'react-intl';
-import IntlProviderFix from '../components/IntlProviderFix';
-import AppContext from '../contexts/AppContext';
-const { publicRuntimeConfig } = getConfig();
-import fetch from 'isomorphic-unfetch';
-import Error from 'next/error';
 import { graphql } from 'react-relay';
 import {
   Environment,
@@ -17,10 +14,14 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import IntlProviderFix from '../components/IntlProviderFix';
 import RelayProviderFix from '../components/RelayProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
+import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
 import { AuthSyncProvider, maybeGetAuthToken } from '../hooks/useAuth';
+
+const { publicRuntimeConfig } = getConfig();
 
 export type AppHref =
   | '/'
