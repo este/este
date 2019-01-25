@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "este",
+  "alias": "este.io",
   "builds": [
     {
       "src": "api/index.ts",
