@@ -5,6 +5,7 @@
 
 - [reactjs.org](https://reactjs.org/)
 - [nextjs.org](https://nextjs.org/)
+- [zeit.co/now](https://zeit.co/now)
 - [github.com/necolas/react-native-web](https://github.com/necolas/react-native-web)
 - [typescriptlang.org](https://www.typescriptlang.org/)
 - [graphql.org](https://graphql.org/)
@@ -32,14 +33,15 @@
 - `npm run gen:api` after `api/schema.graphql` change
 - `npm run prisma delete` get rid of the whole service
 - `npm run env dev` copy `.env.dev` to `.env`
-- `npm run env production` copy `.env.production` to `.env`
+- `npm run env prod` copy `.env.prod` to `.env`
 - `npm test` before commit
+- `npm run deploy` deploy to ZEIT Now
 
 ## Tips
 
 - `npm run dev`, then open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
 - After `prisma/docker-compose.yml` change, run `npm run docker:up`
-- To deploy local Prisma to demo server, set up Prisma with demo database, and put its endpoint to .env.production (copy paste .env.dev), then `npm run env production`, then `npm run prisma:deploy`.
+- To deploy local Prisma to demo server, set up Prisma with demo database, and put its endpoint to .env.prod (copy paste of .env.dev), then `npm run env prod`, then `npm run prisma:deploy`.
 
 ## Links
 

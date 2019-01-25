@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
-import getConfig from 'next/config';
-import Error from 'next/error';
+import NextError from 'next/error';
 import React from 'react';
 import { defineMessages, IntlProvider } from 'react-intl';
 import { graphql } from 'react-relay';
@@ -20,8 +19,6 @@ import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
 import { AuthSyncProvider, maybeGetAuthToken } from '../hooks/useAuth';
-
-const { publicRuntimeConfig } = getConfig();
 
 export type AppHref =
   | '/'
@@ -54,13 +51,14 @@ export const pageTitles = defineMessages({
 });
 
 const createRelayEnvironment = (
+  apiEndpoint: string,
   token: string,
   records: RecordMap,
   rejectErrors: boolean,
 ) => {
   return new Environment({
     network: Network.create(async (operation, variables) => {
-      const response = await fetch(publicRuntimeConfig.apiEndpoint, {
+      const response = await fetch(apiEndpoint, {
         body: JSON.stringify({ query: operation.text, variables }),
         headers: {
           'Content-Type': 'application/json',
@@ -94,12 +92,21 @@ const appQuery = graphql`
   }
 `;
 
+let host = '';
+
+const getApiEndpoint = (host: string): string => {
+  const hasNoPortSoIsProbablyDeployed = host.indexOf(':') === -1;
+  if (hasNoPortSoIsProbablyDeployed) return `https://${host}/api`;
+  return `http://${host.replace('3000', '4000')}`;
+};
+
 interface MyAppProps {
+  host: string;
   initialNow: number;
   pageProps: { data: AppQuery['response'] | null };
-  token: string;
   relayRecords: RecordMap;
   statusCode: number | undefined;
+  token: string;
   variables: AppQuery['variables'];
 }
 
@@ -118,7 +125,11 @@ export default class MyApp extends App<MyAppProps> {
       isSignInPage: '/signin' === ctx.pathname,
       isWebPage: '/web' === ctx.pathname,
     };
+
+    host = host || (ctx.req && ctx.req.headers.host) || '';
+
     const props = {
+      host,
       initialNow: Date.now(),
       pageProps: { data: null },
       relayRecords: {},
@@ -135,7 +146,12 @@ export default class MyApp extends App<MyAppProps> {
       return props;
     }
 
-    const relayEnvironment = createRelayEnvironment(props.token, {}, true);
+    const relayEnvironment = createRelayEnvironment(
+      getApiEndpoint(host),
+      props.token,
+      {},
+      true,
+    );
     try {
       props.pageProps.data = await fetchQuery(
         relayEnvironment,
@@ -209,19 +225,26 @@ export default class MyApp extends App<MyAppProps> {
   render() {
     const {
       Component: Page,
-      pageProps,
       initialNow,
+      pageProps,
       relayRecords,
       statusCode,
       token,
       variables,
     } = this.props;
 
+    host = host || this.props.host;
+
     // TODO: Add custom 404 and 500 pages.
     if (statusCode != null && statusCode >= 400)
-      return <Error statusCode={statusCode} />;
+      return <NextError statusCode={statusCode} />;
 
-    const relayEnvironment = createRelayEnvironment(token, relayRecords, false);
+    const relayEnvironment = createRelayEnvironment(
+      getApiEndpoint(host),
+      token,
+      relayRecords,
+      false,
+    );
 
     return (
       <Container>

@@ -35,11 +35,12 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
     "fix:lint": "tslint -p . --fix",
     "prisma:deploy": "prisma deploy --env-file .env",
-    "prisma:delete": "prisma delete --env-file .env"
+    "prisma:delete": "prisma delete --env-file .env",
+    "deploy": "env-cmd .env now -e API_SECRET -e PRISMA_ENDPOINT -e PRISMA_SECRET",
+    "now-build": "next build"
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
-    "@types/nprogress": "0.0.29",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "apollo-server": "^2.3.1",
     "bcryptjs": "^2.4.3",
@@ -72,6 +73,7 @@
     "@types/jsonwebtoken": "^8.3.0",
     "@types/next": "^7.0.5",
     "@types/node": "^10.12.15",
+    "@types/nprogress": "0.0.29",
     "@types/react": "^16.7.11",
     "@types/react-dom": "^16.0.11",
     "@types/react-intl": "^2.3.14",
@@ -85,6 +87,7 @@
     "babel-plugin-relay": "^1.7.0",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
+    "env-cmd": "^8.0.2",
     "graphqlgen": "^0.5.0",
     "nodemon": "^1.18.7",
     "npm-run-all": "^4.1.5",

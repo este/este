@@ -52,6 +52,9 @@ const server = new ApolloServer({
     const models = createModels(db, user);
     return { models };
   },
+  // Enforce introspection and playground for production.
+  introspection: true,
+  playground: true,
   // @ts-ignore Wrong types.
   resolvers,
   typeDefs: gql`
