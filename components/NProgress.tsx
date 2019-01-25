@@ -22,7 +22,6 @@ const NProgress: React.FunctionComponent<NProgressProps> = ({ color }) => {
   };
 
   React.useEffect(() => {
-    // TODO: Listen also mutation progress.
     Router.events.on('routeChangeStart', show);
     Router.events.on('routeChangeComplete', hide);
     Router.events.on('routeChangeError', hide);
