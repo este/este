@@ -13,8 +13,8 @@
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev:relay": "npm run gen:relay -- --watch",
     "dev": "run-p dev:api dev:web dev:playground dev:relay",
-    "build:web": "next build",
-    "build": "run-p build:web",
+    "build": "next build",
+    "now-build": "next build",
     "start:api": "cross-env NODE_ENV=production npm run ts-node api/index.ts",
     "start:web": "next start",
     "start": "run-p start:api start:web",
@@ -36,8 +36,7 @@
     "fix:lint": "tslint -p . --fix",
     "prisma:deploy": "prisma deploy --env-file .env",
     "prisma:delete": "prisma delete --env-file .env",
-    "deploy": "env-cmd .env now -e API_SECRET -e PRISMA_ENDPOINT -e PRISMA_SECRET",
-    "now-build": "next build"
+    "deploy": "npm run ts-node scripts/deploy.ts"
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
@@ -68,6 +67,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie": "^0.3.2",
+    "@types/dotenv": "^6.1.0",
     "@types/graphql": "^14.0.3",
     "@types/gravatar": "^1.4.28",
     "@types/jsonwebtoken": "^8.3.0",
@@ -87,7 +87,6 @@
     "babel-plugin-relay": "^1.7.0",
     "cross-env": "^5.2.0",
     "dotenv": "^6.2.0",
-    "env-cmd": "^8.0.2",
     "graphqlgen": "^0.5.0",
     "nodemon": "^1.18.7",
     "npm-run-all": "^4.1.5",
