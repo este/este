@@ -62,7 +62,6 @@ const NotAuthenticated: React.FunctionComponent = () => {
   return (
     <>
       <Text style={theme.heading1}>{title}</Text>
-      <Text style={theme.heading1}>test</Text>
       <Text style={theme.paragraph}>
         <Link href={{ pathname: '/signin' }}>Create Web</Link>
       </Text>
