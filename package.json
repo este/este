@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
+    "@sentry/browser": "^4.5.3",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "acorn": "^6.0.5",
     "apollo-server": "^2.3.1",

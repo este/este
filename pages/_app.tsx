@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
@@ -19,6 +20,9 @@ import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
 import { AuthSyncProvider, maybeGetAuthToken } from '../hooks/useAuth';
+
+const SENTRY_PUBLIC_DSN =
+  'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';
 
 export type AppHref =
   | '/'
@@ -217,6 +221,26 @@ export default class MyApp extends App<MyAppProps> {
     }
 
     return props;
+  }
+
+  // https://github.com/zeit/next.js/blob/canary/examples/with-sentry/pages/_app.js
+  constructor(...args: any) {
+    // @ts-ignore
+    super(...args);
+    Sentry.init({ dsn: SENTRY_PUBLIC_DSN });
+  }
+
+  // https://github.com/zeit/next.js/blob/canary/examples/with-sentry/pages/_app.js
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    Sentry.configureScope(scope => {
+      Object.keys(errorInfo).forEach(key => {
+        // @ts-ignore
+        scope.setExtra(key, errorInfo[key]);
+      });
+    });
+    Sentry.captureException(error);
+    // @ts-ignore
+    super.componentDidCatch(error, errorInfo);
   }
 
   render() {
