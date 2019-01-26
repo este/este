@@ -1,7 +1,15 @@
 import React from 'react';
+import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
 import useAppContext from './useAppContext';
+
+const messages = defineMessages({
+  noInternetAccess: {
+    defaultMessage: 'No internet access.',
+    id: 'alert.noInternetAccess',
+  },
+});
 
 // While it's possible to have multiple fields (mutations) in one mutation,
 // I don't think it's a good pattern for client usage. There are questions
@@ -95,7 +103,7 @@ const useMutation = <M extends Mutation>(
   const [pending, setPending] = React.useState(false);
   const focusablesRef = React.useRef<{ [key: string]: Focusable | null }>({});
   const disposableRef = React.useRef<Disposable | null>(null);
-  const { relayEnvironment } = useAppContext();
+  const { intl, relayEnvironment } = useAppContext();
 
   React.useEffect(() => {
     return () => {
@@ -209,9 +217,14 @@ const useMutation = <M extends Mutation>(
           commitOptions.onSuccess(firstResponse);
         }
       },
-      onError(_error) {
+      onError(error) {
         setPending(false);
-        // console.log(_error);
+        if (error == null) return;
+        const message =
+          error.message === 'Failed to fetch'
+            ? intl.formatMessage(messages.noInternetAccess)
+            : error.message;
+        alert(message);
       },
     });
   };
