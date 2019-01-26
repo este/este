@@ -14,6 +14,7 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import handleApiGraphQLError from '../api/handleApiGraphQLError';
 import IntlProviderFix from '../components/IntlProviderFix';
 import RelayProviderFix from '../components/RelayProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
@@ -162,41 +163,23 @@ export default class MyApp extends App<MyAppProps> {
         appQuery,
         props.variables,
       );
-    } catch (errors) {
-      const knownGraphQLErrors = Array.isArray(errors)
-        ? errors
-            .map(error => error && error.extensions && error.extensions.code)
-            .filter(
-              code =>
-                code === 'FORBIDDEN' ||
-                code === 'NOTFOUND' ||
-                code === 'UNAUTHENTICATED',
-            )
-            .map(code =>
-              code === 'FORBIDDEN'
-                ? 403
-                : code === 'UNAUTHENTICATED'
-                ? 401
-                : 404,
-            )
-        : null;
-
-      if (knownGraphQLErrors && knownGraphQLErrors.length > 0) {
-        // The order is important.
-        if (knownGraphQLErrors.includes(401)) {
+    } catch (error) {
+      handleApiGraphQLError(error, {
+        401() {
           props.statusCode = 401;
-        } else if (knownGraphQLErrors.includes(404)) {
-          props.statusCode = 404;
-        } else {
+        },
+        403() {
           props.statusCode = 403;
-        }
-      } else {
-        props.statusCode = 500;
-        // tslint:disable-next-line:no-console
-        console.log(errors);
-      }
-
-      if (ctx.res) ctx.res.statusCode = props.statusCode;
+        },
+        404() {
+          props.statusCode = 404;
+        },
+        unknown() {
+          props.statusCode = 500;
+          Sentry.captureException(error);
+        },
+      });
+      if (ctx.res && props.statusCode) ctx.res.statusCode = props.statusCode;
     }
 
     props.relayRecords = relayEnvironment

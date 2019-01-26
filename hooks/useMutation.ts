@@ -1,13 +1,25 @@
+import * as Sentry from '@sentry/browser';
+import Router from 'next/router';
 import React from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
+import handleApiGraphQLError from '../api/handleApiGraphQLError';
+import { AppHref } from '../pages/_app';
 import useAppContext from './useAppContext';
 
 const messages = defineMessages({
+  forbidden: {
+    defaultMessage: 'This action is forbidden.',
+    id: 'useMutation.forbidden',
+  },
   noInternetAccess: {
-    defaultMessage: 'No internet access.',
-    id: 'alert.noInternetAccess',
+    defaultMessage: 'Please check your internet connection.',
+    id: 'useMutation.noInternetAccess',
+  },
+  notFound: {
+    defaultMessage: 'Not found.',
+    id: 'useMutation.notFound',
   },
 });
 
@@ -209,8 +221,29 @@ const useMutation = <M extends Mutation>(
       variables: { input },
       onCompleted(response, payloadErrors) {
         setPending(false);
-        // TODO: https://github.com/este/este/issues/1634
-        if (payloadErrors) return;
+        if (payloadErrors) {
+          handleApiGraphQLError(payloadErrors, {
+            401() {
+              const signInHref: AppHref = {
+                pathname: '/signin',
+                query: { redirectUrl: Router.asPath || '' },
+              };
+              Router.replace(signInHref);
+            },
+            403() {
+              alert(intl.formatMessage(messages.forbidden));
+            },
+            404() {
+              // This should not happen with mutation.
+              alert(intl.formatMessage(messages.notFound));
+              Sentry.captureException(payloadErrors);
+            },
+            unknown() {
+              Sentry.captureException(payloadErrors);
+            },
+          });
+          return;
+        }
         const firstResponse = response[Object.keys(response)[0]] as Response<M>;
         const errors = ((firstResponse && firstResponse.errors) ||
           {}) as Errors<M>;
@@ -222,10 +255,11 @@ const useMutation = <M extends Mutation>(
       onError(error) {
         setPending(false);
         if (error == null) return;
-        const message =
-          error.message === 'Failed to fetch'
-            ? intl.formatMessage(messages.noInternetAccess)
-            : error.message;
+        const isNetworkError = error.message === 'Failed to fetch';
+        const message = isNetworkError
+          ? intl.formatMessage(messages.noInternetAccess)
+          : error.message;
+        if (!isNetworkError) Sentry.captureException(error);
         alert(message);
       },
     });
