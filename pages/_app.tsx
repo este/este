@@ -219,9 +219,6 @@ export default class MyApp extends App<MyAppProps> {
     return props;
   }
 
-  // TODO:
-  // https://github.com/zeit/next.js/blob/canary/examples/with-sentry/pages/_app.js
-
   render() {
     const {
       Component: Page,

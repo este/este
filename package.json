@@ -41,6 +41,7 @@
   "dependencies": {
     "@playlyfe/gql": "^2.6.1",
     "@zeit/next-bundle-analyzer": "^0.1.2",
+    "acorn": "^6.0.5",
     "apollo-server": "^2.3.1",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.3.1",
@@ -50,7 +51,7 @@
     "gravatar": "^1.8.0",
     "isomorphic-unfetch": "^3.0.0",
     "jsonwebtoken": "^8.4.0",
-    "next": "8.0.0-canary.10",
+    "next": "8.0.0-canary.14",
     "nprogress": "^0.2.0",
     "prisma-client-lib": "^1.22.2",
     "prop-types": "^15.6.2",
