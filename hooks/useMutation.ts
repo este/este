@@ -207,8 +207,10 @@ const useMutation = <M extends Mutation>(
     disposableRef.current = commitMutation<M>(relayEnvironment, {
       mutation,
       variables: { input },
-      onCompleted(response, _payloadErrors) {
+      onCompleted(response, payloadErrors) {
         setPending(false);
+        // TODO: https://github.com/este/este/issues/1634
+        if (payloadErrors) return;
         const firstResponse = response[Object.keys(response)[0]] as Response<M>;
         const errors = ((firstResponse && firstResponse.errors) ||
           {}) as Errors<M>;
