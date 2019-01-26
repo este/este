@@ -35,7 +35,8 @@
 - `npm run env dev` copy `.env.dev` to `.env`
 - `npm run env prod` copy `.env.prod` to `.env`
 - `npm test` before commit
-- `npm run deploy` deploy to ZEIT Now
+- `npm run deploy` deploy to https://name-xxxxxxxxx.now.sh
+- `npm run deploy && now alias` deploy to aliased custom domain
 
 ## Tips
 
