@@ -1,6 +1,0 @@
-{
-  "watch": ["api/**/*.ts"],
-  "execMap": {
-    "ts": "node -r esm -r dotenv/config -r ts-node/register/transpile-only"
-  }
-}

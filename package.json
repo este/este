@@ -8,7 +8,7 @@
   "scripts": {
     "prisma": "prisma",
     "ts-node": "node -r esm -r dotenv/config -r ts-node/register/transpile-only",
-    "dev:api": "nodemon --config nodemon.api.json api/index.ts",
+    "dev:api": "nodemon --watch 'api' --exec 'npm run ts-node api/index.ts'",
     "dev:web": "next",
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev:relay": "npm run gen:relay -- --watch",
