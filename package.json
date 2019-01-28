@@ -52,7 +52,7 @@
     "gravatar": "^1.8.0",
     "isomorphic-unfetch": "^3.0.0",
     "jsonwebtoken": "^8.4.0",
-    "next": "8.0.0-canary.14",
+    "next": "8.0.0-canary.17",
     "nprogress": "^0.2.0",
     "prisma-client-lib": "^1.22.2",
     "prop-types": "^15.6.2",
