@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 declare const _LayoutQuery$ref: unique symbol;
 export type LayoutQuery$ref = typeof _LayoutQuery$ref;
 export type LayoutQuery = {
@@ -12,7 +12,7 @@ export type LayoutQuery = {
 
 
 
-const node: ConcreteFragment = {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "LayoutQuery",
   "type": "Query",

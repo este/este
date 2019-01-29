@@ -149,7 +149,7 @@ v3 = {
   "concreteType": "User",
   "plural": false,
   "selections": [
-    v2
+    (v2/*: any*/)
   ]
 },
 v4 = {
@@ -161,17 +161,12 @@ v4 = {
 };
 return {
   "kind": "Request",
-  "operationKind": "query",
-  "name": "AppQuery",
-  "id": null,
-  "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerThemeQuery\n  ...pagesQuery @include(if: $isIndexPage)\n  ...meQuery @include(if: $isMePage)\n  ...signinQuery @include(if: $isSignInPage)\n  ...webQuery_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pagesQuery on Query {\n  ...LayoutQuery\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment meQuery on Query {\n  ...LayoutQuery\n  ...SetUserThemeQuery\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signinQuery on Query {\n  ...LayoutQuery\n}\n\nfragment webQuery_1Bmzm5 on Query {\n  ...LayoutQuery\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment LayoutQuery on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "AppQuery",
     "type": "Query",
     "metadata": null,
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "FragmentSpread",
@@ -238,7 +233,7 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "AppQuery",
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
@@ -256,7 +251,7 @@ return {
             "args": null,
             "storageKey": null
           },
-          v1
+          (v1/*: any*/)
         ]
       },
       {
@@ -264,7 +259,7 @@ return {
         "passingValue": true,
         "condition": "isWebPage",
         "selections": [
-          v3,
+          (v3/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -281,8 +276,8 @@ return {
             "concreteType": "Web",
             "plural": false,
             "selections": [
-              v4,
-              v1
+              (v4/*: any*/),
+              (v1/*: any*/)
             ]
           }
         ]
@@ -292,7 +287,7 @@ return {
         "passingValue": true,
         "condition": "isSignInPage",
         "selections": [
-          v3
+          (v3/*: any*/)
         ]
       },
       {
@@ -300,7 +295,7 @@ return {
         "passingValue": true,
         "condition": "isMePage",
         "selections": [
-          v3,
+          (v3/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -310,8 +305,8 @@ return {
             "concreteType": "User",
             "plural": false,
             "selections": [
-              v2,
-              v1
+              (v2/*: any*/),
+              (v1/*: any*/)
             ]
           }
         ]
@@ -330,7 +325,7 @@ return {
             "concreteType": "User",
             "plural": false,
             "selections": [
-              v2,
+              (v2/*: any*/),
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -340,8 +335,8 @@ return {
                 "concreteType": "Web",
                 "plural": true,
                 "selections": [
-                  v1,
-                  v4,
+                  (v1/*: any*/),
+                  (v4/*: any*/),
                   {
                     "kind": "ScalarField",
                     "alias": null,
@@ -356,6 +351,13 @@ return {
         ]
       }
     ]
+  },
+  "params": {
+    "operationKind": "query",
+    "name": "AppQuery",
+    "id": null,
+    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerThemeQuery\n  ...pagesQuery @include(if: $isIndexPage)\n  ...meQuery @include(if: $isMePage)\n  ...signinQuery @include(if: $isSignInPage)\n  ...webQuery_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pagesQuery on Query {\n  ...LayoutQuery\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment meQuery on Query {\n  ...LayoutQuery\n  ...SetUserThemeQuery\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signinQuery on Query {\n  ...LayoutQuery\n}\n\nfragment webQuery_1Bmzm5 on Query {\n  ...LayoutQuery\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment LayoutQuery on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();

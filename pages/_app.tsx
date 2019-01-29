@@ -4,7 +4,8 @@ import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
 import React from 'react';
 import { defineMessages, IntlProvider } from 'react-intl';
-import { graphql } from 'react-relay';
+// @ts-ignore
+import { graphql, ReactRelayContext } from 'react-relay';
 import {
   Environment,
   // @ts-ignore Missing type.
@@ -16,7 +17,6 @@ import {
 } from 'relay-runtime';
 import handleApiGraphQLError from '../api/handleApiGraphQLError';
 import IntlProviderFix from '../components/IntlProviderFix';
-import RelayProviderFix from '../components/RelayProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
@@ -252,7 +252,9 @@ export default class MyApp extends App<MyAppProps> {
 
     return (
       <Container>
-        <RelayProviderFix environment={relayEnvironment} variables={variables}>
+        <ReactRelayContext.Provider
+          value={{ environment: relayEnvironment, variables }}
+        >
           <IntlProvider
             locale="en"
             initialNow={initialNow}
@@ -276,7 +278,7 @@ export default class MyApp extends App<MyAppProps> {
               }}
             </ViewerTheme>
           </IntlProvider>
-        </RelayProviderFix>
+        </ReactRelayContext.Provider>
       </Container>
     );
   }

@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 declare const _SetUserThemeQuery$ref: unique symbol;
 export type SetUserThemeQuery$ref = typeof _SetUserThemeQuery$ref;
 export type SetUserThemeQuery = {
@@ -12,7 +12,7 @@ export type SetUserThemeQuery = {
 
 
 
-const node: ConcreteFragment = {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "SetUserThemeQuery",
   "type": "Query",

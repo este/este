@@ -60,24 +60,19 @@ v2 = {
 };
 return {
   "kind": "Request",
-  "operationKind": "mutation",
-  "name": "SetUserThemeMutation",
-  "id": null,
-  "text": "mutation SetUserThemeMutation(\n  $input: SetUserThemeInput!\n) {\n  setUserTheme(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "SetUserThemeMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "setUserTheme",
         "storageKey": null,
-        "args": v1,
+        "args": (v1/*: any*/),
         "concreteType": "SetUserThemePayload",
         "plural": false,
         "selections": [
@@ -90,7 +85,7 @@ return {
             "concreteType": "User",
             "plural": false,
             "selections": [
-              v2
+              (v2/*: any*/)
             ]
           }
         ]
@@ -100,14 +95,14 @@ return {
   "operation": {
     "kind": "Operation",
     "name": "SetUserThemeMutation",
-    "argumentDefinitions": v0,
+    "argumentDefinitions": (v0/*: any*/),
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
         "name": "setUserTheme",
         "storageKey": null,
-        "args": v1,
+        "args": (v1/*: any*/),
         "concreteType": "SetUserThemePayload",
         "plural": false,
         "selections": [
@@ -120,7 +115,7 @@ return {
             "concreteType": "User",
             "plural": false,
             "selections": [
-              v2,
+              (v2/*: any*/),
               {
                 "kind": "ScalarField",
                 "alias": null,
@@ -133,6 +128,13 @@ return {
         ]
       }
     ]
+  },
+  "params": {
+    "operationKind": "mutation",
+    "name": "SetUserThemeMutation",
+    "id": null,
+    "text": "mutation SetUserThemeMutation(\n  $input: SetUserThemeInput!\n) {\n  setUserTheme(input: $input) {\n    user {\n      themeName\n      id\n    }\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();

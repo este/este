@@ -85,7 +85,7 @@ v2 = [
         "concreteType": "UpdateWebErrors",
         "plural": false,
         "selections": [
-          v1
+          (v1/*: any*/)
         ]
       },
       {
@@ -104,7 +104,7 @@ v2 = [
             "args": null,
             "storageKey": null
           },
-          v1
+          (v1/*: any*/)
         ]
       }
     ]
@@ -112,24 +112,26 @@ v2 = [
 ];
 return {
   "kind": "Request",
-  "operationKind": "mutation",
-  "name": "webMutation",
-  "id": null,
-  "text": "mutation webMutation(\n  $input: UpdateWebInput!\n) {\n  updateWeb(input: $input) {\n    errors {\n      name\n    }\n    web {\n      id\n      name\n    }\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "webMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": v2
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v2/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "webMutation",
-    "argumentDefinitions": v0,
-    "selections": v2
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v2/*: any*/)
+  },
+  "params": {
+    "operationKind": "mutation",
+    "name": "webMutation",
+    "id": null,
+    "text": "mutation webMutation(\n  $input: UpdateWebInput!\n) {\n  updateWeb(input: $input) {\n    errors {\n      name\n    }\n    web {\n      id\n      name\n    }\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();

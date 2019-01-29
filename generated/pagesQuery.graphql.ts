@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 import { LayoutQuery$ref } from "./LayoutQuery.graphql";
 declare const _pagesQuery$ref: unique symbol;
 export type pagesQuery$ref = typeof _pagesQuery$ref;
@@ -19,7 +19,7 @@ export type pagesQuery = {
 
 
 
-const node: ConcreteFragment = (function(){
+const node: ReaderFragment = (function(){
 var v0 = {
   "kind": "ScalarField",
   "alias": null,
@@ -48,7 +48,7 @@ return {
       "concreteType": "User",
       "plural": false,
       "selections": [
-        v0,
+        (v0/*: any*/),
         {
           "kind": "LinkedField",
           "alias": null,
@@ -58,7 +58,7 @@ return {
           "concreteType": "Web",
           "plural": true,
           "selections": [
-            v0,
+            (v0/*: any*/),
             {
               "kind": "ScalarField",
               "alias": null,

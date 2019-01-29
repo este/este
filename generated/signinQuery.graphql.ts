@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 import { LayoutQuery$ref } from "./LayoutQuery.graphql";
 declare const _signinQuery$ref: unique symbol;
 export type signinQuery$ref = typeof _signinQuery$ref;
@@ -11,7 +11,7 @@ export type signinQuery = {
 
 
 
-const node: ConcreteFragment = {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "signinQuery",
   "type": "Query",

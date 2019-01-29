@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 import { LayoutQuery$ref } from "./LayoutQuery.graphql";
 declare const _webQuery$ref: unique symbol;
 export type webQuery$ref = typeof _webQuery$ref;
@@ -15,7 +15,7 @@ export type webQuery = {
 
 
 
-const node: ConcreteFragment = {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "webQuery",
   "type": "Query",

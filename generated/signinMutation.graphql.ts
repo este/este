@@ -104,24 +104,26 @@ v1 = [
 ];
 return {
   "kind": "Request",
-  "operationKind": "mutation",
-  "name": "signinMutation",
-  "id": null,
-  "text": "mutation signinMutation(\n  $input: SignInInput!\n) {\n  signIn(input: $input) {\n    token\n    errors {\n      email\n      password\n    }\n  }\n}\n",
-  "metadata": {},
   "fragment": {
     "kind": "Fragment",
     "name": "signinMutation",
     "type": "Mutation",
     "metadata": null,
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "signinMutation",
-    "argumentDefinitions": v0,
-    "selections": v1
+    "argumentDefinitions": (v0/*: any*/),
+    "selections": (v1/*: any*/)
+  },
+  "params": {
+    "operationKind": "mutation",
+    "name": "signinMutation",
+    "id": null,
+    "text": "mutation signinMutation(\n  $input: SignInInput!\n) {\n  signIn(input: $input) {\n    token\n    errors {\n      email\n      password\n    }\n  }\n}\n",
+    "metadata": {}
   }
 };
 })();

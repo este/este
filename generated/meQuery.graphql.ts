@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-import { ConcreteFragment } from "relay-runtime";
+import { ReaderFragment } from "relay-runtime";
 import { LayoutQuery$ref } from "./LayoutQuery.graphql";
 import { SetUserThemeQuery$ref } from "./SetUserThemeQuery.graphql";
 declare const _meQuery$ref: unique symbol;
@@ -15,7 +15,7 @@ export type meQuery = {
 
 
 
-const node: ConcreteFragment = {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "meQuery",
   "type": "Query",
