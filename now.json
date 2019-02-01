@@ -2,9 +2,6 @@
   "version": 2,
   "name": "este",
   "alias": "este.io",
-  "env": {
-    "IS_NOW": "true"
-  },
   "builds": [
     {
       "src": "api/index.ts",

@@ -15,6 +15,6 @@ module.exports = withBundleAnalyzer(
         reportFilename: '../../bundles/server.html',
       },
     },
-    ...(process.env.IS_NOW ? { target: 'serverless' } : null),
+    ...(process.env.NOW_REGION ? { target: 'serverless' } : null),
   }),
 );
