@@ -1,7 +1,7 @@
 // https://github.com/motdotla/dotenv
 import fs from 'fs';
 
-// `npm run env dev` will copy `.env.dev` file to `.env` file.
+// `yarn env dev` will copy `.env.dev` file to `.env` file.
 
 const from = `.env.${process.argv[process.argv.length - 1]}`;
 const to = '.env';

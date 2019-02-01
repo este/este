@@ -11,7 +11,7 @@ import { Context, User } from './types';
 const { PRISMA_ENDPOINT, PRISMA_SECRET, API_SECRET } = process.env;
 
 if (!PRISMA_ENDPOINT || !PRISMA_SECRET || !API_SECRET)
-  throw Error(`Did you run 'npm run env dev'?`);
+  throw Error(`Did you run 'yarn env dev'?`);
 
 const db = new Prisma({ endpoint: PRISMA_ENDPOINT, secret: PRISMA_SECRET });
 

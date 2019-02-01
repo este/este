@@ -16,33 +16,34 @@
 
 - [nodejs.org](http://nodejs.org/)
 - [docker-compose](https://www.docker.com/products/docker-engine)
+- [yarnpkg.com](https://yarnpkg.com/en/)
 
 ## Setup project
 
 - `git clone https://github.com/este/este`
 - `cd este`
-- `npm install`
-- `npm run docker:up`
-- `npm run prisma:deploy`
-- `npm run env dev`
+- `yarn`
+- `yarn docker:up`
+- `yarn prisma:deploy`
+- `yarn env dev`
 
 ## Tasks
 
-- `npm run dev` start development
-- `npm run prisma:deploy` after `prisma/datamodel.graphql` change
-- `npm run gen:api` after `api/schema.graphql` change
-- `npm run prisma delete` get rid of the whole service
-- `npm run env dev` copy `.env.dev` to `.env`
-- `npm run env prod` copy `.env.prod` to `.env`
-- `npm test` before commit
-- `npm run deploy` deploy to https://name-xxxxxxxxx.now.sh
-- `npm run deploy && now alias` deploy to aliased custom domain
+- `yarn dev` start development
+- `yarn prisma:deploy` after `prisma/datamodel.graphql` change
+- `yarn gen:api` after `api/schema.graphql` change
+- `yarn prisma delete` get rid of the whole service
+- `yarn env dev` copy `.env.dev` to `.env`
+- `yarn env prod` copy `.env.prod` to `.env`
+- `yarn test` before commit
+- `yarn deploy` deploy to <https://name-xxxxxxxxx.now.sh>
+- `yarn deploy && now alias` deploy to aliased custom domain
 
 ## Tips
 
-- `npm run dev`, then open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `npm run prisma token` for db.
-- After `prisma/docker-compose.yml` change, run `npm run docker:up`
-- To deploy local Prisma to demo server, set up Prisma with demo database, and put its endpoint to .env.prod (copy paste of .env.dev), then `npm run env prod`, then `npm run prisma:deploy`.
+- `yarn dev`, then open [localhost:5000/playground](http://localhost:5000/playground) and set HTTP HEADERS to `{ "Authorization": "Bearer token" }`. Token is browser cookie for api and `yarn prisma token` for db.
+- After `prisma/docker-compose.yml` change, run `yarn docker:up`
+- To deploy local Prisma to demo server, set up Prisma with demo database, and put its endpoint to .env.prod (copy paste of .env.dev), then `yarn env prod`, then `yarn prisma:deploy`.
 
 ## Links
 
