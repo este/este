@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "8.x.x"
+    "node": "8.10.0"
   },
   "scripts": {
     "ts-node": "node -r esm -r dotenv/config -r ts-node/register/transpile-only",
