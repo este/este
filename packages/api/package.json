@@ -1,0 +1,30 @@
+{
+  "name": "@este/api",
+  "version": "1.0.0",
+  "private": true,
+  "resolutions": {
+    "core-js": "3.0.0-beta.11"
+  },
+  "scripts": {
+    "gen": "graphqlgen",
+    "dev": "cd .. && yarn ts:watch packages/api/index.ts",
+    "start": "cd .. && yarn ts packages/api/index.ts"
+  },
+  "dependencies": {
+    "apollo-server": "^2.3.3",
+    "bcryptjs": "^2.4.3",
+    "core-js": "3.0.0-beta.11",
+    "graphql": "^14.1.1",
+    "graphql-import": "^0.7.1",
+    "jsonwebtoken": "^8.4.0",
+    "prisma-client-lib": "^1.22.2",
+    "validator": "^10.9.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/graphql": "^14.0.5",
+    "@types/jsonwebtoken": "^8.3.0",
+    "@types/validator": "^10.9.0",
+    "graphqlgen": "^0.6.0-rc2"
+  }
+}

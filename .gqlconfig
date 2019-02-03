@@ -1,6 +1,0 @@
-/* .gqlconfig, check https://github.com/este/este/wiki/Recommended-VSCode-Settings */
-{
-  schema: {
-    files: 'api/**/*.graphql'
-  }
-}

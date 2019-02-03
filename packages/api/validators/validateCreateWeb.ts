@@ -1,4 +1,4 @@
-import { CreateWebErrors, CreateWebInput } from '../api/types';
+import { CreateWebErrors, CreateWebInput } from '../types';
 import { validateMax140Chars } from './';
 
 const validateCreateWeb = (input: CreateWebInput): CreateWebErrors => ({

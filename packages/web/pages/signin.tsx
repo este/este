@@ -1,3 +1,4 @@
+import validateSignIn from '@este/api/validators/validateSignIn';
 import React from 'react';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { Platform, TextInput, View } from 'react-native';
@@ -10,7 +11,6 @@ import { signinQuery } from '../generated/signinQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
 import useAuth from '../hooks/useAuth';
 import useMutation from '../hooks/useMutation';
-import validateSignIn from '../validators/validateSignIn';
 import { pageTitles } from './_app';
 
 const mutation = graphql`

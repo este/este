@@ -1,3 +1,4 @@
+import handleApiGraphQLError from '@este/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
@@ -15,7 +16,6 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
-import handleApiGraphQLError from '../api/handleApiGraphQLError';
 import IntlProviderFix from '../components/IntlProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
@@ -176,6 +176,8 @@ export default class MyApp extends App<MyAppProps> {
         },
         unknown() {
           props.statusCode = 500;
+          // tslint:disable-next-line:no-console
+          console.log(error);
           Sentry.captureException(error);
         },
       });

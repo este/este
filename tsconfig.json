@@ -1,28 +1,18 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "jsx": "react-native",
     "allowJs": true,
-    "noEmit": true,
-    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "removeComments": false,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
     "baseUrl": ".",
-    "typeRoots": ["./node_modules/@types"],
+    "jsx": "react-native",
     "lib": ["dom", "es2017", "esnext.asynciterable"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
     "strict": true,
-    "plugins": [
-      {
-        "name": "@divyenduz/ts-graphql-plugin"
-      }
-    ]
+    "target": "esnext"
   },
   "exclude": ["node_modules", "**/generated/**/*.*"]
 }

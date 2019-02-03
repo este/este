@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import validateSignIn from '../../validators/validateSignIn';
 import { SignInErrors, SignInInput, Web } from '../types';
+import validateSignIn from '../validators/validateSignIn';
 import { ModelContext } from './index';
 
 export interface JsonWebTokenPayload {

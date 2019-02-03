@@ -1,5 +1,5 @@
-import validateCreateWeb from '../../validators/validateCreateWeb';
 import { CreateWebInput, DeleteWebInput, UpdateWebInput, Web } from '../types';
+import validateCreateWeb from '../validators/validateCreateWeb';
 import { ModelContext } from './index';
 
 // Fetch web with creator eagerly, because of permissions.

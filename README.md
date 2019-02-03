@@ -14,7 +14,7 @@
 
 ## Prerequisites
 
-- [nodejs.org](http://nodejs.org/)
+- [nodejs.org](http://nodejs.org/) 8 is required because of AWS. No, they don't support 10 yet.
 - [docker-compose](https://www.docker.com/products/docker-engine)
 - [yarnpkg.com](https://yarnpkg.com/en/)
 
@@ -24,14 +24,14 @@
 - `cd este`
 - `yarn`
 - `yarn docker:up`
-- `yarn prisma:deploy`
 - `yarn env dev`
+- `yarn prisma:deploy`
 
 ## Tasks
 
 - `yarn dev` start development
 - `yarn prisma:deploy` after `prisma/datamodel.graphql` change
-- `yarn gen:api` after `api/schema.graphql` change
+- `yarn gen` after `api/schema.graphql` change
 - `yarn prisma delete` get rid of the whole service
 - `yarn env dev` copy `.env.dev` to `.env`
 - `yarn env prod` copy `.env.prod` to `.env`

@@ -1,7 +1,7 @@
+import { EmailError, Max140CharsError, PasswordError } from '@este/api/types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text } from 'react-native';
-import { EmailError, Max140CharsError, PasswordError } from '../api/types';
 import useAppContext from '../hooks/useAppContext';
 
 // '%future added value' is reminder that GraphQL services often expand in

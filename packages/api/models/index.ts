@@ -1,4 +1,4 @@
-import { Prisma } from '../../prisma/generated/prisma-client';
+import { Prisma } from '../../../prisma/generated/prisma-client';
 import { User } from '../types';
 import createPermissions from './createPermissions';
 

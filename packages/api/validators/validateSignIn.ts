@@ -1,4 +1,4 @@
-import { SignInErrors, SignInInput } from '../api/types';
+import { SignInErrors, SignInInput } from '../types';
 import { validateEmail, validatePassword } from './';
 
 const validateSignIn = (input: SignInInput): SignInErrors => ({

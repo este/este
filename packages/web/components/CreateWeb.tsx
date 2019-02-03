@@ -1,3 +1,4 @@
+import validateCreateWeb from '@este/api/validators/validateCreateWeb';
 import Router from 'next/router';
 import React from 'react';
 import { defineMessages } from 'react-intl';
@@ -7,7 +8,6 @@ import { CreateWebMutation } from '../generated/CreateWebMutation.graphql';
 import useAppContext from '../hooks/useAppContext';
 import useMutation from '../hooks/useMutation';
 import { AppHref } from '../pages/_app';
-import validateCreateWeb from '../validators/validateCreateWeb';
 import Button from './Button';
 import ValidationError from './ValidationError';
 

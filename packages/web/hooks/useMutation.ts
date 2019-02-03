@@ -1,10 +1,10 @@
+import handleApiGraphQLError from '@este/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
 import Router from 'next/router';
 import React from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
-import handleApiGraphQLError from '../api/handleApiGraphQLError';
 import { AppHref } from '../pages/_app';
 import useAppContext from './useAppContext';
 
@@ -87,12 +87,10 @@ type Input<M extends Mutation> = M['variables']['input'];
 
 type Response<M extends Mutation> = M['response'][keyof M['response']];
 
-type Commit<M extends Mutation> = (
-  options?: {
-    merge?: Partial<Input<M>>;
-    onSuccess?: (response: Response<M>) => void;
-  },
-) => void;
+type Commit<M extends Mutation> = (options?: {
+  merge?: Partial<Input<M>>;
+  onSuccess?: (response: Response<M>) => void;
+}) => void;
 
 type Errors<M extends Mutation> = NonNullable<Response<M>['errors']>;
 
@@ -123,61 +121,58 @@ const useMutation = <M extends Mutation>(
     };
   }, []);
 
-  const fields = React.useMemo<Fields<Input<M>>>(
-    () => {
-      const createRef = (key: string) => (focusable: Focusable | null) => {
-        focusablesRef.current[key] = focusable;
-      };
+  const fields = React.useMemo<Fields<Input<M>>>(() => {
+    const createRef = (key: string) => (focusable: Focusable | null) => {
+      focusablesRef.current[key] = focusable;
+    };
 
-      const createTextInput = (key: string, value: string): TextInputField => ({
-        // blurOnSubmit true breaks focus on error on invalid field.
-        blurOnSubmit: false,
-        editable: !pending,
-        onChangeText: (text: string) => {
-          setState({ ...state, [key]: text });
-        },
-        ref: createRef(key),
-        value,
-      });
+    const createTextInput = (key: string, value: string): TextInputField => ({
+      // blurOnSubmit true breaks focus on error on invalid field.
+      blurOnSubmit: false,
+      editable: !pending,
+      onChangeText: (text: string) => {
+        setState({ ...state, [key]: text });
+      },
+      ref: createRef(key),
+      value,
+    });
 
-      const createSwitch = (key: string, value: boolean): SwitchField => ({
-        disabled: pending,
-        onValueChange: (value: boolean) => {
-          setState({ ...state, [key]: value });
-        },
-        ref: createRef(key),
-        value,
-      });
+    const createSwitch = (key: string, value: boolean): SwitchField => ({
+      disabled: pending,
+      onValueChange: (value: boolean) => {
+        setState({ ...state, [key]: value });
+      },
+      ref: createRef(key),
+      value,
+    });
 
-      const createPicker = (key: string, value: string): PickerField => ({
-        enabled: !pending,
-        onValueChange: (value: string) => {
-          setState({ ...state, [key]: value });
-        },
-        ref: createRef(key),
-        selectedValue: value,
-      });
+    const createPicker = (key: string, value: string): PickerField => ({
+      enabled: !pending,
+      onValueChange: (value: string) => {
+        setState({ ...state, [key]: value });
+      },
+      ref: createRef(key),
+      selectedValue: value,
+    });
 
-      return Object.keys(state).reduce<Fields<Input<M>>>(
-        (fields, key) => {
-          const value = state[key];
-          const field: Field<boolean | string> | null =
-            typeof value === 'boolean'
-              ? { switch: createSwitch(key, value) }
-              : typeof value === 'string'
-              ? {
-                  picker: createPicker(key, value),
-                  textInput: createTextInput(key, value),
-                }
-              : null;
-          if (field == null) return fields;
-          return { ...fields, [key]: field };
-        },
-        {} as Fields<Input<M>>,
-      );
-    },
-    [state, pending],
-  );
+    return Object.keys(state).reduce<Fields<Input<M>>>(
+      (fields, key) => {
+        const value = state[key];
+        const field: Field<boolean | string> | null =
+          typeof value === 'boolean'
+            ? { switch: createSwitch(key, value) }
+            : typeof value === 'string'
+            ? {
+                picker: createPicker(key, value),
+                textInput: createTextInput(key, value),
+              }
+            : null;
+        if (field == null) return fields;
+        return { ...fields, [key]: field };
+      },
+      {} as Fields<Input<M>>,
+    );
+  }, [state, pending]);
 
   const commit: Commit<M> = (commitOptions = {}) => {
     if (pending) return;

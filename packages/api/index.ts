@@ -2,7 +2,7 @@ import { ApolloServer, gql } from 'apollo-server';
 import { importSchema } from 'graphql-import';
 import { IncomingMessage } from 'http';
 import * as jwt from 'jsonwebtoken';
-import { Prisma } from '../prisma/generated/prisma-client';
+import { Prisma } from '../../prisma/generated/prisma-client';
 import { createModels } from './models';
 import { JsonWebTokenPayload } from './models/userModel';
 import { resolvers } from './resolvers';
