@@ -4,3 +4,4 @@ node_modules
 npm-debug.log
 .env*
 !.env.dev
+web/bundles
