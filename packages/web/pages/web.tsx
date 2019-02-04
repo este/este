@@ -46,7 +46,8 @@ const Web: React.FunctionComponent<WebProps> = ({ data }) => {
       <ValidationError error={errors.name} />
       <View style={theme.buttons}>
         <SaveButton
-          disabled={pending || state.name === web.name}
+          disabled={pending}
+          saved={state.name === web.name}
           onPress={() => commit()}
         />
         <DeleteWeb id={web.id} />
