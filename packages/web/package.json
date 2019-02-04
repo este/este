@@ -41,7 +41,7 @@
     "@types/react-dom": "^16.0.11",
     "@types/react-intl": "^2.3.14",
     "@types/react-native": "^0.55.28",
-    "@types/react-relay": "^1.3.9",
+    "@types/react-relay": "^1.3.11",
     "@types/relay-runtime": "1.3.8",
     "@types/styled-jsx": "^2.2.7",
     "@zeit/next-bundle-analyzer": "^0.1.2",
