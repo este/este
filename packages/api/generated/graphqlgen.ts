@@ -30,48 +30,108 @@ export namespace QueryResolvers {
     id: string;
   }
 
-  export type ViewerResolver = (
-    parent: undefined,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => User | null | Promise<User | null>;
+  export type ViewerResolver =
+    | ((
+        parent: undefined,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => User | null | Promise<User | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | null | Promise<User | null>;
+      };
 
-  export type RequiredViewerResolver = (
-    parent: undefined,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => User | Promise<User>;
+  export type RequiredViewerResolver =
+    | ((
+        parent: undefined,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => User | Promise<User>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | Promise<User>;
+      };
 
-  export type WebResolver = (
-    parent: undefined,
-    args: ArgsWeb,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Web | Promise<Web>;
+  export type WebResolver =
+    | ((
+        parent: undefined,
+        args: ArgsWeb,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Web | Promise<Web>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | Promise<Web>;
+      };
 
   export interface Type {
-    viewer: (
-      parent: undefined,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => User | null | Promise<User | null>;
+    viewer:
+      | ((
+          parent: undefined,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | null | Promise<User | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => User | null | Promise<User | null>;
+        };
 
-    requiredViewer: (
-      parent: undefined,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => User | Promise<User>;
+    requiredViewer:
+      | ((
+          parent: undefined,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | Promise<User>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => User | Promise<User>;
+        };
 
-    web: (
-      parent: undefined,
-      args: ArgsWeb,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Web | Promise<Web>;
+    web:
+      | ((
+          parent: undefined,
+          args: ArgsWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | Promise<Web>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsWeb,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Web | Promise<Web>;
+        };
   }
 }
 
@@ -85,90 +145,210 @@ export namespace UserResolvers {
     webs: (parent: User) => parent.webs,
   };
 
-  export type IdResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type IdResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type CreatedAtResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type CreatedAtResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type UpdatedAtResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type UpdatedAtResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type EmailResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type EmailResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type ThemeNameResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type ThemeNameResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type WebsResolver = (
-    parent: User,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Array<Web | null> | null | Promise<Array<Web | null> | null>;
+  export type WebsResolver =
+    | ((
+        parent: User,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Array<Web | null> | null | Promise<Array<Web | null> | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Array<Web | null> | null | Promise<Array<Web | null> | null>;
+      };
 
   export interface Type {
-    id: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    id:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    createdAt: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    createdAt:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    updatedAt: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    updatedAt:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    email: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    email:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    themeName: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    themeName:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    webs: (
-      parent: User,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Array<Web | null> | null | Promise<Array<Web | null> | null>;
+    webs:
+      | ((
+          parent: User,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Array<Web | null> | null | Promise<Array<Web | null> | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: User,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Array<Web | null> | null | Promise<Array<Web | null> | null>;
+        };
   }
 }
 
@@ -181,76 +361,176 @@ export namespace WebResolvers {
     creator: (parent: Web) => parent.creator,
   };
 
-  export type IdResolver = (
-    parent: Web,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type IdResolver =
+    | ((
+        parent: Web,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type CreatedAtResolver = (
-    parent: Web,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type CreatedAtResolver =
+    | ((
+        parent: Web,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type UpdatedAtResolver = (
-    parent: Web,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type UpdatedAtResolver =
+    | ((
+        parent: Web,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
-  export type CreatorResolver = (
-    parent: Web,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => User | Promise<User>;
+  export type CreatorResolver =
+    | ((
+        parent: Web,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => User | Promise<User>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | Promise<User>;
+      };
 
-  export type NameResolver = (
-    parent: Web,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | Promise<string>;
+  export type NameResolver =
+    | ((
+        parent: Web,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | Promise<string>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>;
+      };
 
   export interface Type {
-    id: (
-      parent: Web,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    id:
+      | ((
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: Web,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    createdAt: (
-      parent: Web,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    createdAt:
+      | ((
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: Web,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    updatedAt: (
-      parent: Web,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    updatedAt:
+      | ((
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: Web,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
 
-    creator: (
-      parent: Web,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => User | Promise<User>;
+    creator:
+      | ((
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | Promise<User>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: Web,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => User | Promise<User>;
+        };
 
-    name: (
-      parent: Web,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | Promise<string>;
+    name:
+      | ((
+          parent: Web,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | Promise<string>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: Web,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | Promise<string>;
+        };
   }
 }
 
@@ -296,76 +576,176 @@ export namespace MutationResolvers {
     input: DeleteWebInput;
   }
 
-  export type SignInResolver = (
-    parent: undefined,
-    args: ArgsSignIn,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => SignInPayload | Promise<SignInPayload>;
+  export type SignInResolver =
+    | ((
+        parent: undefined,
+        args: ArgsSignIn,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => SignInPayload | Promise<SignInPayload>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsSignIn,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SignInPayload | Promise<SignInPayload>;
+      };
 
-  export type SetUserThemeResolver = (
-    parent: undefined,
-    args: ArgsSetUserTheme,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => SetUserThemePayload | Promise<SetUserThemePayload>;
+  export type SetUserThemeResolver =
+    | ((
+        parent: undefined,
+        args: ArgsSetUserTheme,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => SetUserThemePayload | Promise<SetUserThemePayload>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsSetUserTheme,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SetUserThemePayload | Promise<SetUserThemePayload>;
+      };
 
-  export type CreateWebResolver = (
-    parent: undefined,
-    args: ArgsCreateWeb,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => CreateWebPayload | Promise<CreateWebPayload>;
+  export type CreateWebResolver =
+    | ((
+        parent: undefined,
+        args: ArgsCreateWeb,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => CreateWebPayload | Promise<CreateWebPayload>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsCreateWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => CreateWebPayload | Promise<CreateWebPayload>;
+      };
 
-  export type UpdateWebResolver = (
-    parent: undefined,
-    args: ArgsUpdateWeb,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => UpdateWebPayload | Promise<UpdateWebPayload>;
+  export type UpdateWebResolver =
+    | ((
+        parent: undefined,
+        args: ArgsUpdateWeb,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => UpdateWebPayload | Promise<UpdateWebPayload>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsUpdateWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => UpdateWebPayload | Promise<UpdateWebPayload>;
+      };
 
-  export type DeleteWebResolver = (
-    parent: undefined,
-    args: ArgsDeleteWeb,
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => DeleteWebPayload | Promise<DeleteWebPayload>;
+  export type DeleteWebResolver =
+    | ((
+        parent: undefined,
+        args: ArgsDeleteWeb,
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => DeleteWebPayload | Promise<DeleteWebPayload>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: undefined,
+          args: ArgsDeleteWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => DeleteWebPayload | Promise<DeleteWebPayload>;
+      };
 
   export interface Type {
-    signIn: (
-      parent: undefined,
-      args: ArgsSignIn,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => SignInPayload | Promise<SignInPayload>;
+    signIn:
+      | ((
+          parent: undefined,
+          args: ArgsSignIn,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SignInPayload | Promise<SignInPayload>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsSignIn,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => SignInPayload | Promise<SignInPayload>;
+        };
 
-    setUserTheme: (
-      parent: undefined,
-      args: ArgsSetUserTheme,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => SetUserThemePayload | Promise<SetUserThemePayload>;
+    setUserTheme:
+      | ((
+          parent: undefined,
+          args: ArgsSetUserTheme,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SetUserThemePayload | Promise<SetUserThemePayload>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsSetUserTheme,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => SetUserThemePayload | Promise<SetUserThemePayload>;
+        };
 
-    createWeb: (
-      parent: undefined,
-      args: ArgsCreateWeb,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => CreateWebPayload | Promise<CreateWebPayload>;
+    createWeb:
+      | ((
+          parent: undefined,
+          args: ArgsCreateWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => CreateWebPayload | Promise<CreateWebPayload>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsCreateWeb,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => CreateWebPayload | Promise<CreateWebPayload>;
+        };
 
-    updateWeb: (
-      parent: undefined,
-      args: ArgsUpdateWeb,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => UpdateWebPayload | Promise<UpdateWebPayload>;
+    updateWeb:
+      | ((
+          parent: undefined,
+          args: ArgsUpdateWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => UpdateWebPayload | Promise<UpdateWebPayload>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsUpdateWeb,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => UpdateWebPayload | Promise<UpdateWebPayload>;
+        };
 
-    deleteWeb: (
-      parent: undefined,
-      args: ArgsDeleteWeb,
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => DeleteWebPayload | Promise<DeleteWebPayload>;
+    deleteWeb:
+      | ((
+          parent: undefined,
+          args: ArgsDeleteWeb,
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => DeleteWebPayload | Promise<DeleteWebPayload>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: undefined,
+            args: ArgsDeleteWeb,
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => DeleteWebPayload | Promise<DeleteWebPayload>;
+        };
   }
 }
 
@@ -377,34 +757,74 @@ export namespace SignInPayloadResolvers {
       parent.token === undefined ? null : parent.token,
   };
 
-  export type ErrorsResolver = (
-    parent: SignInPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => SignInErrors | null | Promise<SignInErrors | null>;
+  export type ErrorsResolver =
+    | ((
+        parent: SignInPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => SignInErrors | null | Promise<SignInErrors | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: SignInPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SignInErrors | null | Promise<SignInErrors | null>;
+      };
 
-  export type TokenResolver = (
-    parent: SignInPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => string | null | Promise<string | null>;
+  export type TokenResolver =
+    | ((
+        parent: SignInPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => string | null | Promise<string | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: SignInPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | null | Promise<string | null>;
+      };
 
   export interface Type {
-    errors: (
-      parent: SignInPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => SignInErrors | null | Promise<SignInErrors | null>;
+    errors:
+      | ((
+          parent: SignInPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => SignInErrors | null | Promise<SignInErrors | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: SignInPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => SignInErrors | null | Promise<SignInErrors | null>;
+        };
 
-    token: (
-      parent: SignInPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => string | null | Promise<string | null>;
+    token:
+      | ((
+          parent: SignInPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => string | null | Promise<string | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: SignInPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => string | null | Promise<string | null>;
+        };
   }
 }
 
@@ -416,34 +836,74 @@ export namespace SignInErrorsResolvers {
       parent.password === undefined ? null : parent.password,
   };
 
-  export type EmailResolver = (
-    parent: SignInErrors,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => EmailError | null | Promise<EmailError | null>;
+  export type EmailResolver =
+    | ((
+        parent: SignInErrors,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => EmailError | null | Promise<EmailError | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: SignInErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => EmailError | null | Promise<EmailError | null>;
+      };
 
-  export type PasswordResolver = (
-    parent: SignInErrors,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => PasswordError | null | Promise<PasswordError | null>;
+  export type PasswordResolver =
+    | ((
+        parent: SignInErrors,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => PasswordError | null | Promise<PasswordError | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: SignInErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => PasswordError | null | Promise<PasswordError | null>;
+      };
 
   export interface Type {
-    email: (
-      parent: SignInErrors,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => EmailError | null | Promise<EmailError | null>;
+    email:
+      | ((
+          parent: SignInErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => EmailError | null | Promise<EmailError | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: SignInErrors,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => EmailError | null | Promise<EmailError | null>;
+        };
 
-    password: (
-      parent: SignInErrors,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => PasswordError | null | Promise<PasswordError | null>;
+    password:
+      | ((
+          parent: SignInErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => PasswordError | null | Promise<PasswordError | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: SignInErrors,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => PasswordError | null | Promise<PasswordError | null>;
+        };
   }
 }
 
@@ -453,20 +913,40 @@ export namespace SetUserThemePayloadResolvers {
       parent.user === undefined ? null : parent.user,
   };
 
-  export type UserResolver = (
-    parent: SetUserThemePayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => User | null | Promise<User | null>;
+  export type UserResolver =
+    | ((
+        parent: SetUserThemePayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => User | null | Promise<User | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: SetUserThemePayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | null | Promise<User | null>;
+      };
 
   export interface Type {
-    user: (
-      parent: SetUserThemePayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => User | null | Promise<User | null>;
+    user:
+      | ((
+          parent: SetUserThemePayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => User | null | Promise<User | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: SetUserThemePayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => User | null | Promise<User | null>;
+        };
   }
 }
 
@@ -478,34 +958,74 @@ export namespace CreateWebPayloadResolvers {
       parent.web === undefined ? null : parent.web,
   };
 
-  export type ErrorsResolver = (
-    parent: CreateWebPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => CreateWebErrors | null | Promise<CreateWebErrors | null>;
+  export type ErrorsResolver =
+    | ((
+        parent: CreateWebPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => CreateWebErrors | null | Promise<CreateWebErrors | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: CreateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => CreateWebErrors | null | Promise<CreateWebErrors | null>;
+      };
 
-  export type WebResolver = (
-    parent: CreateWebPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Web | null | Promise<Web | null>;
+  export type WebResolver =
+    | ((
+        parent: CreateWebPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Web | null | Promise<Web | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: CreateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>;
+      };
 
   export interface Type {
-    errors: (
-      parent: CreateWebPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => CreateWebErrors | null | Promise<CreateWebErrors | null>;
+    errors:
+      | ((
+          parent: CreateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => CreateWebErrors | null | Promise<CreateWebErrors | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: CreateWebPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => CreateWebErrors | null | Promise<CreateWebErrors | null>;
+        };
 
-    web: (
-      parent: CreateWebPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Web | null | Promise<Web | null>;
+    web:
+      | ((
+          parent: CreateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: CreateWebPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Web | null | Promise<Web | null>;
+        };
   }
 }
 
@@ -515,20 +1035,40 @@ export namespace CreateWebErrorsResolvers {
       parent.name === undefined ? null : parent.name,
   };
 
-  export type NameResolver = (
-    parent: CreateWebErrors,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+  export type NameResolver =
+    | ((
+        parent: CreateWebErrors,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Max140CharsError | null | Promise<Max140CharsError | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: CreateWebErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+      };
 
   export interface Type {
-    name: (
-      parent: CreateWebErrors,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+    name:
+      | ((
+          parent: CreateWebErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Max140CharsError | null | Promise<Max140CharsError | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: CreateWebErrors,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+        };
   }
 }
 
@@ -540,34 +1080,74 @@ export namespace UpdateWebPayloadResolvers {
       parent.web === undefined ? null : parent.web,
   };
 
-  export type ErrorsResolver = (
-    parent: UpdateWebPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>;
+  export type ErrorsResolver =
+    | ((
+        parent: UpdateWebPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: UpdateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>;
+      };
 
-  export type WebResolver = (
-    parent: UpdateWebPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Web | null | Promise<Web | null>;
+  export type WebResolver =
+    | ((
+        parent: UpdateWebPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Web | null | Promise<Web | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: UpdateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>;
+      };
 
   export interface Type {
-    errors: (
-      parent: UpdateWebPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>;
+    errors:
+      | ((
+          parent: UpdateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: UpdateWebPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>;
+        };
 
-    web: (
-      parent: UpdateWebPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Web | null | Promise<Web | null>;
+    web:
+      | ((
+          parent: UpdateWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: UpdateWebPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Web | null | Promise<Web | null>;
+        };
   }
 }
 
@@ -577,20 +1157,40 @@ export namespace UpdateWebErrorsResolvers {
       parent.name === undefined ? null : parent.name,
   };
 
-  export type NameResolver = (
-    parent: UpdateWebErrors,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+  export type NameResolver =
+    | ((
+        parent: UpdateWebErrors,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Max140CharsError | null | Promise<Max140CharsError | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: UpdateWebErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+      };
 
   export interface Type {
-    name: (
-      parent: UpdateWebErrors,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+    name:
+      | ((
+          parent: UpdateWebErrors,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Max140CharsError | null | Promise<Max140CharsError | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: UpdateWebErrors,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Max140CharsError | null | Promise<Max140CharsError | null>;
+        };
   }
 }
 
@@ -600,20 +1200,40 @@ export namespace DeleteWebPayloadResolvers {
       parent.web === undefined ? null : parent.web,
   };
 
-  export type WebResolver = (
-    parent: DeleteWebPayload,
-    args: {},
-    ctx: Context,
-    info: GraphQLResolveInfo,
-  ) => Web | null | Promise<Web | null>;
+  export type WebResolver =
+    | ((
+        parent: DeleteWebPayload,
+        args: {},
+        ctx: Context,
+        info: GraphQLResolveInfo,
+      ) => Web | null | Promise<Web | null>)
+    | {
+        fragment: string;
+        resolver: (
+          parent: DeleteWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>;
+      };
 
   export interface Type {
-    web: (
-      parent: DeleteWebPayload,
-      args: {},
-      ctx: Context,
-      info: GraphQLResolveInfo,
-    ) => Web | null | Promise<Web | null>;
+    web:
+      | ((
+          parent: DeleteWebPayload,
+          args: {},
+          ctx: Context,
+          info: GraphQLResolveInfo,
+        ) => Web | null | Promise<Web | null>)
+      | {
+          fragment: string;
+          resolver: (
+            parent: DeleteWebPayload,
+            args: {},
+            ctx: Context,
+            info: GraphQLResolveInfo,
+          ) => Web | null | Promise<Web | null>;
+        };
   }
 }
 
