@@ -30,9 +30,6 @@
     "prisma:delete": "prisma delete --env-file .env",
     "deploy": "yarn ts scripts/deploy.ts"
   },
-  "resolutions": {
-    "terser": "3.14.1"
-  },
   "dependencies": {
     "esm": "^3.2.0",
     "wsrun": "^3.6.2"
