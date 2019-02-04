@@ -2,9 +2,6 @@
   "name": "@este/api",
   "version": "1.0.0",
   "private": true,
-  "resolutions": {
-    "core-js": "3.0.0-beta.11"
-  },
   "scripts": {
     "gen": "graphqlgen",
     "dev": "cd .. && yarn ts:watch packages/api/index.ts",
@@ -13,7 +10,6 @@
   "dependencies": {
     "apollo-server": "^2.3.3",
     "bcryptjs": "^2.4.3",
-    "core-js": "3.0.0-beta.11",
     "graphql": "^14.1.1",
     "graphql-import": "^0.7.1",
     "jsonwebtoken": "^8.4.0",

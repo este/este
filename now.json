@@ -4,12 +4,8 @@
   "alias": "este.io",
   "builds": [
     {
-      "src": "packages/web/api/index.ts",
+      "src": "packages/api/index.ts",
       "use": "@now/node-server@canary"
-    },
-    {
-      "src": "packages/web/next.config.js",
-      "use": "@now/next@canary"
     }
   ],
   "routes": [
