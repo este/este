@@ -35,6 +35,8 @@
 - `yarn prisma delete` get rid of the whole service
 - `yarn env dev` copy `.env.dev` to `.env`
 - `yarn env prod` copy `.env.prod` to `.env`
+- `yarn build` local build
+- `yarn start` local start
 - `yarn test` before commit
 - `yarn deploy` deploy to <https://name-xxxxxxxxx.now.sh>
 - `yarn deploy && now alias` deploy to aliased custom domain
