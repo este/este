@@ -16,6 +16,7 @@
 - [nodejs.org](http://nodejs.org/) 8 is required because of AWS. No, they don't support 10 yet.
 - [docker-compose](https://www.docker.com/products/docker-engine)
 - [yarnpkg.com](https://yarnpkg.com/en/)
+- [prisma-cli](https://www.prisma.io/docs/prisma-cli-and-configuration/using-the-prisma-cli-alx4/)
 
 ## Setup project
 

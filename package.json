@@ -28,7 +28,7 @@
     "env": "yarn ts scripts/env",
     "prisma:deploy": "prisma deploy --env-file .env",
     "prisma:delete": "prisma delete --env-file .env",
-    "fok-deploy": "yarn ts-node scripts/deploy.ts"
+    "deploy": "yarn ts scripts/deploy.ts"
   },
   "resolutions": {
     "terser": "3.14.1"
@@ -40,7 +40,6 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.2",
     "dotenv": "^6.2.0",
-    "prisma": "^1.23.0",
     "rimraf": "^2.6.3",
     "ts-node": "^8.0.0",
     "ts-node-dev": "^1.0.0-pre.32",
