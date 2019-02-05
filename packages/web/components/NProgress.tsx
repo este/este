@@ -13,11 +13,13 @@ const NProgress: React.FunctionComponent<NProgressProps> = ({ color }) => {
   const timeoutRef = React.useRef<number | null>(null);
 
   const show = () => {
-    timeoutRef.current = setTimeout(() => nprogress.start(), startDelay);
+    // Some weird VSCode bug. Enforce browser setTimeout via window.
+    // https://github.com/Microsoft/TypeScript/issues/842#issuecomment-339860768
+    timeoutRef.current = window.setTimeout(() => nprogress.start(), startDelay);
   };
 
   const hide = () => {
-    if (timeoutRef.current != null) clearTimeout(timeoutRef.current);
+    if (timeoutRef.current != null) window.clearTimeout(timeoutRef.current);
     nprogress.done();
   };
 
