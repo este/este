@@ -26,6 +26,7 @@
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
     "env": "yarn ts scripts/env",
+    "prisma:generate": "prisma generate --env-file .env",
     "prisma:deploy": "prisma deploy --env-file .env",
     "prisma:delete": "prisma delete --env-file .env",
     "deploy": "yarn ts scripts/deploy.ts"

@@ -31,8 +31,9 @@
 
 - `yarn dev` start development
 - `yarn prisma:deploy` after `prisma/datamodel.graphql` change
+- `yarn prisma:generate` generate Prisma client
+- `yarn prisma:delete` get rid of the whole service
 - `yarn gen` after `api/schema.graphql` change
-- `yarn prisma delete` get rid of the whole service
 - `yarn env dev` copy `.env.dev` to `.env`
 - `yarn env prod` copy `.env.prod` to `.env`
 - `yarn build` local build
