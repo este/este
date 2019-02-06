@@ -395,6 +395,7 @@ input WebUpdateManyWithoutCreatorInput {
   create: [WebCreateWithoutCreatorInput!]
   delete: [WebWhereUniqueInput!]
   connect: [WebWhereUniqueInput!]
+  set: [WebWhereUniqueInput!]
   disconnect: [WebWhereUniqueInput!]
   update: [WebUpdateWithWhereUniqueWithoutCreatorInput!]
   upsert: [WebUpsertWithWhereUniqueWithoutCreatorInput!]
