@@ -11,8 +11,9 @@ import { AppRegistry } from 'react-native';
 // Disable input and textarea outline because blinking caret is enough.
 // https://github.com/necolas/react-native-web/blob/master/docs/guides/client-side-rendering.md
 const globalStyles = `
-  #__next{display: flex; flex-direction: column; height: 100%}
-  input,textarea{outline: none}
+  #__next{display:flex;flex-direction:column;height:100%}
+  input,textarea{outline:none}
+  body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 `;
 
 export default class MyDocument extends Document {
