@@ -1,3 +1,4 @@
+import validateCreateWeb from '@este/api/validators/validateCreateWeb';
 import React from 'react';
 import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -34,6 +35,7 @@ const Web: React.FunctionComponent<WebProps> = ({ data }) => {
   const { fields, commit, errors, pending, state } = useMutation<webMutation>(
     mutation,
     { id: web.id, name: web.name },
+    { validator: validateCreateWeb },
   );
 
   return (
