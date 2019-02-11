@@ -39,7 +39,7 @@ export namespace QueryResolvers {
       ) => User | null | Promise<User | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: {},
           ctx: Context,
@@ -56,7 +56,7 @@ export namespace QueryResolvers {
       ) => User | Promise<User>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: {},
           ctx: Context,
@@ -73,7 +73,7 @@ export namespace QueryResolvers {
       ) => Web | Promise<Web>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsWeb,
           ctx: Context,
@@ -91,7 +91,7 @@ export namespace QueryResolvers {
         ) => User | null | Promise<User | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: {},
             ctx: Context,
@@ -108,7 +108,7 @@ export namespace QueryResolvers {
         ) => User | Promise<User>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: {},
             ctx: Context,
@@ -125,7 +125,7 @@ export namespace QueryResolvers {
         ) => Web | Promise<Web>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsWeb,
             ctx: Context,
@@ -154,7 +154,7 @@ export namespace UserResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -171,7 +171,7 @@ export namespace UserResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -188,7 +188,7 @@ export namespace UserResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -205,7 +205,7 @@ export namespace UserResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -222,7 +222,7 @@ export namespace UserResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -239,7 +239,7 @@ export namespace UserResolvers {
       ) => Array<Web | null> | null | Promise<Array<Web | null> | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: User,
           args: {},
           ctx: Context,
@@ -257,7 +257,7 @@ export namespace UserResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -274,7 +274,7 @@ export namespace UserResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -291,7 +291,7 @@ export namespace UserResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -308,7 +308,7 @@ export namespace UserResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -325,7 +325,7 @@ export namespace UserResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -342,7 +342,7 @@ export namespace UserResolvers {
         ) => Array<Web | null> | null | Promise<Array<Web | null> | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: User,
             args: {},
             ctx: Context,
@@ -370,7 +370,7 @@ export namespace WebResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: Web,
           args: {},
           ctx: Context,
@@ -387,7 +387,7 @@ export namespace WebResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: Web,
           args: {},
           ctx: Context,
@@ -404,7 +404,7 @@ export namespace WebResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: Web,
           args: {},
           ctx: Context,
@@ -421,7 +421,7 @@ export namespace WebResolvers {
       ) => User | Promise<User>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: Web,
           args: {},
           ctx: Context,
@@ -438,7 +438,7 @@ export namespace WebResolvers {
       ) => string | Promise<string>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: Web,
           args: {},
           ctx: Context,
@@ -456,7 +456,7 @@ export namespace WebResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: Web,
             args: {},
             ctx: Context,
@@ -473,7 +473,7 @@ export namespace WebResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: Web,
             args: {},
             ctx: Context,
@@ -490,7 +490,7 @@ export namespace WebResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: Web,
             args: {},
             ctx: Context,
@@ -507,7 +507,7 @@ export namespace WebResolvers {
         ) => User | Promise<User>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: Web,
             args: {},
             ctx: Context,
@@ -524,7 +524,7 @@ export namespace WebResolvers {
         ) => string | Promise<string>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: Web,
             args: {},
             ctx: Context,
@@ -585,7 +585,7 @@ export namespace MutationResolvers {
       ) => SignInPayload | Promise<SignInPayload>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsSignIn,
           ctx: Context,
@@ -602,7 +602,7 @@ export namespace MutationResolvers {
       ) => SetUserThemePayload | Promise<SetUserThemePayload>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsSetUserTheme,
           ctx: Context,
@@ -619,7 +619,7 @@ export namespace MutationResolvers {
       ) => CreateWebPayload | Promise<CreateWebPayload>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsCreateWeb,
           ctx: Context,
@@ -636,7 +636,7 @@ export namespace MutationResolvers {
       ) => UpdateWebPayload | Promise<UpdateWebPayload>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsUpdateWeb,
           ctx: Context,
@@ -653,7 +653,7 @@ export namespace MutationResolvers {
       ) => DeleteWebPayload | Promise<DeleteWebPayload>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: undefined,
           args: ArgsDeleteWeb,
           ctx: Context,
@@ -671,7 +671,7 @@ export namespace MutationResolvers {
         ) => SignInPayload | Promise<SignInPayload>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsSignIn,
             ctx: Context,
@@ -688,7 +688,7 @@ export namespace MutationResolvers {
         ) => SetUserThemePayload | Promise<SetUserThemePayload>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsSetUserTheme,
             ctx: Context,
@@ -705,7 +705,7 @@ export namespace MutationResolvers {
         ) => CreateWebPayload | Promise<CreateWebPayload>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsCreateWeb,
             ctx: Context,
@@ -722,7 +722,7 @@ export namespace MutationResolvers {
         ) => UpdateWebPayload | Promise<UpdateWebPayload>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsUpdateWeb,
             ctx: Context,
@@ -739,7 +739,7 @@ export namespace MutationResolvers {
         ) => DeleteWebPayload | Promise<DeleteWebPayload>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: undefined,
             args: ArgsDeleteWeb,
             ctx: Context,
@@ -766,7 +766,7 @@ export namespace SignInPayloadResolvers {
       ) => SignInErrors | null | Promise<SignInErrors | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: SignInPayload,
           args: {},
           ctx: Context,
@@ -783,7 +783,7 @@ export namespace SignInPayloadResolvers {
       ) => string | null | Promise<string | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: SignInPayload,
           args: {},
           ctx: Context,
@@ -801,7 +801,7 @@ export namespace SignInPayloadResolvers {
         ) => SignInErrors | null | Promise<SignInErrors | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: SignInPayload,
             args: {},
             ctx: Context,
@@ -818,7 +818,7 @@ export namespace SignInPayloadResolvers {
         ) => string | null | Promise<string | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: SignInPayload,
             args: {},
             ctx: Context,
@@ -845,7 +845,7 @@ export namespace SignInErrorsResolvers {
       ) => EmailError | null | Promise<EmailError | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: SignInErrors,
           args: {},
           ctx: Context,
@@ -862,7 +862,7 @@ export namespace SignInErrorsResolvers {
       ) => PasswordError | null | Promise<PasswordError | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: SignInErrors,
           args: {},
           ctx: Context,
@@ -880,7 +880,7 @@ export namespace SignInErrorsResolvers {
         ) => EmailError | null | Promise<EmailError | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: SignInErrors,
             args: {},
             ctx: Context,
@@ -897,7 +897,7 @@ export namespace SignInErrorsResolvers {
         ) => PasswordError | null | Promise<PasswordError | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: SignInErrors,
             args: {},
             ctx: Context,
@@ -922,7 +922,7 @@ export namespace SetUserThemePayloadResolvers {
       ) => User | null | Promise<User | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: SetUserThemePayload,
           args: {},
           ctx: Context,
@@ -940,7 +940,7 @@ export namespace SetUserThemePayloadResolvers {
         ) => User | null | Promise<User | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: SetUserThemePayload,
             args: {},
             ctx: Context,
@@ -967,7 +967,7 @@ export namespace CreateWebPayloadResolvers {
       ) => CreateWebErrors | null | Promise<CreateWebErrors | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: CreateWebPayload,
           args: {},
           ctx: Context,
@@ -984,7 +984,7 @@ export namespace CreateWebPayloadResolvers {
       ) => Web | null | Promise<Web | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: CreateWebPayload,
           args: {},
           ctx: Context,
@@ -1002,7 +1002,7 @@ export namespace CreateWebPayloadResolvers {
         ) => CreateWebErrors | null | Promise<CreateWebErrors | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: CreateWebPayload,
             args: {},
             ctx: Context,
@@ -1019,7 +1019,7 @@ export namespace CreateWebPayloadResolvers {
         ) => Web | null | Promise<Web | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: CreateWebPayload,
             args: {},
             ctx: Context,
@@ -1044,7 +1044,7 @@ export namespace CreateWebErrorsResolvers {
       ) => Max140CharsError | null | Promise<Max140CharsError | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: CreateWebErrors,
           args: {},
           ctx: Context,
@@ -1062,7 +1062,7 @@ export namespace CreateWebErrorsResolvers {
         ) => Max140CharsError | null | Promise<Max140CharsError | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: CreateWebErrors,
             args: {},
             ctx: Context,
@@ -1089,7 +1089,7 @@ export namespace UpdateWebPayloadResolvers {
       ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: UpdateWebPayload,
           args: {},
           ctx: Context,
@@ -1106,7 +1106,7 @@ export namespace UpdateWebPayloadResolvers {
       ) => Web | null | Promise<Web | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: UpdateWebPayload,
           args: {},
           ctx: Context,
@@ -1124,7 +1124,7 @@ export namespace UpdateWebPayloadResolvers {
         ) => UpdateWebErrors | null | Promise<UpdateWebErrors | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: UpdateWebPayload,
             args: {},
             ctx: Context,
@@ -1141,7 +1141,7 @@ export namespace UpdateWebPayloadResolvers {
         ) => Web | null | Promise<Web | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: UpdateWebPayload,
             args: {},
             ctx: Context,
@@ -1166,7 +1166,7 @@ export namespace UpdateWebErrorsResolvers {
       ) => Max140CharsError | null | Promise<Max140CharsError | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: UpdateWebErrors,
           args: {},
           ctx: Context,
@@ -1184,7 +1184,7 @@ export namespace UpdateWebErrorsResolvers {
         ) => Max140CharsError | null | Promise<Max140CharsError | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: UpdateWebErrors,
             args: {},
             ctx: Context,
@@ -1209,7 +1209,7 @@ export namespace DeleteWebPayloadResolvers {
       ) => Web | null | Promise<Web | null>)
     | {
         fragment: string;
-        resolver: (
+        resolve: (
           parent: DeleteWebPayload,
           args: {},
           ctx: Context,
@@ -1227,7 +1227,7 @@ export namespace DeleteWebPayloadResolvers {
         ) => Web | null | Promise<Web | null>)
       | {
           fragment: string;
-          resolver: (
+          resolve: (
             parent: DeleteWebPayload,
             args: {},
             ctx: Context,
@@ -1250,4 +1250,9 @@ export interface Resolvers {
   UpdateWebPayload: UpdateWebPayloadResolvers.Type;
   UpdateWebErrors: UpdateWebErrorsResolvers.Type;
   DeleteWebPayload: DeleteWebPayloadResolvers.Type;
+}
+
+// @ts-ignore
+declare module 'graphql-tools' {
+  interface IResolvers extends Resolvers {}
 }
