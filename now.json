@@ -8,14 +8,21 @@
       "use": "@now/node-server@canary"
     },
     {
-      "src": "packages/web/next.config.js",
+      "src": "packages/web/package.json",
       "use": "@now/next@canary"
     }
   ],
   "routes": [
     {
       "src": "/api/.*",
-      "dest": "/api/"
+      "dest": "/packages/api/"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/packages/web/$1",
+      "headers": {
+        "x-request-path": "$1"
+      }
     }
   ]
 }
