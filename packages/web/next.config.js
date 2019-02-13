@@ -4,7 +4,7 @@ const withCustomBabelConfig = require('next-plugin-custom-babel-config');
 const withTranspileModules = require('next-plugin-transpile-modules');
 const withTypescript = require('@zeit/next-typescript');
 
-const { BUNDLE_ANALYZE, NOW_REGION } = process.env;
+const { BUNDLE_ANALYZE } = process.env;
 
 module.exports = withCustomBabelConfig(
   withBundleAnalyzer(
@@ -24,7 +24,8 @@ module.exports = withCustomBabelConfig(
           },
         },
         transpileModules: ['@este'],
-        ...(NOW_REGION ? { target: 'serverless' } : null),
+        // TODO: Use serverless target only within Now. But how?
+        target: 'serverless',
       }),
     ),
   ),
