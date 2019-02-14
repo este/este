@@ -1076,18 +1076,18 @@
   integrity sha512-FwI9gX75FgVBJ7ywgnq/P7tw+/o1GUbtP0KzbtusLigAOgIgNISRK0ZPl4qertvXSIE8YbsVJueQ90cDt9YYyw==
 
 "@types/next-server@*":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@types/next-server/-/next-server-7.0.3.tgz#a86f49045bc00e00bad8f6754f540acef33ef08f"
-  integrity sha512-OCFYa4oBPViMvvLyjjIG/0St7rT+ggwi7z+Dn348I38YQey1kbVOQA5QCdEH4ydud8UqAOUFodO4AiAJO2+J2w==
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/@types/next-server/-/next-server-7.0.4.tgz#69b5e340a923bc7e8ad9228cf4e057eaed955a98"
+  integrity sha512-WFgM4EU24HIwE9HLub4vJYHdv+0BcdYXsV5TwSz4cjJR/WGOAalgaW/JhiQi4CPFmbluJWOB+JixnZRA07ONfw==
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
     "@types/react-loadable" "*"
 
 "@types/next@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@types/next/-/next-8.0.0.tgz#e2dbf3fbc3d5f4dbd1f83d19a3971fb916c42263"
-  integrity sha512-PTz9jGOkQKugasBtTbgYwUL7zfH4J3iGK9UXNeg4Hat8Lj09S3ikXzJernRHrg/gHYa8LJivyi1v8ku/ZUa5bQ==
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@types/next/-/next-8.0.1.tgz#d19731594215e09a8db1ca0b8862d5308707d46a"
+  integrity sha512-BYfeuN7Uy+kuCODrVRfLurWEoU0AR9Esfct18OeJMIqAfmk4d8SH47b7FxrvdeZiRDvKfpD4Ft/Z7ZGI6ErvDg==
   dependencies:
     "@types/next-server" "*"
     "@types/node" "*"
@@ -1117,14 +1117,14 @@
   integrity sha1-BgvVEAIqAF8YQCNAMNMTL7kZVHE=
 
 "@types/prettier@^1.13.2":
-  version "1.16.0"
-  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-1.16.0.tgz#ee6190019ed78c41a22c3d8a2e7ebc4015e2e022"
-  integrity sha512-ExfCqCyU+SPZIDB1I+CTolTv0kNAATsxLIRdl2z3YAdAjstf6f+0aJQBatCNn8LRdREpAX28GAjw4FlU89Ct1Q==
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-1.16.1.tgz#328d1c9b54402e44119398bcb6a31b7bbd606d59"
+  integrity sha512-db6pZL5QY3JrlCHBhYQzYDci0xnoDuxfseUuguLRr3JNk+bnCfpkK6p8quiUDyO8A0vbpBKkk59Fw125etrNeA==
 
 "@types/prop-types@*":
-  version "15.5.8"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
-  integrity sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
+  version "15.5.9"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.9.tgz#f2d14df87b0739041bc53a7d75e3d77d726a3ec0"
+  integrity sha512-Nha5b+jmBI271jdTMwrHiNXM+DvThjHOfyZtMX9kj/c/LUj2xiLHsG/1L3tJ8DjAoQN48cHwUwtqBotjyXaSdQ==
 
 "@types/range-parser@*":
   version "1.2.3"
@@ -1132,16 +1132,16 @@
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
 
 "@types/react-dom@^16.0.11":
-  version "16.8.0"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.0.tgz#c565f43f9d2ec911f9e0b8f3b74e25e67879aa3f"
-  integrity sha512-Jp4ufcEEjVJEB0OHq2MCZcE1u3KYUKO6WnSuiU/tZeYeiZxUoQavfa/TZeiIT+1XoN6l0lQVNM30VINZFDeolQ==
+  version "16.8.1"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.1.tgz#e43810a5e44b37854a9c7cd99e6c43e4f522c7c6"
+  integrity sha512-Vyo4LqUvpjNC9RMXV6kXcsvW6U/WKOuHbz+mtY43Fu8AslHjQ5/Yx+sj0agGLkbnqOlQgyIgosewcxdjMirVXA==
   dependencies:
     "@types/react" "*"
 
 "@types/react-intl@^2.3.14":
-  version "2.3.16"
-  resolved "https://registry.yarnpkg.com/@types/react-intl/-/react-intl-2.3.16.tgz#d89c4ff754e8299865a3d15c33d38db859222eb2"
-  integrity sha512-9clR/whM7h5Lq7P6zgMuAERCY5T8z2o8i2soAc5itbVcPT/ir/dvZgZ91XLmTYG8lw6LGz9NVJoOURYZSjdAmA==
+  version "2.3.17"
+  resolved "https://registry.yarnpkg.com/@types/react-intl/-/react-intl-2.3.17.tgz#e1fc6e46e8af58bdef9531259d509380a8a99e8e"
+  integrity sha512-FGd6J1GQ7zvl1GZ3BBev83B7nfak8dqoR2PZ+l5MoisKMpd4xOLhZJC1ugpmk3Rz5F85t6HbOg9mYqXW97BsNA==
 
 "@types/react-loadable@*":
   version "5.5.0"
@@ -1159,22 +1159,27 @@
     "@types/react" "*"
 
 "@types/react-relay@^1.3.11":
-  version "1.3.11"
-  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-1.3.11.tgz#97fb7e724eca01f8194214b6be2234a5c2d27943"
-  integrity sha512-HiY9P3S/zKBFygB/9ikynM7kzqFpzSWnKM4ZQtL4LYQSUYvLl1EyHmXMQ6Ha9ExXyVABlPF73d/M98nYMTK0og==
+  version "1.3.12"
+  resolved "https://registry.yarnpkg.com/@types/react-relay/-/react-relay-1.3.12.tgz#865aa8b5a5f0db66b5dc42eda014a098ee14f96f"
+  integrity sha512-3G4BZfwefDO7W7pZZY2NURI/YpAQB2MBl3yPQ5azaS3jZhvtMRtJNX0H2FbifRsmgoqeDqD96Fm0f5ItOJiq8w==
   dependencies:
     "@types/react" "*"
     "@types/relay-runtime" "*"
 
 "@types/react@*", "@types/react@^16.7.11":
-  version "16.8.2"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.2.tgz#3b7a7f7ea89d1c7d68b00849fb5de839011c077b"
-  integrity sha512-6mcKsqlqkN9xADrwiUz2gm9Wg4iGnlVGciwBRYFQSMWG6MQjhOZ/AVnxn+6v8nslFgfYTV8fNdE6XwKu6va5PA==
+  version "16.8.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.3.tgz#7b67956f682bea30a5a09b3242c0784ff196c848"
+  integrity sha512-PjPocAxL9SNLjYMP4dfOShW/rj9FDBJGu3JFRt0zEYf77xfihB6fq8zfDpMrV6s82KnAi7F1OEe5OsQX25Ybdw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/relay-runtime@*", "@types/relay-runtime@1.3.8":
+"@types/relay-runtime@*":
+  version "1.3.10"
+  resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-1.3.10.tgz#25dbdbefc7f56791acb561427c9d89791392dc35"
+  integrity sha512-U3CPTZiQslq+Mm00tIqO3Z+n+CNSz8fLCYWZ6wRSLyGqD9QAZGmmqTS3DLmqksj1QJaENLN2Qo11n3Pr3IYVNg==
+
+"@types/relay-runtime@1.3.8":
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/@types/relay-runtime/-/relay-runtime-1.3.8.tgz#75f554d8aa57a8a76e304ec858a7c7a32322bef0"
   integrity sha512-v5uoUkn1rTjmg1A/1qOFqdWR30aRAOnGw3dn80gnMEPIavqq49V9N/3EMk80AB2337OhGgV65oTG6cteGWEndA==
@@ -1198,9 +1203,9 @@
   integrity sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==
 
 "@types/styled-jsx@^2.2.7":
-  version "2.2.7"
-  resolved "https://registry.yarnpkg.com/@types/styled-jsx/-/styled-jsx-2.2.7.tgz#f7ebdd48949f1d95b04807f7161bbee8e8d749b3"
-  integrity sha512-bwwW60WiFZ0vfpxU7Ymvi8A0sOPX89gJYfbBO4Y5qOsuyMFQYs+uo/kACEPurwafQ9dv/ce2CsNre90Hk5bVKg==
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/@types/styled-jsx/-/styled-jsx-2.2.8.tgz#b50d13d8a3c34036282d65194554cf186bab7234"
+  integrity sha512-Yjye9VwMdYeXfS71ihueWRSxrruuXTwKCbzue4+5b2rjnQ//AtyM7myZ1BEhNhBQ/nL/RE7bdToUoLln2miKvg==
   dependencies:
     "@types/react" "*"
 
