@@ -23,9 +23,9 @@ module.exports = withCustomBabelConfig(
             reportFilename: '../../bundles/server.html',
           },
         },
-        transpileModules: ['@este'],
         // TODO: Use serverless target only within Now. But how?
         target: 'serverless',
+        transpileModules: ['@este'],
       }),
     ),
   ),
