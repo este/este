@@ -14,8 +14,8 @@
   ],
   "routes": [
     {
-      "src": "/api/.*",
-      "dest": "/packages/api/"
+      "src": "/api",
+      "dest": "/packages/api"
     },
     {
       "src": "/(.*)",
