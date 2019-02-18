@@ -39,8 +39,8 @@
 - `yarn build` local build
 - `yarn start` local start
 - `yarn test` before commit
-- `yarn deploy` deploy to <https://name-xxxxxxxxx.now.sh>
-- `yarn deploy && now alias` deploy to aliased custom domain
+- `now` deploy to <https://name-xxxxxxxxx.now.sh>
+- `now && now alias` deploy to aliased custom domain
 
 ## Tips
 

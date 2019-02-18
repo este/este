@@ -28,8 +28,7 @@
     "env": "yarn ts scripts/env",
     "prisma:generate": "prisma generate --env-file .env",
     "prisma:deploy": "prisma deploy --env-file .env",
-    "prisma:delete": "prisma delete --env-file .env",
-    "deploy": "yarn ts scripts/deploy.ts"
+    "prisma:delete": "prisma delete --env-file .env"
   },
   "dependencies": {
     "esm": "^3.2.0",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.2",
     "dotenv": "^6.2.0",
+    "prisma": "^1.26.6",
     "rimraf": "^2.6.3",
     "ts-node": "^8.0.0",
     "ts-node-dev": "^1.0.0-pre.32",

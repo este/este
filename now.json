@@ -2,6 +2,11 @@
   "version": 2,
   "name": "este",
   "alias": "este.io",
+  "env": {
+    "API_SECRET": "@api-secret",
+    "PRISMA_ENDPOINT": "@prisma-endpoint",
+    "PRISMA_SECRET": "@prisma-secret"
+  },
   "builds": [
     {
       "src": "packages/api/index.ts",
