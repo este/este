@@ -1,5 +1,5 @@
 {
-  "name": "@este/web",
+  "name": "@app/web",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "analyze:browser": "BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
-    "@este/api": "1.0.0",
+    "@app/api": "1.0.0",
     "@sentry/browser": "^4.5.3",
     "cookie": "^0.3.1",
     "gravatar": "^1.8.0",

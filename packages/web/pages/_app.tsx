@@ -1,4 +1,4 @@
-import handleApiGraphQLError from '@este/api/handleApiGraphQLError';
+import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';

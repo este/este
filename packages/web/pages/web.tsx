@@ -1,4 +1,4 @@
-import validateCreateWeb from '@este/api/validators/validateCreateWeb';
+import validateCreateWeb from '@app/api/validators/validateCreateWeb';
 import React from 'react';
 import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';

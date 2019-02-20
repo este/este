@@ -1,4 +1,4 @@
-import validateSignIn from '@este/api/validators/validateSignIn';
+import validateSignIn from '@app/api/validators/validateSignIn';
 import React from 'react';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { Platform, TextInput, View } from 'react-native';

@@ -26,7 +26,9 @@ module.exports = withCustomBabelConfig(
         // TODO: Use serverless target only within Now. But how?
         // This does not work ...(process.env,NOW_REGION ? { target: 'serverless' } : null),
         target: 'serverless',
-        transpileModules: ['@este'],
+        // For Yarn monorepo.
+        // https://github.com/martpie/next-transpile-modules#readme
+        transpileModules: ['@app'],
       }),
     ),
   ),

@@ -1,4 +1,4 @@
-import { EmailError, Max140CharsError, PasswordError } from '@este/api/types';
+import { EmailError, Max140CharsError, PasswordError } from '@app/api/types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text } from 'react-native';

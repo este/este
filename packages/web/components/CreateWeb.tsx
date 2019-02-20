@@ -1,4 +1,4 @@
-import validateCreateWeb from '@este/api/validators/validateCreateWeb';
+import validateCreateWeb from '@app/api/validators/validateCreateWeb';
 import Router from 'next/router';
 import React from 'react';
 import { defineMessages } from 'react-intl';
