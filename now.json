@@ -24,10 +24,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/packages/web/$1",
-      "headers": {
-        "x-request-path": "$1"
-      }
+      "dest": "/packages/web/$1"
     }
   ]
 }
