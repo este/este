@@ -23,6 +23,7 @@ export default class MyDocument extends Document {
     const { getStyleElement } = AppRegistry.getApplication('Main');
     const page = renderPage();
     const styles = [
+      // eslint-disable-next-line react/no-danger
       <style dangerouslySetInnerHTML={{ __html: globalStyles }} key="styles" />,
       getStyleElement(),
     ];
@@ -31,7 +32,7 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <html style={{ height: '100%' }}>
+      <html lang="en" style={{ height: '100%' }}>
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />

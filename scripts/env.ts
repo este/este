@@ -8,5 +8,5 @@ const to = '.env';
 
 fs.copyFileSync(from, to);
 
-// tslint:disable-next-line:no-console
+// eslint-disable-next-line no-console
 console.log(`${from} copied to ${to}`);

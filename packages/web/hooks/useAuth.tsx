@@ -1,8 +1,9 @@
+/* eslint-env browser */
 import cookie from 'cookie';
 import { IncomingMessage } from 'http';
 import Router from 'next/router';
 import React from 'react';
-import { AppHref } from '../pages/_app';
+import { AppHref } from '../types';
 
 const cookieName = 'token';
 const localStorageKey = 'signOut';
@@ -56,7 +57,7 @@ const useAuthSync = () => {
       window.removeEventListener('storage', syncLogout);
       window.localStorage.removeItem(localStorageKey);
     };
-  }, []);
+  }, [syncLogout]);
 };
 
 // We need provider because _app is a class and classes doesn't support Hooks.

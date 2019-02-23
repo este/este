@@ -4,9 +4,9 @@ import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
 import React from 'react';
-import { defineMessages, IntlProvider } from 'react-intl';
-// @ts-ignore
-import { graphql, ReactRelayContext } from 'react-relay';
+import { IntlProvider, defineMessages } from 'react-intl';
+// @ts-ignore Missing type.
+import { ReactRelayContext, graphql } from 'react-relay';
 import {
   Environment,
   // @ts-ignore Missing type.
@@ -21,22 +21,10 @@ import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
 import { AuthSyncProvider, maybeGetAuthToken } from '../hooks/useAuth';
+import { AppHref } from '../types';
 
 const SENTRY_PUBLIC_DSN =
   'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';
-
-export type AppHref =
-  | '/'
-  | 'https://twitter.com/steida'
-  | '/me'
-  | {
-      pathname: '/signin';
-      query?: { redirectUrl: string };
-    }
-  | {
-      pathname: '/web';
-      query: { id: string };
-    };
 
 // Page titles can not be collocated within pages because that would defeat
 // code splitting. One nav component would import many whole pages.
@@ -125,10 +113,10 @@ export default class MyApp extends App<MyAppProps> {
       id: '',
     };
     const isPageQueryArgs = {
-      isIndexPage: '/' === ctx.pathname,
-      isMePage: '/me' === ctx.pathname,
-      isSignInPage: '/signin' === ctx.pathname,
-      isWebPage: '/web' === ctx.pathname,
+      isIndexPage: ctx.pathname === '/',
+      isMePage: ctx.pathname === '/me',
+      isSignInPage: ctx.pathname === '/signin',
+      isWebPage: ctx.pathname === '/web',
     };
 
     host = host || (ctx.req && ctx.req.headers.host) || '';
@@ -176,13 +164,17 @@ export default class MyApp extends App<MyAppProps> {
         },
         unknown() {
           props.statusCode = 500;
-          // tslint:disable-next-line:no-console
+          // eslint-disable-next-line no-console
           console.log(error);
           Sentry.captureException(error);
         },
       });
       if (ctx.res && props.statusCode) ctx.res.statusCode = props.statusCode;
     }
+
+    const foo = () => {};
+    // eslint-disable-next-line no-console
+    console.log(foo);
 
     props.relayRecords = relayEnvironment
       .getStore()

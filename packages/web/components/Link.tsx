@@ -1,11 +1,10 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { withRouter, WithRouterProps } from 'next/router';
 import React from 'react';
-import { Platform, RegisteredStyle, TextStyle } from 'react-native';
-import { Text } from 'react-native';
+import { Platform, RegisteredStyle, Text, TextStyle } from 'react-native';
 import { Assign, Omit, Overwrite } from 'utility-types';
 import useAppContext from '../hooks/useAppContext';
-import { AppHref } from '../pages/_app';
+import { AppHref } from '../types';
 
 type LinkProps = Assign<
   Overwrite<

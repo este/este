@@ -45,7 +45,6 @@ export const ModularScale = {
   step7: 3 / 2,
   step8: 8 / 5,
   step9: 5 / 3,
-  // tslint:disable-next-line:object-literal-sort-keys
   step10: 16 / 9,
   step11: 15 / 8,
   step12: 2,

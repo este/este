@@ -1,3 +1,5 @@
+// TODO: Remove alert, move to shared.
+/* eslint-env browser */
 import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
 import Router from 'next/router';
@@ -5,7 +7,7 @@ import React from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
-import { AppHref } from '../pages/_app';
+import { AppHref } from '../types';
 import useAppContext from './useAppContext';
 
 const messages = defineMessages({
@@ -170,6 +172,7 @@ const useMutation = <M extends Mutation>(
         if (field == null) return fields;
         return { ...fields, [key]: field };
       },
+      // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
       {} as Fields<Input<M>>,
     );
   }, [state, pending]);
@@ -190,7 +193,7 @@ const useMutation = <M extends Mutation>(
     // Why not an array? Object is more handy for GraphQL.
     // Check api/schema.graphql SignInErrors type.
     const handleErrors = (errors: Errors<M>): { hasError: boolean } => {
-      const error = Object.entries(errors).find(([_, value]) => value != null);
+      const error = Object.entries(errors).find(([, value]) => value != null);
       if (error != null && error[1] != null) {
         // @ts-ignore PR anyone?
         setErrors({ [error[0]]: error[1] });
@@ -226,10 +229,12 @@ const useMutation = <M extends Mutation>(
               Router.replace(signInHref);
             },
             403() {
+              // eslint-disable-next-line no-alert
               alert(intl.formatMessage(messages.forbidden));
             },
             404() {
               // This should not happen with mutation.
+              // eslint-disable-next-line no-alert
               alert(intl.formatMessage(messages.notFound));
               Sentry.captureException(payloadErrors);
             },
@@ -255,6 +260,7 @@ const useMutation = <M extends Mutation>(
           ? intl.formatMessage(messages.noInternetAccess)
           : error.message;
         if (!isNetworkError) Sentry.captureException(error);
+        // eslint-disable-next-line no-alert
         alert(message);
       },
     });

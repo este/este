@@ -41,13 +41,13 @@ const userModel = (ctx: ModelContext) => {
         themeName: '',
       });
       return success(user.id);
-    } else {
+    } 
       const user = await ctx.db.user({ email: input.email });
       if (!user) return fail({ email: 'NOT_EXISTS' });
       const validPassword = await bcrypt.compare(input.password, user.password);
       if (!validPassword) return fail({ password: 'WRONG_PASSWORD' });
       return success(user.id);
-    }
+    
   };
 
   const requiredViewer = () => {

@@ -5,7 +5,7 @@ import { graphql } from 'react-relay';
 import { DeleteWebMutation } from '../generated/DeleteWebMutation.graphql';
 import useConfirm from '../hooks/useConfirm';
 import useMutation from '../hooks/useMutation';
-import { AppHref } from '../pages/_app';
+import { AppHref } from '../types';
 import Button from './Button';
 
 const mutation = graphql`

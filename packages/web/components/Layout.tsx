@@ -1,10 +1,11 @@
+/* eslint-env browser */
 import Head from 'next/head';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
-import Gravatar from '../components/Gravatar';
-import NProgress from '../components/NProgress';
+import Gravatar from './Gravatar';
+import NProgress from './NProgress';
 import { LayoutQuery } from '../generated/LayoutQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
 import { pageTitles } from '../pages/_app';
@@ -65,20 +66,13 @@ interface LayoutProps {
 
 const Layout: React.FunctionComponent<LayoutProps> = props => {
   const { theme } = useAppContext();
-  const [htmlBackgroundColor, nprogressColor] = React.useMemo(
-    () => {
-      return [
-        StyleSheet.flatten(theme.layout).backgroundColor || '#fff',
-        StyleSheet.flatten(theme.link).color || '#29d',
-      ];
-    },
-    [theme.layout],
-  );
+  const [htmlBackgroundColor, nprogressColor] = React.useMemo(() => {
+    return [
+      StyleSheet.flatten(theme.layout).backgroundColor || '#fff',
+      StyleSheet.flatten(theme.link).color || '#29d',
+    ];
+  }, [theme]);
   const layoutBodyRef = React.useRef<View>(null);
-
-  React.useEffect(() => {
-    maybeFocusLayoutBody();
-  }, []);
 
   // https://medium.com/@robdel12/single-page-apps-routers-are-broken-255daa310cf
   // Useful for accessibility and key navigation.
@@ -97,6 +91,10 @@ const Layout: React.FunctionComponent<LayoutProps> = props => {
     layoutBodyRef.current.setNativeProps({ style: { outline: 'none' } });
     layoutBodyRef.current.focus();
   };
+
+  React.useEffect(() => {
+    maybeFocusLayoutBody();
+  }, [maybeFocusLayoutBody]);
 
   return (
     <>

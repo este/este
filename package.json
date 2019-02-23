@@ -16,7 +16,7 @@
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev": "run-p dev:workspaces dev:playground",
     "deps": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
-    "lint": "tslint -p .",
+    "lint": "eslint '**/*.{ts,tsx}'",
     "lint:fix": "yarn lint --fix",
     "gen": "wsrun --exclude-missing gen",
     "tsc": "tsc",
@@ -35,15 +35,23 @@
     "wsrun": "^3.6.2"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.4.1",
+    "@typescript-eslint/parser": "^1.4.1",
     "babel-plugin-module-resolver": "^3.1.2",
     "dotenv": "^6.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.2.0",
+    "eslint-plugin-relay": "^1.0.0",
     "prisma": "^1.26.6",
     "rimraf": "^2.6.3",
     "ts-node": "^8.0.0",
     "ts-node-dev": "^1.0.0-pre.32",
-    "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.17.0",
-    "tslint-react": "^3.6.0",
     "typescript": "^3.2.2"
   }
 }

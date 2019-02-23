@@ -24,7 +24,7 @@ const getUser = async (req: IncomingMessage): Promise<User | null> => {
     decoded = jwt.verify(token, API_SECRET);
   } catch (error) {
     if (error.name !== 'JsonWebTokenError') {
-      // tslint:disable-next-line:no-console
+      // eslint-disable-next-line no-console
       console.log(error);
     }
     return null;
@@ -39,7 +39,7 @@ const getUser = async (req: IncomingMessage): Promise<User | null> => {
       user = await db.user({ id: decoded.userId });
     }
   } catch (error) {
-    // tslint:disable-next-line:no-console
+    // eslint-disable-next-line no-console
     console.log(error);
   }
   if (user == null) return null;
@@ -58,11 +58,11 @@ const server = new ApolloServer({
   // @ts-ignore Wrong types.
   resolvers,
   typeDefs: gql`
-    ${importSchema(__dirname + '/schema.graphql')}
+    ${importSchema(`${__dirname}/schema.graphql`)}
   `,
 });
 
 server.listen().then(({ url }: { url: string }) => {
-  // tslint:disable-next-line:no-console
+  // eslint-disable-next-line no-console
   console.log(`Server ready at ${url}`);
 });

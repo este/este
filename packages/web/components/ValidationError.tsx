@@ -24,6 +24,7 @@ const ValidationError: React.FunctionComponent<ValidationErrorProps> = ({
 
   const getMessage = () => {
     if (error == null) return null;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleNever = (_: never | '%future added value') => {
       // This would be an implementation of assertNever with client data only:
       // throw new Error(`Unexpected validation error: ${error}`);
