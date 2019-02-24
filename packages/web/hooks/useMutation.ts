@@ -1,4 +1,4 @@
-// TODO: Remove alert, move to shared.
+// TODO: Replace alert with universal component.
 /* eslint-env browser */
 import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
