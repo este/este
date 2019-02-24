@@ -12,7 +12,7 @@
   "scripts": {
     "ts": "ts-node -T -r esm -r dotenv/config",
     "ts:watch": "ts-node-dev --no-notify --transpileOnly -r esm -r dotenv/config",
-    "dev:workspaces": "wsrun dev",
+    "dev:workspaces": "wsrun --exclude-missing dev",
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev": "run-p dev:workspaces dev:playground",
     "deps": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
@@ -22,7 +22,7 @@
     "tsc": "tsc",
     "build": "wsrun --exclude-missing build",
     "test": "run-s lint gen tsc build",
-    "start": "wsrun start",
+    "start": "wsrun --exclude-missing start",
     "docker:up": "cd prisma && docker-compose up -d && cd ../",
     "docker:down": "cd prisma && docker-compose down && cd ../",
     "env": "yarn ts scripts/env",
