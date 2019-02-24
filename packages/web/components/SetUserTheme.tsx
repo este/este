@@ -4,7 +4,6 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import { SetUserThemeMutation } from '../generated/SetUserThemeMutation.graphql';
 import { SetUserThemeQuery } from '../generated/SetUserThemeQuery.graphql';
 import useMutation from '../hooks/useMutation';
-import { name as darkThemeName } from '../themes/dark';
 import Button from './Button';
 
 const mutation = graphql`
@@ -29,10 +28,10 @@ const SetUserTheme: React.FunctionComponent<SetUserThemeProps> = ({
     mutation,
     { name: (viewer && viewer.themeName) || '' },
   );
-  const darkIsEnabled = state.name === darkThemeName;
-
+  // Magic string constant is good enough for now.
+  const darkIsEnabled = state.name === 'dark';
   const toggleLightDarkTheme = () => {
-    commit({ merge: { name: darkIsEnabled ? '' : darkThemeName } });
+    commit({ merge: { name: darkIsEnabled ? '' : 'dark' } });
   };
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { InjectedIntl } from 'react-intl';
 import { Environment } from 'relay-runtime';
-import { Theme } from '../themes/light';
+import { Theme } from '@app/themes/lightTheme';
 
 interface AppContext {
   intl: InjectedIntl;

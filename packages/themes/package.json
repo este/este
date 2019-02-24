@@ -1,0 +1,11 @@
+{
+  "name": "@app/themes",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react-native-web": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.55.28"
+  }
+}
