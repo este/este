@@ -66,6 +66,7 @@ module.exports = {
     'no-nested-ternary': 'off',
     // Prettier. Imho bug that must be disabled explicitly.
     'react/jsx-one-expression-per-line': 'off',
+    'lines-between-class-members': 'off',
     // Relay
     'relay/graphql-syntax': 'error',
     'relay/compat-uses-vars': 'error',
@@ -73,6 +74,13 @@ module.exports = {
     'relay/generated-flow-types': 'error',
     // 'relay/no-future-added-value': 'error', // Why?
     'relay/unused-fields': 'error',
+    // We use it for immer. It should be checked by readonly anyway.
+    'no-param-reassign': 'off',
+    // Irrelevant.
+    'no-plusplus': 'off',
+    'no-return-assign': 'off',
+    // TSC checks it.
+    '@typescript-eslint/no-unused-vars': 'off',
     // React Hooks.
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
