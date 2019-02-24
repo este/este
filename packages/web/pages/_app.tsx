@@ -172,10 +172,6 @@ export default class MyApp extends App<MyAppProps> {
       if (ctx.res && props.statusCode) ctx.res.statusCode = props.statusCode;
     }
 
-    const foo = () => {};
-    // eslint-disable-next-line no-console
-    console.log(foo);
-
     props.relayRecords = relayEnvironment
       .getStore()
       .getSource()
