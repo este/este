@@ -1,0 +1,14 @@
+{
+  "name": "@app/components",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.1",
+    "react-art": "^16.8.0",
+    "react-native-web": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.7.11",
+    "@types/react-native": "^0.55.28"
+  }
+}
