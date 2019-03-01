@@ -1,7 +1,7 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import { withRouter, WithRouterProps } from 'next/router';
 import React from 'react';
-import { Platform, RegisteredStyle, Text, TextStyle } from 'react-native';
+import { Platform, Text, TextStyle, StyleProp } from 'react-native';
 import { Assign, Omit, Overwrite } from 'utility-types';
 import useAppContext from '../hooks/useAppContext';
 import { AppHref } from '../types';
@@ -17,8 +17,8 @@ type LinkProps = Assign<
     }
   >,
   WithRouterProps & {
-    style?: RegisteredStyle<TextStyle>;
-    activeStyle?: RegisteredStyle<TextStyle>;
+    style?: StyleProp<TextStyle>;
+    activeStyle?: StyleProp<TextStyle>;
   }
 >;
 
@@ -33,9 +33,7 @@ const Link: React.FunctionComponent<LinkProps> = props => {
     const linkQuery = typeof href === 'object' ? href.query : null;
     return (
       linkPathname === router.pathname &&
-      (linkQuery == null
-        ? true
-        : JSON.stringify(linkQuery) === JSON.stringify(router.query))
+      JSON.stringify(linkQuery || {}) === JSON.stringify(router.query || {})
     );
   };
 
