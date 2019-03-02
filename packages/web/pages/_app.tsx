@@ -17,6 +17,7 @@ import {
   Store,
 } from 'relay-runtime';
 import IntlProviderFix from '../components/IntlProviderFix';
+import RouterProviderFix from '../components/RouterProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
 import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
@@ -251,21 +252,23 @@ export default class MyApp extends App<MyAppProps> {
             textComponent={React.Fragment}
           >
             <ViewerTheme data={pageProps.data}>
-              {theme => {
-                return (
-                  <IntlProviderFix>
-                    {intl => (
-                      <AppContext.Provider
-                        value={{ intl, relayEnvironment, theme }}
-                      >
-                        <AuthSyncProvider>
-                          <Page {...pageProps} />
-                        </AuthSyncProvider>
-                      </AppContext.Provider>
-                    )}
-                  </IntlProviderFix>
-                );
-              }}
+              {theme => (
+                <IntlProviderFix>
+                  {intl => (
+                    <RouterProviderFix>
+                      {router => (
+                        <AppContext.Provider
+                          value={{ intl, relayEnvironment, theme, router }}
+                        >
+                          <AuthSyncProvider>
+                            <Page {...pageProps} />
+                          </AuthSyncProvider>
+                        </AppContext.Provider>
+                      )}
+                    </RouterProviderFix>
+                  )}
+                </IntlProviderFix>
+              )}
             </ViewerTheme>
           </IntlProvider>
         </ReactRelayContext.Provider>
