@@ -4,7 +4,7 @@ import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
 import React from 'react';
-import { IntlProvider, defineMessages } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 // @ts-ignore Missing type.
 import { ReactRelayContext, graphql } from 'react-relay';
 import {
@@ -26,23 +26,6 @@ import { AppHref } from '../types';
 
 const SENTRY_PUBLIC_DSN =
   'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';
-
-// Page titles can not be collocated within pages because that would defeat
-// code splitting. One nav component would import many whole pages.
-export const pageTitles = defineMessages({
-  index: {
-    defaultMessage: 'Este',
-    id: 'pageTitles.index',
-  },
-  me: {
-    defaultMessage: 'Me',
-    id: 'pageTitles.me',
-  },
-  signIn: {
-    defaultMessage: 'Sign in',
-    id: 'pageTitles.signIn',
-  },
-});
 
 const createRelayEnvironment = (
   apiEndpoint: string,

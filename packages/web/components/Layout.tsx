@@ -8,21 +8,22 @@ import Gravatar from './Gravatar';
 import NProgress from './NProgress';
 import { LayoutQuery } from '../generated/LayoutQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
-import { pageTitles } from '../pages/_app';
 import Link from './Link';
+import usePageTitles from '../hooks/usePageTitles';
 
 interface HeaderProps {
   viewer: LayoutQuery['viewer'];
 }
 
 const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
-  const { intl, theme } = useAppContext();
+  const { theme } = useAppContext();
+  const pageTitles = usePageTitles();
 
   return (
     <View style={theme.layoutHeader}>
       <Text style={theme.text}>
         <Link prefetch href="/">
-          {intl.formatMessage(pageTitles.index)}
+          {pageTitles.index}
         </Link>
       </Text>
       <Text style={[theme.text, theme.marginStartAuto]}>
@@ -37,7 +38,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
           </Link>
         ) : (
           <Link prefetch href={{ pathname: '/signin' }}>
-            {intl.formatMessage(pageTitles.signIn)}
+            {pageTitles.signIn}
           </Link>
         )}
       </Text>

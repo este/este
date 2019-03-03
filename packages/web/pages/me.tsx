@@ -9,7 +9,7 @@ import SetUserTheme from '../components/SetUserTheme';
 import { meQuery } from '../generated/meQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
 import useAuth from '../hooks/useAuth';
-import { pageTitles } from './_app';
+import usePageTitles from '../hooks/usePageTitles';
 
 interface MeProps {
   data: meQuery;
@@ -17,10 +17,11 @@ interface MeProps {
 
 const Me: React.FunctionComponent<MeProps> = ({ data }) => {
   const { requiredViewer } = data;
-  const { intl, theme } = useAppContext();
+  const { theme } = useAppContext();
+  const pageTitles = usePageTitles();
   const auth = useAuth();
   return (
-    <Layout title={intl.formatMessage(pageTitles.me)} data={data}>
+    <Layout title={pageTitles.me} data={data}>
       <Text style={theme.heading1}>{requiredViewer.email}</Text>
       <Text style={theme.paragraph}>
         <Gravatar email={requiredViewer.email} />

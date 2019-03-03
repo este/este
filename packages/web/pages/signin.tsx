@@ -11,7 +11,7 @@ import { signinQuery } from '../generated/signinQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
 import useAuth from '../hooks/useAuth';
 import useMutation from '../hooks/useMutation';
-import { pageTitles } from './_app';
+import usePageTitles from '../hooks/usePageTitles';
 
 const mutation = graphql`
   mutation signinMutation($input: SignInInput!) {
@@ -43,6 +43,7 @@ interface SignIn {
 const SignIn: React.FunctionComponent<SignIn> = ({ data }) => {
   const { intl, theme } = useAppContext();
   const auth = useAuth();
+  const pageTitles = usePageTitles();
   const { fields, commit, errors, pending } = useMutation<signinMutation>(
     mutation,
     {
@@ -64,7 +65,7 @@ const SignIn: React.FunctionComponent<SignIn> = ({ data }) => {
   };
 
   return (
-    <Layout title={intl.formatMessage(pageTitles.signIn)} data={data}>
+    <Layout title={pageTitles.signIn} data={data}>
       <TextInput
         {...fields.email.textInput}
         placeholder={intl.formatMessage(messages.emailPlaceholder)}

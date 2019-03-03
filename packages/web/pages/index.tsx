@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import Link from '../components/Link';
 import { pagesQuery } from '../generated/pagesQuery.graphql';
 import useAppContext from '../hooks/useAppContext';
-import { pageTitles } from './_app';
+import usePageTitles from '../hooks/usePageTitles';
 
 type Viewer = NonNullable<pagesQuery['viewer']>;
 
@@ -57,11 +57,11 @@ const Authenticated: React.FunctionComponent<AuthenticatedProps> = ({
 
 const NotAuthenticated: React.FunctionComponent = () => {
   const { theme } = useAppContext();
-  const { intl } = useAppContext();
-  const title = intl.formatMessage(pageTitles.index);
+  const pageTitles = usePageTitles();
+
   return (
     <>
-      <Text style={theme.heading1}>{title}</Text>
+      <Text style={theme.heading1}>{pageTitles.index}</Text>
       <Text style={theme.paragraph}>
         <Link href={{ pathname: '/signin' }}>Create Web</Link>
       </Text>
@@ -72,11 +72,10 @@ const NotAuthenticated: React.FunctionComponent = () => {
 const Index: React.FunctionComponent<{
   data: pagesQuery;
 }> = ({ data }) => {
-  const { intl } = useAppContext();
-  const title = intl.formatMessage(pageTitles.index);
+  const pageTitles = usePageTitles();
 
   return (
-    <Layout title={title} data={data}>
+    <Layout title={pageTitles.index} data={data}>
       {data.viewer ? (
         <Authenticated viewer={data.viewer} />
       ) : (
