@@ -46,18 +46,18 @@ const useAuth = () => {
 export default useAuth;
 
 const useAuthSync = () => {
-  const syncLogout = (event: StorageEvent) => {
-    if (event.key === localStorageKey) {
-      browserRedirectToIndexAfterSignOut();
-    }
-  };
   React.useEffect(() => {
+    const syncLogout = (event: StorageEvent) => {
+      if (event.key === localStorageKey) {
+        browserRedirectToIndexAfterSignOut();
+      }
+    };
     window.addEventListener('storage', syncLogout);
     return () => {
       window.removeEventListener('storage', syncLogout);
       window.localStorage.removeItem(localStorageKey);
     };
-  }, [syncLogout]);
+  });
 };
 
 // We need provider because _app is a class and classes doesn't support Hooks.

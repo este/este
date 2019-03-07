@@ -77,7 +77,7 @@ const Layout: React.FunctionComponent<LayoutProps> = props => {
 
   // https://medium.com/@robdel12/single-page-apps-routers-are-broken-255daa310cf
   // Useful for accessibility and key navigation.
-  const maybeFocusLayoutBody = () => {
+  React.useEffect(() => {
     if (!layoutBodyRef.current) return;
     // Do not focus on the initial render.
     if (initialRender === true) {
@@ -91,11 +91,7 @@ const Layout: React.FunctionComponent<LayoutProps> = props => {
     }
     layoutBodyRef.current.setNativeProps({ style: { outline: 'none' } });
     layoutBodyRef.current.focus();
-  };
-
-  React.useEffect(() => {
-    maybeFocusLayoutBody();
-  }, [maybeFocusLayoutBody]);
+  });
 
   return (
     <>
