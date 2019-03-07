@@ -1,7 +1,7 @@
 import isEmail from 'validator/lib/isEmail';
 // import isURL from 'validator/lib/isURL';
 
-// Helpers.
+// Errors.
 
 const required = (value: string) => value.length === 0 && 'REQUIRED';
 const email = (value: string) => !isEmail(value) && 'EMAIL';
