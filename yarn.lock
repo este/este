@@ -917,7 +917,7 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@sentry/browser@^4.5.3":
+"@sentry/browser@^4.5.3", "@sentry/browser@^4.6.5":
   version "4.6.5"
   resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.6.5.tgz#ecae280400117fef039db1b678e110a7d3e98a10"
   integrity sha512-sIbEDTdZeRN+jzCEHGBOdidjSv+ZmJ9VPfek+bnP5FZNyUYfaZRrwWG0sJPPb8SlhSPUQXSI1t1saRhvd+Gs4A==
@@ -4153,6 +4153,11 @@ forwarded@~0.1.2:
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
   integrity sha1-mMI9qxF1ZXuMBXPozszZGw/xjIQ=
 
+fp-ts@^1.0.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-1.15.0.tgz#7706d6761cc98ccbece91c2ff2e5a5b924f65f3d"
+  integrity sha512-D0gnY9qnpifaqNABqSKjttOW4YVpAHK7I7hcstJllbyqS1GKzbQoAguZYr77DhXzIXnsJiqo65dCHJZq6ouxiQ==
+
 fragment-cache@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/fragment-cache/-/fragment-cache-0.2.1.tgz#4290fad27f13e89be7f33799c6bc5a0abfff0d19"
@@ -4918,6 +4923,13 @@ invert-kv@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-2.0.0.tgz#7393f5afa59ec9ff5f67a27620d11c226e3eec02"
   integrity sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==
+
+io-ts@^1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/io-ts/-/io-ts-1.8.3.tgz#b617159ad030b5c85e14192ffbf24dd054030b38"
+  integrity sha512-zrZRpGNqbuMu8LWJ7lNNQpgdjIiOsNsIfzk8CJpeuVmdnNExGBpb5Wwtp+G9gmMOzLqj4+iFA7+HiFGLzqgBFQ==
+  dependencies:
+    fp-ts "^1.0.0"
 
 ipaddr.js@1.8.0:
   version "1.8.0"
@@ -6229,7 +6241,7 @@ next-transpile-modules@^2.0.0:
   resolved "https://registry.yarnpkg.com/next-transpile-modules/-/next-transpile-modules-2.2.0.tgz#1cd4b8b3e8bc22107c31ba38cbc889bc483bbae9"
   integrity sha512-AY2Rw5lYjWJgpTTA+cfhakTcaG32PpMqpCjqA0DsfHZXXPPIPUjONVXEHcliENKo3H7mdlDgJM8Imy4+Hz96Tw==
 
-next@^8.0.0:
+next@^8.0.0, next@^8.0.3:
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/next/-/next-8.0.3.tgz#7f27172e9441aacb21b04aaaaa663af43aceea3b"
   integrity sha512-Q4GHUZPzQrjBAWPOBBbWVlKUj9XPc/OsLc7svEXG+c/k9K9piQHDewtI9g4jQPAQlKOqt9BcRk8s5teV4SFPfQ==
@@ -7351,7 +7363,7 @@ prop-types@15.6.2:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2:
+prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -7537,7 +7549,7 @@ react-art@^16.8.0:
     prop-types "^15.6.2"
     scheduler "^0.13.5"
 
-react-dom@^16.8.1:
+react-dom@^16.8.1, react-dom@^16.8.5:
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.5.tgz#b3e37d152b49e07faaa8de41fdf562be3463335e"
   integrity sha512-VIEIvZLpFafsfu4kgmftP5L8j7P1f0YThfVTrANMhZUFMDOsA6e0kfR6wxw/8xxKs4NB59TZYbxNdPCDW34x4w==
@@ -7552,7 +7564,7 @@ react-error-overlay@4.0.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
   integrity sha512-FlsPxavEyMuR6TjVbSSywovXSEyOg6ZDj5+Z8nbsRl9EkOzAhEIcS+GLoQDC5fz/t9suhUXWmUrOBrgeUvrMxw==
 
-react-intl@^2.7.2:
+react-intl@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.8.0.tgz#20b0c1f01d1292427768aa8ec9e51ab7e36503ba"
   integrity sha512-1cSasNkHxZOXYYhms9Q1tSEWF8AWZQNq3nPLB/j8mYV0ZTSt2DhGQXHfKrKQMu4cgj9J1Crqg7xFPICTBgzqtQ==
@@ -7605,7 +7617,7 @@ react-timer-mixin@^0.13.4:
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
   integrity sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q==
 
-react@^16.8.1:
+react@^16.8.1, react@^16.8.5:
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.5.tgz#49be3b655489d74504ad994016407e8a0445de66"
   integrity sha512-daCb9TD6FZGvJ3sg8da1tRAtIuw29PbKZW++NN4wqkbEvxL+bZpaaYb4xuftW/SpXmgacf1skXl/ddX6CdOlDw==
