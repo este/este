@@ -4,12 +4,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
+import useAppContext from '@app/hooks/useAppContext';
+import usePageTitles from '@app/hooks/usePageTitles';
 import Gravatar from './Gravatar';
 import NProgress from './NProgress';
 import { LayoutQuery } from '../generated/LayoutQuery.graphql';
-import useAppContext from '../hooks/useAppContext';
 import Link from './Link';
-import usePageTitles from '../hooks/usePageTitles';
 
 interface HeaderProps {
   viewer: LayoutQuery['viewer'];

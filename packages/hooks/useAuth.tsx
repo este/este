@@ -3,7 +3,7 @@ import cookie from 'cookie';
 import { IncomingMessage } from 'http';
 import Router from 'next/router';
 import React from 'react';
-import { AppHref } from '../types';
+import { AppHref } from './useAppHref';
 
 const cookieName = 'token';
 const localStorageKey = 'signOut';

@@ -2,14 +2,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
+import useAppContext from '@app/hooks/useAppContext';
+import useAuth from '@app/hooks/useAuth';
+import usePageTitles from '@app/hooks/usePageTitles';
 import Button from '../components/Button';
 import Gravatar from '../components/Gravatar';
 import Layout from '../components/Layout';
 import SetUserTheme from '../components/SetUserTheme';
 import { meQuery } from '../generated/meQuery.graphql';
-import useAppContext from '../hooks/useAppContext';
-import useAuth from '../hooks/useAuth';
-import usePageTitles from '../hooks/usePageTitles';
 
 interface MeProps {
   data: meQuery;

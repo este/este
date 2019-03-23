@@ -1,17 +1,17 @@
-import validateSignIn from '@app/api/validators/validateSignIn';
 import React from 'react';
+import validateSignIn from '@app/api/validators/validateSignIn';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { Platform, TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
+import useAppContext from '@app/hooks/useAppContext';
+import useAuth from '@app/hooks/useAuth';
+import useMutation from '@app/hooks/useMutation';
+import usePageTitles from '@app/hooks/usePageTitles';
 import Button from '../components/Button';
 import Layout from '../components/Layout';
 import ValidationError from '../components/ValidationError';
 import { signinMutation } from '../generated/signinMutation.graphql';
 import { signinQuery } from '../generated/signinQuery.graphql';
-import useAppContext from '../hooks/useAppContext';
-import useAuth from '../hooks/useAuth';
-import useMutation from '../hooks/useMutation';
-import usePageTitles from '../hooks/usePageTitles';
 
 const mutation = graphql`
   mutation signinMutation($input: SignInInput!) {

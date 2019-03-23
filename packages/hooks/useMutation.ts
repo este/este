@@ -7,7 +7,7 @@ import React from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
-import { AppHref } from '../types';
+import { AppHref } from './useAppHref';
 import useAppContext from './useAppContext';
 
 const messages = defineMessages({

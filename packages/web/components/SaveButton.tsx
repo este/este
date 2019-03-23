@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import useSavedState from '../hooks/useSavedState';
+import useSavedState from '@app/hooks/useSavedState';
 import Button from './Button';
 
 interface SaveButtonProps {

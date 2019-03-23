@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import useAppContext from '../hooks/useAppContext';
+import useAppContext from '@app/hooks/useAppContext';
 
 type Type = 'text' | 'primary' | 'secondary' | 'danger';
 
@@ -31,12 +31,7 @@ const Button: React.FunctionComponent<ButtonProps> = props => {
   };
 
   return (
-    <TouchableOpacity
-      disabled={disabled}
-      {...rest}
-      // TODO: With updated RN types. Probably 0.57+
-      // accessibilityRole="button"
-    >
+    <TouchableOpacity disabled={disabled} accessibilityRole="button" {...rest}>
       <Text style={[getStyle(type), disabled && theme.buttonDisabled]}>
         {props.children}
       </Text>

@@ -16,13 +16,13 @@ import {
   RecordSource,
   Store,
 } from 'relay-runtime';
+import { AuthSyncProvider, maybeGetAuthToken } from '@app/hooks/useAuth';
+import { AppHref } from '@app/hooks/useAppHref';
+import { AppContext } from '@app/hooks/useAppContext';
 import IntlProviderFix from '../components/IntlProviderFix';
 import RouterProviderFix from '../components/RouterProviderFix';
 import ViewerTheme from '../components/ViewerTheme';
-import AppContext from '../contexts/AppContext';
 import { AppQuery } from '../generated/AppQuery.graphql';
-import { AuthSyncProvider, maybeGetAuthToken } from '../hooks/useAuth';
-import { AppHref } from '../types';
 
 const SENTRY_PUBLIC_DSN =
   'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';
