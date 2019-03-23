@@ -1,12 +1,11 @@
 import validateCreateWeb from '@app/api/validators/validateCreateWeb';
-import Router from 'next/router';
 import React from 'react';
 import { defineMessages } from 'react-intl';
 import { TextInput, View } from 'react-native';
 import { graphql } from 'react-relay';
 import useAppContext from '@app/hooks/useAppContext';
 import useMutation from '@app/hooks/useMutation';
-import { AppHref } from '@app/hooks/useAppHref';
+import useAppHref from '@app/hooks/useAppHref';
 import { CreateWebMutation } from '../generated/CreateWebMutation.graphql';
 import Button from './Button';
 import ValidationError from './ValidationError';
@@ -42,16 +41,16 @@ const CreateWeb: React.FunctionComponent = () => {
     { name: '' },
     { validator: validateCreateWeb },
   );
+  const appHref = useAppHref();
 
   const createWeb = () => {
     commit({
       onSuccess({ web }) {
         if (web == null) return;
-        const href: AppHref = {
+        appHref.push({
           pathname: '/web',
           query: { id: web.id },
-        };
-        Router.push(href);
+        });
       },
     });
   };

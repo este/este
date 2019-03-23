@@ -1,6 +1,6 @@
 import Router from 'next/router';
 import nprogress from 'nprogress';
-import React from 'react';
+import React, { useRef, FunctionComponent, useEffect } from 'react';
 
 // Don't show progress for fast transitions.
 const startDelay = 1000;
@@ -9,8 +9,8 @@ interface NProgressProps {
   color: string;
 }
 
-const NProgress: React.FunctionComponent<NProgressProps> = ({ color }) => {
-  const timeoutRef = React.useRef<number | null>(null);
+const NProgress: FunctionComponent<NProgressProps> = ({ color }) => {
+  const timeoutRef = useRef<number | null>(null);
 
   const show = () => {
     // Some weird VSCode bug. Enforce browser setTimeout via window.
@@ -24,7 +24,7 @@ const NProgress: React.FunctionComponent<NProgressProps> = ({ color }) => {
     nprogress.done();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     Router.events.on('routeChangeStart', show);
     Router.events.on('routeChangeComplete', hide);
     Router.events.on('routeChangeError', hide);

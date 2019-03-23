@@ -3,18 +3,19 @@ import cookie from 'cookie';
 import { IncomingMessage } from 'http';
 import Router from 'next/router';
 import React from 'react';
-import { AppHref } from './useAppHref';
+import useAppHref from './useAppHref';
 
 const cookieName = 'token';
 const localStorageKey = 'signOut';
 
 const browserRedirectToIndexAfterSignOut = () => {
-  const href: AppHref = '/';
   // Browser redirect to purge sensitive session data.
-  window.location.href = href;
+  window.location.href = '/';
 };
 
 const useAuth = () => {
+  const appHref = useAppHref();
+
   const signIn = (token: string) => {
     window.document.cookie = cookie.serialize(cookieName, token, {
       maxAge: 30 * 24 * 60 * 60,
@@ -24,9 +25,7 @@ const useAuth = () => {
     if (typeof redirectUrl === 'string') {
       Router.replace(redirectUrl);
     } else {
-      // We don't need full redirect.
-      const href: AppHref = '/';
-      Router.replace(href);
+      appHref.replace({ pathname: '/' });
     }
   };
 

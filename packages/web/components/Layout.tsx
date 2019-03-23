@@ -22,13 +22,13 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
   return (
     <View style={theme.layoutHeader}>
       <Text style={theme.text}>
-        <Link prefetch href="/">
+        <Link prefetch href={{ pathname: '/' }}>
           {pageTitles.index}
         </Link>
       </Text>
       <Text style={[theme.text, theme.marginStartAuto]}>
         {viewer ? (
-          <Link prefetch href="/me">
+          <Link prefetch href={{ pathname: '/me' }}>
             <Gravatar
               email={viewer.email}
               size={StyleSheet.flatten(theme.text).lineHeight}
@@ -52,7 +52,7 @@ const Footer: React.FunctionComponent = () => {
     <View style={theme.layoutFooter}>
       <Text style={theme.layoutFooterText}>
         <FormattedMessage defaultMessage="made by" id="pageFooterMadeBy" />{' '}
-        <Link href="https://twitter.com/steida">steida</Link>
+        <Link href={{ pathname: 'https://twitter.com/steida' }}>steida</Link>
       </Text>
     </View>
   );

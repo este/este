@@ -3,11 +3,11 @@
 import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
 import * as Sentry from '@sentry/browser';
 import Router from 'next/router';
-import React from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
-import { AppHref } from './useAppHref';
+import useAppHref from './useAppHref';
 import useAppContext from './useAppContext';
 
 const messages = defineMessages({
@@ -109,20 +109,21 @@ const useMutation = <M extends Mutation>(
   setState: (state: Input<M>) => void;
   state: Input<M>;
 } => {
-  const [state, setState] = React.useState<Input<M>>(initialState);
-  const [errors, setErrors] = React.useState<Partial<Errors<M>>>({});
-  const [pending, setPending] = React.useState(false);
-  const focusablesRef = React.useRef<{ [key: string]: Focusable | null }>({});
-  const disposableRef = React.useRef<Disposable | null>(null);
+  const [state, setState] = useState<Input<M>>(initialState);
+  const [errors, setErrors] = useState<Partial<Errors<M>>>({});
+  const [pending, setPending] = useState(false);
+  const focusablesRef = useRef<{ [key: string]: Focusable | null }>({});
+  const disposableRef = useRef<Disposable | null>(null);
   const { intl, relayEnvironment } = useAppContext();
+  const appHref = useAppHref();
 
-  React.useEffect(() => {
+  useEffect(() => {
     return () => {
       if (disposableRef.current) disposableRef.current.dispose();
     };
   }, []);
 
-  const fields = React.useMemo<Fields<Input<M>>>(() => {
+  const fields = useMemo<Fields<Input<M>>>(() => {
     const createRef = (key: string) => (focusable: Focusable | null) => {
       focusablesRef.current[key] = focusable;
     };
@@ -221,11 +222,10 @@ const useMutation = <M extends Mutation>(
         if (payloadErrors) {
           handleApiGraphQLError(payloadErrors, {
             401() {
-              const signInHref: AppHref = {
+              appHref.replace({
                 pathname: '/signin',
                 query: { redirectUrl: Router.asPath || '' },
-              };
-              Router.replace(signInHref);
+              });
             },
             403() {
               // eslint-disable-next-line no-alert
