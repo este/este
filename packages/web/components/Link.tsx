@@ -1,5 +1,5 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import React from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import { Platform, Text, TextStyle, StyleProp } from 'react-native';
 import { Assign, Omit, Overwrite } from 'utility-types';
 import useAppContext from '@app/hooks/useAppContext';
@@ -16,28 +16,45 @@ export type LinkProps = Assign<
     }
   >,
   {
+    accessible?: boolean;
+    download?: string;
     style?: StyleProp<TextStyle>;
     activeStyle?: StyleProp<TextStyle>;
+    // We use it for manual focus.
+    nativeID?: string;
   }
 >;
 
-const Link: React.FunctionComponent<LinkProps> = props => {
+const Link: FunctionComponent<LinkProps> = props => {
   const { theme } = useAppContext();
+  const [hasHover, setHasHover] = useState(false);
   const appHref = useAppHref();
-  const [hasHover, setHasHover] = React.useState(false);
-  const { children, style, activeStyle, href, ...rest } = props;
-  const routeIsActive = appHref.isActive(href);
+  const {
+    children,
+    accessible,
+    style,
+    activeStyle,
+    href,
+    download,
+    nativeID,
+    ...rest
+  } = props;
+
+  const isActive = appHref.isActive(href);
 
   return (
     <NextLink {...rest} href={href} passHref>
       <Text
         style={[
           style || theme.link,
-          (hasHover || routeIsActive) && (activeStyle || theme.linkActive),
+          (isActive || hasHover) && (activeStyle || theme.linkActive),
         ]}
         accessibilityRole="link"
+        accessible={accessible}
+        nativeID={nativeID}
         {...Platform.select({
           web: {
+            download,
             onMouseEnter: () => setHasHover(true),
             onMouseLeave: () => setHasHover(false),
           },
