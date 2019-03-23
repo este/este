@@ -55,9 +55,8 @@ interface SwitchField extends FocusableField {
 
 interface PickerField extends FocusableField {
   enabled: boolean;
-  // any, because of "@types/react-native": "^0.55.28"
-  onValueChange: (value: any) => void;
-  selectedValue: any;
+  onValueChange: (value: string) => void;
+  selectedValue: string;
 }
 
 type Field<Value> = Value extends boolean

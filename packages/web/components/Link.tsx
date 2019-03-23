@@ -35,10 +35,9 @@ const Link: React.FunctionComponent<LinkProps> = props => {
           style || theme.link,
           (hasHover || routeIsActive) && (activeStyle || theme.linkActive),
         ]}
+        accessibilityRole="link"
         {...Platform.select({
           web: {
-            // TODO: Move to Text props with new RN types.
-            accessibilityRole: 'link',
             onMouseEnter: () => setHasHover(true),
             onMouseLeave: () => setHasHover(false),
           },
