@@ -65,6 +65,7 @@ module.exports = {
     'react/prop-types': 'off',
     // It's fine.
     'react/no-multi-comp': 'off',
+    'react/no-unescaped-entities': 'off',
     // They are fine sometimes.
     'no-nested-ternary': 'off',
     // This is fine.
