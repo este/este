@@ -4,12 +4,12 @@ import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import useAppContext from '@app/hooks/useAppContext';
 import useMutation from '@app/hooks/useMutation';
-import DeleteWeb from '../components/DeleteWeb';
-import Layout from '../components/Layout';
-import SaveButton from '../components/SaveButton';
-import ValidationError from '../components/ValidationError';
-import { webMutation } from '../generated/webMutation.graphql';
-import { webQuery } from '../generated/webQuery.graphql';
+import DeleteWeb from '@app/components/DeleteWeb';
+import Layout from '@app/components/Layout';
+import SaveButton from '@app/components/SaveButton';
+import ValidationError from '@app/components/ValidationError';
+import { webMutation } from '@app/relay/generated/webMutation.graphql';
+import { webQuery } from '@app/relay/generated/webQuery.graphql';
 
 const mutation = graphql`
   mutation webMutation($input: UpdateWebInput!) {

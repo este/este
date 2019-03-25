@@ -6,9 +6,9 @@ import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import useAppContext from '@app/hooks/useAppContext';
 import usePageTitles from '@app/hooks/usePageTitles';
+import { LayoutQuery } from '@app/relay/generated/LayoutQuery.graphql';
 import Gravatar from './Gravatar';
 import NProgress from './NProgress';
-import { LayoutQuery } from '../generated/LayoutQuery.graphql';
 import Link from './Link';
 
 interface HeaderProps {

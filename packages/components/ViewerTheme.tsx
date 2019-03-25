@@ -2,7 +2,7 @@ import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import lightTheme, { Theme } from '@app/themes/lightTheme';
 import darkTheme from '@app/themes/darkTheme';
-import { ViewerThemeQuery } from '../generated/ViewerThemeQuery.graphql';
+import { ViewerThemeQuery } from '@app/relay/generated/ViewerThemeQuery.graphql';
 
 interface ViewerThemeProps {
   data: ViewerThemeQuery;

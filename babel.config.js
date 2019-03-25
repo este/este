@@ -4,7 +4,7 @@ module.exports = api => {
   const presets = ['next/babel', '@zeit/next-typescript/babel'];
 
   const plugins = [
-    ['relay', { artifactDirectory: './generated' }],
+    ['relay', { artifactDirectory: '../../packages/relay/generated' }],
     // https://github.com/zeit/next.js/issues/5989
     [
       'module-resolver',

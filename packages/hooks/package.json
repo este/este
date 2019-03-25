@@ -6,7 +6,7 @@
     "@app/api": "1.0.0",
     "@sentry/browser": "^4.6.5",
     "io-ts": "^1.8.3",
-    "next": "^8.0.3",
+    "next": "^8.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",

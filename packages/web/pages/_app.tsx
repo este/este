@@ -19,10 +19,10 @@ import {
 import { AuthSyncProvider, maybeGetAuthToken } from '@app/hooks/useAuth';
 import { AppHref } from '@app/hooks/useAppHref';
 import { AppContext } from '@app/hooks/useAppContext';
-import IntlProviderFix from '../components/IntlProviderFix';
-import RouterProviderFix from '../components/RouterProviderFix';
-import ViewerTheme from '../components/ViewerTheme';
-import { AppQuery } from '../generated/AppQuery.graphql';
+import IntlProviderFix from '@app/components/IntlProviderFix';
+import RouterProviderFix from '@app/components/RouterProviderFix';
+import ViewerTheme from '@app/components/ViewerTheme';
+import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
 
 const SENTRY_PUBLIC_DSN =
   'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';

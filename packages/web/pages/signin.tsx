@@ -7,11 +7,11 @@ import useAppContext from '@app/hooks/useAppContext';
 import useAuth from '@app/hooks/useAuth';
 import useMutation from '@app/hooks/useMutation';
 import usePageTitles from '@app/hooks/usePageTitles';
-import Button from '../components/Button';
-import Layout from '../components/Layout';
-import ValidationError from '../components/ValidationError';
-import { signinMutation } from '../generated/signinMutation.graphql';
-import { signinQuery } from '../generated/signinQuery.graphql';
+import Button from '@app/components/Button';
+import Layout from '@app/components/Layout';
+import ValidationError from '@app/components/ValidationError';
+import { signinMutation } from '@app/relay/generated/signinMutation.graphql';
+import { signinQuery } from '@app/relay/generated/signinQuery.graphql';
 
 const mutation = graphql`
   mutation signinMutation($input: SignInInput!) {

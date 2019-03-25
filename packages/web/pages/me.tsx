@@ -5,11 +5,11 @@ import { createFragmentContainer, graphql } from 'react-relay';
 import useAppContext from '@app/hooks/useAppContext';
 import useAuth from '@app/hooks/useAuth';
 import usePageTitles from '@app/hooks/usePageTitles';
-import Button from '../components/Button';
-import Gravatar from '../components/Gravatar';
-import Layout from '../components/Layout';
-import SetUserTheme from '../components/SetUserTheme';
-import { meQuery } from '../generated/meQuery.graphql';
+import Button from '@app/components/Button';
+import Gravatar from '@app/components/Gravatar';
+import Layout from '@app/components/Layout';
+import SetUserTheme from '@app/components/SetUserTheme';
+import { meQuery } from '@app/relay/generated/meQuery.graphql';
 
 interface MeProps {
   data: meQuery;

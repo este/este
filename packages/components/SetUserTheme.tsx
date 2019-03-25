@@ -2,8 +2,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import useMutation from '@app/hooks/useMutation';
-import { SetUserThemeMutation } from '../generated/SetUserThemeMutation.graphql';
-import { SetUserThemeQuery } from '../generated/SetUserThemeQuery.graphql';
+import { SetUserThemeMutation } from '@app/relay/generated/SetUserThemeMutation.graphql';
+import { SetUserThemeQuery } from '@app/relay/generated/SetUserThemeQuery.graphql';
 import Button from './Button';
 
 const mutation = graphql`

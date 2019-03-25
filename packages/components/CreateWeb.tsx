@@ -6,7 +6,7 @@ import { graphql } from 'react-relay';
 import useAppContext from '@app/hooks/useAppContext';
 import useMutation from '@app/hooks/useMutation';
 import useAppHref from '@app/hooks/useAppHref';
-import { CreateWebMutation } from '../generated/CreateWebMutation.graphql';
+import { CreateWebMutation } from '@app/relay/generated/CreateWebMutation.graphql';
 import Button from './Button';
 import ValidationError from './ValidationError';
 

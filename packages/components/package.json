@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "@app/api": "1.0.0",
+    "@app/hooks": "1.0.0",
+    "@app/relay": "1.0.0",
+    "@app/themes": "1.0.0",
     "react": "^16.8.1"
   },
   "devDependencies": {
