@@ -6,6 +6,7 @@ import useAppContext from '@app/hooks/useAppContext';
 import usePageTitles from '@app/hooks/usePageTitles';
 import CreateWeb from '@app/components/CreateWeb';
 import Layout from '@app/components/Layout';
+import KeyboardNavigableView from '@app/components/KeyboardNavigableView';
 import Link from '@app/components/Link';
 import { pagesQuery } from '@app/relay/generated/pagesQuery.graphql';
 
@@ -49,7 +50,9 @@ const Authenticated: React.FunctionComponent<AuthenticatedProps> = ({
 }) => {
   return (
     <>
-      <ViewerWebs webs={viewer.webs} />
+      <KeyboardNavigableView>
+        <ViewerWebs webs={viewer.webs} />
+      </KeyboardNavigableView>
       <CreateWeb />
     </>
   );
