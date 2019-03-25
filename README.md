@@ -39,8 +39,7 @@
 - `yarn build` local build
 - `yarn start` local start
 - `yarn test` before commit
-- `now` deploy to <https://name-xxxxxxxxx.now.sh>
-- `now && now alias` deploy to aliased custom domain
+- `now` deploy to [zeit.co/now](https://zeit.co/now)
 
 ## Tips
 
