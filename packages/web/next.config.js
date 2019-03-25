@@ -23,8 +23,7 @@ module.exports = withCustomBabelConfig(
             reportFilename: '../../bundles/server.html',
           },
         },
-        // TODO: Use serverless target only within Now. But how?
-        // This does not work ...(process.env,NOW_REGION ? { target: 'serverless' } : null),
+        // https://github.com/zeit/next.js/issues/6219
         target: 'serverless',
         // For Yarn monorepo. Note because of '@app' we don't have to list all packages.
         // https://github.com/martpie/next-transpile-modules#readme
