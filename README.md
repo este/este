@@ -1,7 +1,5 @@
 # Este
 
-[![CircleCI](https://circleci.com/gh/este/este/tree/master.svg?style=svg)](https://circleci.com/gh/este/este/tree/master)
-
 - [reactjs.org](https://reactjs.org/)
 - [nextjs.org](https://nextjs.org/)
 - [zeit.co/now](https://zeit.co/now)
