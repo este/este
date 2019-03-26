@@ -5,7 +5,6 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "jsx": "react-native",
-    "lib": ["dom", "es2017", "esnext.asynciterable"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
