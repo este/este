@@ -1,6 +1,7 @@
 # Este
 
 - [reactjs.org](https://reactjs.org/)
+- [facebook.github.io/react-native](https://facebook.github.io/react-native/)
 - [nextjs.org](https://nextjs.org/)
 - [zeit.co/now](https://zeit.co/now)
 - [github.com/necolas/react-native-web](https://github.com/necolas/react-native-web)
@@ -27,7 +28,9 @@
 
 ## Tasks
 
-- `yarn dev` start development
+- `yarn dev` start web development
+- `yarn dev-ios` start iOS development
+- `yarn dev-android` start Android development
 - `yarn prisma:deploy` after `prisma/datamodel.graphql` change
 - `yarn prisma:generate` generate Prisma client
 - `yarn prisma:delete` get rid of the whole service

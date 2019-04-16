@@ -15,6 +15,8 @@
     "dev:workspaces": "wsrun --exclude-missing dev",
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev": "run-p dev:**",
+    "dev-ios": "yarn workspace @app/native dev:ios",
+    "dev-android": "yarn workspace @app/native dev:android",
     "deps": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
     "lint": "eslint '**/*.{ts,tsx}'",
     "lint:fix": "yarn lint --fix",

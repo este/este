@@ -12,7 +12,7 @@ module.exports = withCustomBabelConfig(
       withTranspileModules({
         analyzeBrowser: ['browser', 'both'].includes(BUNDLE_ANALYZE),
         analyzeServer: ['server', 'both'].includes(BUNDLE_ANALYZE),
-        babelConfigFile: path.resolve('../../babel.config.js'),
+        babelConfigFile: path.resolve('babel.config.js'),
         bundleAnalyzerConfig: {
           browser: {
             analyzerMode: 'static',

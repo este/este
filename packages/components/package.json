@@ -7,7 +7,7 @@
     "@app/hooks": "1.0.0",
     "@app/relay": "1.0.0",
     "@app/themes": "1.0.0",
-    "react": "^16.8.1"
+    "react": "16.8.6"
   },
   "devDependencies": {
     "@types/react": "^16.7.11"
