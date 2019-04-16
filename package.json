@@ -30,6 +30,9 @@
     "prisma:deploy": "prisma deploy --env-file .env",
     "prisma:delete": "prisma delete --env-file .env"
   },
+  "resolutions": {
+    "esm": "3.2.20"
+  },
   "dependencies": {
     "esm": "^3.2.0",
     "wsrun": "^3.6.2"
