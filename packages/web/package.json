@@ -16,7 +16,6 @@
     "@app/hooks": "1.0.0",
     "@app/relay": "1.0.0",
     "@app/themes": "1.0.0",
-    "@sentry/browser": "^4.5.3",
     "cookie": "^0.3.1",
     "gravatar": "^1.8.0",
     "isomorphic-unfetch": "^3.0.0",

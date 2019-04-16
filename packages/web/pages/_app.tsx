@@ -1,5 +1,4 @@
 import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
-import * as Sentry from '@sentry/browser';
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
@@ -23,9 +22,6 @@ import IntlProviderFix from '@app/components/IntlProviderFix';
 import RouterProviderFix from '@app/components/RouterProviderFix';
 import ViewerTheme from '@app/components/ViewerTheme';
 import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
-
-const SENTRY_PUBLIC_DSN =
-  'https://9b0e0ee39ba34f05a6a6ff94a7006acd@sentry.io/1380106';
 
 const createRelayEnvironment = (
   apiEndpoint: string,
@@ -150,7 +146,6 @@ export default class MyApp extends App<MyAppProps> {
           props.statusCode = 500;
           // eslint-disable-next-line no-console
           console.log(error);
-          Sentry.captureException(error);
         },
       });
       if (ctx.res && props.statusCode) ctx.res.statusCode = props.statusCode;
@@ -178,26 +173,6 @@ export default class MyApp extends App<MyAppProps> {
     }
 
     return props;
-  }
-
-  // https://github.com/zeit/next.js/blob/canary/examples/with-sentry/pages/_app.js
-  constructor(...args: any) {
-    // @ts-ignore
-    super(...args);
-    Sentry.init({ dsn: SENTRY_PUBLIC_DSN });
-  }
-
-  // https://github.com/zeit/next.js/blob/canary/examples/with-sentry/pages/_app.js
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    Sentry.configureScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
-        // @ts-ignore
-        scope.setExtra(key, errorInfo[key]);
-      });
-    });
-    Sentry.captureException(error);
-    // @ts-ignore
-    super.componentDidCatch(error, errorInfo);
   }
 
   render() {

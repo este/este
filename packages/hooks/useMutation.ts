@@ -1,7 +1,6 @@
 // TODO: Replace alert with universal component.
 /* eslint-env browser */
 import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
-import * as Sentry from '@sentry/browser';
 import Router from 'next/router';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { defineMessages } from 'react-intl';
@@ -235,10 +234,10 @@ const useMutation = <M extends Mutation>(
               // This should not happen with mutation.
               // eslint-disable-next-line no-alert
               alert(intl.formatMessage(messages.notFound));
-              Sentry.captureException(payloadErrors);
             },
             unknown() {
-              Sentry.captureException(payloadErrors);
+              // eslint-disable-next-line no-alert
+              alert(payloadErrors);
             },
           });
           return;
@@ -258,7 +257,6 @@ const useMutation = <M extends Mutation>(
         const message = isNetworkError
           ? intl.formatMessage(messages.noInternetAccess)
           : error.message;
-        if (!isNetworkError) Sentry.captureException(error);
         // eslint-disable-next-line no-alert
         alert(message);
       },
