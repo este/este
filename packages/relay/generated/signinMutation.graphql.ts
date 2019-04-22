@@ -4,9 +4,9 @@ import { ConcreteRequest } from "relay-runtime";
 export type EmailError = "ALREADY_EXISTS" | "EMAIL" | "NOT_EXISTS" | "REQUIRED" | "%future added value";
 export type PasswordError = "MAX_1024_CHARS" | "MIN_5_CHARS" | "REQUIRED" | "WRONG_PASSWORD" | "%future added value";
 export type SignInInput = {
+    readonly createAccount: boolean;
     readonly email: string;
     readonly password: string;
-    readonly createAccount: boolean;
 };
 export type signinMutationVariables = {
     readonly input: SignInInput;

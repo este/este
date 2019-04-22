@@ -1,18 +1,20 @@
 # Este
 
-- [reactjs.org](https://reactjs.org/)
-- [facebook.github.io/react-native](https://facebook.github.io/react-native/)
-- [nextjs.org](https://nextjs.org/)
+- [react](https://reactjs.org/)
+- [react-native](https://facebook.github.io/react-native/)
+- [react-native-web](https://github.com/necolas/react-native-web)
+- [nextjs](https://nextjs.org/)
 - [zeit.co/now](https://zeit.co/now)
-- [github.com/necolas/react-native-web](https://github.com/necolas/react-native-web)
 - [typescriptlang.org](https://www.typescriptlang.org/)
 - [graphql.org](https://graphql.org/)
-- [facebook.github.io/relay](https://facebook.github.io/relay/)
-- [prisma.io](https://www.prisma.io/)
+- [relay](https://facebook.github.io/relay/)
+- [prisma](https://www.prisma.io/)
+- [nexusjs](https://nexus.js.org/)
+- [apollo-server](https://www.apollographql.com/docs/apollo-server/)
 
 ## Prerequisites
 
-- [nodejs.org](http://nodejs.org/) 8 is required because of AWS. No, they don't support 10 yet.
+- [nodejs.org](http://nodejs.org/) 8 is required because of AWS. They don't support 10 yet.
 - [docker-compose](https://www.docker.com/products/docker-engine)
 - [yarnpkg.com](https://yarnpkg.com/en/)
 - [prisma-cli](https://www.prisma.io/docs/prisma-cli-and-configuration/using-the-prisma-cli-alx4/)
@@ -31,7 +33,7 @@
 - `yarn dev` start web development
 - `yarn dev-ios` start iOS development
 - `yarn dev-android` start Android development
-- `yarn prisma:deploy` after `prisma/datamodel.graphql` change
+- `yarn prisma:deploy` after `prisma/datamodel.prisma` change
 - `yarn prisma:generate` generate Prisma client
 - `yarn prisma:delete` get rid of the whole service
 - `yarn gen` after `api/schema.graphql` change

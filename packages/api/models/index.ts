@@ -1,18 +1,21 @@
 import { Prisma } from '../../../prisma/generated/prisma-client';
-import { User } from '../types';
 import createPermissions from './createPermissions';
+import { NexusGenAllTypes } from '../typegen';
 
 import userModel from './userModel';
 import webModel from './webModel';
 
-export const createModels = (db: Prisma, user: User | null) => {
+export const createModels = (
+  prisma: Prisma,
+  user: NexusGenAllTypes['User'] | null,
+) => {
   const permissions = createPermissions(user);
   const input = {
     hasError(errors: {}) {
       return Object.values(errors).some(error => error != null);
     },
   };
-  const modelContext = { db, input, permissions };
+  const modelContext = { prisma, input, permissions };
 
   return {
     user: userModel(modelContext),
@@ -23,7 +26,7 @@ export const createModels = (db: Prisma, user: User | null) => {
 export type Models = ReturnType<typeof createModels>;
 
 export interface ModelContext {
-  db: Prisma;
+  prisma: Prisma;
   input: {
     hasError: (errors: {}) => boolean;
   };

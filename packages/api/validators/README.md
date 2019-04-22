@@ -1,3 +1,4 @@
 # Validators
 
-Validators belong to API because API holds the truth and because of Prisma tooling.
+Validators belong to API because API holds the truth.
+Validators are pure functions so they can be used everywhere.

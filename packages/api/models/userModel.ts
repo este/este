@@ -1,18 +1,16 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import { SignInErrors, SignInInput, Web } from '../types';
 import validateSignIn from '../validators/validateSignIn';
 import { ModelContext } from './index';
+import { NexusGenAllTypes } from '../typegen';
 
 export interface JsonWebTokenPayload {
   userId: string;
 }
 
-const userModel = (ctx: ModelContext) => {
-  const signIn = async (input: SignInInput) => {
-    // TODO: Partial should not be required soon.
-    // https://github.com/prisma/prisma/issues/3621.
-    const fail = (errors: Partial<SignInErrors>) => ({
+const userModel = (context: ModelContext) => {
+  const signIn = async (input: NexusGenAllTypes['SignInInput']) => {
+    const fail = (errors: NexusGenAllTypes['SignInErrors']) => ({
       errors: {
         email: null,
         password: null,
@@ -20,6 +18,7 @@ const userModel = (ctx: ModelContext) => {
       },
       token: null,
     });
+
     const success = (userId: string) => {
       const payload: JsonWebTokenPayload = { userId };
       return {
@@ -29,35 +28,36 @@ const userModel = (ctx: ModelContext) => {
     };
 
     const errors = validateSignIn(input);
-    if (ctx.input.hasError(errors)) return fail(errors);
+    if (context.input.hasError(errors)) return fail(errors);
 
     if (input.createAccount) {
-      const exists = await ctx.db.$exists.user({ email: input.email });
+      const exists = await context.prisma.$exists.user({ email: input.email });
       if (exists) return fail({ email: 'ALREADY_EXISTS' });
       const password = await bcrypt.hash(input.password, 10);
-      const user = await ctx.db.createUser({
+      const user = await context.prisma.createUser({
         email: input.email,
         password,
         themeName: '',
       });
       return success(user.id);
-    } 
-      const user = await ctx.db.user({ email: input.email });
-      if (!user) return fail({ email: 'NOT_EXISTS' });
-      const validPassword = await bcrypt.compare(input.password, user.password);
-      if (!validPassword) return fail({ password: 'WRONG_PASSWORD' });
-      return success(user.id);
-    
+    }
+    const user = await context.prisma.user({ email: input.email });
+    if (!user) return fail({ email: 'NOT_EXISTS' });
+    const validPassword = await bcrypt.compare(input.password, user.password);
+    if (!validPassword) return fail({ password: 'WRONG_PASSWORD' });
+    return success(user.id);
   };
 
+  // Throws if viewer is not authenticated.
   const requiredViewer = () => {
-    return ctx.permissions.isAuthenticated();
+    return context.permissions.isAuthenticated();
   };
 
+  // Return null if viewer is not authenticated.
   const viewer = () => {
     let user = null;
     try {
-      user = ctx.permissions.isAuthenticated();
+      user = context.permissions.isAuthenticated();
     } catch (error) {
       if (error.name === 'AuthenticationError') return null;
       throw error;
@@ -66,8 +66,8 @@ const userModel = (ctx: ModelContext) => {
   };
 
   const setTheme = async (name: string) => {
-    const viewer = ctx.permissions.isAuthenticated();
-    const user = await ctx.db.updateUser({
+    const viewer = context.permissions.isAuthenticated();
+    const user = await context.prisma.updateUser({
       data: { themeName: name },
       where: { id: viewer.id },
     });
@@ -76,7 +76,9 @@ const userModel = (ctx: ModelContext) => {
   };
 
   const webs = async (userId: string) => {
-    const viewer = ctx.permissions.isAuthenticated(userId);
+    const viewer = context.permissions.isAuthenticated(userId);
+    // $fragment is workaround.
+    // https://github.com/prisma/prisma/issues/3668
     const fragment = `
       fragment WebWithCreator on Web {
         id
@@ -92,10 +94,10 @@ const userModel = (ctx: ModelContext) => {
         }
       }
     `;
-    return ctx.db
+    return context.prisma
       .user({ id: viewer.id })
       .webs({ orderBy: 'createdAt_DESC' })
-      .$fragment<Web[]>(fragment);
+      .$fragment<NexusGenAllTypes['Web'][]>(fragment);
   };
 
   return {

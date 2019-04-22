@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "ts": "ts-node -T -r esm -r dotenv/config",
-    "ts:watch": "ts-node-dev --no-notify --transpileOnly -r esm -r dotenv/config",
+    "ts:watch": "ts-node-dev --respawn --no-notify --transpileOnly -r esm -r dotenv/config",
     "dev:workspaces": "wsrun --exclude-missing dev",
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev": "run-p dev:**",

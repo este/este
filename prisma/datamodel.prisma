@@ -1,0 +1,17 @@
+type User {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  email: String! @unique
+  password: String!
+  themeName: String!
+  webs: [Web!]!
+}
+
+type Web {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  creator: User!
+  name: String!
+}

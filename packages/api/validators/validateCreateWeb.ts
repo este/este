@@ -1,7 +1,9 @@
-import { CreateWebErrors, CreateWebInput } from '../types';
-import { validateMax140Chars } from ".";
+import { validateMax140Chars } from '.';
+import { NexusGenAllTypes } from '../typegen';
 
-const validateCreateWeb = (input: CreateWebInput): CreateWebErrors => ({
+const validateCreateWeb = (
+  input: NexusGenAllTypes['CreateWebInput'],
+): Required<NexusGenAllTypes['CreateWebErrors']> => ({
   name: validateMax140Chars(input.name),
 });
 
