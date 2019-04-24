@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import * as jwt from 'jsonwebtoken';
-import { Prisma } from 'prisma/generated/prisma-client';
+import { Prisma } from '../../prisma/generated/prisma-client';
 import { NexusGenFieldTypes } from './typegen';
 import { JsonWebTokenPayload } from './models/userModel';
 
