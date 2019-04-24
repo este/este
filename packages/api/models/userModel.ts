@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
-import validateSignIn from '../validators/validateSignIn';
+import { validateSignIn } from '../validators/validateSignIn';
 import { ModelContext } from './index';
 import { NexusGenAllTypes } from '../typegen';
 
@@ -8,7 +8,7 @@ export interface JsonWebTokenPayload {
   userId: string;
 }
 
-const userModel = (context: ModelContext) => {
+export const userModel = (context: ModelContext) => {
   const signIn = async (input: NexusGenAllTypes['SignInInput']) => {
     const fail = (errors: NexusGenAllTypes['SignInErrors']) => ({
       errors: {
@@ -108,5 +108,3 @@ const userModel = (context: ModelContext) => {
     webs,
   };
 };
-
-export default userModel;

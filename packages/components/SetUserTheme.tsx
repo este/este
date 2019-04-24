@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
-import useMutation from '@app/hooks/useMutation';
+import { useMutation } from '@app/hooks/useMutation';
 import { SetUserThemeMutation } from '@app/relay/generated/SetUserThemeMutation.graphql';
 import { SetUserThemeQuery } from '@app/relay/generated/SetUserThemeQuery.graphql';
-import Button from './Button';
+import { Button } from './Button';
 
 const mutation = graphql`
   mutation SetUserThemeMutation($input: SetUserThemeInput!) {
@@ -17,13 +17,13 @@ const mutation = graphql`
   }
 `;
 
-interface SetUserThemeProps {
+interface SetUserThemeWithDataProps {
   data: SetUserThemeQuery;
 }
 
-const SetUserTheme: React.FunctionComponent<SetUserThemeProps> = ({
-  data: { viewer },
-}) => {
+const SetUserThemeWithData: React.FunctionComponent<
+  SetUserThemeWithDataProps
+> = ({ data: { viewer } }) => {
   const { commit, pending, state } = useMutation<SetUserThemeMutation>(
     mutation,
     { name: (viewer && viewer.themeName) || '' },
@@ -45,8 +45,8 @@ const SetUserTheme: React.FunctionComponent<SetUserThemeProps> = ({
   );
 };
 
-export default createFragmentContainer(
-  SetUserTheme,
+export const SetUserTheme = createFragmentContainer(
+  SetUserThemeWithData,
   graphql`
     fragment SetUserThemeQuery on Query {
       viewer {

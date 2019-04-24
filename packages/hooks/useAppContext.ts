@@ -15,11 +15,9 @@ interface AppContext {
 
 export const AppContext = React.createContext<AppContext | null>(null);
 
-const useAppContext = () => {
+export const useAppContext = () => {
   const appContext = React.useContext(AppContext);
   if (appContext == null)
     throw Error('useAppContext: Please provide AppContext value.');
   return appContext;
 };
-
-export default useAppContext;

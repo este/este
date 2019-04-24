@@ -2,8 +2,8 @@ import NextLink, { LinkProps as NextLinkProps } from 'next/link';
 import React, { useState, FunctionComponent } from 'react';
 import { Platform, Text, TextStyle, StyleProp } from 'react-native';
 import { Assign, Omit, Overwrite } from 'utility-types';
-import useAppContext from '@app/hooks/useAppContext';
-import useAppHref, { AppHref } from '@app/hooks/useAppHref';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { useAppHref, AppHref } from '@app/hooks/useAppHref';
 
 export type LinkProps = Assign<
   Overwrite<
@@ -25,7 +25,7 @@ export type LinkProps = Assign<
   }
 >;
 
-const Link: FunctionComponent<LinkProps> = props => {
+export const Link: FunctionComponent<LinkProps> = props => {
   const { theme } = useAppContext();
   const [hasHover, setHasHover] = useState(false);
   const appHref = useAppHref();
@@ -65,5 +65,3 @@ const Link: FunctionComponent<LinkProps> = props => {
     </NextLink>
   );
 };
-
-export default Link;

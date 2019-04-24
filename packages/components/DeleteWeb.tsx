@@ -1,11 +1,11 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
-import useConfirm from '@app/hooks/useConfirm';
-import useMutation from '@app/hooks/useMutation';
-import useAppHref from '@app/hooks/useAppHref';
+import { useConfirm } from '@app/hooks/useConfirm';
+import { useMutation } from '@app/hooks/useMutation';
+import { useAppHref } from '@app/hooks/useAppHref';
 import { DeleteWebMutation } from '@app/relay/generated/DeleteWebMutation.graphql';
-import Button from './Button';
+import { Button } from './Button';
 
 const mutation = graphql`
   mutation DeleteWebMutation($input: DeleteWebInput!) {
@@ -21,7 +21,7 @@ interface DeleteWebProps {
   id: string;
 }
 
-const DeleteWeb: React.FunctionComponent<DeleteWebProps> = ({ id }) => {
+export const DeleteWeb: React.FunctionComponent<DeleteWebProps> = ({ id }) => {
   const confirm = useConfirm();
   const { commit, pending } = useMutation<DeleteWebMutation>(mutation, { id });
   const appHref = useAppHref();
@@ -41,5 +41,3 @@ const DeleteWeb: React.FunctionComponent<DeleteWebProps> = ({ id }) => {
     </Button>
   );
 };
-
-export default DeleteWeb;

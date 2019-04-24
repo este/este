@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import useSavedState from '@app/hooks/useSavedState';
-import Button from './Button';
+import { useSavedState } from '@app/hooks/useSavedState';
+import { Button } from './Button';
 
 interface SaveButtonProps {
   disabled: boolean;
@@ -9,7 +9,7 @@ interface SaveButtonProps {
   saved: boolean;
 }
 
-const SaveButton: React.FunctionComponent<SaveButtonProps> = props => {
+export const SaveButton: React.FunctionComponent<SaveButtonProps> = props => {
   const [disabled, saved] = useSavedState(props.disabled, props.saved);
 
   return (
@@ -22,5 +22,3 @@ const SaveButton: React.FunctionComponent<SaveButtonProps> = props => {
     </Button>
   );
 };
-
-export default SaveButton;

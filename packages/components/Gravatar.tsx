@@ -9,7 +9,7 @@ interface GravatarProps {
   inline?: boolean;
 }
 
-const Gravatar: React.FunctionComponent<GravatarProps> = props => {
+export const Gravatar: React.FunctionComponent<GravatarProps> = props => {
   const { email, size = 100, rounded, inline } = props;
 
   return (
@@ -31,5 +31,3 @@ const Gravatar: React.FunctionComponent<GravatarProps> = props => {
     />
   );
 };
-
-export default Gravatar;

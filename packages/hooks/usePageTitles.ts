@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 import { useMemo } from 'react';
-import useAppContext from './useAppContext';
+import { useAppContext } from './useAppContext';
 
 export const pageTitles = defineMessages({
   index: {
@@ -19,7 +19,7 @@ export const pageTitles = defineMessages({
 
 // Page titles can not be collocated within pages because that would defeat
 // code splitting. One nav component would import many pages.
-const usePageTitles = () => {
+export const usePageTitles = () => {
   const { intl } = useAppContext();
   const titles = useMemo(() => {
     return {
@@ -31,5 +31,3 @@ const usePageTitles = () => {
   }, [intl]);
   return titles;
 };
-
-export default usePageTitles;

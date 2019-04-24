@@ -3,7 +3,7 @@ import cookie from 'cookie';
 import { IncomingMessage } from 'http';
 import Router from 'next/router';
 import React from 'react';
-import useAppHref from './useAppHref';
+import { useAppHref } from './useAppHref';
 
 const cookieName = 'token';
 const localStorageKey = 'signOut';
@@ -13,7 +13,7 @@ const browserRedirectToIndexAfterSignOut = () => {
   window.location.href = '/';
 };
 
-const useAuth = () => {
+export const useAuth = () => {
   const appHref = useAppHref();
 
   const signIn = (token: string) => {
@@ -41,8 +41,6 @@ const useAuth = () => {
 
   return { signIn, signOut };
 };
-
-export default useAuth;
 
 const useAuthSync = () => {
   React.useEffect(() => {

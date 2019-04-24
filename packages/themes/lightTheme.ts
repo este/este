@@ -309,7 +309,5 @@ export class LightTheme {
   }
 }
 
-const lightTheme = StyleSheet.create(new LightTheme(colors, dimensions));
+export const lightTheme = StyleSheet.create(new LightTheme(colors, dimensions));
 export type Theme = typeof lightTheme;
-
-export default lightTheme;

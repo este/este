@@ -18,7 +18,7 @@ const getKnownGraphQLErrorHttpStatusCodes = (
     : [];
 };
 
-const handleApiGraphQLError = (
+export const handleApiGraphQLError = (
   error: any,
   handlers: { [code in KnownGraphQLErrorStatusCode | 'unknown']: () => void },
 ) => {
@@ -31,5 +31,3 @@ const handleApiGraphQLError = (
   else if (codes.includes(403)) handlers[403]();
   else handlers.unknown();
 };
-
-export default handleApiGraphQLError;

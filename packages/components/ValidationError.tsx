@@ -2,7 +2,7 @@ import { NexusGenAllTypes } from '@app/api/typegen';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text } from 'react-native';
-import useAppContext from '@app/hooks/useAppContext';
+import { useAppContext } from '@app/hooks/useAppContext';
 
 interface ValidationErrorProps {
   error?:
@@ -13,7 +13,7 @@ interface ValidationErrorProps {
     | '%future added value';
 }
 
-const ValidationError: FunctionComponent<ValidationErrorProps> = ({
+export const ValidationError: FunctionComponent<ValidationErrorProps> = ({
   error,
 }) => {
   const { theme } = useAppContext();
@@ -87,5 +87,3 @@ const ValidationError: FunctionComponent<ValidationErrorProps> = ({
 
   return <Text style={theme.validationError}>{getMessage()}</Text>;
 };
-
-export default ValidationError;

@@ -1,9 +1,9 @@
 import { Prisma } from '../../../prisma/generated/prisma-client';
-import createPermissions from './createPermissions';
+import { createPermissions } from './createPermissions';
 import { NexusGenAllTypes } from '../typegen';
 
-import userModel from './userModel';
-import webModel from './webModel';
+import { userModel } from './userModel';
+import { webModel } from './webModel';
 
 export const createModels = (
   prisma: Prisma,

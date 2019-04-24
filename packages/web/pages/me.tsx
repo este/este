@@ -2,13 +2,13 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
-import useAppContext from '@app/hooks/useAppContext';
-import useAuth from '@app/hooks/useAuth';
-import usePageTitles from '@app/hooks/usePageTitles';
-import Button from '@app/components/Button';
-import Gravatar from '@app/components/Gravatar';
-import Layout from '@app/components/Layout';
-import SetUserTheme from '@app/components/SetUserTheme';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { useAuth } from '@app/hooks/useAuth';
+import { usePageTitles } from '@app/hooks/usePageTitles';
+import { Button } from '@app/components/Button';
+import { Gravatar } from '@app/components/Gravatar';
+import { Layout } from '@app/components/Layout';
+import { SetUserTheme } from '@app/components/SetUserTheme';
 import { meQuery } from '@app/relay/generated/meQuery.graphql';
 
 interface MeProps {
@@ -36,6 +36,7 @@ const Me: React.FunctionComponent<MeProps> = ({ data }) => {
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default createFragmentContainer(
   Me,
   graphql`

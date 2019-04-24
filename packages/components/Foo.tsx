@@ -5,8 +5,6 @@ interface FooProps {
   name: string;
 }
 
-const Foo: FunctionComponent<FooProps> = props => {
+export const Foo: FunctionComponent<FooProps> = props => {
   return <Text>{props.name}</Text>;
 };
-
-export default Foo;

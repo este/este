@@ -2,12 +2,12 @@ import React from 'react';
 import { FormattedRelative } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
-import useAppContext from '@app/hooks/useAppContext';
-import usePageTitles from '@app/hooks/usePageTitles';
-import CreateWeb from '@app/components/CreateWeb';
-import Layout from '@app/components/Layout';
-import KeyboardNavigableView from '@app/components/KeyboardNavigableView';
-import Link from '@app/components/Link';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { usePageTitles } from '@app/hooks/usePageTitles';
+import { CreateWeb } from '@app/components/CreateWeb';
+import { Layout } from '@app/components/Layout';
+import { KeyboardNavigableView } from '@app/components/KeyboardNavigableView';
+import { Link } from '@app/components/Link';
 import { pagesQuery } from '@app/relay/generated/pagesQuery.graphql';
 
 type Viewer = NonNullable<pagesQuery['viewer']>;
@@ -88,6 +88,7 @@ const Index: React.FunctionComponent<{
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default createFragmentContainer(
   Index,
   graphql`

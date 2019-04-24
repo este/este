@@ -42,7 +42,7 @@ module.exports = {
     // I believe shadowing is a nice language feature.
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
-    // 'import/no-default-export': 'error',
+    'import/no-default-export': 'error',
     'import/no-unresolved': 'error',
     // We have types.
     'react/prop-types': 'off',

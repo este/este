@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import { defineMessages } from 'react-intl';
-import useAppContext from './useAppContext';
+import { useAppContext } from './useAppContext';
 
 const messages = defineMessages({
   areYouSure: {
@@ -9,7 +9,7 @@ const messages = defineMessages({
   },
 });
 
-const useConfirm = () => {
+export const useConfirm = () => {
   const { intl } = useAppContext();
 
   const confirm = () => {
@@ -19,5 +19,3 @@ const useConfirm = () => {
 
   return confirm;
 };
-
-export default useConfirm;

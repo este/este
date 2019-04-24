@@ -16,6 +16,7 @@ const globalStyles = `
   body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 `;
 
+// eslint-disable-next-line import/no-default-export
 export default class MyDocument extends Document {
   static async getInitialProps({ renderPage }: NextDocumentContext) {
     AppRegistry.registerComponent('Main', () => Main);

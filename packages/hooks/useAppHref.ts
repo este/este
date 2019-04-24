@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import * as t from 'io-ts';
-import useAppContext from './useAppContext';
+import { useAppContext } from './useAppContext';
 
 // Typed app routing via brilliant gcanti/io-ts.
 // Soon in Next.js: https://twitter.com/timneutkens/status/1109092151907045376
@@ -22,7 +22,7 @@ const AppHrefIO = t.union([
 
 export type AppHref = t.TypeOf<typeof AppHrefIO>;
 
-const useAppHref = () => {
+export const useAppHref = () => {
   const { router } = useAppContext();
 
   // This should be memoized globally. In serverless, it means per request :-)
@@ -67,5 +67,3 @@ const useAppHref = () => {
     [current, router],
   );
 };
-
-export default useAppHref;

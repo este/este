@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import Foo from '@app/components/Foo';
+import { Foo } from '@app/components/Foo';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,4 +39,5 @@ const App: FunctionComponent = () => {
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default App;

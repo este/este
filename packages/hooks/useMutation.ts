@@ -1,13 +1,13 @@
 // TODO: Replace alert with universal component.
 /* eslint-env browser */
-import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
+import { handleApiGraphQLError } from '@app/api/handleApiGraphQLError';
 import Router from 'next/router';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
 import { Disposable } from 'relay-runtime';
-import useAppHref from './useAppHref';
-import useAppContext from './useAppContext';
+import { useAppHref } from './useAppHref';
+import { useAppContext } from './useAppContext';
 
 const messages = defineMessages({
   forbidden: {
@@ -94,7 +94,7 @@ type Commit<M extends Mutation> = (options?: {
 
 type Errors<M extends Mutation> = NonNullable<Response<M>['errors']>;
 
-const useMutation = <M extends Mutation>(
+export const useMutation = <M extends Mutation>(
   mutation: GraphQLTaggedNode,
   initialState: Input<M>,
   useMutationOptions: {
@@ -272,5 +272,3 @@ const useMutation = <M extends Mutation>(
     state,
   };
 };
-
-export default useMutation;

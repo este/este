@@ -10,7 +10,7 @@ import { View, ViewProps, findNodeHandle } from 'react-native';
 // For initial tabIndex, use accessible prop.
 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets
 
-const KeyboardNavigableView: FunctionComponent<ViewProps> = props => {
+export const KeyboardNavigableView: FunctionComponent<ViewProps> = props => {
   const viewRef = useRef<View>(null);
 
   const getViewElement = useCallback((): HTMLElement | null => {
@@ -156,5 +156,3 @@ const KeyboardNavigableView: FunctionComponent<ViewProps> = props => {
 
   return <View {...props} ref={viewRef} />;
 };
-
-export default KeyboardNavigableView;

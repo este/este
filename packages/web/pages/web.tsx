@@ -1,13 +1,13 @@
-import validateCreateWeb from '@app/api/validators/validateCreateWeb';
+import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
 import React from 'react';
 import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
-import useAppContext from '@app/hooks/useAppContext';
-import useMutation from '@app/hooks/useMutation';
-import DeleteWeb from '@app/components/DeleteWeb';
-import Layout from '@app/components/Layout';
-import SaveButton from '@app/components/SaveButton';
-import ValidationError from '@app/components/ValidationError';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { useMutation } from '@app/hooks/useMutation';
+import { DeleteWeb } from '@app/components/DeleteWeb';
+import { Layout } from '@app/components/Layout';
+import { SaveButton } from '@app/components/SaveButton';
+import { ValidationError } from '@app/components/ValidationError';
 import { webMutation } from '@app/relay/generated/webMutation.graphql';
 import { webQuery } from '@app/relay/generated/webQuery.graphql';
 
@@ -58,6 +58,7 @@ const Web: React.FunctionComponent<WebProps> = ({ data }) => {
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default createFragmentContainer(
   Web,
   graphql`

@@ -7,6 +7,6 @@ const darkColors = {
   foreground: '#ffffff',
 };
 
-const darkTheme = StyleSheet.create(new LightTheme(darkColors, dimensions));
-
-export default darkTheme;
+export const darkTheme = StyleSheet.create(
+  new LightTheme(darkColors, dimensions),
+);

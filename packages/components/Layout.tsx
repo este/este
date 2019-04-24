@@ -4,12 +4,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
-import useAppContext from '@app/hooks/useAppContext';
-import usePageTitles from '@app/hooks/usePageTitles';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { usePageTitles } from '@app/hooks/usePageTitles';
 import { LayoutQuery } from '@app/relay/generated/LayoutQuery.graphql';
-import Gravatar from './Gravatar';
-import NProgress from './NProgress';
-import Link from './Link';
+import { Gravatar } from './Gravatar';
+import { NProgress } from './NProgress';
+import { Link } from './Link';
 
 interface HeaderProps {
   viewer: LayoutQuery['viewer'];
@@ -60,12 +60,12 @@ const Footer: React.FunctionComponent = () => {
 
 let initialRender = true;
 
-interface LayoutProps {
+interface LayoutWithDataProps {
   title: string;
   data: LayoutQuery;
 }
 
-const Layout: React.FunctionComponent<LayoutProps> = props => {
+const LayoutWithData: React.FunctionComponent<LayoutWithDataProps> = props => {
   const { theme } = useAppContext();
   const [htmlBackgroundColor, nprogressColor] = React.useMemo(() => {
     return [
@@ -114,8 +114,8 @@ const Layout: React.FunctionComponent<LayoutProps> = props => {
   );
 };
 
-export default createFragmentContainer(
-  Layout,
+export const Layout = createFragmentContainer(
+  LayoutWithData,
   graphql`
     fragment LayoutQuery on Query {
       viewer {

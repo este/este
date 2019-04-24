@@ -16,7 +16,7 @@ class NotFoundError extends ApolloError {
 }
 
 // Remember to update handleApiGraphQLError.ts.
-const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
+export const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
   const isAuthenticated = (userId?: string): NexusGenAllTypes['User'] => {
     if (user == null || (userId != null && user.id !== userId))
       throw new AuthenticationError('you must be logged in');
@@ -42,5 +42,3 @@ const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
     isWebCreatorOrAdmin,
   };
 };
-
-export default createPermissions;

@@ -1,14 +1,14 @@
-import validateCreateWeb from '@app/api/validators/validateCreateWeb';
+import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
 import React from 'react';
 import { defineMessages } from 'react-intl';
 import { TextInput, View } from 'react-native';
 import { graphql } from 'react-relay';
-import useAppContext from '@app/hooks/useAppContext';
-import useMutation from '@app/hooks/useMutation';
-import useAppHref from '@app/hooks/useAppHref';
+import { useAppContext } from '@app/hooks/useAppContext';
+import { useMutation } from '@app/hooks/useMutation';
+import { useAppHref } from '@app/hooks/useAppHref';
 import { CreateWebMutation } from '@app/relay/generated/CreateWebMutation.graphql';
-import Button from './Button';
-import ValidationError from './ValidationError';
+import { Button } from './Button';
+import { ValidationError } from './ValidationError';
 
 const messages = defineMessages({
   createWebButton: {
@@ -34,7 +34,7 @@ const mutation = graphql`
   }
 `;
 
-const CreateWeb: React.FunctionComponent = () => {
+export const CreateWeb: React.FunctionComponent = () => {
   const { intl, theme } = useAppContext();
   const { fields, commit, errors, pending } = useMutation<CreateWebMutation>(
     mutation,
@@ -72,5 +72,3 @@ const CreateWeb: React.FunctionComponent = () => {
     </>
   );
 };
-
-export default CreateWeb;

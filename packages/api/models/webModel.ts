@@ -1,4 +1,4 @@
-import validateCreateWeb from '../validators/validateCreateWeb';
+import { validateCreateWeb } from '../validators/validateCreateWeb';
 import { ModelContext } from './index';
 import { NexusGenAllTypes } from '../typegen';
 
@@ -21,7 +21,7 @@ const webWithCreatorFragment = `
   }
 `;
 
-const webModel = (context: ModelContext) => {
+export const webModel = (context: ModelContext) => {
   const byId = async (id: string) => {
     const web = await context.prisma
       .web({ id })
@@ -73,5 +73,3 @@ const webModel = (context: ModelContext) => {
     updateWeb,
   };
 };
-
-export default webModel;

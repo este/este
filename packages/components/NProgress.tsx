@@ -9,7 +9,7 @@ interface NProgressProps {
   color: string;
 }
 
-const NProgress: FunctionComponent<NProgressProps> = ({ color }) => {
+export const NProgress: FunctionComponent<NProgressProps> = ({ color }) => {
   const timeoutRef = useRef<number | null>(null);
 
   const show = () => {
@@ -66,5 +66,3 @@ const NProgress: FunctionComponent<NProgressProps> = ({ color }) => {
     </style>
   );
 };
-
-export default NProgress;

@@ -1,25 +1,24 @@
 import React from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
-import lightTheme, { Theme } from '@app/themes/lightTheme';
-import darkTheme from '@app/themes/darkTheme';
+import { Theme, lightTheme } from '@app/themes/lightTheme';
+import { darkTheme } from '@app/themes/darkTheme';
 import { ViewerThemeQuery } from '@app/relay/generated/ViewerThemeQuery.graphql';
 
-interface ViewerThemeProps {
+interface ViewerThemeWithDataProps {
   data: ViewerThemeQuery;
   children: (theme: Theme) => React.ReactElement<any> | null;
 }
 
-const ViewerTheme: React.FunctionComponent<ViewerThemeProps> = ({
-  children,
-  data: { viewer },
-}) => {
+const ViewerThemeWithData: React.FunctionComponent<
+  ViewerThemeWithDataProps
+> = ({ children, data: { viewer } }) => {
   // Magic string is good enough for now.
   const theme = viewer && viewer.themeName === 'dark' ? darkTheme : lightTheme;
   return children(theme);
 };
 
-export default createFragmentContainer(
-  ViewerTheme,
+export const ViewerTheme = createFragmentContainer(
+  ViewerThemeWithData,
   graphql`
     fragment ViewerThemeQuery on Query {
       viewer {

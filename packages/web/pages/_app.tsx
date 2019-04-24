@@ -1,4 +1,4 @@
-import handleApiGraphQLError from '@app/api/handleApiGraphQLError';
+import { handleApiGraphQLError } from '@app/api/handleApiGraphQLError';
 import fetch from 'isomorphic-unfetch';
 import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
@@ -18,9 +18,9 @@ import {
 import { AuthSyncProvider, maybeGetAuthToken } from '@app/hooks/useAuth';
 import { AppHref } from '@app/hooks/useAppHref';
 import { AppContext } from '@app/hooks/useAppContext';
-import IntlProviderFix from '@app/components/IntlProviderFix';
-import RouterProviderFix from '@app/components/RouterProviderFix';
-import ViewerTheme from '@app/components/ViewerTheme';
+import { IntlProviderFix } from '@app/components/IntlProviderFix';
+import { RouterProviderFix } from '@app/components/RouterProviderFix';
+import { ViewerTheme } from '@app/components/ViewerTheme';
 import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
 
 const createRelayEnvironment = (
@@ -83,6 +83,7 @@ interface MyAppProps {
   variables: AppQuery['variables'];
 }
 
+// eslint-disable-next-line import/no-default-export
 export default class MyApp extends App<MyAppProps> {
   static async getInitialProps({
     router,
