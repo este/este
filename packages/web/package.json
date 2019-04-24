@@ -16,8 +16,6 @@
     "@app/hooks": "1.0.0",
     "@app/relay": "1.0.0",
     "@app/themes": "1.0.0",
-    "cookie": "^0.3.1",
-    "gravatar": "^1.8.0",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^8.0.0",
     "nprogress": "^0.2.0",
@@ -28,11 +26,11 @@
     "react-native-web": "^0.11.2",
     "react-relay": "^3.0.0",
     "react": "16.8.6",
-    "relay-runtime": "^3.0.0"
+    "relay-runtime": "^3.0.0",
+    "react-native": "0.59.4"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@types/cookie": "^0.3.2",
     "@types/gravatar": "^1.4.28",
     "@types/next": "^8.0.0",
     "@types/nprogress": "0.0.29",

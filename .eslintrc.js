@@ -1,9 +1,3 @@
-// Temp fix for import.
-// https://github.com/benmosher/eslint-plugin-import/issues/1285#issuecomment-466212438
-const jsExtensions = ['.js', '.jsx'];
-const tsExtensions = ['.ts', '.tsx'];
-const allExtensions = jsExtensions.concat(tsExtensions);
-
 module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -19,6 +13,7 @@ module.exports = {
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
@@ -32,17 +27,6 @@ module.exports = {
     //   'Hyperlink',
     //   { name: 'Link', linkAttribute: 'to' },
     // ],
-    // Temp fix for import.
-    // https://github.com/benmosher/eslint-plugin-import/issues/1285#issuecomment-466212438
-    'import/extensions': allExtensions,
-    'import/parsers': {
-      '@typescript-eslint/parser': tsExtensions,
-    },
-    'import/resolver': {
-      node: {
-        extensions: allExtensions,
-      },
-    },
   },
   // Este rules.
   rules: {
@@ -57,9 +41,8 @@ module.exports = {
     'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
     // I believe shadowing is a nice language feature.
     'no-shadow': 'off',
-    // Does not work with TypeScript export type.
     'import/prefer-default-export': 'off',
-    // Does not work with Babel react-native to react-native-web
+    // 'import/no-default-export': 'error',
     'import/no-unresolved': 'off',
     // We have types.
     'react/prop-types': 'off',
@@ -94,7 +77,6 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'react/destructuring-assignment': 'off',
-    'import/no-extraneous-dependencies': 'off',
     'import/no-cycle': 'off',
   },
 };
