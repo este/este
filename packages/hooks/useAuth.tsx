@@ -2,7 +2,7 @@
 import cookie from 'cookie';
 import { IncomingMessage } from 'http';
 import Router from 'next/router';
-import React from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { useAppHref } from './useAppHref';
 
 const cookieName = 'token';
@@ -43,7 +43,7 @@ export const useAuth = () => {
 };
 
 const useAuthSync = () => {
-  React.useEffect(() => {
+  useEffect(() => {
     const syncLogout = (event: StorageEvent) => {
       if (event.key === localStorageKey) {
         browserRedirectToIndexAfterSignOut();
@@ -58,9 +58,9 @@ const useAuthSync = () => {
 };
 
 // We need provider because _app is a class and classes doesn't support Hooks.
-export const AuthSyncProvider: React.FunctionComponent = props => {
+export const AuthSyncProvider: FunctionComponent = props => {
   useAuthSync();
-  return <React.Fragment>{props.children}</React.Fragment>;
+  return <>{props.children}</>;
 };
 
 // If there are no cookies or cookies can't be applied, return the empty string.

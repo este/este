@@ -1,5 +1,5 @@
 import NextLink, { LinkProps as NextLinkProps } from 'next/link';
-import React, { useState, FunctionComponent } from 'react';
+import React, { useState, FunctionComponent, ReactNode } from 'react';
 import { Platform, Text, TextStyle, StyleProp } from 'react-native';
 import { Assign, Omit, Overwrite } from 'utility-types';
 import { useAppContext } from '@app/hooks/useAppContext';
@@ -10,7 +10,7 @@ export type LinkProps = Assign<
     Omit<NextLinkProps, 'passHref'>,
     {
       // Allow string etc.
-      children: React.ReactNode;
+      children: ReactNode;
       // Make href required and typed.
       href: AppHref;
     }

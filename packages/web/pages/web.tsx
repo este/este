@@ -1,5 +1,5 @@
 import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
@@ -29,7 +29,7 @@ interface WebProps {
   data: webQuery;
 }
 
-const Web: React.FunctionComponent<WebProps> = ({ data }) => {
+const Web: FunctionComponent<WebProps> = ({ data }) => {
   const { web } = data;
   const { theme } = useAppContext();
   const { fields, commit, errors, pending, state } = useMutation<webMutation>(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { validateSignIn } from '@app/api/validators/validateSignIn';
 import { defineMessages, FormattedMessage } from 'react-intl';
 import { Platform, TextInput, View } from 'react-native';
@@ -40,7 +40,7 @@ interface SignIn {
   data: signinQuery;
 }
 
-const SignIn: React.FunctionComponent<SignIn> = ({ data }) => {
+const SignIn: FunctionComponent<SignIn> = ({ data }) => {
   const { intl, theme } = useAppContext();
   const auth = useAuth();
   const pageTitles = usePageTitles();

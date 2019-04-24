@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { graphql } from 'react-relay';
 import { useConfirm } from '@app/hooks/useConfirm';
@@ -21,7 +21,7 @@ interface DeleteWebProps {
   id: string;
 }
 
-export const DeleteWeb: React.FunctionComponent<DeleteWebProps> = ({ id }) => {
+export const DeleteWeb: FunctionComponent<DeleteWebProps> = ({ id }) => {
   const confirm = useConfirm();
   const { commit, pending } = useMutation<DeleteWebMutation>(mutation, { id });
   const appHref = useAppHref();

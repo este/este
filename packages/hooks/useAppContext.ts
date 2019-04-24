@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext, createContext } from 'react';
 
 import { Environment } from 'relay-runtime';
 import { InjectedIntl } from 'react-intl';
@@ -13,10 +13,10 @@ interface AppContext {
   // initialRender: boolean;
 }
 
-export const AppContext = React.createContext<AppContext | null>(null);
+export const AppContext = createContext<AppContext | null>(null);
 
 export const useAppContext = () => {
-  const appContext = React.useContext(AppContext);
+  const appContext = useContext(AppContext);
   if (appContext == null)
     throw Error('useAppContext: Please provide AppContext value.');
   return appContext;

@@ -1,5 +1,5 @@
 import gravatar from 'gravatar';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Image } from 'react-native';
 
 interface GravatarProps {
@@ -9,7 +9,7 @@ interface GravatarProps {
   inline?: boolean;
 }
 
-export const Gravatar: React.FunctionComponent<GravatarProps> = props => {
+export const Gravatar: FunctionComponent<GravatarProps> = props => {
   const { email, size = 100, rounded, inline } = props;
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -15,7 +15,7 @@ interface MeProps {
   data: meQuery;
 }
 
-const Me: React.FunctionComponent<MeProps> = ({ data }) => {
+const Me: FunctionComponent<MeProps> = ({ data }) => {
   const { requiredViewer } = data;
   const { theme } = useAppContext();
   const pageTitles = usePageTitles();

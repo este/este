@@ -1,5 +1,5 @@
 import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { defineMessages } from 'react-intl';
 import { TextInput, View } from 'react-native';
 import { graphql } from 'react-relay';
@@ -34,7 +34,7 @@ const mutation = graphql`
   }
 `;
 
-export const CreateWeb: React.FunctionComponent = () => {
+export const CreateWeb: FunctionComponent = () => {
   const { intl, theme } = useAppContext();
   const { fields, commit, errors, pending } = useMutation<CreateWebMutation>(
     mutation,

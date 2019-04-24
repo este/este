@@ -1,6 +1,6 @@
 /* eslint-env browser */
 import Head from 'next/head';
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -15,7 +15,7 @@ interface HeaderProps {
   viewer: LayoutQuery['viewer'];
 }
 
-const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
+const Header: FunctionComponent<HeaderProps> = ({ viewer }) => {
   const { theme } = useAppContext();
   const pageTitles = usePageTitles();
 
@@ -46,7 +46,7 @@ const Header: React.FunctionComponent<HeaderProps> = ({ viewer }) => {
   );
 };
 
-const Footer: React.FunctionComponent = () => {
+const Footer: FunctionComponent = () => {
   const { theme } = useAppContext();
   return (
     <View style={theme.layoutFooter}>

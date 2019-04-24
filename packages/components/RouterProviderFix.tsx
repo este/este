@@ -1,14 +1,14 @@
-import React from 'react';
+import { ReactElement, FunctionComponent } from 'react';
 import { withRouter, SingletonRouter } from 'next/router';
 
 // Pass old React context into a new React context.
 
 interface RouterProviderFixWithRouterProps {
   router: SingletonRouter;
-  children: (router: SingletonRouter) => React.ReactElement<any>;
+  children: (router: SingletonRouter) => ReactElement<any>;
 }
 
-const RouterProviderFixWithRouter: React.FunctionComponent<
+const RouterProviderFixWithRouter: FunctionComponent<
   RouterProviderFixWithRouterProps
 > = props => {
   return props.children(props.router);

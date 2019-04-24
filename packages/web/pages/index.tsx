@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedRelative } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
@@ -16,7 +16,7 @@ interface ViewerWebsProps {
   webs: Viewer['webs'];
 }
 
-const ViewerWebs: React.FunctionComponent<ViewerWebsProps> = ({ webs }) => {
+const ViewerWebs: FunctionComponent<ViewerWebsProps> = ({ webs }) => {
   const { theme } = useAppContext();
   if (webs == null) return null;
   return (
@@ -45,9 +45,7 @@ interface AuthenticatedProps {
   viewer: Viewer;
 }
 
-const Authenticated: React.FunctionComponent<AuthenticatedProps> = ({
-  viewer,
-}) => {
+const Authenticated: FunctionComponent<AuthenticatedProps> = ({ viewer }) => {
   return (
     <>
       <KeyboardNavigableView>
@@ -58,7 +56,7 @@ const Authenticated: React.FunctionComponent<AuthenticatedProps> = ({
   );
 };
 
-const NotAuthenticated: React.FunctionComponent = () => {
+const NotAuthenticated: FunctionComponent = () => {
   const { theme } = useAppContext();
   const pageTitles = usePageTitles();
 
@@ -72,7 +70,7 @@ const NotAuthenticated: React.FunctionComponent = () => {
   );
 };
 
-const Index: React.FunctionComponent<{
+const Index: FunctionComponent<{
   data: pagesQuery;
 }> = ({ data }) => {
   const pageTitles = usePageTitles();

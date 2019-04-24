@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useMutation } from '@app/hooks/useMutation';
@@ -21,9 +21,9 @@ interface SetUserThemeWithDataProps {
   data: SetUserThemeQuery;
 }
 
-const SetUserThemeWithData: React.FunctionComponent<
-  SetUserThemeWithDataProps
-> = ({ data: { viewer } }) => {
+const SetUserThemeWithData: FunctionComponent<SetUserThemeWithDataProps> = ({
+  data: { viewer },
+}) => {
   const { commit, pending, state } = useMutation<SetUserThemeMutation>(
     mutation,
     { name: (viewer && viewer.themeName) || '' },

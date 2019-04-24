@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { useAppContext } from '@app/hooks/useAppContext';
 
@@ -8,7 +8,7 @@ interface ButtonProps extends TouchableOpacityProps {
   type?: Type;
 }
 
-export const Button: React.FunctionComponent<ButtonProps> = props => {
+export const Button: FunctionComponent<ButtonProps> = props => {
   const { theme } = useAppContext();
   const { disabled, type = 'text', ...rest } = props;
 
