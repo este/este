@@ -6,3 +6,4 @@ web/bundles
 yarn-error.log
 .env*
 !.env.dev
+.eslintcache

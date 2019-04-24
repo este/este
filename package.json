@@ -18,7 +18,7 @@
     "dev-ios": "yarn workspace @app/native dev:ios",
     "dev-android": "yarn workspace @app/native dev:android",
     "deps": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
-    "lint": "eslint '**/*.{ts,tsx}'",
+    "lint": "eslint '**/*.{ts,tsx}' --cache",
     "lint:fix": "yarn lint --fix",
     "gen": "wsrun --exclude-missing gen",
     "tsc": "tsc",
