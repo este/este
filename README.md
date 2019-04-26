@@ -56,9 +56,3 @@
 - [twitter.com/estejs](https://twitter.com/estejs)
 - [medium.com/@steida](https://medium.com/@steida/)
 - [wiki](https://github.com/este/este/wiki)
-
-## Bitcoin
-
-If you like Este and Bitcoin, send me a few Satoshis.
-
-[blockstream.info/address/3PxoPXdwnkiZpvQeGo1VvRphJhdr8iGy8q](https://blockstream.info/address/3PxoPXdwnkiZpvQeGo1VvRphJhdr8iGy8q)
