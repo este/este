@@ -43,8 +43,9 @@ module.exports = {
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'error',
-    // Off because React Native in web is replaced with React Native Web.
+    // Because React Native in packages/web is replaced with React Native Web.
     'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
     // We have types.
     'react/prop-types': 'off',
     // It's fine.

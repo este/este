@@ -26,8 +26,7 @@
     "react-native-web": "^0.11.2",
     "react-relay": "^3.0.0",
     "react": "16.8.6",
-    "relay-runtime": "^3.0.0",
-    "react-native": "0.59.4"
+    "relay-runtime": "^3.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -36,7 +35,6 @@
     "@types/nprogress": "0.0.29",
     "@types/react-dom": "^16.0.11",
     "@types/react-intl": "^2.3.14",
-    "@types/react-native": "^0.57.41",
     "@types/react-relay": "^1.3.11",
     "@types/react": "^16.7.11",
     "@types/relay-runtime": "^1.3.12",
