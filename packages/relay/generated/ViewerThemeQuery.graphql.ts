@@ -4,9 +4,9 @@ import { ReaderFragment } from "relay-runtime";
 declare const _ViewerThemeQuery$ref: unique symbol;
 export type ViewerThemeQuery$ref = typeof _ViewerThemeQuery$ref;
 export type ViewerThemeQuery = {
-    readonly viewer: ({
+    readonly viewer: {
         readonly themeName: string;
-    }) | null;
+    } | null;
     readonly " $refType": ViewerThemeQuery$ref;
 };
 

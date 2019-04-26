@@ -9,7 +9,7 @@
     "@app/themes": "1.0.0",
     "react": "16.8.6",
     "react-intl": "^2.8.0",
-    "react-native": "0.59.4",
+    "react-native": "0.59.5",
     "react-relay": "^3.0.0",
     "gravatar": "^1.8.0",
     "next": "^8.0.0",

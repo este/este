@@ -9,9 +9,9 @@ export type DeleteWebMutationVariables = {
 };
 export type DeleteWebMutationResponse = {
     readonly deleteWeb: {
-        readonly web: ({
+        readonly web: {
             readonly id: string;
-        }) | null;
+        } | null;
     };
 };
 export type DeleteWebMutation = {

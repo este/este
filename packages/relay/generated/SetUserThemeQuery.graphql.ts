@@ -4,9 +4,9 @@ import { ReaderFragment } from "relay-runtime";
 declare const _SetUserThemeQuery$ref: unique symbol;
 export type SetUserThemeQuery$ref = typeof _SetUserThemeQuery$ref;
 export type SetUserThemeQuery = {
-    readonly viewer: ({
+    readonly viewer: {
         readonly themeName: string;
-    }) | null;
+    } | null;
     readonly " $refType": SetUserThemeQuery$ref;
 };
 

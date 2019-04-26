@@ -5,14 +5,14 @@ import { LayoutQuery$ref } from "./LayoutQuery.graphql";
 declare const _pagesQuery$ref: unique symbol;
 export type pagesQuery$ref = typeof _pagesQuery$ref;
 export type pagesQuery = {
-    readonly viewer: ({
+    readonly viewer: {
         readonly id: string;
         readonly webs: ReadonlyArray<{
             readonly id: string;
             readonly name: string;
             readonly createdAt: any;
         }>;
-    }) | null;
+    } | null;
     readonly " $fragmentRefs": LayoutQuery$ref;
     readonly " $refType": pagesQuery$ref;
 };

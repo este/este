@@ -10,12 +10,12 @@ export type CreateWebMutationVariables = {
 };
 export type CreateWebMutationResponse = {
     readonly createWeb: {
-        readonly web: ({
+        readonly web: {
             readonly id: string;
-        }) | null;
-        readonly errors: ({
+        } | null;
+        readonly errors: {
             readonly name: Max140CharsError | null;
-        }) | null;
+        } | null;
     };
 };
 export type CreateWebMutation = {

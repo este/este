@@ -9,9 +9,9 @@ export type SetUserThemeMutationVariables = {
 };
 export type SetUserThemeMutationResponse = {
     readonly setUserTheme: {
-        readonly user: ({
+        readonly user: {
             readonly themeName: string;
-        }) | null;
+        } | null;
     };
 };
 export type SetUserThemeMutation = {

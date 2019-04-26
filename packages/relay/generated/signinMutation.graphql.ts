@@ -14,10 +14,10 @@ export type signinMutationVariables = {
 export type signinMutationResponse = {
     readonly signIn: {
         readonly token: string | null;
-        readonly errors: ({
+        readonly errors: {
             readonly email: EmailError | null;
             readonly password: PasswordError | null;
-        }) | null;
+        } | null;
     };
 };
 export type signinMutation = {

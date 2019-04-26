@@ -11,13 +11,13 @@ export type webMutationVariables = {
 };
 export type webMutationResponse = {
     readonly updateWeb: {
-        readonly errors: ({
+        readonly errors: {
             readonly name: Max140CharsError | null;
-        }) | null;
-        readonly web: ({
+        } | null;
+        readonly web: {
             readonly id: string;
             readonly name: string;
-        }) | null;
+        } | null;
     };
 };
 export type webMutation = {

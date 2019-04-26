@@ -4,9 +4,9 @@ import { ReaderFragment } from "relay-runtime";
 declare const _LayoutQuery$ref: unique symbol;
 export type LayoutQuery$ref = typeof _LayoutQuery$ref;
 export type LayoutQuery = {
-    readonly viewer: ({
+    readonly viewer: {
         readonly email: string;
-    }) | null;
+    } | null;
     readonly " $refType": LayoutQuery$ref;
 };
 
