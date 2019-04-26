@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "8.10.0"
+    "node": "8.10.x"
   },
   "workspaces": [
     "packages/*"

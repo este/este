@@ -43,7 +43,8 @@ module.exports = {
     'no-shadow': 'off',
     'import/prefer-default-export': 'off',
     'import/no-default-export': 'error',
-    'import/no-unresolved': 'error',
+    // Off because React Native in web is replaced with React Native Web.
+    'import/no-unresolved': 'off',
     // We have types.
     'react/prop-types': 'off',
     // It's fine.

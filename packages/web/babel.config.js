@@ -5,7 +5,6 @@ module.exports = api => {
 
   const plugins = [
     ['relay', { artifactDirectory: '../../packages/relay/generated' }],
-    // https://github.com/zeit/next.js/issues/5989
     [
       'module-resolver',
       {
