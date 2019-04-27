@@ -2,7 +2,7 @@ import {
   ApolloError,
   AuthenticationError,
   ForbiddenError,
-} from 'apollo-server';
+} from 'apollo-server-micro';
 import { NexusGenAllTypes } from '../typegen';
 
 // https://graphql.org/learn/authorization/

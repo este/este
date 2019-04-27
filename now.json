@@ -5,10 +5,11 @@
   "env": {
     "API_SECRET": "@api-secret",
     "PRISMA_ENDPOINT": "@prisma-endpoint",
-    "PRISMA_SECRET": "@prisma-secret"
+    "PRISMA_SECRET": "@prisma-secret",
+    "IS_NOW": "true"
   },
   "builds": [
-    { "src": "packages/api/index.ts", "use": "@now/node-server" },
+    { "src": "packages/api/index.ts", "use": "@now/node" },
     { "src": "packages/web/next.config.js", "use": "@now/next" }
   ],
   "routes": [

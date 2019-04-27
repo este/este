@@ -1,6 +1,7 @@
-import { ApolloServer } from 'apollo-server';
+import { ApolloServer } from 'apollo-server-micro';
 import { makeSchema } from 'nexus';
 import path from 'path';
+import { createServer } from 'http';
 import { prisma } from '../../prisma/generated/prisma-client';
 import * as schemaTypes from './schema';
 import { Context } from './types';
@@ -36,7 +37,19 @@ const server = new ApolloServer({
   playground: true,
 });
 
-server.listen().then(({ url }) => {
-  // eslint-disable-next-line no-console
-  console.log(`Server ready at ${url}`);
+// Set in now.json. Unfortunately, it does not work for next.config.js.
+const { IS_NOW } = process.env;
+
+const handler = server.createHandler({
+  path: IS_NOW ? '/api' : '/',
 });
+
+if (!process.env.IS_NOW) {
+  createServer(handler).listen(4000, () => {
+    // eslint-disable-next-line no-console
+    console.log(`ready on http://localhost:4000`);
+  });
+}
+
+// eslint-disable-next-line import/no-default-export
+export default handler;
