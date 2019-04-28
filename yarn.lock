@@ -11733,7 +11733,7 @@ util@^0.11.0:
   dependencies:
     inherits "2.0.3"
 
-utility-types@3.5.x, utility-types@^3.4.1:
+utility-types@^3.4.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.5.0.tgz#d80c95b774575d1683f5ba807879c52d8f35db1c"
   integrity sha512-1XdYkHN+Dcgh1PQEER1CF5BXkGLvf7Owor6tYSyEs+lbHi4obz4ZeJZQVZyinKvFaGwriBKRlEk5hiApfhglQg==
