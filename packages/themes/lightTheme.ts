@@ -13,7 +13,6 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
 export const colors = {
   background: '#fff',
   danger: '#fa5252',
-  error: '#fa5252',
   foreground: 'rgb(51, 51, 51)',
   foregroundInverse: '#fff',
   gray: 'rgb(153, 163, 173)',
@@ -290,7 +289,7 @@ export class LightTheme {
 
     this.validationError = {
       ...this.textSmall,
-      color: colors.error,
+      color: colors.danger,
       fontWeight: 'bold',
       minHeight: typography.lineHeight,
     };
