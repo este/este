@@ -34,7 +34,8 @@
     "prisma:delete": "prisma delete --env-file .env"
   },
   "resolutions": {
-    "esm": "3.2.20"
+    "esm": "3.2.20",
+    "utility-types": "3.5.x"
   },
   "dependencies": {
     "esm": "^3.2.0",
