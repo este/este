@@ -11753,9 +11753,9 @@ util@^0.11.0:
     inherits "2.0.3"
 
 utility-types@^3.4.1:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.5.0.tgz#d80c95b774575d1683f5ba807879c52d8f35db1c"
-  integrity sha512-1XdYkHN+Dcgh1PQEER1CF5BXkGLvf7Owor6tYSyEs+lbHi4obz4ZeJZQVZyinKvFaGwriBKRlEk5hiApfhglQg==
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/utility-types/-/utility-types-3.6.1.tgz#14d0621888c906592d7544414b3762b33a657568"
+  integrity sha512-3MiRraWYaLnIjEbWHQEhuMlPIyjSVPZBlfvulm8xGMSs5nQrP0RiCCGJGvNCi2on8w8B7skRTNJUAGK+8PlbrQ==
 
 utils-merge@1.0.1:
   version "1.0.1"
