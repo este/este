@@ -2,7 +2,13 @@
 import Head from 'next/head';
 import React, { FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { findNodeHandle, StyleSheet, Text, View } from 'react-native';
+import {
+  findNodeHandle,
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+} from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
 import { usePageTitles } from '@app/hooks/usePageTitles';
@@ -63,13 +69,14 @@ let initialRender = true;
 interface LayoutWithDataProps {
   title: string;
   data: LayoutQuery;
+  hideFooter?: boolean;
 }
 
 const LayoutWithData: React.FunctionComponent<LayoutWithDataProps> = props => {
   const { theme } = useAppContext();
   const [htmlBackgroundColor, nprogressColor] = React.useMemo(() => {
     return [
-      StyleSheet.flatten(theme.layout).backgroundColor || '#fff',
+      StyleSheet.flatten(theme.layoutScrollView).backgroundColor || '#fff',
       StyleSheet.flatten(theme.link).color || '#29d',
     ];
   }, [theme]);
@@ -98,18 +105,21 @@ const LayoutWithData: React.FunctionComponent<LayoutWithDataProps> = props => {
       <Head>
         <title>{props.title}</title>
         <meta name="theme-color" content={htmlBackgroundColor} />
-        <style>{` html { background-color: ${htmlBackgroundColor} } `}</style>
+        <style>{`html{background-color:${htmlBackgroundColor}}`}</style>
       </Head>
       <NProgress color={nprogressColor} />
-      <View style={theme.layout}>
-        <View style={theme.layoutContainer}>
-          <Header viewer={props.data.viewer} />
-          <View ref={layoutBodyRef} style={theme.layoutBody}>
-            {props.children}
-          </View>
-          <Footer />
+      {/* Note Header is always visible. */}
+      <Header viewer={props.data.viewer} />
+      <ScrollView
+        style={theme.layoutScrollView}
+        contentContainerStyle={theme.layoutScrollViewContentContainer}
+      >
+        <View ref={layoutBodyRef} style={theme.layoutBody}>
+          {props.children}
         </View>
-      </View>
+        {/* Note Footer is always at the bottom because of minHeight 100%. */}
+        {props.hideFooter !== true && <Footer />}
+      </ScrollView>
     </>
   );
 };

@@ -88,8 +88,8 @@ export class LightTheme {
   paragraph: TextStyle;
   heading1: TextStyle;
   heading2: TextStyle;
-  layout: ViewStyle;
-  layoutContainer: ViewStyle;
+  layoutScrollView: ViewStyle;
+  layoutScrollViewContentContainer: ViewStyle;
   layoutHeader: ViewStyle;
   layoutBody: ViewStyle;
   layoutFooter: ViewStyle;
@@ -160,25 +160,27 @@ export class LightTheme {
       ...typography.scale(1),
     };
 
-    this.layout = {
-      // That's why we have separate layout and layoutContainer.
-      // layoutContainer can have a different bg color than the whole page.
+    this.layoutScrollView = {
+      flex: 1,
       backgroundColor: colors.background,
-      // minHeight ensures the footer is always at the bottom. Flex 1 can't help,
-      // because we do not use ScrollView. Check _document.tsx overflow comment.
+    };
+
+    const layoutWidth = {
+      marginHorizontal: 'auto',
+      maxWidth: 768,
+      // https://css-tricks.com/tale-width-max-width/
+      width: '100%',
+      paddingHorizontal: 16,
+    };
+
+    this.layoutScrollViewContentContainer = {
+      ...layoutWidth,
+      // Ensure the footer is always at the bottom.
       minHeight: '100%',
     };
 
-    this.layoutContainer = {
-      flex: 1,
-      marginHorizontal: 'auto',
-      maxWidth: 768,
-      paddingHorizontal: dimensions.spaceSmall,
-      // https://css-tricks.com/tale-width-max-width/
-      width: '100%',
-    };
-
     this.layoutHeader = {
+      ...layoutWidth,
       flexDirection: 'row',
       paddingVertical: dimensions.space,
     };
@@ -189,6 +191,7 @@ export class LightTheme {
     };
 
     this.layoutFooter = {
+      marginTop: dimensions.space,
       borderTopColor: colors.gray,
       borderTopWidth: 1,
       paddingVertical: dimensions.spaceSmall,
