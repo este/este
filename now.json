@@ -13,7 +13,7 @@
     { "src": "packages/web/next.config.js", "use": "@now/next" }
   ],
   "routes": [
-    { "src": "/api", "dest": "/packages/api" },
+    { "src": "/_api", "dest": "/packages/api" },
     { "src": "/(.*)", "dest": "/packages/web/$1" }
   ]
 }

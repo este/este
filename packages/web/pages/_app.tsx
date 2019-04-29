@@ -69,7 +69,7 @@ let host = '';
 
 const getApiEndpoint = (host: string): string => {
   const hasNoPortSoIsProbablyDeployed = host.indexOf(':') === -1;
-  if (hasNoPortSoIsProbablyDeployed) return `https://${host}/api`;
+  if (hasNoPortSoIsProbablyDeployed) return `https://${host}/_api`;
   return `http://${host.replace('3000', '4000')}`;
 };
 
