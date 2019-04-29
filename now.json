@@ -3,9 +3,9 @@
   "name": "este",
   "alias": "este.io",
   "env": {
-    "API_SECRET": "@api-secret",
-    "PRISMA_ENDPOINT": "@prisma-endpoint",
-    "PRISMA_SECRET": "@prisma-secret",
+    "API_SECRET": "@este-api-secret",
+    "PRISMA_ENDPOINT": "@este-prisma-endpoint",
+    "PRISMA_SECRET": "@este-prisma-secret",
     "IS_NOW": "true"
   },
   "builds": [
