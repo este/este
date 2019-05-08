@@ -21,7 +21,7 @@
     "@types/react-native": "^0.57.43",
     "babel-jest": "^24.7.1",
     "jest": "^24.7.1",
-    "metro-react-native-babel-preset": "^0.53.1"
+    "metro-react-native-babel-preset": "^0.54.0"
   },
   "jest": {
     "preset": "react-native"
