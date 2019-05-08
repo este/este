@@ -1,6 +1,8 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import cors from 'micro-cors';
 
+const { IS_NOW } = process.env;
+
 export const createServerlessHandler = (
   port: number,
   handler: (req: IncomingMessage, res: ServerResponse) => Promise<void>,
@@ -25,7 +27,7 @@ export const createServerlessHandler = (
     }
     return handler(req, res);
   });
-  if (!process.env.IS_NOW) {
+  if (!IS_NOW) {
     createServer(corsHandler).listen(port, () => {
       // eslint-disable-next-line no-console
       console.log(`ready on http://localhost:${port}`);

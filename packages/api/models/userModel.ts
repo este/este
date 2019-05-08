@@ -8,6 +8,8 @@ export interface JsonWebTokenPayload {
   userId: string;
 }
 
+const { API_SECRET } = process.env;
+
 export const userModel = (context: ModelContext) => {
   const signIn = async (input: NexusGenAllTypes['SignInInput']) => {
     const fail = (errors: NexusGenAllTypes['SignInErrors']) => ({
@@ -23,7 +25,7 @@ export const userModel = (context: ModelContext) => {
       const payload: JsonWebTokenPayload = { userId };
       return {
         errors: null,
-        token: jwt.sign(payload, process.env.API_SECRET as jwt.Secret),
+        token: jwt.sign(payload, API_SECRET as jwt.Secret),
       };
     };
 

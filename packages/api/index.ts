@@ -49,9 +49,11 @@ const server = new ApolloServer({
   playground: true,
 });
 
+const { IS_NOW } = process.env;
+
 const handler = createServerlessHandler(
   4000,
-  server.createHandler({ path: process.env.IS_NOW ? `/_api` : '/' }),
+  server.createHandler({ path: IS_NOW ? `/_api` : '/' }),
 );
 
 // eslint-disable-next-line import/no-default-export
