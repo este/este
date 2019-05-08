@@ -10,15 +10,14 @@
     "packages/*"
   ],
   "scripts": {
-    "ts": "ts-node -T -r esm -r dotenv/config",
+    "ts": "node -r esm -r ts-node/register/transpile-only -r dotenv/config",
     "ts:watch": "ts-node-dev --respawn --no-notify --transpileOnly -r esm -r dotenv/config",
     "dev:workspaces": "wsrun --exclude-missing dev",
     "dev:playground": "prisma playground --port 5000 --server-only",
     "dev": "run-p dev:**",
     "dev-ios": "yarn workspace @app/native dev:ios",
     "dev-android": "yarn workspace @app/native dev:android",
-    "deps": "rimraf 'node_modules' '**/node_modules' && yarn",
-    "deps:update": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
+    "deps": "rimraf 'yarn.lock' 'node_modules' '**/node_modules' && yarn",
     "lint": "eslint '**/*.{ts,tsx}' --cache",
     "lint:fix": "yarn lint --fix",
     "gen": "wsrun --exclude-missing gen",
@@ -33,9 +32,6 @@
     "prisma:deploy": "prisma deploy --env-file .env",
     "prisma:delete": "prisma delete --env-file .env"
   },
-  "resolutions": {
-    "esm": "3.2.20"
-  },
   "dependencies": {
     "esm": "^3.2.0",
     "wsrun": "^3.6.2"
@@ -45,7 +41,7 @@
     "@typescript-eslint/parser": "^1.4.1",
     "babel-plugin-module-resolver": "^3.1.2",
     "babel-plugin-relay": "^3.0.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
