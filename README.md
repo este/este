@@ -42,6 +42,7 @@
 - `yarn build` local build
 - `yarn start` local start
 - `yarn test` before commit
+- `yarn deps` rimraf 'yarn.lock' 'node_modules' '\*\*/node_modules' && yarn
 - `now` deploy to [zeit.co/now](https://zeit.co/now)
 
 ## Tips
