@@ -1,12 +1,13 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { makeSchema } from 'nexus';
 import path from 'path';
+import { withCORS } from '@app/serverless/withCORS';
+import { ports } from '@app/serverless/getEndpoint';
 import { prisma } from '../../prisma/generated/prisma-client';
 import * as schemaTypes from './schema';
 import { Context } from './types';
 import { getUser } from './getUser';
 import { createModels } from './models';
-import { createServerlessHandler } from './createServerlessHandler';
 
 const { PRISMA_ENDPOINT, PRISMA_SECRET, API_SECRET } = process.env;
 if (!PRISMA_ENDPOINT || !PRISMA_SECRET || !API_SECRET)
@@ -51,8 +52,8 @@ const server = new ApolloServer({
 
 const { IS_NOW } = process.env;
 
-const handler = createServerlessHandler(
-  4000,
+const handler = withCORS(
+  ports.api,
   server.createHandler({ path: IS_NOW ? `/_api` : '/' }),
 );
 
