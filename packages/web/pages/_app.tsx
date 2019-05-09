@@ -4,7 +4,6 @@ import App, { Container, NextAppContext } from 'next/app';
 import NextError from 'next/error';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
-// @ts-ignore Missing type.
 import { ReactRelayContext, graphql } from 'react-relay';
 import {
   Environment,

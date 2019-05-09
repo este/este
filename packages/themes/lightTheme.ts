@@ -305,7 +305,6 @@ export class LightTheme {
       ...this.textSmall,
       color: colors.gray,
       padding: typography.lineHeight / 6,
-      // @ts-ignore Because it was added in RN56.
       textTransform: 'uppercase',
     };
   }

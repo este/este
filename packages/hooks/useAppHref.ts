@@ -60,7 +60,7 @@ export const useAppHref = () => {
       },
       query<P extends AppHref['pathname']>(pathname: P): QueryReturn<P> {
         if (current == null || current.pathname !== pathname) return;
-        // @ts-ignore TODO: Type current.query somehow.
+        // @ts-ignore Type current.query somehow.
         return current.query || undefined;
       },
     }),
