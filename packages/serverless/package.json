@@ -1,0 +1,11 @@
+{
+  "name": "@app/serverless",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "micro-cors": "^0.1.1"
+  },
+  "devDependencies": {
+    "@types/micro-cors": "^0.1.0"
+  }
+}

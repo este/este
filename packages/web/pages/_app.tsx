@@ -22,6 +22,7 @@ import { IntlProviderFix } from '@app/components/IntlProviderFix';
 import { RouterProviderFix } from '@app/components/RouterProviderFix';
 import { ViewerTheme } from '@app/components/ViewerTheme';
 import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
+import { getEndpoint } from '@app/serverless/getEndpoint';
 
 const createRelayEnvironment = (
   apiEndpoint: string,
@@ -66,12 +67,6 @@ const appQuery = graphql`
 `;
 
 let host = '';
-
-const getApiEndpoint = (host: string): string => {
-  const hasNoPortSoIsProbablyDeployed = host.indexOf(':') === -1;
-  if (hasNoPortSoIsProbablyDeployed) return `https://${host}/_api`;
-  return `http://${host.replace('3000', '4000')}`;
-};
 
 interface MyAppProps {
   host: string;
@@ -121,7 +116,7 @@ export default class MyApp extends App<MyAppProps> {
     }
 
     const relayEnvironment = createRelayEnvironment(
-      getApiEndpoint(host),
+      getEndpoint(host).api,
       props.token,
       {},
       true,
@@ -194,7 +189,7 @@ export default class MyApp extends App<MyAppProps> {
       return <NextError statusCode={statusCode} />;
 
     const relayEnvironment = createRelayEnvironment(
-      getApiEndpoint(host),
+      getEndpoint(host).api,
       token,
       relayRecords,
       false,
