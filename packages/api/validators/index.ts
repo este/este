@@ -1,10 +1,11 @@
 import isEmail from 'validator/lib/isEmail';
-// import isURL from 'validator/lib/isURL';
+import isURL from 'validator/lib/isURL';
 
 // Errors.
 
 const required = (value: string) => value.length === 0 && 'REQUIRED';
 const email = (value: string) => !isEmail(value) && 'EMAIL';
+const url = (value: string) => !isURL(value) && 'URL';
 const min5 = (value: string) => value.length < 5 && 'MIN_5_CHARS';
 const max1024 = (value: string) => value.length > 1024 && 'MAX_1024_CHARS';
 const max140 = (value: string) => value.length > 140 && 'MAX_140_CHARS';
@@ -14,11 +15,11 @@ const max140 = (value: string) => value.length > 140 && 'MAX_140_CHARS';
 export const validateEmail = (value: string) =>
   required(value) || email(value) || null;
 
+export const validateURL = (value: string) =>
+  required(value) || url(value) || null;
+
 export const validatePassword = (value: string) =>
   required(value) || min5(value) || max1024(value) || null;
 
 export const validateMax140Chars = (value: string) =>
   required(value) || max140(value) || null;
-
-// export const validateUrl = (value: string) =>
-//   required(value) || (!isURL(value) ? 'URL' : undefined);
