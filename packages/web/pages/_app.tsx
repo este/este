@@ -57,11 +57,11 @@ const appQuery = graphql`
     $isSignInPage: Boolean!
     $isWebPage: Boolean!
   ) {
-    ...ViewerThemeQuery
-    ...pagesQuery @include(if: $isIndexPage)
-    ...meQuery @include(if: $isMePage)
-    ...signinQuery @include(if: $isSignInPage)
-    ...webQuery @include(if: $isWebPage) @arguments(id: $id)
+    ...ViewerTheme_data
+    ...pages_data @include(if: $isIndexPage)
+    ...me_data @include(if: $isMePage)
+    ...signin_data @include(if: $isSignInPage)
+    ...web_data @include(if: $isWebPage) @arguments(id: $id)
   }
 `;
 

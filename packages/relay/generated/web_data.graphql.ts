@@ -1,23 +1,23 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-import { LayoutQuery$ref } from "./LayoutQuery.graphql";
-declare const _webQuery$ref: unique symbol;
-export type webQuery$ref = typeof _webQuery$ref;
-export type webQuery = {
+import { Layout_data$ref } from "./Layout_data.graphql";
+declare const _web_data$ref: unique symbol;
+export type web_data$ref = typeof _web_data$ref;
+export type web_data = {
     readonly web: {
         readonly name: string;
         readonly id: string;
     };
-    readonly " $fragmentRefs": LayoutQuery$ref;
-    readonly " $refType": webQuery$ref;
+    readonly " $fragmentRefs": Layout_data$ref;
+    readonly " $refType": web_data$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "webQuery",
+  "name": "web_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [
@@ -30,11 +30,6 @@ const node: ReaderFragment = {
   ],
   "selections": [
     {
-      "kind": "FragmentSpread",
-      "name": "LayoutQuery",
-      "args": null
-    },
-    {
       "kind": "LinkedField",
       "alias": null,
       "name": "web",
@@ -43,8 +38,7 @@ const node: ReaderFragment = {
         {
           "kind": "Variable",
           "name": "id",
-          "variableName": "id",
-          "type": "ID!"
+          "variableName": "id"
         }
       ],
       "concreteType": "Web",
@@ -65,8 +59,13 @@ const node: ReaderFragment = {
           "storageKey": null
         }
       ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Layout_data",
+      "args": null
     }
   ]
 };
-(node as any).hash = '7cef18cc8873b9c394ee68bb9832863c';
+(node as any).hash = 'e7709d84184701e18e6d663976e5dbd7';
 export default node;

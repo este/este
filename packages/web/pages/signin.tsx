@@ -11,7 +11,7 @@ import { Button } from '@app/components/Button';
 import { Layout } from '@app/components/Layout';
 import { ValidationError } from '@app/components/ValidationError';
 import { signinMutation } from '@app/relay/generated/signinMutation.graphql';
-import { signinQuery } from '@app/relay/generated/signinQuery.graphql';
+import { signin_data } from '@app/relay/generated/signin_data.graphql';
 
 const mutation = graphql`
   mutation signinMutation($input: SignInInput!) {
@@ -37,7 +37,7 @@ const messages = defineMessages({
 });
 
 interface SignIn {
-  data: signinQuery;
+  data: signin_data;
 }
 
 const SignIn: FunctionComponent<SignIn> = ({ data }) => {
@@ -105,11 +105,10 @@ const SignIn: FunctionComponent<SignIn> = ({ data }) => {
 };
 
 // eslint-disable-next-line import/no-default-export
-export default createFragmentContainer(
-  SignIn,
-  graphql`
-    fragment signinQuery on Query {
-      ...LayoutQuery
+export default createFragmentContainer(SignIn, {
+  data: graphql`
+    fragment signin_data on Query {
+      ...Layout_data
     }
   `,
-);
+});

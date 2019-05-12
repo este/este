@@ -1,10 +1,10 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-import { LayoutQuery$ref } from "./LayoutQuery.graphql";
-declare const _pagesQuery$ref: unique symbol;
-export type pagesQuery$ref = typeof _pagesQuery$ref;
-export type pagesQuery = {
+import { Layout_data$ref } from "./Layout_data.graphql";
+declare const _pages_data$ref: unique symbol;
+export type pages_data$ref = typeof _pages_data$ref;
+export type pages_data = {
     readonly viewer: {
         readonly id: string;
         readonly webs: ReadonlyArray<{
@@ -13,8 +13,8 @@ export type pagesQuery = {
             readonly createdAt: any;
         }>;
     } | null;
-    readonly " $fragmentRefs": LayoutQuery$ref;
-    readonly " $refType": pagesQuery$ref;
+    readonly " $fragmentRefs": Layout_data$ref;
+    readonly " $refType": pages_data$ref;
 };
 
 
@@ -29,16 +29,11 @@ var v0 = {
 };
 return {
   "kind": "Fragment",
-  "name": "pagesQuery",
+  "name": "pages_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
-    {
-      "kind": "FragmentSpread",
-      "name": "LayoutQuery",
-      "args": null
-    },
     {
       "kind": "LinkedField",
       "alias": null,
@@ -76,9 +71,14 @@ return {
           ]
         }
       ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Layout_data",
+      "args": null
     }
   ]
 };
 })();
-(node as any).hash = '9f24a04ede412522b97508fce87f9b70';
+(node as any).hash = '320f914f53561b3d79cde978c426e71f';
 export default node;

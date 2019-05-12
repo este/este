@@ -47,8 +47,7 @@ v1 = [
   {
     "kind": "Variable",
     "name": "input",
-    "variableName": "input",
-    "type": "SetUserThemeInput!"
+    "variableName": "input"
   }
 ],
 v2 = {

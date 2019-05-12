@@ -69,8 +69,7 @@ v2 = [
       {
         "kind": "Variable",
         "name": "input",
-        "variableName": "input",
-        "type": "UpdateWebInput!"
+        "variableName": "input"
       }
     ],
     "concreteType": "UpdateWebPayload",

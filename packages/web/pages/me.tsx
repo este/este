@@ -9,10 +9,10 @@ import { Button } from '@app/components/Button';
 import { Gravatar } from '@app/components/Gravatar';
 import { Layout } from '@app/components/Layout';
 import { SetUserTheme } from '@app/components/SetUserTheme';
-import { meQuery } from '@app/relay/generated/meQuery.graphql';
+import { me_data } from '@app/relay/generated/me_data.graphql';
 
 interface MeProps {
-  data: meQuery;
+  data: me_data;
 }
 
 const Me: FunctionComponent<MeProps> = ({ data }) => {
@@ -37,15 +37,14 @@ const Me: FunctionComponent<MeProps> = ({ data }) => {
 };
 
 // eslint-disable-next-line import/no-default-export
-export default createFragmentContainer(
-  Me,
-  graphql`
-    fragment meQuery on Query {
-      ...LayoutQuery
+export default createFragmentContainer(Me, {
+  data: graphql`
+    fragment me_data on Query {
+      ...Layout_data
       ...SetUserThemeQuery
       requiredViewer {
         email
       }
     }
   `,
-);
+});

@@ -52,8 +52,7 @@ v1 = [
       {
         "kind": "Variable",
         "name": "input",
-        "variableName": "input",
-        "type": "DeleteWebInput!"
+        "variableName": "input"
       }
     ],
     "concreteType": "DeleteWebPayload",

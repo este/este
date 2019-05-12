@@ -1,20 +1,20 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-declare const _ViewerThemeQuery$ref: unique symbol;
-export type ViewerThemeQuery$ref = typeof _ViewerThemeQuery$ref;
-export type ViewerThemeQuery = {
+declare const _Layout_data$ref: unique symbol;
+export type Layout_data$ref = typeof _Layout_data$ref;
+export type Layout_data = {
     readonly viewer: {
-        readonly themeName: string;
+        readonly email: string;
     } | null;
-    readonly " $refType": ViewerThemeQuery$ref;
+    readonly " $refType": Layout_data$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "ViewerThemeQuery",
+  "name": "Layout_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [],
@@ -31,7 +31,7 @@ const node: ReaderFragment = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "themeName",
+          "name": "email",
           "args": null,
           "storageKey": null
         }
@@ -39,5 +39,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = '5efc1d93529f08ba65568a002a5496ac';
+(node as any).hash = '2767304cfa7a6fc63e7e5cc22feff773';
 export default node;

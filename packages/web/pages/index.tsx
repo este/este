@@ -8,9 +8,9 @@ import { CreateWeb } from '@app/components/CreateWeb';
 import { Layout } from '@app/components/Layout';
 import { KeyboardNavigableView } from '@app/components/KeyboardNavigableView';
 import { Link } from '@app/components/Link';
-import { pagesQuery } from '@app/relay/generated/pagesQuery.graphql';
+import { pages_data } from '@app/relay/generated/pages_data.graphql';
 
-type Viewer = NonNullable<pagesQuery['viewer']>;
+type Viewer = NonNullable<pages_data['viewer']>;
 
 interface ViewerWebsProps {
   webs: Viewer['webs'];
@@ -71,7 +71,7 @@ const NotAuthenticated: FunctionComponent = () => {
 };
 
 const Index: FunctionComponent<{
-  data: pagesQuery;
+  data: pages_data;
 }> = ({ data }) => {
   const pageTitles = usePageTitles();
 
@@ -87,11 +87,10 @@ const Index: FunctionComponent<{
 };
 
 // eslint-disable-next-line import/no-default-export
-export default createFragmentContainer(
-  Index,
-  graphql`
-    fragment pagesQuery on Query {
-      ...LayoutQuery
+export default createFragmentContainer(Index, {
+  data: graphql`
+    fragment pages_data on Query {
+      ...Layout_data
       viewer {
         id
         webs {
@@ -102,4 +101,4 @@ export default createFragmentContainer(
       }
     }
   `,
-);
+});

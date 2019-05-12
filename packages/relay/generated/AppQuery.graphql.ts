@@ -1,11 +1,11 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-import { ViewerThemeQuery$ref } from "./ViewerThemeQuery.graphql";
-import { meQuery$ref } from "./meQuery.graphql";
-import { pagesQuery$ref } from "./pagesQuery.graphql";
-import { signinQuery$ref } from "./signinQuery.graphql";
-import { webQuery$ref } from "./webQuery.graphql";
+import { ViewerTheme_data$ref } from "./ViewerTheme_data.graphql";
+import { me_data$ref } from "./me_data.graphql";
+import { pages_data$ref } from "./pages_data.graphql";
+import { signin_data$ref } from "./signin_data.graphql";
+import { web_data$ref } from "./web_data.graphql";
 export type AppQueryVariables = {
     readonly id: string;
     readonly isIndexPage: boolean;
@@ -14,7 +14,7 @@ export type AppQueryVariables = {
     readonly isWebPage: boolean;
 };
 export type AppQueryResponse = {
-    readonly " $fragmentRefs": ViewerThemeQuery$ref & pagesQuery$ref & meQuery$ref & signinQuery$ref & webQuery$ref;
+    readonly " $fragmentRefs": ViewerTheme_data$ref & pages_data$ref & me_data$ref & signin_data$ref & web_data$ref;
 };
 export type AppQuery = {
     readonly response: AppQueryResponse;
@@ -31,22 +31,22 @@ query AppQuery(
   $isSignInPage: Boolean!
   $isWebPage: Boolean!
 ) {
-  ...ViewerThemeQuery
-  ...pagesQuery @include(if: $isIndexPage)
-  ...meQuery @include(if: $isMePage)
-  ...signinQuery @include(if: $isSignInPage)
-  ...webQuery_1Bmzm5 @include(if: $isWebPage)
+  ...ViewerTheme_data
+  ...pages_data @include(if: $isIndexPage)
+  ...me_data @include(if: $isMePage)
+  ...signin_data @include(if: $isSignInPage)
+  ...web_data_1Bmzm5 @include(if: $isWebPage)
 }
 
-fragment ViewerThemeQuery on Query {
+fragment ViewerTheme_data on Query {
   viewer {
     themeName
     id
   }
 }
 
-fragment pagesQuery on Query {
-  ...LayoutQuery
+fragment pages_data on Query {
+  ...Layout_data
   viewer {
     id
     webs {
@@ -57,8 +57,8 @@ fragment pagesQuery on Query {
   }
 }
 
-fragment meQuery on Query {
-  ...LayoutQuery
+fragment me_data on Query {
+  ...Layout_data
   ...SetUserThemeQuery
   requiredViewer {
     email
@@ -66,19 +66,19 @@ fragment meQuery on Query {
   }
 }
 
-fragment signinQuery on Query {
-  ...LayoutQuery
+fragment signin_data on Query {
+  ...Layout_data
 }
 
-fragment webQuery_1Bmzm5 on Query {
-  ...LayoutQuery
+fragment web_data_1Bmzm5 on Query {
+  ...Layout_data
   web(id: $id) {
     name
     id
   }
 }
 
-fragment LayoutQuery on Query {
+fragment Layout_data on Query {
   viewer {
     email
     id
@@ -126,21 +126,35 @@ var v0 = [
     "defaultValue": null
   }
 ],
-v1 = {
+v1 = [
+  {
+    "kind": "Variable",
+    "name": "id",
+    "variableName": "id"
+  }
+],
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v2 = {
+v3 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "email",
   "args": null,
   "storageKey": null
 },
-v3 = {
+v4 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v5 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "viewer",
@@ -149,15 +163,8 @@ v3 = {
   "concreteType": "User",
   "plural": false,
   "selections": [
-    (v2/*: any*/)
+    (v3/*: any*/)
   ]
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -170,36 +177,17 @@ return {
     "selections": [
       {
         "kind": "FragmentSpread",
-        "name": "ViewerThemeQuery",
+        "name": "ViewerTheme_data",
         "args": null
       },
       {
         "kind": "Condition",
         "passingValue": true,
-        "condition": "isWebPage",
+        "condition": "isIndexPage",
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "webQuery",
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "id",
-                "variableName": "id",
-                "type": null
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "kind": "Condition",
-        "passingValue": true,
-        "condition": "isSignInPage",
-        "selections": [
-          {
-            "kind": "FragmentSpread",
-            "name": "signinQuery",
+            "name": "pages_data",
             "args": null
           }
         ]
@@ -211,7 +199,7 @@ return {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "meQuery",
+            "name": "me_data",
             "args": null
           }
         ]
@@ -219,12 +207,24 @@ return {
       {
         "kind": "Condition",
         "passingValue": true,
-        "condition": "isIndexPage",
+        "condition": "isSignInPage",
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "pagesQuery",
+            "name": "signin_data",
             "args": null
+          }
+        ]
+      },
+      {
+        "kind": "Condition",
+        "passingValue": true,
+        "condition": "isWebPage",
+        "selections": [
+          {
+            "kind": "FragmentSpread",
+            "name": "web_data",
+            "args": (v1/*: any*/)
           }
         ]
       }
@@ -251,64 +251,7 @@ return {
             "args": null,
             "storageKey": null
           },
-          (v1/*: any*/)
-        ]
-      },
-      {
-        "kind": "Condition",
-        "passingValue": true,
-        "condition": "isWebPage",
-        "selections": [
-          (v3/*: any*/),
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "web",
-            "storageKey": null,
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "id",
-                "variableName": "id",
-                "type": "ID!"
-              }
-            ],
-            "concreteType": "Web",
-            "plural": false,
-            "selections": [
-              (v4/*: any*/),
-              (v1/*: any*/)
-            ]
-          }
-        ]
-      },
-      {
-        "kind": "Condition",
-        "passingValue": true,
-        "condition": "isSignInPage",
-        "selections": [
-          (v3/*: any*/)
-        ]
-      },
-      {
-        "kind": "Condition",
-        "passingValue": true,
-        "condition": "isMePage",
-        "selections": [
-          (v3/*: any*/),
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "requiredViewer",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "User",
-            "plural": false,
-            "selections": [
-              (v2/*: any*/),
-              (v1/*: any*/)
-            ]
-          }
+          (v2/*: any*/)
         ]
       },
       {
@@ -325,7 +268,7 @@ return {
             "concreteType": "User",
             "plural": false,
             "selections": [
-              (v2/*: any*/),
+              (v3/*: any*/),
               {
                 "kind": "LinkedField",
                 "alias": null,
@@ -335,7 +278,7 @@ return {
                 "concreteType": "Web",
                 "plural": true,
                 "selections": [
-                  (v1/*: any*/),
+                  (v2/*: any*/),
                   (v4/*: any*/),
                   {
                     "kind": "ScalarField",
@@ -349,6 +292,56 @@ return {
             ]
           }
         ]
+      },
+      {
+        "kind": "Condition",
+        "passingValue": true,
+        "condition": "isMePage",
+        "selections": [
+          (v5/*: any*/),
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "requiredViewer",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "User",
+            "plural": false,
+            "selections": [
+              (v3/*: any*/),
+              (v2/*: any*/)
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "Condition",
+        "passingValue": true,
+        "condition": "isSignInPage",
+        "selections": [
+          (v5/*: any*/)
+        ]
+      },
+      {
+        "kind": "Condition",
+        "passingValue": true,
+        "condition": "isWebPage",
+        "selections": [
+          (v5/*: any*/),
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "web",
+            "storageKey": null,
+            "args": (v1/*: any*/),
+            "concreteType": "Web",
+            "plural": false,
+            "selections": [
+              (v4/*: any*/),
+              (v2/*: any*/)
+            ]
+          }
+        ]
       }
     ]
   },
@@ -356,10 +349,10 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerThemeQuery\n  ...pagesQuery @include(if: $isIndexPage)\n  ...meQuery @include(if: $isMePage)\n  ...signinQuery @include(if: $isSignInPage)\n  ...webQuery_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pagesQuery on Query {\n  ...LayoutQuery\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment meQuery on Query {\n  ...LayoutQuery\n  ...SetUserThemeQuery\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signinQuery on Query {\n  ...LayoutQuery\n}\n\nfragment webQuery_1Bmzm5 on Query {\n  ...LayoutQuery\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment LayoutQuery on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
+    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...web_data_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserThemeQuery\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment web_data_1Bmzm5 on Query {\n  ...Layout_data\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '455566daeeaa31f58ada253f98a1b25e';
+(node as any).hash = '43db371d7599218101ba5b4c5511b51c';
 export default node;

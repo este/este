@@ -1,37 +1,27 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-import { LayoutQuery$ref } from "./LayoutQuery.graphql";
+import { Layout_data$ref } from "./Layout_data.graphql";
 import { SetUserThemeQuery$ref } from "./SetUserThemeQuery.graphql";
-declare const _meQuery$ref: unique symbol;
-export type meQuery$ref = typeof _meQuery$ref;
-export type meQuery = {
+declare const _me_data$ref: unique symbol;
+export type me_data$ref = typeof _me_data$ref;
+export type me_data = {
     readonly requiredViewer: {
         readonly email: string;
     };
-    readonly " $fragmentRefs": LayoutQuery$ref & SetUserThemeQuery$ref;
-    readonly " $refType": meQuery$ref;
+    readonly " $fragmentRefs": Layout_data$ref & SetUserThemeQuery$ref;
+    readonly " $refType": me_data$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "meQuery",
+  "name": "me_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
-    {
-      "kind": "FragmentSpread",
-      "name": "LayoutQuery",
-      "args": null
-    },
-    {
-      "kind": "FragmentSpread",
-      "name": "SetUserThemeQuery",
-      "args": null
-    },
     {
       "kind": "LinkedField",
       "alias": null,
@@ -49,8 +39,18 @@ const node: ReaderFragment = {
           "storageKey": null
         }
       ]
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "Layout_data",
+      "args": null
+    },
+    {
+      "kind": "FragmentSpread",
+      "name": "SetUserThemeQuery",
+      "args": null
     }
   ]
 };
-(node as any).hash = '895732c8f441e13eb0b43e8f835bd0ba';
+(node as any).hash = 'df3e1d0014ff9aa4df471edea4fcf95f';
 export default node;

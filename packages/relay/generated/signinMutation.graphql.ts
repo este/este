@@ -60,8 +60,7 @@ v1 = [
       {
         "kind": "Variable",
         "name": "input",
-        "variableName": "input",
-        "type": "SignInInput!"
+        "variableName": "input"
       }
     ],
     "concreteType": "SignInPayload",

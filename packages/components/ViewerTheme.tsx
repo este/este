@@ -2,10 +2,10 @@ import { ReactElement, FunctionComponent } from 'react';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { Theme, lightTheme } from '@app/themes/lightTheme';
 import { darkTheme } from '@app/themes/darkTheme';
-import { ViewerThemeQuery } from '@app/relay/generated/ViewerThemeQuery.graphql';
+import { ViewerTheme_data } from '@app/relay/generated/ViewerTheme_data.graphql';
 
 interface ViewerThemeWithDataProps {
-  data: ViewerThemeQuery;
+  data: ViewerTheme_data;
   children: (theme: Theme) => ReactElement<any> | null;
 }
 
@@ -18,13 +18,12 @@ const ViewerThemeWithData: FunctionComponent<ViewerThemeWithDataProps> = ({
   return children(theme);
 };
 
-export const ViewerTheme = createFragmentContainer(
-  ViewerThemeWithData,
-  graphql`
-    fragment ViewerThemeQuery on Query {
+export const ViewerTheme = createFragmentContainer(ViewerThemeWithData, {
+  data: graphql`
+    fragment ViewerTheme_data on Query {
       viewer {
         themeName
       }
     }
   `,
-);
+});

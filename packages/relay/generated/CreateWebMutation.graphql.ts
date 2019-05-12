@@ -59,8 +59,7 @@ v1 = [
       {
         "kind": "Variable",
         "name": "input",
-        "variableName": "input",
-        "type": "CreateWebInput!"
+        "variableName": "input"
       }
     ],
     "concreteType": "CreateWebPayload",

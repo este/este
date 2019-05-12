@@ -9,7 +9,7 @@ import { Layout } from '@app/components/Layout';
 import { SaveButton } from '@app/components/SaveButton';
 import { ValidationError } from '@app/components/ValidationError';
 import { webMutation } from '@app/relay/generated/webMutation.graphql';
-import { webQuery } from '@app/relay/generated/webQuery.graphql';
+import { web_data } from '@app/relay/generated/web_data.graphql';
 
 const mutation = graphql`
   mutation webMutation($input: UpdateWebInput!) {
@@ -26,7 +26,7 @@ const mutation = graphql`
 `;
 
 interface WebProps {
-  data: webQuery;
+  data: web_data;
 }
 
 const Web: FunctionComponent<WebProps> = ({ data }) => {
@@ -59,15 +59,14 @@ const Web: FunctionComponent<WebProps> = ({ data }) => {
 };
 
 // eslint-disable-next-line import/no-default-export
-export default createFragmentContainer(
-  Web,
-  graphql`
-    fragment webQuery on Query @argumentDefinitions(id: { type: "ID!" }) {
-      ...LayoutQuery
+export default createFragmentContainer(Web, {
+  data: graphql`
+    fragment web_data on Query @argumentDefinitions(id: { type: "ID!" }) {
+      ...Layout_data
       web(id: $id) {
         name
         id
       }
     }
   `,
-);
+});

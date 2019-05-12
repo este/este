@@ -30,8 +30,10 @@ module.exports = {
   },
   // Este rules.
   rules: {
-    // I believe type is enforced by callers.
+    // Type is enforced by callers. Not entirely, but it's good enough.
     '@typescript-eslint/explicit-function-return-type': 'off',
+    // We need underscores for relay/generated/Component_prop.graphql
+    '@typescript-eslint/camelcase': 'off',
     // Temp fix for import.
     // https://github.com/benmosher/eslint-plugin-import/issues/1285#issuecomment-466212438
     'import/named': 'off',

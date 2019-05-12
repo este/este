@@ -12,13 +12,13 @@ import {
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
 import { usePageTitles } from '@app/hooks/usePageTitles';
-import { LayoutQuery } from '@app/relay/generated/LayoutQuery.graphql';
+import { Layout_data } from '@app/relay/generated/Layout_data.graphql';
 import { Gravatar } from './Gravatar';
 import { NProgress } from './NProgress';
 import { Link } from './Link';
 
 interface HeaderProps {
-  viewer: LayoutQuery['viewer'];
+  viewer: Layout_data['viewer'];
 }
 
 const Header: FunctionComponent<HeaderProps> = ({ viewer }) => {
@@ -68,7 +68,7 @@ let initialRender = true;
 
 interface LayoutWithDataProps {
   title: string;
-  data: LayoutQuery;
+  data: Layout_data;
   hideFooter?: boolean;
 }
 
@@ -124,13 +124,12 @@ const LayoutWithData: React.FunctionComponent<LayoutWithDataProps> = props => {
   );
 };
 
-export const Layout = createFragmentContainer(
-  LayoutWithData,
-  graphql`
-    fragment LayoutQuery on Query {
+export const Layout = createFragmentContainer(LayoutWithData, {
+  data: graphql`
+    fragment Layout_data on Query {
       viewer {
         email
       }
     }
   `,
-);
+});
