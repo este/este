@@ -8,6 +8,7 @@ import { core } from "nexus"
 declare global {
   interface NexusGenCustomDefinitionMethods<TypeName extends string> {
     dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+    json<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "JSON";
   }
 }
 
@@ -40,6 +41,7 @@ export interface NexusGenEnums {
   EmailError: "ALREADY_EXISTS" | "EMAIL" | "NOT_EXISTS" | "REQUIRED"
   Max140CharsError: "MAX_140_CHARS" | "REQUIRED"
   PasswordError: "MAX_1024_CHARS" | "MIN_5_CHARS" | "REQUIRED" | "WRONG_PASSWORD"
+  URLError: "REQUIRED" | "URL"
 }
 
 export interface NexusGenRootTypes {
@@ -93,6 +95,7 @@ export interface NexusGenRootTypes {
   Boolean: boolean;
   ID: string;
   DateTime: any;
+  JSON: any;
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
@@ -104,6 +107,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   EmailError: NexusGenEnums['EmailError'];
   Max140CharsError: NexusGenEnums['Max140CharsError'];
   PasswordError: NexusGenEnums['PasswordError'];
+  URLError: NexusGenEnums['URLError'];
 }
 
 export interface NexusGenFieldTypes {
@@ -198,11 +202,11 @@ export type NexusGenObjectNames = "CreateWebErrors" | "CreateWebPayload" | "Dele
 
 export type NexusGenInputNames = "CreateWebInput" | "DeleteWebInput" | "SetUserThemeInput" | "SignInInput" | "UpdateWebInput";
 
-export type NexusGenEnumNames = "EmailError" | "Max140CharsError" | "PasswordError";
+export type NexusGenEnumNames = "EmailError" | "Max140CharsError" | "PasswordError" | "URLError";
 
 export type NexusGenInterfaceNames = never;
 
-export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "String";
+export type NexusGenScalarNames = "Boolean" | "DateTime" | "Float" | "ID" | "Int" | "JSON" | "String";
 
 export type NexusGenUnionNames = never;
 

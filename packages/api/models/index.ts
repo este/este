@@ -8,6 +8,7 @@ import { webModel } from './webModel';
 export const createModels = (
   prisma: Prisma,
   user: NexusGenAllTypes['User'] | null,
+  host: string,
 ) => {
   const permissions = createPermissions(user);
   const input = {
@@ -15,7 +16,7 @@ export const createModels = (
       return Object.values(errors).some(error => error != null);
     },
   };
-  const modelContext = { prisma, input, permissions };
+  const modelContext = { prisma, input, permissions, host };
 
   return {
     user: userModel(modelContext),
@@ -31,4 +32,5 @@ export interface ModelContext {
     hasError: (errors: {}) => boolean;
   };
   permissions: ReturnType<typeof createPermissions>;
+  host: string;
 }

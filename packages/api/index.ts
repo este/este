@@ -1,8 +1,9 @@
 import { ApolloServer } from 'apollo-server-micro';
 import { makeSchema } from 'nexus';
 import path from 'path';
-import { withCORS } from '@app/serverless/withCORS';
+import { IncomingMessage } from 'http';
 import { ports } from '@app/serverless/getEndpoint';
+import { withCORS } from '@app/serverless/withCORS';
 import { prisma } from '../../prisma/generated/prisma-client';
 import * as schemaTypes from './schema';
 import { Context } from './types';
@@ -36,16 +37,24 @@ const schema = makeSchema({
     sources: [{ source: path.join(__dirname, './types.ts'), alias: 'types' }],
     contextType: 'types.Context',
   },
+  // backingTypeMap: {
+  //   EmailAddress: 'string',
+  //   DateTime: 'string',
+  //   Max1024Chars: 'string',
+  //   Max140Chars: 'string',
+  //   URL: 'string',
+  // },
 });
 
 const server = new ApolloServer({
   schema,
-  context: async ({ req }): Promise<Context> => {
+  context: async ({ req }: { req: IncomingMessage }): Promise<Context> => {
+    if (req.headers.host == null) throw new Error('missing req.headers.host');
     const user = await getUser(API_SECRET, prisma, req);
-    const models = createModels(prisma, user);
+    const models = createModels(prisma, user, req.headers.host);
     return { models };
   },
-  // Enforce introspection and playground for production.
+  // Enable introspection and playground for production.
   introspection: true,
   playground: true,
 });
@@ -54,7 +63,9 @@ const { IS_NOW } = process.env;
 
 const handler = withCORS(
   ports.api,
-  server.createHandler({ path: IS_NOW ? `/_api` : '/' }),
+  server.createHandler({
+    path: IS_NOW ? '/_api' : '/',
+  }),
 );
 
 // eslint-disable-next-line import/no-default-export
