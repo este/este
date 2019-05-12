@@ -2,14 +2,14 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { Layout_data$ref } from "./Layout_data.graphql";
-import { SetUserThemeQuery$ref } from "./SetUserThemeQuery.graphql";
+import { SetUserTheme_data$ref } from "./SetUserTheme_data.graphql";
 declare const _me_data$ref: unique symbol;
 export type me_data$ref = typeof _me_data$ref;
 export type me_data = {
     readonly requiredViewer: {
         readonly email: string;
     };
-    readonly " $fragmentRefs": Layout_data$ref & SetUserThemeQuery$ref;
+    readonly " $fragmentRefs": Layout_data$ref & SetUserTheme_data$ref;
     readonly " $refType": me_data$ref;
 };
 
@@ -47,10 +47,10 @@ const node: ReaderFragment = {
     },
     {
       "kind": "FragmentSpread",
-      "name": "SetUserThemeQuery",
+      "name": "SetUserTheme_data",
       "args": null
     }
   ]
 };
-(node as any).hash = 'df3e1d0014ff9aa4df471edea4fcf95f';
+(node as any).hash = 'a2089c4d224a46eb90f522e10d0cd4a0';
 export default node;

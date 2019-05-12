@@ -59,7 +59,7 @@ fragment pages_data on Query {
 
 fragment me_data on Query {
   ...Layout_data
-  ...SetUserThemeQuery
+  ...SetUserTheme_data
   requiredViewer {
     email
     id
@@ -85,7 +85,7 @@ fragment Layout_data on Query {
   }
 }
 
-fragment SetUserThemeQuery on Query {
+fragment SetUserTheme_data on Query {
   viewer {
     themeName
     id
@@ -349,7 +349,7 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...web_data_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserThemeQuery\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment web_data_1Bmzm5 on Query {\n  ...Layout_data\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserThemeQuery on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
+    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isWebPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...web_data_1Bmzm5 @include(if: $isWebPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    webs {\n      id\n      name\n      createdAt\n    }\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserTheme_data\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment web_data_1Bmzm5 on Query {\n  ...Layout_data\n  web(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n",
     "metadata": {}
   }
 };

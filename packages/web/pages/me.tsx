@@ -34,6 +34,7 @@ const Me: FunctionComponent<MeProps> = ({ data }) => {
       </View>
     </Layout>
   );
+  // return null;
 };
 
 // eslint-disable-next-line import/no-default-export
@@ -41,7 +42,7 @@ export default createFragmentContainer(Me, {
   data: graphql`
     fragment me_data on Query {
       ...Layout_data
-      ...SetUserThemeQuery
+      ...SetUserTheme_data
       requiredViewer {
         email
       }

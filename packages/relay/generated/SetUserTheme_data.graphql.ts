@@ -1,20 +1,20 @@
 /* tslint:disable */
 
 import { ReaderFragment } from "relay-runtime";
-declare const _SetUserThemeQuery$ref: unique symbol;
-export type SetUserThemeQuery$ref = typeof _SetUserThemeQuery$ref;
-export type SetUserThemeQuery = {
+declare const _SetUserTheme_data$ref: unique symbol;
+export type SetUserTheme_data$ref = typeof _SetUserTheme_data$ref;
+export type SetUserTheme_data = {
     readonly viewer: {
         readonly themeName: string;
     } | null;
-    readonly " $refType": SetUserThemeQuery$ref;
+    readonly " $refType": SetUserTheme_data$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "SetUserThemeQuery",
+  "name": "SetUserTheme_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [],
@@ -39,5 +39,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = '4caed22209e351eb29528d137d665009';
+(node as any).hash = '329178ebb07a75167f8716288697b62c';
 export default node;

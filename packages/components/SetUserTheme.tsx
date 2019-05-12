@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useMutation } from '@app/hooks/useMutation';
 import { SetUserThemeMutation } from '@app/relay/generated/SetUserThemeMutation.graphql';
-import { SetUserThemeQuery } from '@app/relay/generated/SetUserThemeQuery.graphql';
+import { SetUserTheme_data } from '@app/relay/generated/SetUserTheme_data.graphql';
 import { Button } from './Button';
 
 const mutation = graphql`
@@ -18,7 +18,7 @@ const mutation = graphql`
 `;
 
 interface SetUserThemeWithDataProps {
-  data: SetUserThemeQuery;
+  data: SetUserTheme_data;
 }
 
 const SetUserThemeWithData: FunctionComponent<SetUserThemeWithDataProps> = ({
@@ -45,13 +45,12 @@ const SetUserThemeWithData: FunctionComponent<SetUserThemeWithDataProps> = ({
   );
 };
 
-export const SetUserTheme = createFragmentContainer(
-  SetUserThemeWithData,
-  graphql`
-    fragment SetUserThemeQuery on Query {
+export const SetUserTheme = createFragmentContainer(SetUserThemeWithData, {
+  data: graphql`
+    fragment SetUserTheme_data on Query {
       viewer {
         themeName
       }
     }
   `,
-);
+});
