@@ -1,51 +1,86 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+      modules: true,
+    },
+    project: './tsconfig.json',
+  },
+  plugins: ['@typescript-eslint', 'relay', 'react-hooks'],
   extends: [
     'airbnb',
-    // It removes global Flow types so we don’t have to.
-    'plugin:flowtype/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
     'prettier',
-    'prettier/flowtype',
+    'prettier/@typescript-eslint',
     'prettier/react',
   ],
-  parser: 'babel-eslint',
-  plugins: ['flowtype'],
-  globals: {
-    APP_NAME: true,
-    APP_VERSION: true,
-    DEFAULT_LOCALE: true,
-    GRAPHQL_ENDPOINT: true,
-    HOSTNAME: true,
-    SENTRY_CLIENT_DNS: true,
-    SENTRY_SERVER_DNS: true,
-    window: true,
-    HTMLElement: true,
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    // linkComponents: [
+    //   // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
+    //   'Hyperlink',
+    //   { name: 'Link', linkAttribute: 'to' },
+    // ],
   },
-  // Airbnb is great but very strict. Feel free to relax any rule.
+  // Este rules.
   rules: {
-    camelcase: 0, // Foo_foo can be Relay compiler generated type.
-    'consistent-return': 0, // Control freaky.
-    'default-case': 0, // Control freaky.
-    'guard-for-in': 0, // It's not a bug it's a feature.
-    'import/first': 0, // Nobody cares about imports order.
-    'import/prefer-default-export': 0, // Control freaky.
-    'no-nested-ternary': 0, // Control freaky.
-    'no-param-reassign': 0, // We love param reassignment. Naming is hard.
-    'no-plusplus': 0, // Control freaky.
-    'no-restricted-syntax': 0, // Not needed with modern browsers.
-    'no-shadow': 0, // Shadowing is a nice language feature. Naming is hard.
-    'no-underscore-dangle': 0, // Control freaky.
-    'react/default-props-match-prop-types': 0, // Buggy.
-    'react/forbid-prop-types': 0, // Control freaky.
-    'react/jsx-boolean-value': 0, // Control freaky.
-    'react/jsx-curly-brace-presence': 0, // styled-jsx
-    'react/jsx-filename-extension': 0, // JSX belongs to .js files.
-    'react/no-danger': 0, // Control freaky.
-    'react/no-unused-prop-types': 0, // Flow.
-    'react/prop-types': 0, // Flow.
-    'react/require-default-props': 0, // Flow.
-    'spaced-comment': 0, // We don't care.
-    // allow console and debugger in development
-    'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    // Type is enforced by callers. Not entirely, but it's good enough.
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    // We need underscores for relay/generated/Component_prop.graphql
+    '@typescript-eslint/camelcase': 'off',
+    // Temp fix for import.
+    // https://github.com/benmosher/eslint-plugin-import/issues/1285#issuecomment-466212438
+    'import/named': 'off',
+    // Enforce arrow functions only is afaik not possible. But this helps.
+    'func-style': ['error', 'declaration', { allowArrowFunctions: true }],
+    // Fix for TypeScript.
+    'react/jsx-filename-extension': ['error', { extensions: ['.tsx'] }],
+    // I believe shadowing is a nice language feature.
+    'no-shadow': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-default-export': 'error',
+    // Because React Native in packages/web is replaced with React Native Web.
+    'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    // We have types.
+    'react/prop-types': 'off',
+    // It's fine.
+    'react/no-multi-comp': 'off',
+    'react/no-unescaped-entities': 'off',
+    // They are fine sometimes.
+    'no-nested-ternary': 'off',
+    // This is fine.
+    'lines-between-class-members': 'off',
+    // Relay
+    'relay/graphql-syntax': 'error',
+    'relay/compat-uses-vars': 'error',
+    'relay/graphql-naming': 'error',
+    'relay/generated-flow-types': 'error',
+    // 'relay/no-future-added-value': 'error', // Why?
+    'relay/unused-fields': 'error',
+    // We use it for immer. It should be checked by readonly anyway.
+    'no-param-reassign': 'off',
+    // Irrelevant.
+    'no-plusplus': 'off',
+    'no-return-assign': 'off',
+    'consistent-return': 'off',
+    // TSC checks it.
+    '@typescript-eslint/no-unused-vars': 'off',
+    'no-undef': 'off',
+    'react/jsx-no-undef': 'off',
+    // React Hooks.
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'error',
+    // Reconsider, maybe enable later:
+    '@typescript-eslint/explicit-member-accessibility': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'react/destructuring-assignment': 'off',
+    'import/no-cycle': 'off',
   },
 };

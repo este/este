@@ -1,6 +1,9 @@
 .DS_Store
 .next
-lang/.messages
 node_modules
 npm-debug.log
+web/bundles
 yarn-error.log
+.env*
+!.env.dev
+.eslintcache

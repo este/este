@@ -1,0 +1,24 @@
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
+import { useSavedState } from '@app/hooks/useSavedState';
+import { Button } from './Button';
+
+interface SaveButtonProps {
+  disabled: boolean;
+  onPress: () => void;
+  saved: boolean;
+}
+
+export const SaveButton: FunctionComponent<SaveButtonProps> = props => {
+  const [disabled, saved] = useSavedState(props.disabled, props.saved);
+
+  return (
+    <Button type="primary" disabled={disabled} onPress={props.onPress}>
+      {saved ? (
+        <FormattedMessage id="button.saved" defaultMessage="Saved" />
+      ) : (
+        <FormattedMessage id="button.save" defaultMessage="Save" />
+      )}
+    </Button>
+  );
+};

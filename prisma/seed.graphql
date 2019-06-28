@@ -1,0 +1,11 @@
+mutation {
+  createUser(
+    data: {
+      email: "a@a.com"
+      password: "$2a$10$TMyDbQyR4O1Oa.QjKfiVmun7YcZMlsKpkI0BjvOCqXGASwR20N/be"
+      themeName: "dark"
+    }
+  ) {
+    id
+  }
+}

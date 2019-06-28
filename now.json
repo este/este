@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "este",
+  "alias": "este.io",
+  "env": {
+    "API_SECRET": "@este-api-secret",
+    "PRISMA_ENDPOINT": "@este-prisma-endpoint",
+    "PRISMA_SECRET": "@este-prisma-secret",
+    "IS_NOW": "true"
+  },
+  "builds": [
+    { "src": "packages/api/index.ts", "use": "@now/node" },
+    { "src": "packages/web/next.config.js", "use": "@now/next" }
+  ],
+  "routes": [
+    { "src": "/_api", "dest": "/packages/api" },
+    { "src": "/(.*)", "dest": "/packages/web/$1" }
+  ]
+}

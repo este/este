@@ -1,0 +1,21 @@
+{
+  "name": "@app/hooks",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@app/api": "1.0.0",
+    "@app/themes": "1.0.0",
+    "io-ts": "^1.8.3",
+    "next": "^8.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "16.8.6",
+    "react-intl": "^2.8.0",
+    "react-relay": "^4.0.0",
+    "relay-runtime": "^4.0.0",
+    "cookie": "^0.3.1"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.3.2"
+  }
+}
