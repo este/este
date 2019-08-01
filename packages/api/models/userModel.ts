@@ -72,6 +72,7 @@ export const userModel = (context: ModelContext) => {
         email: input.email,
         password,
         themeName: '',
+        team: { connect: { id: 'cjy5pq0pv004n0767mmcfconl' } },
       });
       return success(user.id);
     }
@@ -134,7 +135,6 @@ export const userModel = (context: ModelContext) => {
     first: number;
     skip?: number;
   }) => {
-    console.log({ userId, first, skip });
     // If you are teamate you can read user tadas
     await teamates(userId);
 

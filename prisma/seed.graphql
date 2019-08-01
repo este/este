@@ -1,14 +1,15 @@
 mutation {
+  createTeam(data: { name: "First team", id: "cjy5pq0pv004n0767mmcfconl" }) {
+    id
+  }
   createUser(
     data: {
       email: "a@a.com"
       password: "$2a$10$TMyDbQyR4O1Oa.QjKfiVmun7YcZMlsKpkI0BjvOCqXGASwR20N/be"
       themeName: "dark"
+      team: { connect: { id: "cjy5pq0pv004n0767mmcfconl" } }
     }
   ) {
-    id
-  }
-  createTeam(data: { name: "First team", id: "firstTeam" }) {
     id
   }
 }

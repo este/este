@@ -179,11 +179,10 @@ export const userTadasConnection = subscriptionField('userTadasConnection', {
     return context.models.user.$subscribeUserTadaCreateAndDelete(args.filters);
   },
   resolve(
-    payload,
+    _payload,
     args: { filters: NexusGenAllTypes['PageSubcriptionFilters'] },
     context,
   ) {
-    console.log({ payload, args });
     return context.models.user.tadas({
       userId: args.filters.rootDataId,
       ...args.filters,
