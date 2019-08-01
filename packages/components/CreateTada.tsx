@@ -1,19 +1,18 @@
-import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
+import { validateCreateTada } from '@app/api/validators/validateTada';
 import React, { FunctionComponent } from 'react';
 import { defineMessages } from 'react-intl';
 import { TextInput, View } from 'react-native';
 import { graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
 import { useMutation } from '@app/hooks/useMutation';
-import { useAppHref } from '@app/hooks/useAppHref';
-import { CreateWebMutation } from '@app/relay/generated/CreateWebMutation.graphql';
+import { CreateTadaMutation } from '@app/relay/generated/CreateTadaMutation.graphql';
 import { Button } from './Button';
 import { ValidationError } from './ValidationError';
 
 const messages = defineMessages({
-  createWebButton: {
-    defaultMessage: 'Create Web',
-    id: 'createWebButton',
+  createTadaButton: {
+    defaultMessage: 'Create Tada',
+    id: 'createTadaButton',
   },
   namePlaceholder: {
     defaultMessage: 'name',
@@ -22,9 +21,9 @@ const messages = defineMessages({
 });
 
 const mutation = graphql`
-  mutation CreateWebMutation($input: CreateWebInput!) {
-    createWeb(input: $input) {
-      web {
+  mutation CreateTadaMutation($input: TadaCreateInput!) {
+    createTada(input: $input) {
+      tada {
         id
       }
       errors {
@@ -34,23 +33,24 @@ const mutation = graphql`
   }
 `;
 
-export const CreateWeb: FunctionComponent = () => {
+export const CreateTada: FunctionComponent = () => {
   const { intl, theme } = useAppContext();
-  const { fields, commit, errors, pending } = useMutation<CreateWebMutation>(
+  const { fields, commit, errors, pending } = useMutation<CreateTadaMutation>(
     mutation,
     { name: '' },
-    { validator: validateCreateWeb },
+    { validator: validateCreateTada },
   );
-  const appHref = useAppHref();
+  // const appHref = useAppHref();
 
-  const createWeb = () => {
+  const createTada = () => {
     commit({
-      onSuccess({ web }) {
-        if (web == null) return;
-        appHref.push({
-          pathname: '/web',
-          query: { id: web.id },
-        });
+      onSuccess({ errors }) {
+        if (errors != null) return;
+        fields.name.textInput.onChangeText('');
+        // appHref.push({
+        //   pathname: '/tada',
+        //   query: { id: tada.id },
+        // });
       },
     });
   };
@@ -61,12 +61,12 @@ export const CreateWeb: FunctionComponent = () => {
         {...fields.name.textInput}
         style={theme.text}
         placeholder={intl.formatMessage(messages.namePlaceholder)}
-        onSubmitEditing={createWeb}
+        onSubmitEditing={createTada}
       />
       <ValidationError error={errors.name} />
       <View style={theme.buttons}>
-        <Button type="text" disabled={pending} onPress={createWeb}>
-          {intl.formatMessage(messages.createWebButton)}
+        <Button type="text" disabled={pending} onPress={createTada}>
+          {intl.formatMessage(messages.createTadaButton)}
         </Button>
       </View>
     </>

@@ -2,8 +2,8 @@ import {
   ApolloError,
   AuthenticationError,
   ForbiddenError,
-} from 'apollo-server-micro';
-import { NexusGenAllTypes } from '../typegen';
+} from 'apollo-server';
+import { NexusGenAllTypes } from '../generated/nexus';
 
 // https://graphql.org/learn/authorization/
 // https://www.apollographql.com/docs/apollo-server/features/authentication.html
@@ -18,16 +18,24 @@ class NotFoundError extends ApolloError {
 // Remember to update handleApiGraphQLError.ts.
 export const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
   const isAuthenticated = (userId?: string): NexusGenAllTypes['User'] => {
-    if (user == null || (userId != null && user.id !== userId))
+    if (user == null || (userId != null && user.id !== userId)) {
       throw new AuthenticationError('you must be logged in');
+    }
     return user;
   };
 
-  const isWebCreatorOrAdmin = (web: NexusGenAllTypes['Web']) => {
+  const isTadaCreatorOrAdmin = (tada: NexusGenAllTypes['Tada']) => {
     const viewer = isAuthenticated();
     // TODO: if (viewer.isAdmin) return;
-    if (viewer.id === web.creator.id) return;
-    throw new ForbiddenError('you must be web creator or admin');
+    if (viewer.id === tada.creator.id) return;
+
+    throw new ForbiddenError('you must be tada creator or admin');
+  };
+
+  const isTeamate = (user: NexusGenAllTypes['User'], teamId: string) => {
+    if (user.team.id === teamId) return;
+
+    throw new ForbiddenError('the user must be part of your team');
   };
 
   const exists = (object: any) => {
@@ -39,6 +47,7 @@ export const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
   return {
     exists,
     isAuthenticated,
-    isWebCreatorOrAdmin,
+    isTadaCreatorOrAdmin,
+    isTeamate,
   };
 };

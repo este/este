@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 import * as t from 'io-ts';
 import { useAppContext } from './useAppContext';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { fold } from 'fp-ts/lib/Either';
 
 // Typed app routing via brilliant gcanti/io-ts.
 // Soon in Next.js: https://twitter.com/timneutkens/status/1109092151907045376
@@ -10,7 +12,7 @@ const AppHrefIO = t.union([
   t.type({ pathname: t.literal('/me') }),
   t.type({ pathname: t.literal('https://twitter.com/steida') }),
   t.type({
-    pathname: t.literal('/web'),
+    pathname: t.literal('/tada'),
     query: t.type({ id: t.string }),
   }),
   // https://github.com/gcanti/io-ts#mixing-required-and-optional-props
@@ -29,11 +31,14 @@ export const useAppHref = () => {
   const current = useMemo<AppHref | undefined>(() => {
     let maybeAppHref: AppHref | undefined;
     const routerAppHref = { pathname: router.pathname, query: router.query };
-    AppHrefIO.decode(routerAppHref).fold(
-      _errors => {}, // No need to report unmatched app href.
-      value => {
-        maybeAppHref = value;
-      },
+    pipe(
+      AppHrefIO.decode(routerAppHref),
+      fold(
+        _errors => {}, // No need to report unmatched app href.
+        value => {
+          maybeAppHref = value;
+        },
+      ),
     );
     return maybeAppHref;
   }, [router.pathname, router.query]);

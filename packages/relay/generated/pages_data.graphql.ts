@@ -2,16 +2,14 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { Layout_data$ref } from "./Layout_data.graphql";
+import { UserTadas_user$ref } from "./UserTadas_user.graphql";
+import { UserTeamates_user$ref } from "./UserTeamates_user.graphql";
 declare const _pages_data$ref: unique symbol;
 export type pages_data$ref = typeof _pages_data$ref;
 export type pages_data = {
     readonly viewer: {
         readonly id: string;
-        readonly webs: ReadonlyArray<{
-            readonly id: string;
-            readonly name: string;
-            readonly createdAt: any;
-        }>;
+        readonly " $fragmentRefs": UserTadas_user$ref & UserTeamates_user$ref;
     } | null;
     readonly " $fragmentRefs": Layout_data$ref;
     readonly " $refType": pages_data$ref;
@@ -19,15 +17,7 @@ export type pages_data = {
 
 
 
-const node: ReaderFragment = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
-return {
+const node: ReaderFragment = {
   "kind": "Fragment",
   "name": "pages_data",
   "type": "Query",
@@ -43,30 +33,32 @@ return {
       "concreteType": "User",
       "plural": false,
       "selections": [
-        (v0/*: any*/),
         {
-          "kind": "LinkedField",
+          "kind": "ScalarField",
           "alias": null,
-          "name": "webs",
-          "storageKey": null,
+          "name": "id",
           "args": null,
-          "concreteType": "Web",
-          "plural": true,
-          "selections": [
-            (v0/*: any*/),
+          "storageKey": null
+        },
+        {
+          "kind": "FragmentSpread",
+          "name": "UserTadas_user",
+          "args": [
             {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "name",
-              "args": null,
-              "storageKey": null
-            },
+              "kind": "Literal",
+              "name": "first",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "kind": "FragmentSpread",
+          "name": "UserTeamates_user",
+          "args": [
             {
-              "kind": "ScalarField",
-              "alias": null,
-              "name": "createdAt",
-              "args": null,
-              "storageKey": null
+              "kind": "Literal",
+              "name": "tadasFirst",
+              "value": 3
             }
           ]
         }
@@ -79,6 +71,5 @@ return {
     }
   ]
 };
-})();
-(node as any).hash = '320f914f53561b3d79cde978c426e71f';
+(node as any).hash = '726a2a8931d4def97b425c9f177f8dff';
 export default node;

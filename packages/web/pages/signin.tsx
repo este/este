@@ -73,7 +73,7 @@ const SignIn: FunctionComponent<SignIn> = ({ data }) => {
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
         {...Platform.select({
-          web: { name: 'email', autoComplete: 'email' },
+          tada: { name: 'email', autoComplete: 'email' },
         })}
       />
       <ValidationError error={errors.email} />
@@ -84,7 +84,7 @@ const SignIn: FunctionComponent<SignIn> = ({ data }) => {
         onSubmitEditing={() => signIn()}
         style={theme.textInputOutline}
         {...Platform.select({
-          web: { name: 'password' },
+          tada: { name: 'password' },
         })}
       />
       <ValidationError error={errors.password} />

@@ -7,18 +7,19 @@
     "@app/hooks": "1.0.0",
     "@app/relay": "1.0.0",
     "@app/themes": "1.0.0",
+    "@types/nprogress": "^0.2.0",
+    "gravatar": "^1.8.0",
+    "next": "^8.0.0",
+    "nprogress": "^0.2.0",
     "react": "^16.8.6",
     "react-intl": "^2.8.0",
     "react-native": "^0.59.5",
-    "react-relay": "^4.0.0",
-    "gravatar": "^1.8.0",
-    "next": "^8.0.0",
-    "utility-types": "^3.4.1",
-    "nprogress": "^0.2.0"
+    "react-relay": "^5.0.0",
+    "utility-types": "^3.4.1"
   },
   "devDependencies": {
-    "@types/react": "^16.7.11",
     "@types/next": "^8.0.0",
-    "@types/nprogress": "0.0.29"
+    "@types/nprogress": "0.0.29",
+    "@types/react": "^16.7.11"
   }
 }

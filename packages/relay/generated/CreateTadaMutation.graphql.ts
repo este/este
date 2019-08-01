@@ -2,15 +2,16 @@
 
 import { ConcreteRequest } from "relay-runtime";
 export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED" | "%future added value";
-export type CreateWebInput = {
+export type TadaCreateInput = {
+    readonly description?: string | null;
     readonly name: string;
 };
-export type CreateWebMutationVariables = {
-    readonly input: CreateWebInput;
+export type CreateTadaMutationVariables = {
+    readonly input: TadaCreateInput;
 };
-export type CreateWebMutationResponse = {
-    readonly createWeb: {
-        readonly web: {
+export type CreateTadaMutationResponse = {
+    readonly createTada: {
+        readonly tada: {
             readonly id: string;
         } | null;
         readonly errors: {
@@ -18,19 +19,19 @@ export type CreateWebMutationResponse = {
         } | null;
     };
 };
-export type CreateWebMutation = {
-    readonly response: CreateWebMutationResponse;
-    readonly variables: CreateWebMutationVariables;
+export type CreateTadaMutation = {
+    readonly response: CreateTadaMutationResponse;
+    readonly variables: CreateTadaMutationVariables;
 };
 
 
 
 /*
-mutation CreateWebMutation(
-  $input: CreateWebInput!
+mutation CreateTadaMutation(
+  $input: TadaCreateInput!
 ) {
-  createWeb(input: $input) {
-    web {
+  createTada(input: $input) {
+    tada {
       id
     }
     errors {
@@ -45,7 +46,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "CreateWebInput!",
+    "type": "TadaCreateInput!",
     "defaultValue": null
   }
 ],
@@ -53,7 +54,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "createWeb",
+    "name": "createTada",
     "storageKey": null,
     "args": [
       {
@@ -62,16 +63,16 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "CreateWebPayload",
+    "concreteType": "TadaCreatePayload",
     "plural": false,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "web",
+        "name": "tada",
         "storageKey": null,
         "args": null,
-        "concreteType": "Web",
+        "concreteType": "Tada",
         "plural": false,
         "selections": [
           {
@@ -89,7 +90,7 @@ v1 = [
         "name": "errors",
         "storageKey": null,
         "args": null,
-        "concreteType": "CreateWebErrors",
+        "concreteType": "TadaCreateErrors",
         "plural": false,
         "selections": [
           {
@@ -108,7 +109,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "CreateWebMutation",
+    "name": "CreateTadaMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -116,18 +117,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "CreateWebMutation",
+    "name": "CreateTadaMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "CreateWebMutation",
+    "name": "CreateTadaMutation",
     "id": null,
-    "text": "mutation CreateWebMutation(\n  $input: CreateWebInput!\n) {\n  createWeb(input: $input) {\n    web {\n      id\n    }\n    errors {\n      name\n    }\n  }\n}\n",
+    "text": "mutation CreateTadaMutation(\n  $input: TadaCreateInput!\n) {\n  createTada(input: $input) {\n    tada {\n      id\n    }\n    errors {\n      name\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '64f32d2b4bb6377920b968ab0058cd46';
+(node as any).hash = '095bcc6ddf2756325946f7b6519b6e6d';
 export default node;

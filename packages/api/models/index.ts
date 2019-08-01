@@ -1,9 +1,9 @@
 import { Prisma } from '../../../prisma/generated/prisma-client';
 import { createPermissions } from './createPermissions';
-import { NexusGenAllTypes } from '../typegen';
+import { NexusGenAllTypes } from '../generated/nexus';
 
 import { userModel } from './userModel';
-import { webModel } from './webModel';
+import { tadaModel } from './tadaModel';
 
 export const createModels = (
   prisma: Prisma,
@@ -20,7 +20,7 @@ export const createModels = (
 
   return {
     user: userModel(modelContext),
-    web: webModel(modelContext),
+    tada: tadaModel(modelContext),
   };
 };
 

@@ -1,3 +1,12 @@
+type Team {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  name: String!
+  description: String
+  members: [User!]!
+}
+
 type User {
   id: ID! @id
   createdAt: DateTime! @createdAt
@@ -5,13 +14,15 @@ type User {
   email: String! @unique
   password: String!
   themeName: String!
-  webs: [Web!]!
+  tadas: [Tada!]!
+  team: Team
 }
 
-type Web {
+type Tada {
   id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   creator: User!
   name: String!
+  description: String
 }

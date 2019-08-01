@@ -2,40 +2,41 @@
 
 import { ConcreteRequest } from "relay-runtime";
 export type Max140CharsError = "MAX_140_CHARS" | "REQUIRED" | "%future added value";
-export type UpdateWebInput = {
+export type TadaUpdateInput = {
+    readonly description?: string | null;
     readonly id: string;
-    readonly name: string;
+    readonly name?: string | null;
 };
-export type webMutationVariables = {
-    readonly input: UpdateWebInput;
+export type tadaMutationVariables = {
+    readonly input: TadaUpdateInput;
 };
-export type webMutationResponse = {
-    readonly updateWeb: {
+export type tadaMutationResponse = {
+    readonly updateTada: {
         readonly errors: {
             readonly name: Max140CharsError | null;
         } | null;
-        readonly web: {
+        readonly tada: {
             readonly id: string;
             readonly name: string;
         } | null;
     };
 };
-export type webMutation = {
-    readonly response: webMutationResponse;
-    readonly variables: webMutationVariables;
+export type tadaMutation = {
+    readonly response: tadaMutationResponse;
+    readonly variables: tadaMutationVariables;
 };
 
 
 
 /*
-mutation webMutation(
-  $input: UpdateWebInput!
+mutation tadaMutation(
+  $input: TadaUpdateInput!
 ) {
-  updateWeb(input: $input) {
+  updateTada(input: $input) {
     errors {
       name
     }
-    web {
+    tada {
       id
       name
     }
@@ -48,7 +49,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "UpdateWebInput!",
+    "type": "TadaUpdateInput!",
     "defaultValue": null
   }
 ],
@@ -63,7 +64,7 @@ v2 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "updateWeb",
+    "name": "updateTada",
     "storageKey": null,
     "args": [
       {
@@ -72,7 +73,7 @@ v2 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "UpdateWebPayload",
+    "concreteType": "TadaUpdatePayload",
     "plural": false,
     "selections": [
       {
@@ -81,7 +82,7 @@ v2 = [
         "name": "errors",
         "storageKey": null,
         "args": null,
-        "concreteType": "UpdateWebErrors",
+        "concreteType": "TadaUpdateErrors",
         "plural": false,
         "selections": [
           (v1/*: any*/)
@@ -90,10 +91,10 @@ v2 = [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "web",
+        "name": "tada",
         "storageKey": null,
         "args": null,
-        "concreteType": "Web",
+        "concreteType": "Tada",
         "plural": false,
         "selections": [
           {
@@ -113,7 +114,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "webMutation",
+    "name": "tadaMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -121,18 +122,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "webMutation",
+    "name": "tadaMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v2/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "webMutation",
+    "name": "tadaMutation",
     "id": null,
-    "text": "mutation webMutation(\n  $input: UpdateWebInput!\n) {\n  updateWeb(input: $input) {\n    errors {\n      name\n    }\n    web {\n      id\n      name\n    }\n  }\n}\n",
+    "text": "mutation tadaMutation(\n  $input: TadaUpdateInput!\n) {\n  updateTada(input: $input) {\n    errors {\n      name\n    }\n    tada {\n      id\n      name\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '82d1163391711c566819fe72b7823f7c';
+(node as any).hash = '306912133e5df126a1204194c5419b4a';
 export default node;

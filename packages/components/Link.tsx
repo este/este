@@ -53,7 +53,7 @@ export const Link: FunctionComponent<LinkProps> = props => {
         accessible={accessible}
         nativeID={nativeID}
         {...Platform.select({
-          web: {
+          tada: {
             download,
             onMouseEnter: () => setHasHover(true),
             onMouseLeave: () => setHasHover(false),

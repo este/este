@@ -8,4 +8,7 @@ mutation {
   ) {
     id
   }
+  createTeam(data: { name: "First team", id: "firstTeam" }) {
+    id
+  }
 }

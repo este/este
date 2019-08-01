@@ -5,7 +5,7 @@ import Router from 'next/router';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { defineMessages } from 'react-intl';
 import { commitMutation, GraphQLTaggedNode } from 'react-relay';
-import { Disposable } from 'relay-runtime';
+import { Disposable, RecordSourceSelectorProxy } from 'relay-runtime';
 import { useAppHref } from './useAppHref';
 import { useAppContext } from './useAppContext';
 
@@ -90,6 +90,8 @@ type Response<M extends Mutation> = M['response'][keyof M['response']];
 type Commit<M extends Mutation> = (options?: {
   merge?: Partial<Input<M>>;
   onSuccess?: (response: Response<M>) => void;
+  optimisticResponse?: M['response'];
+  optimisticUpdater?: (store: RecordSourceSelectorProxy) => void;
 }) => void;
 
 type Errors<M extends Mutation> = NonNullable<Response<M>['errors']>;
@@ -178,12 +180,12 @@ export const useMutation = <M extends Mutation>(
 
   const commit: Commit<M> = (commitOptions = {}) => {
     if (pending) return;
-
     const input = {
       ...state,
       ...commitOptions.merge,
     };
     if (commitOptions.merge != null) setState(input);
+    const { optimisticResponse, optimisticUpdater } = commitOptions;
 
     // Find, set, and forus the first error only.
     // Sure we can set all errors at once, but I prefer less noisy UI.
@@ -216,6 +218,8 @@ export const useMutation = <M extends Mutation>(
     disposableRef.current = commitMutation<M>(relayEnvironment, {
       mutation,
       variables: { input },
+      optimisticResponse,
+      optimisticUpdater,
       onCompleted(response, payloadErrors) {
         setPending(false);
         if (payloadErrors) {

@@ -2,7 +2,23 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { validateSignIn } from '../validators/validateSignIn';
 import { ModelContext } from './index';
-import { NexusGenAllTypes } from '../typegen';
+import { NexusGenAllTypes } from '../generated/nexus';
+import { tadaConnectionWithCreatorFragment } from './tadaModel';
+
+export const userWithTeamFragment = `
+  fragment UserWithTeam on User {
+    id
+    createdAt
+    updatedAt
+    email
+    themeName
+    team {
+      id
+      name
+      description
+    }
+  }
+`;
 
 export interface JsonWebTokenPayload {
   userId: string;
@@ -11,6 +27,22 @@ export interface JsonWebTokenPayload {
 const { API_SECRET } = process.env;
 
 export const userModel = (context: ModelContext) => {
+  const byId = async (id: string) => {
+    const user = await context.prisma
+      .user({ id })
+      .$fragment<NexusGenAllTypes['User']>(userWithTeamFragment);
+    context.permissions.exists(user);
+    // We don't need additional checks. It's covered by get.
+    return user;
+  };
+
+  const get = async (user: NexusGenAllTypes['User']) => {
+    // This is required. User can be resolved from any other resolver.
+    // If you are teamate you can read user tadas
+    await teamates(user.id);
+    return user;
+  };
+
   const signIn = async (input: NexusGenAllTypes['SignInInput']) => {
     const fail = (errors: NexusGenAllTypes['SignInErrors']) => ({
       errors: {
@@ -73,40 +105,81 @@ export const userModel = (context: ModelContext) => {
       data: { themeName: name },
       where: { id: viewer.id },
     });
-    const userWithWebs = { ...user, webs: [] };
-    return { user: userWithWebs };
+    const userWithTadas = { ...user, tadas: [] };
+    return { user: userWithTadas };
   };
 
-  const webs = async (userId: string) => {
-    const viewer = context.permissions.isAuthenticated(userId);
-    // $fragment is workaround.
-    // https://github.com/prisma/prisma/issues/3668
-    const fragment = `
-      fragment WebWithCreator on Web {
-        id
-        createdAt
-        updatedAt
-        name
-        creator {
-          id
-          createdAt
-          updatedAt
-          email
-          themeName
-        }
-      }
-    `;
+  const teamates = async (userId?: string) => {
+    const viewer = context.permissions.isAuthenticated();
+    const user = userId && (await byId(userId));
+
+    userId && user.team && context.permissions.isTeamate(viewer, user.team.id);
+
+    const team = await context.prisma.usersConnection({
+      orderBy: 'createdAt_DESC',
+      where: {
+        team: { id: userId && user.team ? user.team.id : viewer.team.id },
+      },
+    });
+
+    return team;
+  };
+
+  const tadas = async ({
+    userId,
+    first,
+    skip,
+  }: {
+    userId: string;
+    first: number;
+    skip?: number;
+  }) => {
+    console.log({ userId, first, skip });
+    // If you are teamate you can read user tadas
+    await teamates(userId);
+
     return context.prisma
-      .user({ id: viewer.id })
-      .webs({ orderBy: 'createdAt_DESC' })
-      .$fragment<NexusGenAllTypes['Web'][]>(fragment);
+      .tadasConnection({
+        first,
+        skip,
+        where: { creator: { id: userId } },
+        orderBy: 'createdAt_DESC',
+      })
+      .$fragment<NexusGenAllTypes['Tada']>(tadaConnectionWithCreatorFragment);
+  };
+
+  const $subscribeViewerAccessibleTadaUpdate = async () => {
+    // If you are teamate you can read user tadas
+    const team = await teamates();
+
+    return context.prisma.$subscribe.tada({
+      mutation_in: 'UPDATED',
+      node: { creator: { id_in: team.edges.map(teamate => teamate.node.id) } },
+    });
+  };
+
+  const $subscribeUserTadaCreateAndDelete = async ({
+    rootDataId,
+  }: NexusGenAllTypes['PageSubcriptionFilters']) => {
+    // If you are teamate you can read user tadas
+    await teamates(rootDataId);
+
+    return context.prisma.$subscribe.tada({
+      mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
+      node: { creator: { id: rootDataId } },
+    });
   };
 
   return {
+    $subscribeUserTadaCreateAndDelete,
+    $subscribeViewerAccessibleTadaUpdate,
+    byId,
+    get,
     requiredViewer,
     setTheme,
     signIn,
+    tadas,
+    teamates,
     viewer,
-    webs,
   };
 };

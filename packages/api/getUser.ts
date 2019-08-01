@@ -1,18 +1,17 @@
-import { IncomingMessage } from 'http';
 import * as jwt from 'jsonwebtoken';
 import { Prisma } from '../../prisma/generated/prisma-client';
-import { NexusGenFieldTypes } from './typegen';
+import { NexusGenAllTypes, NexusGenRootTypes } from './generated/nexus';
 import { JsonWebTokenPayload } from './models/userModel';
+import { userWithTeamFragment } from './models/userModel';
 
 export const getUser = async (
   apiSecret: string,
   prisma: Prisma,
-  req: IncomingMessage,
-): Promise<NexusGenFieldTypes['User'] | null> => {
-  const { authorization } = req.headers;
-  if (authorization == null) return null;
-  const token = authorization.replace('Bearer ', '');
-
+  token: string | null,
+): Promise<NexusGenRootTypes['User'] | null> => {
+  if (!token) {
+    return null;
+  }
   let decoded = {};
   try {
     decoded = jwt.verify(token, apiSecret);
@@ -28,9 +27,11 @@ export const getUser = async (
     'userId' in decoded;
   if (!hasUserId(decoded)) return null;
 
-  const user = await prisma.user({ id: decoded.userId });
+  const user = await prisma
+    .user({ id: decoded.userId })
+    .$fragment<NexusGenAllTypes['User']>(userWithTeamFragment);
   if (user == null) return null;
 
-  // Do not fetch user webs, we don't need it. getUser is used only for auth.
-  return { ...user, webs: [] };
+  // Do not fetch user tadas, we don't need it. getUser is used only for auth.
+  return { ...user, tadas: [] };
 };

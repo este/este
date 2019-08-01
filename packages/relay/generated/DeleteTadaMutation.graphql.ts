@@ -1,32 +1,32 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-export type DeleteWebInput = {
+export type TadaDeleteInput = {
     readonly id: string;
 };
-export type DeleteWebMutationVariables = {
-    readonly input: DeleteWebInput;
+export type DeleteTadaMutationVariables = {
+    readonly input: TadaDeleteInput;
 };
-export type DeleteWebMutationResponse = {
-    readonly deleteWeb: {
-        readonly web: {
+export type DeleteTadaMutationResponse = {
+    readonly deleteTada: {
+        readonly tada: {
             readonly id: string;
         } | null;
     };
 };
-export type DeleteWebMutation = {
-    readonly response: DeleteWebMutationResponse;
-    readonly variables: DeleteWebMutationVariables;
+export type DeleteTadaMutation = {
+    readonly response: DeleteTadaMutationResponse;
+    readonly variables: DeleteTadaMutationVariables;
 };
 
 
 
 /*
-mutation DeleteWebMutation(
-  $input: DeleteWebInput!
+mutation DeleteTadaMutation(
+  $input: TadaDeleteInput!
 ) {
-  deleteWeb(input: $input) {
-    web {
+  deleteTada(input: $input) {
+    tada {
       id
     }
   }
@@ -38,7 +38,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "input",
-    "type": "DeleteWebInput!",
+    "type": "TadaDeleteInput!",
     "defaultValue": null
   }
 ],
@@ -46,7 +46,7 @@ v1 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "deleteWeb",
+    "name": "deleteTada",
     "storageKey": null,
     "args": [
       {
@@ -55,16 +55,16 @@ v1 = [
         "variableName": "input"
       }
     ],
-    "concreteType": "DeleteWebPayload",
+    "concreteType": "TadaDeletePayload",
     "plural": false,
     "selections": [
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "web",
+        "name": "tada",
         "storageKey": null,
         "args": null,
-        "concreteType": "Web",
+        "concreteType": "Tada",
         "plural": false,
         "selections": [
           {
@@ -83,7 +83,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "DeleteWebMutation",
+    "name": "DeleteTadaMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
@@ -91,18 +91,18 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "DeleteWebMutation",
+    "name": "DeleteTadaMutation",
     "argumentDefinitions": (v0/*: any*/),
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
-    "name": "DeleteWebMutation",
+    "name": "DeleteTadaMutation",
     "id": null,
-    "text": "mutation DeleteWebMutation(\n  $input: DeleteWebInput!\n) {\n  deleteWeb(input: $input) {\n    web {\n      id\n    }\n  }\n}\n",
+    "text": "mutation DeleteTadaMutation(\n  $input: TadaDeleteInput!\n) {\n  deleteTada(input: $input) {\n    tada {\n      id\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = 'bc857af0266cf71d7ed7fce0e84c9c27';
+(node as any).hash = '82962ec11e17af430237bc3c23cdd977';
 export default node;

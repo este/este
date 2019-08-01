@@ -4,7 +4,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": "8.10.x"
+    "node": "10.x.x"
   },
   "workspaces": [
     "packages/*"
@@ -34,17 +34,17 @@
   },
   "dependencies": {
     "esm": "^3.2.0",
-    "wsrun": "^3.6.2"
+    "wsrun": "^5.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^1.4.1",
     "@typescript-eslint/parser": "^1.4.1",
     "babel-plugin-module-resolver": "^3.1.2",
-    "babel-plugin-relay": "^4.0.0",
+    "babel-plugin-relay": "^5.0.0",
     "dotenv": "^8.0.0",
-    "eslint": "^5.14.1",
+    "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^4.0.0",
+    "eslint-config-prettier": "^6.0.0",
     "eslint-import-resolver-node": "^0.3.2",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",

@@ -1,5 +1,5 @@
 import { validateEmail, validatePassword } from '.';
-import { NexusGenAllTypes } from '../typegen';
+import { NexusGenAllTypes } from '../generated/nexus';
 
 export const validateSignIn = (
   input: NexusGenAllTypes['SignInInput'],

@@ -5,6 +5,9 @@ import NextError from 'next/error';
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { ReactRelayContext, graphql } from 'react-relay';
+import { execute } from 'apollo-link';
+import { WebSocketLink } from 'apollo-link-ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import {
   Environment,
   // @ts-ignore Missing type.
@@ -15,6 +18,7 @@ import {
   Store,
 } from 'relay-runtime';
 import { AuthSyncProvider, maybeGetAuthToken } from '@app/hooks/useAuth';
+import { WebSocketConnectionParams } from '@app/api/types';
 import { AppHref } from '@app/hooks/useAppHref';
 import { AppContext } from '@app/hooks/useAppContext';
 import { IntlProviderFix } from '@app/components/IntlProviderFix';
@@ -22,6 +26,7 @@ import { RouterProviderFix } from '@app/components/RouterProviderFix';
 import { ViewerTheme } from '@app/components/ViewerTheme';
 import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
 import { getEndpoint } from '@app/serverless/getEndpoint';
+import { parse } from 'graphql';
 
 const createRelayEnvironment = (
   apiEndpoint: string,
@@ -30,21 +35,43 @@ const createRelayEnvironment = (
   rejectErrors: boolean,
 ) => {
   return new Environment({
-    network: Network.create(async (operation, variables) => {
-      const response = await fetch(apiEndpoint, {
-        body: JSON.stringify({ query: operation.text, variables }),
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { authorization: `Bearer ${token}` } : null),
-        },
-        method: 'POST',
-      });
-      // Relay fetch ignores json.errors, so we have to handle it manually.
-      // But only for queries. Mutations are ok.
-      const json = await response.json();
-      if (rejectErrors && json.errors) return Promise.reject(json.errors);
-      return json;
-    }),
+    network: Network.create(
+      async (operation, variables) => {
+        const response = await fetch(apiEndpoint, {
+          body: JSON.stringify({ query: operation.text, variables }),
+          headers: {
+            'Content-Type': 'application/json',
+            ...(token ? { authorization: `Bearer ${token}` } : null),
+          },
+          method: 'POST',
+        });
+        // Relay fetch ignores json.errors, so we have to handle it manually.
+        // But only for queries. Mutations are ok.
+        const json = await response.json();
+        if (rejectErrors && json.errors) return Promise.reject(json.errors);
+        return json;
+      },
+      (operation, variables) => {
+        const connectionParams: WebSocketConnectionParams = {
+          token,
+          host: apiEndpoint.replace('http://', ''),
+        };
+        const subscriptionClient = new SubscriptionClient(
+          `${apiEndpoint.replace('http', 'ws')}/graphql`,
+          {
+            reconnect: true,
+            connectionParams,
+          },
+        );
+
+        const subscriptionLink = new WebSocketLink(subscriptionClient);
+
+        return execute(subscriptionLink, {
+          query: parse(operation.text || ''),
+          variables,
+        });
+      },
+    ),
     store: new Store(new RecordSource(records)),
   });
 };
@@ -55,13 +82,13 @@ const appQuery = graphql`
     $isIndexPage: Boolean!
     $isMePage: Boolean!
     $isSignInPage: Boolean!
-    $isWebPage: Boolean!
+    $isTadaPage: Boolean!
   ) {
     ...ViewerTheme_data
     ...pages_data @include(if: $isIndexPage)
     ...me_data @include(if: $isMePage)
     ...signin_data @include(if: $isSignInPage)
-    ...web_data @include(if: $isWebPage) @arguments(id: $id)
+    ...tada_data @include(if: $isTadaPage) @arguments(id: $id)
   }
 `;
 
@@ -91,7 +118,7 @@ export default class MyApp extends App<MyAppProps> {
       isIndexPage: ctx.pathname === '/',
       isMePage: ctx.pathname === '/me',
       isSignInPage: ctx.pathname === '/signin',
-      isWebPage: ctx.pathname === '/web',
+      isTadaPage: ctx.pathname === '/tada',
     };
 
     host = host || (ctx.req && ctx.req.headers.host) || '';
@@ -109,7 +136,6 @@ export default class MyApp extends App<MyAppProps> {
         ...isPageQueryArgs,
       },
     };
-
     if (props.statusCode != null && props.statusCode >= 400) {
       return props;
     }

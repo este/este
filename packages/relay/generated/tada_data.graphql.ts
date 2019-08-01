@@ -2,22 +2,22 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { Layout_data$ref } from "./Layout_data.graphql";
-declare const _web_data$ref: unique symbol;
-export type web_data$ref = typeof _web_data$ref;
-export type web_data = {
-    readonly web: {
+declare const _tada_data$ref: unique symbol;
+export type tada_data$ref = typeof _tada_data$ref;
+export type tada_data = {
+    readonly tada: {
         readonly name: string;
         readonly id: string;
-    };
+    } | null;
     readonly " $fragmentRefs": Layout_data$ref;
-    readonly " $refType": web_data$ref;
+    readonly " $refType": tada_data$ref;
 };
 
 
 
 const node: ReaderFragment = {
   "kind": "Fragment",
-  "name": "web_data",
+  "name": "tada_data",
   "type": "Query",
   "metadata": null,
   "argumentDefinitions": [
@@ -32,7 +32,7 @@ const node: ReaderFragment = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "web",
+      "name": "tada",
       "storageKey": null,
       "args": [
         {
@@ -41,7 +41,7 @@ const node: ReaderFragment = {
           "variableName": "id"
         }
       ],
-      "concreteType": "Web",
+      "concreteType": "Tada",
       "plural": false,
       "selections": [
         {
@@ -67,5 +67,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = 'e7709d84184701e18e6d663976e5dbd7';
+(node as any).hash = '3e3e3cc83d0893434cae5d340547dfd9';
 export default node;

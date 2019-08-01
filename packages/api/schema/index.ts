@@ -1,4 +1,4 @@
-import { asNexusMethod, queryType } from 'nexus';
+import { asNexusMethod, queryType, objectType } from 'nexus';
 import GraphQLJSON from 'graphql-type-json';
 import {
   DateTime,
@@ -16,8 +16,9 @@ import {
 } from '@okgrow/graphql-scalars';
 
 export * from './errors';
+export * from './pagination';
 export * from './user';
-export * from './web';
+export * from './tada';
 
 // https://github.com/prisma/nexus/issues/132
 export const Query = queryType({

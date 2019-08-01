@@ -4,29 +4,29 @@ import { graphql } from 'react-relay';
 import { useConfirm } from '@app/hooks/useConfirm';
 import { useMutation } from '@app/hooks/useMutation';
 import { useAppHref } from '@app/hooks/useAppHref';
-import { DeleteWebMutation } from '@app/relay/generated/DeleteWebMutation.graphql';
+import { DeleteTadaMutation } from '@app/relay/generated/DeleteTadaMutation.graphql';
 import { Button } from './Button';
 
 const mutation = graphql`
-  mutation DeleteWebMutation($input: DeleteWebInput!) {
-    deleteWeb(input: $input) {
-      web {
+  mutation DeleteTadaMutation($input: TadaDeleteInput!) {
+    deleteTada(input: $input) {
+      tada {
         id
       }
     }
   }
 `;
 
-interface DeleteWebProps {
+interface DeleteTadaProps {
   id: string;
 }
 
-export const DeleteWeb: FunctionComponent<DeleteWebProps> = ({ id }) => {
+export const DeleteTada: FunctionComponent<DeleteTadaProps> = ({ id }) => {
   const confirm = useConfirm();
-  const { commit, pending } = useMutation<DeleteWebMutation>(mutation, { id });
+  const { commit, pending } = useMutation<DeleteTadaMutation>(mutation, { id });
   const appHref = useAppHref();
 
-  const deleteWeb = () => {
+  const deleteTada = () => {
     if (!confirm()) return;
     commit({
       onSuccess() {
@@ -36,8 +36,8 @@ export const DeleteWeb: FunctionComponent<DeleteWebProps> = ({ id }) => {
   };
 
   return (
-    <Button type="danger" disabled={pending} onPress={deleteWeb}>
-      <FormattedMessage id="deleteWebButton" defaultMessage="Delete Web" />
+    <Button type="danger" disabled={pending} onPress={deleteTada}>
+      <FormattedMessage id="deleteTadaButton" defaultMessage="Delete Tada" />
     </Button>
   );
 };

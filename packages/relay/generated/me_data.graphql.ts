@@ -8,7 +8,7 @@ export type me_data$ref = typeof _me_data$ref;
 export type me_data = {
     readonly requiredViewer: {
         readonly email: string;
-    };
+    } | null;
     readonly " $fragmentRefs": Layout_data$ref & SetUserTheme_data$ref;
     readonly " $refType": me_data$ref;
 };

@@ -1,23 +1,24 @@
-import { validateCreateWeb } from '@app/api/validators/validateCreateWeb';
+import { validateUpdateTada } from '@app/api/validators/validateTada';
 import React, { FunctionComponent } from 'react';
 import { TextInput, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
 import { useMutation } from '@app/hooks/useMutation';
-import { DeleteWeb } from '@app/components/DeleteWeb';
+import { useViewerAccessibleTadaUpdatedSubscription } from '@app/hooks/useViewerAccessibleTadaUpdatedSubscription';
+import { DeleteTada } from '@app/components/DeleteTada';
 import { Layout } from '@app/components/Layout';
 import { SaveButton } from '@app/components/SaveButton';
 import { ValidationError } from '@app/components/ValidationError';
-import { webMutation } from '@app/relay/generated/webMutation.graphql';
-import { web_data } from '@app/relay/generated/web_data.graphql';
+import { tadaMutation } from '@app/relay/generated/tadaMutation.graphql';
+import { tada_data } from '@app/relay/generated/tada_data.graphql';
 
 const mutation = graphql`
-  mutation webMutation($input: UpdateWebInput!) {
-    updateWeb(input: $input) {
+  mutation tadaMutation($input: TadaUpdateInput!) {
+    updateTada(input: $input) {
       errors {
         name
       }
-      web {
+      tada {
         id
         name
       }
@@ -25,21 +26,22 @@ const mutation = graphql`
   }
 `;
 
-interface WebProps {
-  data: web_data;
+interface TadaProps {
+  data: tada_data;
 }
 
-const Web: FunctionComponent<WebProps> = ({ data }) => {
-  const { web } = data;
+const Tada: FunctionComponent<TadaProps> = ({ data }) => {
+  const { tada } = data;
   const { theme } = useAppContext();
-  const { fields, commit, errors, pending, state } = useMutation<webMutation>(
+  const { fields, commit, errors, pending, state } = useMutation<tadaMutation>(
     mutation,
-    { id: web.id, name: web.name },
-    { validator: validateCreateWeb },
+    { id: tada.id, name: tada.name },
+    { validator: validateUpdateTada },
   );
+  useViewerAccessibleTadaUpdatedSubscription();
 
   return (
-    <Layout title={web.name} data={data}>
+    <Layout title={tada.name} data={data}>
       <TextInput
         {...fields.name.textInput}
         style={theme.textInputOutline}
@@ -49,21 +51,21 @@ const Web: FunctionComponent<WebProps> = ({ data }) => {
       <View style={theme.buttons}>
         <SaveButton
           disabled={pending}
-          saved={state.name === web.name}
+          saved={state.name === tada.name}
           onPress={() => commit()}
         />
-        <DeleteWeb id={web.id} />
+        <DeleteTada id={tada.id} />
       </View>
     </Layout>
   );
 };
 
 // eslint-disable-next-line import/no-default-export
-export default createFragmentContainer(Web, {
+export default createFragmentContainer(Tada, {
   data: graphql`
-    fragment web_data on Query @argumentDefinitions(id: { type: "ID!" }) {
+    fragment tada_data on Query @argumentDefinitions(id: { type: "ID!" }) {
       ...Layout_data
-      web(id: $id) {
+      tada(id: $id) {
         name
         id
       }

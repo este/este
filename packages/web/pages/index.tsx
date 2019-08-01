@@ -1,57 +1,44 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedRelative } from 'react-intl';
 import { Text, View } from 'react-native';
 import { createFragmentContainer, graphql } from 'react-relay';
 import { useAppContext } from '@app/hooks/useAppContext';
 import { usePageTitles } from '@app/hooks/usePageTitles';
-import { CreateWeb } from '@app/components/CreateWeb';
+import { useViewerAccessibleTadaUpdatedSubscription } from '@app/hooks/useViewerAccessibleTadaUpdatedSubscription';
+import { CreateTada } from '@app/components/CreateTada';
 import { Layout } from '@app/components/Layout';
 import { KeyboardNavigableView } from '@app/components/KeyboardNavigableView';
+import UserTadas from '@app/components/UserTadas';
+import UserTeamates from '@app/components/UserTeamates';
 import { Link } from '@app/components/Link';
 import { pages_data } from '@app/relay/generated/pages_data.graphql';
 
 type Viewer = NonNullable<pages_data['viewer']>;
-
-interface ViewerWebsProps {
-  webs: Viewer['webs'];
-}
-
-const ViewerWebs: FunctionComponent<ViewerWebsProps> = ({ webs }) => {
-  const { theme } = useAppContext();
-  if (webs == null) return null;
-  return (
-    // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18051#issuecomment-449628575
-    <>
-      {webs.map(web => {
-        if (web == null) return null;
-        return (
-          <View style={theme.marginBottom} key={web.id}>
-            <Text style={theme.text}>
-              <Link href={{ pathname: '/web', query: { id: web.id } }}>
-                {web.name}
-              </Link>
-            </Text>
-            <Text style={theme.textSmallGray}>
-              <FormattedRelative value={web.createdAt} />
-            </Text>
-          </View>
-        );
-      })}
-    </>
-  );
-};
 
 interface AuthenticatedProps {
   viewer: Viewer;
 }
 
 const Authenticated: FunctionComponent<AuthenticatedProps> = ({ viewer }) => {
+  useViewerAccessibleTadaUpdatedSubscription();
+
   return (
     <>
       <KeyboardNavigableView>
-        <ViewerWebs webs={viewer.webs} />
+        <UserTadas user={viewer || null} />
+        <CreateTada />
       </KeyboardNavigableView>
-      <CreateWeb />
+      <View
+        style={{
+          backgroundColor: '#cecece',
+          bottom: 0,
+          left: 0,
+          position: 'fixed',
+          width: '300px',
+          top: 0,
+        }}
+      >
+        <UserTeamates user={viewer || null} />
+      </View>
     </>
   );
 };
@@ -64,7 +51,7 @@ const NotAuthenticated: FunctionComponent = () => {
     <>
       <Text style={theme.heading1}>{pageTitles.index}</Text>
       <Text style={theme.paragraph}>
-        <Link href={{ pathname: '/signin' }}>Create Web</Link>
+        <Link href={{ pathname: '/signin' }}>Create Tada</Link>
       </Text>
     </>
   );
@@ -93,11 +80,8 @@ export default createFragmentContainer(Index, {
       ...Layout_data
       viewer {
         id
-        webs {
-          id
-          name
-          createdAt
-        }
+        ...UserTadas_user @arguments(first: 5)
+        ...UserTeamates_user @arguments(tadasFirst: 3)
       }
     }
   `,
