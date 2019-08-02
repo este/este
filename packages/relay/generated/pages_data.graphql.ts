@@ -3,13 +3,13 @@
 import { ReaderFragment } from "relay-runtime";
 import { Layout_data$ref } from "./Layout_data.graphql";
 import { UserTadas_user$ref } from "./UserTadas_user.graphql";
-import { UserTeamates_user$ref } from "./UserTeamates_user.graphql";
+import { UserTeammates_user$ref } from "./UserTeammates_user.graphql";
 declare const _pages_data$ref: unique symbol;
 export type pages_data$ref = typeof _pages_data$ref;
 export type pages_data = {
     readonly viewer: {
         readonly id: string;
-        readonly " $fragmentRefs": UserTadas_user$ref & UserTeamates_user$ref;
+        readonly " $fragmentRefs": UserTadas_user$ref & UserTeammates_user$ref;
     } | null;
     readonly " $fragmentRefs": Layout_data$ref;
     readonly " $refType": pages_data$ref;
@@ -53,7 +53,7 @@ const node: ReaderFragment = {
         },
         {
           "kind": "FragmentSpread",
-          "name": "UserTeamates_user",
+          "name": "UserTeammates_user",
           "args": [
             {
               "kind": "Literal",
@@ -71,5 +71,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = '726a2a8931d4def97b425c9f177f8dff';
+(node as any).hash = '3eb105d47a5cb923bd1a39c0a6cbdde9';
 export default node;

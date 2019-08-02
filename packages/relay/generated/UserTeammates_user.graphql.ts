@@ -2,11 +2,11 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { UserTadas_user$ref } from "./UserTadas_user.graphql";
-declare const _UserTeamates_user$ref: unique symbol;
-export type UserTeamates_user$ref = typeof _UserTeamates_user$ref;
-export type UserTeamates_user = {
+declare const _UserTeammates_user$ref: unique symbol;
+export type UserTeammates_user$ref = typeof _UserTeammates_user$ref;
+export type UserTeammates_user = {
     readonly id: string;
-    readonly teamates: {
+    readonly teammates: {
         readonly edges: ReadonlyArray<{
             readonly node: {
                 readonly id: string;
@@ -16,7 +16,7 @@ export type UserTeamates_user = {
             };
         }>;
     };
-    readonly " $refType": UserTeamates_user$ref;
+    readonly " $refType": UserTeammates_user$ref;
 };
 
 
@@ -31,7 +31,7 @@ var v0 = {
 };
 return {
   "kind": "Fragment",
-  "name": "UserTeamates_user",
+  "name": "UserTeammates_user",
   "type": "User",
   "metadata": {
     "connection": [
@@ -40,7 +40,7 @@ return {
         "cursor": null,
         "direction": "forward",
         "path": [
-          "teamates"
+          "teammates"
         ]
       }
     ]
@@ -63,8 +63,8 @@ return {
     (v0/*: any*/),
     {
       "kind": "LinkedField",
-      "alias": "teamates",
-      "name": "__UserTeamatesFragment_teamates_connection",
+      "alias": "teammates",
+      "name": "__UserTeammatesFragment_teammates_connection",
       "storageKey": null,
       "args": null,
       "concreteType": "UserConnection",
@@ -162,5 +162,5 @@ return {
   ]
 };
 })();
-(node as any).hash = 'a3c39c37f5b8ef5155f874a8ac0a7c7a';
+(node as any).hash = '561ce2df495bc4562a32ea64ea875b7b';
 export default node;

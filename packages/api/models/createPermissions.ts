@@ -32,7 +32,7 @@ export const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
     throw new ForbiddenError('you must be tada creator or admin');
   };
 
-  const isTeamate = (user: NexusGenAllTypes['User'], teamId: string) => {
+  const isTeammate = (user: NexusGenAllTypes['User'], teamId: string) => {
     if (user.team.id === teamId) return;
 
     throw new ForbiddenError('the user must be part of your team');
@@ -48,6 +48,6 @@ export const createPermissions = (user: NexusGenAllTypes['User'] | null) => {
     exists,
     isAuthenticated,
     isTadaCreatorOrAdmin,
-    isTeamate,
+    isTeammate,
   };
 };

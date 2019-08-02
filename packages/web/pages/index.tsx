@@ -8,7 +8,7 @@ import { CreateTada } from '@app/components/CreateTada';
 import { Layout } from '@app/components/Layout';
 import { KeyboardNavigableView } from '@app/components/KeyboardNavigableView';
 import UserTadas from '@app/components/UserTadas';
-import UserTeamates from '@app/components/UserTeamates';
+import UserTeammates from '@app/components/UserTeammates';
 import { Link } from '@app/components/Link';
 import { pages_data } from '@app/relay/generated/pages_data.graphql';
 
@@ -37,7 +37,7 @@ const Authenticated: FunctionComponent<AuthenticatedProps> = ({ viewer }) => {
           top: 0,
         }}
       >
-        <UserTeamates user={viewer || null} />
+        <UserTeammates user={viewer || null} />
       </View>
     </>
   );
@@ -81,7 +81,7 @@ export default createFragmentContainer(Index, {
       viewer {
         id
         ...UserTadas_user @arguments(first: 5)
-        ...UserTeamates_user @arguments(tadasFirst: 3)
+        ...UserTeammates_user @arguments(tadasFirst: 3)
       }
     }
   `,

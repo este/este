@@ -29,10 +29,10 @@ export const User = prismaObjectType({
       resolve: (user, args, context) =>
         context.models.user.tadas({ userId: user.id, ...args }),
     });
-    t.field('teamates', {
+    t.field('teammates', {
       type: 'UserConnection',
       args: { first: arg({ type: 'Int' }) },
-      resolve: (user, _args, context) => context.models.user.teamates(user.id),
+      resolve: (user, _args, context) => context.models.user.teammates(user.id),
     });
   },
 });

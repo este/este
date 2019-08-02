@@ -1,31 +1,31 @@
 /* tslint:disable */
 
 import { ConcreteRequest } from "relay-runtime";
-import { UserTeamates_user$ref } from "./UserTeamates_user.graphql";
-export type UserTeamatesPaginationQueryVariables = {};
-export type UserTeamatesPaginationQueryResponse = {
+import { UserTeammates_user$ref } from "./UserTeammates_user.graphql";
+export type UserTeammatesPaginationQueryVariables = {};
+export type UserTeammatesPaginationQueryResponse = {
     readonly viewer: {
-        readonly " $fragmentRefs": UserTeamates_user$ref;
+        readonly " $fragmentRefs": UserTeammates_user$ref;
     } | null;
 };
-export type UserTeamatesPaginationQuery = {
-    readonly response: UserTeamatesPaginationQueryResponse;
-    readonly variables: UserTeamatesPaginationQueryVariables;
+export type UserTeammatesPaginationQuery = {
+    readonly response: UserTeammatesPaginationQueryResponse;
+    readonly variables: UserTeammatesPaginationQueryVariables;
 };
 
 
 
 /*
-query UserTeamatesPaginationQuery {
+query UserTeammatesPaginationQuery {
   viewer {
-    ...UserTeamates_user
+    ...UserTeammates_user
     id
   }
 }
 
-fragment UserTeamates_user on User {
+fragment UserTeammates_user on User {
   id
-  teamates(first: 10) {
+  teammates(first: 10) {
     edges {
       node {
         id
@@ -137,7 +137,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "UserTeamatesPaginationQuery",
+    "name": "UserTeammatesPaginationQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -153,7 +153,7 @@ return {
         "selections": [
           {
             "kind": "FragmentSpread",
-            "name": "UserTeamates_user",
+            "name": "UserTeammates_user",
             "args": null
           }
         ]
@@ -162,7 +162,7 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "UserTeamatesPaginationQuery",
+    "name": "UserTeammatesPaginationQuery",
     "argumentDefinitions": [],
     "selections": [
       {
@@ -178,8 +178,8 @@ return {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "teamates",
-            "storageKey": "teamates(first:10)",
+            "name": "teammates",
+            "storageKey": "teammates(first:10)",
             "args": (v2/*: any*/),
             "concreteType": "UserConnection",
             "plural": false,
@@ -280,10 +280,10 @@ return {
           {
             "kind": "LinkedHandle",
             "alias": null,
-            "name": "teamates",
+            "name": "teammates",
             "args": (v2/*: any*/),
             "handle": "connection",
-            "key": "UserTeamatesFragment_teamates",
+            "key": "UserTeammatesFragment_teammates",
             "filters": null
           }
         ]
@@ -292,12 +292,12 @@ return {
   },
   "params": {
     "operationKind": "query",
-    "name": "UserTeamatesPaginationQuery",
+    "name": "UserTeammatesPaginationQuery",
     "id": null,
-    "text": "query UserTeamatesPaginationQuery {\n  viewer {\n    ...UserTeamates_user\n    id\n  }\n}\n\nfragment UserTeamates_user on User {\n  id\n  teamates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_1VU2v9\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_1VU2v9 on User {\n  id\n  tadas(first: 10, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query UserTeammatesPaginationQuery {\n  viewer {\n    ...UserTeammates_user\n    id\n  }\n}\n\nfragment UserTeammates_user on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_1VU2v9\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_1VU2v9 on User {\n  id\n  tadas(first: 10, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = 'ad59e3ab1295a6b1f8d16b5bae062066';
+(node as any).hash = '5200b5491161bb965a8e135e1e61dfb8';
 export default node;

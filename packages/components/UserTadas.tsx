@@ -52,8 +52,13 @@ const UserTadas: React.FunctionComponent<UserTadasProps> = ({
   user,
 }) => {
   const { intl, theme } = useAppContext();
+  // TODO: Find a way to pass the initial 'first' argument value as pageLength.
+  // Using 'user.tadas.edges.length' is not ok as you are not subscribing to the entire page requested
+  // when 'edges.length' is smaller than 'first'.
+  const pageLength = React.useMemo(() => user.tadas.edges.length, []);
   const { isLoading, next, previous } = usePagination({
     connectionKey: 'UserTadasFragment_tadas',
+    pageLength,
     paginate,
     relay,
     rootDataId: user.id,

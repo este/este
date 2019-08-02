@@ -4,14 +4,16 @@ import { usePageSubscription } from './usePageSubscription';
 
 export const usePagination = ({
   connectionKey,
+  pageLength,
   paginate,
-  rootDataId,
   relay,
+  rootDataId,
   subscription,
   subscriptionName,
   totalCount,
 }: {
   connectionKey: string;
+  pageLength: number;
   paginate?: boolean;
   relay: RelayPaginationProp;
   rootDataId: string;
@@ -21,7 +23,6 @@ export const usePagination = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
-  const pageLength = useMemo(() => totalCount, []);
 
   usePageSubscription({
     subscription,

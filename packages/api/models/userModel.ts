@@ -38,8 +38,8 @@ export const userModel = (context: ModelContext) => {
 
   const get = async (user: NexusGenAllTypes['User']) => {
     // This is required. User can be resolved from any other resolver.
-    // If you are teamate you can read user tadas
-    await teamates(user.id);
+    // If you are teammate you can read user tadas
+    await teammates(user.id);
     return user;
   };
 
@@ -110,11 +110,11 @@ export const userModel = (context: ModelContext) => {
     return { user: userWithTadas };
   };
 
-  const teamates = async (userId?: string) => {
+  const teammates = async (userId?: string) => {
     const viewer = context.permissions.isAuthenticated();
     const user = userId && (await byId(userId));
 
-    userId && user.team && context.permissions.isTeamate(viewer, user.team.id);
+    userId && user.team && context.permissions.isTeammate(viewer, user.team.id);
 
     const team = await context.prisma.usersConnection({
       orderBy: 'createdAt_DESC',
@@ -135,8 +135,8 @@ export const userModel = (context: ModelContext) => {
     first: number;
     skip?: number;
   }) => {
-    // If you are teamate you can read user tadas
-    await teamates(userId);
+    // If you are teammate you can read user tadas
+    await teammates(userId);
 
     return context.prisma
       .tadasConnection({
@@ -149,20 +149,22 @@ export const userModel = (context: ModelContext) => {
   };
 
   const $subscribeViewerAccessibleTadaUpdate = async () => {
-    // If you are teamate you can read user tadas
-    const team = await teamates();
+    // If you are teammate you can read user tadas
+    const team = await teammates();
 
     return context.prisma.$subscribe.tada({
       mutation_in: 'UPDATED',
-      node: { creator: { id_in: team.edges.map(teamate => teamate.node.id) } },
+      node: {
+        creator: { id_in: team.edges.map(teammate => teammate.node.id) },
+      },
     });
   };
 
   const $subscribeUserTadaCreateAndDelete = async ({
     rootDataId,
   }: NexusGenAllTypes['PageSubcriptionFilters']) => {
-    // If you are teamate you can read user tadas
-    await teamates(rootDataId);
+    // If you are teammate you can read user tadas
+    await teammates(rootDataId);
 
     return context.prisma.$subscribe.tada({
       mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
@@ -179,7 +181,7 @@ export const userModel = (context: ModelContext) => {
     setTheme,
     signIn,
     tadas,
-    teamates,
+    teammates,
     viewer,
   };
 };

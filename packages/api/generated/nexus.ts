@@ -489,7 +489,7 @@ export interface NexusGenFieldTypes {
     id: string; // ID!
     tadas: NexusGenRootTypes['TadaConnection']; // TadaConnection!
     team: NexusGenRootTypes['Team'] | null; // Team
-    teamates: NexusGenRootTypes['UserConnection']; // UserConnection!
+    teammates: NexusGenRootTypes['UserConnection']; // UserConnection!
     themeName: string; // String!
     updatedAt: any; // DateTime!
   }
@@ -551,7 +551,7 @@ export interface NexusGenArgTypes {
       first: number; // Int!
       skip?: number | null; // Int
     }
-    teamates: { // args
+    teammates: { // args
       first: number; // Int!
     }
   }

@@ -50,7 +50,7 @@ fragment pages_data on Query {
   viewer {
     id
     ...UserTadas_user_3OVASn
-    ...UserTeamates_user_1sPVUO
+    ...UserTeammates_user_1sPVUO
   }
 }
 
@@ -108,9 +108,9 @@ fragment UserTadas_user_3OVASn on User {
   }
 }
 
-fragment UserTeamates_user_1sPVUO on User {
+fragment UserTeammates_user_1sPVUO on User {
   id
-  teamates(first: 10) {
+  teammates(first: 10) {
     edges {
       node {
         id
@@ -454,8 +454,8 @@ return {
               {
                 "kind": "LinkedField",
                 "alias": null,
-                "name": "teamates",
-                "storageKey": "teamates(first:10)",
+                "name": "teammates",
+                "storageKey": "teammates(first:10)",
                 "args": (v13/*: any*/),
                 "concreteType": "UserConnection",
                 "plural": false,
@@ -512,10 +512,10 @@ return {
               {
                 "kind": "LinkedHandle",
                 "alias": null,
-                "name": "teamates",
+                "name": "teammates",
                 "args": (v13/*: any*/),
                 "handle": "connection",
-                "key": "UserTeamatesFragment_teamates",
+                "key": "UserTeammatesFragment_teammates",
                 "filters": null
               }
             ]
@@ -578,7 +578,7 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isTadaPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...tada_data_1Bmzm5 @include(if: $isTadaPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    ...UserTadas_user_3OVASn\n    ...UserTeamates_user_1sPVUO\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserTheme_data\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment tada_data_1Bmzm5 on Query {\n  ...Layout_data\n  tada(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment UserTadas_user_3OVASn on User {\n  id\n  tadas(first: 5, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTeamates_user_1sPVUO on User {\n  id\n  teamates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_4yQIxA\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_4yQIxA on User {\n  id\n  tadas(first: 3, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isTadaPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...tada_data_1Bmzm5 @include(if: $isTadaPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    ...UserTadas_user_3OVASn\n    ...UserTeammates_user_1sPVUO\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserTheme_data\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment tada_data_1Bmzm5 on Query {\n  ...Layout_data\n  tada(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment UserTadas_user_3OVASn on User {\n  id\n  tadas(first: 5, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTeammates_user_1sPVUO on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_4yQIxA\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_4yQIxA on User {\n  id\n  tadas(first: 3, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
