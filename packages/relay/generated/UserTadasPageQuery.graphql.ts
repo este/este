@@ -44,8 +44,8 @@ fragment UserTadas_user_2gi4Xv on User {
       cursor
     }
     pageInfo {
-      endCursor
       hasNextPage
+      endCursor
     }
   }
 }
@@ -222,14 +222,14 @@ return {
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "endCursor",
+                    "name": "hasNextPage",
                     "args": null,
                     "storageKey": null
                   },
                   {
                     "kind": "ScalarField",
                     "alias": null,
-                    "name": "hasNextPage",
+                    "name": "endCursor",
                     "args": null,
                     "storageKey": null
                   }
@@ -257,7 +257,7 @@ return {
     "operationKind": "query",
     "name": "UserTadasPageQuery",
     "id": null,
-    "text": "query UserTadasPageQuery(\n  $userId: ID!\n  $first: Int!\n  $skip: Int\n) {\n  user(id: $userId) {\n    ...UserTadas_user_2gi4Xv\n    id\n  }\n}\n\nfragment UserTadas_user_2gi4Xv on User {\n  id\n  tadas(first: $first, skip: $skip) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query UserTadasPageQuery(\n  $userId: ID!\n  $first: Int!\n  $skip: Int\n) {\n  user(id: $userId) {\n    ...UserTadas_user_2gi4Xv\n    id\n  }\n}\n\nfragment UserTadas_user_2gi4Xv on User {\n  id\n  tadas(first: $first, skip: $skip) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

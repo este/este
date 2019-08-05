@@ -22,7 +22,20 @@ const node: ReaderFragment = {
   "name": "pages_data",
   "type": "Query",
   "metadata": null,
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "LocalArgument",
+      "name": "teammatesTadasPageLength",
+      "type": "Int!",
+      "defaultValue": null
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "viewerTadasPageLength",
+      "type": "Int!",
+      "defaultValue": null
+    }
+  ],
   "selections": [
     {
       "kind": "LinkedField",
@@ -45,9 +58,9 @@ const node: ReaderFragment = {
           "name": "UserTadas_user",
           "args": [
             {
-              "kind": "Literal",
+              "kind": "Variable",
               "name": "first",
-              "value": 5
+              "variableName": "viewerTadasPageLength"
             }
           ]
         },
@@ -56,9 +69,9 @@ const node: ReaderFragment = {
           "name": "UserTeammates_user",
           "args": [
             {
-              "kind": "Literal",
+              "kind": "Variable",
               "name": "tadasFirst",
-              "value": 3
+              "variableName": "teammatesTadasPageLength"
             }
           ]
         }
@@ -71,5 +84,5 @@ const node: ReaderFragment = {
     }
   ]
 };
-(node as any).hash = '3eb105d47a5cb923bd1a39c0a6cbdde9';
+(node as any).hash = '6bea5761ca53cc2cfa61da0f9daaa5cd';
 export default node;

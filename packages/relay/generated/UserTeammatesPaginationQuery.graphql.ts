@@ -56,8 +56,8 @@ fragment UserTadas_user_1VU2v9 on User {
       cursor
     }
     pageInfo {
-      endCursor
       hasNextPage
+      endCursor
     }
   }
 }
@@ -109,29 +109,18 @@ v6 = {
   "storageKey": null
 },
 v7 = {
-  "kind": "LinkedField",
+  "kind": "ScalarField",
   "alias": null,
-  "name": "pageInfo",
-  "storageKey": null,
+  "name": "hasNextPage",
   "args": null,
-  "concreteType": "PageInfo",
-  "plural": false,
-  "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "endCursor",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "hasNextPage",
-      "args": null,
-      "storageKey": null
-    }
-  ]
+  "storageKey": null
+},
+v8 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "endCursor",
+  "args": null,
+  "storageKey": null
 };
 return {
   "kind": "Request",
@@ -253,7 +242,19 @@ return {
                               (v6/*: any*/)
                             ]
                           },
-                          (v7/*: any*/)
+                          {
+                            "kind": "LinkedField",
+                            "alias": null,
+                            "name": "pageInfo",
+                            "storageKey": null,
+                            "args": null,
+                            "concreteType": "PageInfo",
+                            "plural": false,
+                            "selections": [
+                              (v7/*: any*/),
+                              (v8/*: any*/)
+                            ]
+                          }
                         ]
                       },
                       {
@@ -274,7 +275,19 @@ return {
                   (v6/*: any*/)
                 ]
               },
-              (v7/*: any*/)
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "pageInfo",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "plural": false,
+                "selections": [
+                  (v8/*: any*/),
+                  (v7/*: any*/)
+                ]
+              }
             ]
           },
           {
@@ -294,7 +307,7 @@ return {
     "operationKind": "query",
     "name": "UserTeammatesPaginationQuery",
     "id": null,
-    "text": "query UserTeammatesPaginationQuery {\n  viewer {\n    ...UserTeammates_user\n    id\n  }\n}\n\nfragment UserTeammates_user on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_1VU2v9\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_1VU2v9 on User {\n  id\n  tadas(first: 10, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query UserTeammatesPaginationQuery {\n  viewer {\n    ...UserTeammates_user\n    id\n  }\n}\n\nfragment UserTeammates_user on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_1VU2v9\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_1VU2v9 on User {\n  id\n  tadas(first: 10, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

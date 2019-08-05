@@ -18,13 +18,21 @@ interface AuthenticatedProps {
   viewer: Viewer;
 }
 
+export const indexPageArguments = {
+  teammatesTadasPageLength: 2,
+  viewerTadasPageLength: 5,
+};
+
 const Authenticated: FunctionComponent<AuthenticatedProps> = ({ viewer }) => {
   useViewerAccessibleTadaUpdatedSubscription();
 
   return (
     <>
       <KeyboardNavigableView>
-        <UserTadas user={viewer || null} />
+        <UserTadas
+          user={viewer || null}
+          pageLength={indexPageArguments.viewerTadasPageLength}
+        />
         <CreateTada />
       </KeyboardNavigableView>
       <View
@@ -37,7 +45,10 @@ const Authenticated: FunctionComponent<AuthenticatedProps> = ({ viewer }) => {
           top: 0,
         }}
       >
-        <UserTeammates user={viewer || null} />
+        <UserTeammates
+          user={viewer || null}
+          tadasPageLength={indexPageArguments.teammatesTadasPageLength}
+        />
       </View>
     </>
   );
@@ -76,12 +87,16 @@ const Index: FunctionComponent<{
 // eslint-disable-next-line import/no-default-export
 export default createFragmentContainer(Index, {
   data: graphql`
-    fragment pages_data on Query {
+    fragment pages_data on Query
+      @argumentDefinitions(
+        teammatesTadasPageLength: { type: "Int!" }
+        viewerTadasPageLength: { type: "Int!" }
+      ) {
       ...Layout_data
       viewer {
         id
-        ...UserTadas_user @arguments(first: 5)
-        ...UserTeammates_user @arguments(tadasFirst: 3)
+        ...UserTadas_user @arguments(first: $viewerTadasPageLength)
+        ...UserTeammates_user @arguments(tadasFirst: $teammatesTadasPageLength)
       }
     }
   `,

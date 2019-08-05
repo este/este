@@ -40,9 +40,9 @@ export const usePageSubscription = ({
         );
         if (connection) {
           const newEdges = rootField.getLinkedRecords('edges');
-          const newPageInfo = rootField.getLinkedRecords('pageInfo');
+          const newPageInfo = rootField.getLinkedRecord('pageInfo');
           newEdges && connection.setLinkedRecords(newEdges, 'edges');
-          newPageInfo && connection.setLinkedRecords(newPageInfo, 'pageInfo');
+          newPageInfo && connection.setLinkedRecord(newPageInfo, 'pageInfo');
         }
       }
     },

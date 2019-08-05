@@ -28,6 +28,8 @@ import { AppQuery } from '@app/relay/generated/AppQuery.graphql';
 import { getEndpoint } from '@app/serverless/getEndpoint';
 import { parse } from 'graphql';
 
+import { indexPageArguments } from './index';
+
 const createRelayEnvironment = (
   apiEndpoint: string,
   token: string,
@@ -83,9 +85,16 @@ const appQuery = graphql`
     $isMePage: Boolean!
     $isSignInPage: Boolean!
     $isTadaPage: Boolean!
+    $teammatesTadasPageLength: Int!
+    $viewerTadasPageLength: Int!
   ) {
     ...ViewerTheme_data
-    ...pages_data @include(if: $isIndexPage)
+    ...pages_data
+      @include(if: $isIndexPage)
+      @arguments(
+        teammatesTadasPageLength: $teammatesTadasPageLength
+        viewerTadasPageLength: $viewerTadasPageLength
+      )
     ...me_data @include(if: $isMePage)
     ...signin_data @include(if: $isSignInPage)
     ...tada_data @include(if: $isTadaPage) @arguments(id: $id)
@@ -113,6 +122,7 @@ export default class MyApp extends App<MyAppProps> {
     // Types require fully defined URL query. Will not be used entirely ofc.
     const defaultQueryArgs = {
       id: '',
+      ...indexPageArguments,
     };
     const isPageQueryArgs = {
       isIndexPage: ctx.pathname === '/',

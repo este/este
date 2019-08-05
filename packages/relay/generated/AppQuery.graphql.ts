@@ -12,6 +12,8 @@ export type AppQueryVariables = {
     readonly isMePage: boolean;
     readonly isSignInPage: boolean;
     readonly isTadaPage: boolean;
+    readonly teammatesTadasPageLength: number;
+    readonly viewerTadasPageLength: number;
 };
 export type AppQueryResponse = {
     readonly " $fragmentRefs": ViewerTheme_data$ref & pages_data$ref & me_data$ref & signin_data$ref & tada_data$ref;
@@ -30,9 +32,11 @@ query AppQuery(
   $isMePage: Boolean!
   $isSignInPage: Boolean!
   $isTadaPage: Boolean!
+  $teammatesTadasPageLength: Int!
+  $viewerTadasPageLength: Int!
 ) {
   ...ViewerTheme_data
-  ...pages_data @include(if: $isIndexPage)
+  ...pages_data_1Ig3HR @include(if: $isIndexPage)
   ...me_data @include(if: $isMePage)
   ...signin_data @include(if: $isSignInPage)
   ...tada_data_1Bmzm5 @include(if: $isTadaPage)
@@ -45,12 +49,12 @@ fragment ViewerTheme_data on Query {
   }
 }
 
-fragment pages_data on Query {
+fragment pages_data_1Ig3HR on Query {
   ...Layout_data
   viewer {
     id
-    ...UserTadas_user_3OVASn
-    ...UserTeammates_user_1sPVUO
+    ...UserTadas_user_8qnpt
+    ...UserTeammates_user_1ZKL6
   }
 }
 
@@ -89,9 +93,9 @@ fragment SetUserTheme_data on Query {
   }
 }
 
-fragment UserTadas_user_3OVASn on User {
+fragment UserTadas_user_8qnpt on User {
   id
-  tadas(first: 5, skip: 0) {
+  tadas(first: $viewerTadasPageLength, skip: 0) {
     edges {
       node {
         id
@@ -102,13 +106,13 @@ fragment UserTadas_user_3OVASn on User {
       cursor
     }
     pageInfo {
-      endCursor
       hasNextPage
+      endCursor
     }
   }
 }
 
-fragment UserTeammates_user_1sPVUO on User {
+fragment UserTeammates_user_1ZKL6 on User {
   id
   teammates(first: 10) {
     edges {
@@ -116,7 +120,7 @@ fragment UserTeammates_user_1sPVUO on User {
         id
         email
         createdAt
-        ...UserTadas_user_4yQIxA
+        ...UserTadas_user_2oiQgv
         __typename
       }
       cursor
@@ -128,9 +132,9 @@ fragment UserTeammates_user_1sPVUO on User {
   }
 }
 
-fragment UserTadas_user_4yQIxA on User {
+fragment UserTadas_user_2oiQgv on User {
   id
-  tadas(first: 3, skip: 0) {
+  tadas(first: $teammatesTadasPageLength, skip: 0) {
     edges {
       node {
         id
@@ -141,8 +145,8 @@ fragment UserTadas_user_4yQIxA on User {
       cursor
     }
     pageInfo {
-      endCursor
       hasNextPage
+      endCursor
     }
   }
 }
@@ -179,6 +183,18 @@ var v0 = [
     "name": "isTadaPage",
     "type": "Boolean!",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "teammatesTadasPageLength",
+    "type": "Int!",
+    "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "viewerTadasPageLength",
+    "type": "Int!",
+    "defaultValue": null
   }
 ],
 v1 = [
@@ -209,9 +225,9 @@ v4 = {
 },
 v5 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
     "name": "first",
-    "value": 5
+    "variableName": "viewerTadasPageLength"
   },
   (v4/*: any*/)
 ],
@@ -244,31 +260,20 @@ v9 = {
   "storageKey": null
 },
 v10 = {
-  "kind": "LinkedField",
+  "kind": "ScalarField",
   "alias": null,
-  "name": "pageInfo",
-  "storageKey": null,
+  "name": "hasNextPage",
   "args": null,
-  "concreteType": "PageInfo",
-  "plural": false,
-  "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "endCursor",
-      "args": null,
-      "storageKey": null
-    },
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "hasNextPage",
-      "args": null,
-      "storageKey": null
-    }
-  ]
+  "storageKey": null
 },
-v11 = [
+v11 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "endCursor",
+  "args": null,
+  "storageKey": null
+},
+v12 = [
   {
     "kind": "LinkedField",
     "alias": null,
@@ -296,28 +301,40 @@ v11 = [
       (v9/*: any*/)
     ]
   },
-  (v10/*: any*/)
+  {
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "pageInfo",
+    "storageKey": null,
+    "args": null,
+    "concreteType": "PageInfo",
+    "plural": false,
+    "selections": [
+      (v10/*: any*/),
+      (v11/*: any*/)
+    ]
+  }
 ],
-v12 = [
+v13 = [
   "first",
   "skip"
 ],
-v13 = [
+v14 = [
   {
     "kind": "Literal",
     "name": "first",
     "value": 10
   }
 ],
-v14 = [
+v15 = [
   {
-    "kind": "Literal",
+    "kind": "Variable",
     "name": "first",
-    "value": 3
+    "variableName": "teammatesTadasPageLength"
   },
   (v4/*: any*/)
 ],
-v15 = {
+v16 = {
   "kind": "LinkedField",
   "alias": null,
   "name": "viewer",
@@ -351,7 +368,18 @@ return {
           {
             "kind": "FragmentSpread",
             "name": "pages_data",
-            "args": null
+            "args": [
+              {
+                "kind": "Variable",
+                "name": "teammatesTadasPageLength",
+                "variableName": "teammatesTadasPageLength"
+              },
+              {
+                "kind": "Variable",
+                "name": "viewerTadasPageLength",
+                "variableName": "viewerTadasPageLength"
+              }
+            ]
           }
         ]
       },
@@ -436,11 +464,11 @@ return {
                 "kind": "LinkedField",
                 "alias": null,
                 "name": "tadas",
-                "storageKey": "tadas(first:5,skip:0)",
+                "storageKey": null,
                 "args": (v5/*: any*/),
                 "concreteType": "TadaConnection",
                 "plural": false,
-                "selections": (v11/*: any*/)
+                "selections": (v12/*: any*/)
               },
               {
                 "kind": "LinkedHandle",
@@ -449,14 +477,14 @@ return {
                 "args": (v5/*: any*/),
                 "handle": "connection",
                 "key": "UserTadasFragment_tadas",
-                "filters": (v12/*: any*/)
+                "filters": (v13/*: any*/)
               },
               {
                 "kind": "LinkedField",
                 "alias": null,
                 "name": "teammates",
                 "storageKey": "teammates(first:10)",
-                "args": (v13/*: any*/),
+                "args": (v14/*: any*/),
                 "concreteType": "UserConnection",
                 "plural": false,
                 "selections": [
@@ -485,20 +513,20 @@ return {
                             "kind": "LinkedField",
                             "alias": null,
                             "name": "tadas",
-                            "storageKey": "tadas(first:3,skip:0)",
-                            "args": (v14/*: any*/),
+                            "storageKey": null,
+                            "args": (v15/*: any*/),
                             "concreteType": "TadaConnection",
                             "plural": false,
-                            "selections": (v11/*: any*/)
+                            "selections": (v12/*: any*/)
                           },
                           {
                             "kind": "LinkedHandle",
                             "alias": null,
                             "name": "tadas",
-                            "args": (v14/*: any*/),
+                            "args": (v15/*: any*/),
                             "handle": "connection",
                             "key": "UserTadasFragment_tadas",
-                            "filters": (v12/*: any*/)
+                            "filters": (v13/*: any*/)
                           },
                           (v8/*: any*/)
                         ]
@@ -506,14 +534,26 @@ return {
                       (v9/*: any*/)
                     ]
                   },
-                  (v10/*: any*/)
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "pageInfo",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "PageInfo",
+                    "plural": false,
+                    "selections": [
+                      (v11/*: any*/),
+                      (v10/*: any*/)
+                    ]
+                  }
                 ]
               },
               {
                 "kind": "LinkedHandle",
                 "alias": null,
                 "name": "teammates",
-                "args": (v13/*: any*/),
+                "args": (v14/*: any*/),
                 "handle": "connection",
                 "key": "UserTeammatesFragment_teammates",
                 "filters": null
@@ -527,7 +567,7 @@ return {
         "passingValue": true,
         "condition": "isMePage",
         "selections": [
-          (v15/*: any*/),
+          (v16/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -548,7 +588,7 @@ return {
         "passingValue": true,
         "condition": "isSignInPage",
         "selections": [
-          (v15/*: any*/)
+          (v16/*: any*/)
         ]
       },
       {
@@ -556,7 +596,7 @@ return {
         "passingValue": true,
         "condition": "isTadaPage",
         "selections": [
-          (v15/*: any*/),
+          (v16/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
@@ -578,10 +618,10 @@ return {
     "operationKind": "query",
     "name": "AppQuery",
     "id": null,
-    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isTadaPage: Boolean!\n) {\n  ...ViewerTheme_data\n  ...pages_data @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...tada_data_1Bmzm5 @include(if: $isTadaPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data on Query {\n  ...Layout_data\n  viewer {\n    id\n    ...UserTadas_user_3OVASn\n    ...UserTeammates_user_1sPVUO\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserTheme_data\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment tada_data_1Bmzm5 on Query {\n  ...Layout_data\n  tada(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment UserTadas_user_3OVASn on User {\n  id\n  tadas(first: 5, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTeammates_user_1sPVUO on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_4yQIxA\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_4yQIxA on User {\n  id\n  tadas(first: 3, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query AppQuery(\n  $id: ID!\n  $isIndexPage: Boolean!\n  $isMePage: Boolean!\n  $isSignInPage: Boolean!\n  $isTadaPage: Boolean!\n  $teammatesTadasPageLength: Int!\n  $viewerTadasPageLength: Int!\n) {\n  ...ViewerTheme_data\n  ...pages_data_1Ig3HR @include(if: $isIndexPage)\n  ...me_data @include(if: $isMePage)\n  ...signin_data @include(if: $isSignInPage)\n  ...tada_data_1Bmzm5 @include(if: $isTadaPage)\n}\n\nfragment ViewerTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment pages_data_1Ig3HR on Query {\n  ...Layout_data\n  viewer {\n    id\n    ...UserTadas_user_8qnpt\n    ...UserTeammates_user_1ZKL6\n  }\n}\n\nfragment me_data on Query {\n  ...Layout_data\n  ...SetUserTheme_data\n  requiredViewer {\n    email\n    id\n  }\n}\n\nfragment signin_data on Query {\n  ...Layout_data\n}\n\nfragment tada_data_1Bmzm5 on Query {\n  ...Layout_data\n  tada(id: $id) {\n    name\n    id\n  }\n}\n\nfragment Layout_data on Query {\n  viewer {\n    email\n    id\n  }\n}\n\nfragment SetUserTheme_data on Query {\n  viewer {\n    themeName\n    id\n  }\n}\n\nfragment UserTadas_user_8qnpt on User {\n  id\n  tadas(first: $viewerTadasPageLength, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n\nfragment UserTeammates_user_1ZKL6 on User {\n  id\n  teammates(first: 10) {\n    edges {\n      node {\n        id\n        email\n        createdAt\n        ...UserTadas_user_2oiQgv\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n\nfragment UserTadas_user_2oiQgv on User {\n  id\n  tadas(first: $teammatesTadasPageLength, skip: 0) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = 'e6df1f2373aca09938c419b6c1bcfe15';
+(node as any).hash = '113a4af1d3eeb81df5bf797241c4ec6f';
 export default node;

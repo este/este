@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { GraphQLTaggedNode, RelayPaginationProp } from 'react-relay';
 import { usePageSubscription } from './usePageSubscription';
 
@@ -11,6 +11,7 @@ export const usePagination = ({
   subscription,
   subscriptionName,
   totalCount,
+  hasNextPage,
 }: {
   connectionKey: string;
   pageLength: number;
@@ -20,6 +21,7 @@ export const usePagination = ({
   subscription: GraphQLTaggedNode;
   subscriptionName: string;
   totalCount: number;
+  hasNextPage: boolean; // We can't trust RelayPaginationProp because of subscription updating the connection
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
@@ -29,7 +31,7 @@ export const usePagination = ({
     subscriptionName,
     connectionKey,
     rootDataId,
-    first: paginate ? pageLength : totalCount,
+    first: paginate || totalCount < pageLength ? pageLength : totalCount,
     skip: paginate ? (currentPageNumber - 1) * pageLength : 0,
   });
 
@@ -78,7 +80,7 @@ export const usePagination = ({
 
   return {
     isLoading,
-    next: relay.hasMore() ? next : undefined,
+    next: hasNextPage ? next : undefined,
     currentPageNumber,
     previous: paginate && currentPageNumber !== 1 ? previous : undefined,
   };

@@ -8,11 +8,14 @@ import UserTadas from './UserTadas';
 
 interface UserTeammatesProps {
   user: UserTeammates_user;
+  tadasPageLength: number;
 }
 
-const UserTeammates: FunctionComponent<UserTeammatesProps> = ({ user }) => {
+const UserTeammates: FunctionComponent<UserTeammatesProps> = ({
+  user,
+  tadasPageLength,
+}) => {
   const { theme } = useAppContext();
-
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/18051#issuecomment-449628575
     <>
@@ -24,7 +27,11 @@ const UserTeammates: FunctionComponent<UserTeammatesProps> = ({ user }) => {
             <Text style={theme.textSmallGray}>
               <FormattedRelative value={teammate.node.createdAt} />
             </Text>
-            <UserTadas user={teammate.node} paginate />
+            <UserTadas
+              user={teammate.node}
+              paginate
+              pageLength={tadasPageLength}
+            />
           </View>
         );
       })}

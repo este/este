@@ -13,6 +13,9 @@ export type UserTadas_user = {
                 readonly createdAt: any;
             };
         }>;
+        readonly pageInfo: {
+            readonly hasNextPage: boolean;
+        };
     };
     readonly " $refType": UserTadas_user$ref;
 };
@@ -148,14 +151,14 @@ return {
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "endCursor",
+              "name": "hasNextPage",
               "args": null,
               "storageKey": null
             },
             {
               "kind": "ScalarField",
               "alias": null,
-              "name": "hasNextPage",
+              "name": "endCursor",
               "args": null,
               "storageKey": null
             }
@@ -166,5 +169,5 @@ return {
   ]
 };
 })();
-(node as any).hash = '459267a07a2514a77b506deeb8a330be';
+(node as any).hash = 'fb9fef9168444ed08fa4ce8f40729e0a';
 export default node;

@@ -18,6 +18,9 @@ export type UserTadasPageSubscriptionResponse = {
                 readonly createdAt: any;
             };
         }>;
+        readonly pageInfo: {
+            readonly hasNextPage: boolean;
+        };
     };
 };
 export type UserTadasPageSubscription = {
@@ -38,6 +41,9 @@ subscription UserTadasPageSubscription(
         name
         createdAt
       }
+    }
+    pageInfo {
+      hasNextPage
     }
   }
 }
@@ -110,6 +116,24 @@ v1 = [
             ]
           }
         ]
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "pageInfo",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "PageInfo",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "hasNextPage",
+            "args": null,
+            "storageKey": null
+          }
+        ]
       }
     ]
   }
@@ -134,10 +158,10 @@ return {
     "operationKind": "subscription",
     "name": "UserTadasPageSubscription",
     "id": null,
-    "text": "subscription UserTadasPageSubscription(\n  $filters: PageSubcriptionFilters!\n) {\n  userTadasConnection(filters: $filters) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n      }\n    }\n  }\n}\n",
+    "text": "subscription UserTadasPageSubscription(\n  $filters: PageSubcriptionFilters!\n) {\n  userTadasConnection(filters: $filters) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n      }\n    }\n    pageInfo {\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
-(node as any).hash = '999fda2b9b756b803dc25ac65ef88a20';
+(node as any).hash = '0683e6c5e30561230092cce5833ec19d';
 export default node;
