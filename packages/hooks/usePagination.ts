@@ -25,20 +25,24 @@ export const usePagination = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentPageNumber, setCurrentPageNumber] = useState(1);
+  const first =
+    paginate || totalCount < pageLength
+      ? pageLength
+      : currentPageNumber * pageLength;
 
   usePageSubscription({
     subscription,
     subscriptionName,
     connectionKey,
     rootDataId,
-    first: paginate || totalCount < pageLength ? pageLength : totalCount,
+    first,
     skip: paginate ? (currentPageNumber - 1) * pageLength : 0,
   });
 
   const previous = useCallback(() => {
     setIsLoading(true);
     relay.refetchConnection(
-      pageLength,
+      first,
       error => {
         setIsLoading(false);
         if (error) {
@@ -48,17 +52,20 @@ export const usePagination = ({
         setCurrentPageNumber(previousPageNumber => previousPageNumber - 1);
       },
       {
-        first: pageLength,
-        skip: (currentPageNumber - 2) * pageLength,
+        first,
+        skip: (currentPageNumber - 2) * first,
       },
     );
-  }, [currentPageNumber, pageLength]);
+  }, [currentPageNumber, first]);
 
   const next = useCallback(() => {
-    const newTotal = totalCount + pageLength;
     setIsLoading(true);
+
+    const first = paginate ? pageLength : (currentPageNumber + 1) * pageLength;
+    const skip = paginate ? currentPageNumber * pageLength : 0;
+
     relay.refetchConnection(
-      paginate ? pageLength : newTotal,
+      first,
       error => {
         setIsLoading(false);
         if (error) {
@@ -68,15 +75,11 @@ export const usePagination = ({
         setCurrentPageNumber(previousPageNumber => previousPageNumber + 1);
       },
       {
-        ...(paginate
-          ? {
-              first: pageLength,
-              skip: currentPageNumber * pageLength,
-            }
-          : { first: newTotal, skip: 0 }),
+        first,
+        skip,
       },
     );
-  }, [totalCount, currentPageNumber, pageLength]);
+  }, [currentPageNumber, pageLength, paginate]);
 
   return {
     isLoading,

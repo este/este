@@ -167,7 +167,6 @@ export const userModel = (context: ModelContext) => {
     await teammates(rootDataId);
 
     return context.prisma.$subscribe.tada({
-      mutation_in: ['CREATED', 'UPDATED', 'DELETED'],
       node: { creator: { id: rootDataId } },
     });
   };
